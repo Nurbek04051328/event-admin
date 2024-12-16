@@ -36,9 +36,9 @@
       </div>
       <div class="py-2">
         <div class="text-xs text-gray-500 2xl:text-[12px]">{{ $t('event.table.organizator') }}</div>
-        <div class="text-[14px] font-medium text-gray-800 flex items-center">
+        <div class="text-[14px] font-medium text-gray-800 flex items-center mt-2">
 
-          <img v-if="event?.organizer?.cover.length>0" :src="`${url}/${event?.organizer?.cover[0]}`" alt="">
+          <img v-if="event?.organizer?.cover.length>0" :src="`${url}/${event?.organizer?.cover[0]}`" class="w-12 h-12 mr-2 rounded-full" alt="">
           <img v-else src="@/assets/images/not-user.jpg" alt="" class="w-12 rounded-md">
           <div>
             <h2>{{ event?.organizer?.lname }} {{ event?.organizer?.name }}</h2>

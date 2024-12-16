@@ -15,7 +15,6 @@ export const organizerStore = defineStore('organizerStore', () => {
 
   const getorganizers = async (params) => {
     const { data } = await api.get(base_url, { params })
-    console.log(data)
     organizer.data = [...(data?.organizers || [])]
     organizer.count = data?.count
   }

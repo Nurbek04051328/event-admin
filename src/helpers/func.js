@@ -40,7 +40,9 @@ const generateExcel = async (url) => {
   const res = await api.get(url)
   await download(res.data)
 }
+
 const url = import.meta.env.VITE_URL
+
 const download = async (filepath) => {
   const filename = filepath.split('/').at(-1) || ''
   axios({

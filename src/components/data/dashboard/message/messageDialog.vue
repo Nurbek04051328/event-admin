@@ -1,7 +1,7 @@
 <template>
   <default-modal>
     <DialogPanel
-      class="relative transform overflow-hidden rounded-lg bg-white px-4 pb-4 pt-5 text-left shadow-xl transition-all w-[30%] sm:my-8 sm:w-full sm:max-w-lg sm:p-6"
+      class="relative transform  rounded-lg bg-white px-4 pb-4 pt-5 text-left shadow-xl transition-all w-[30%] sm:my-8 sm:w-full sm:max-w-lg sm:p-6"
     >
       <div class="absolute right-0 top-0 hidden pr-4 pt-4 sm:block">
         <button
@@ -19,37 +19,63 @@
       <div>
         <TabList :list="links" @tab-changed="changeTab" :active="currentTab || 'organizator'"/>
       </div>
-      <div class="space-y-2 mt-4 mb-6" v-if="currentTab == 'organizator'">
-        <select
-          v-model="id"
-          class="select"
-          @change="ChangeId()"
-        >
-          <option disabled value="" selected hidden>
-            Выберите Организатора
-          </option> 
-          <option v-for="opt in organizer?.data" :key="opt._id" :value="opt._id">
-            {{ opt.lname }} {{ opt.name }}
-          </option>
-        </select>
+      <div class="space-y-2 mt-4 mb-6 relative" v-if="currentTab == 'organizator'">
+        <input
+            type="text"
+            v-model="searchOrganizerText"
+            placeholder="Введите имя пользователя"
+            class="w-full p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
+          <ul
+            v-if="resultsOrganizer.length > 0"
+            class="absolute w-full mt-2 bg-white border rounded-md shadow-lg max-h-60 overflow-auto z-50"
+          >
+            <li
+              v-for="user in resultsOrganizer"
+              :key="user._id"
+              @click="selectUser(user)"
+              class="flex items-center p-2 cursor-pointer hover:bg-gray-100"
+            >
+              <img
+                v-if="user?.cover.length>0 || user?.face.length>0"
+                class="h-8 w-8 rounded-full mr-2"
+                :src="`${url}/${user.cover?.at(0) || user.face?.at(0)}`"
+                alt=""
+              />
+              <img v-else src="@/assets/images/not-user.jpg" alt="" class="w-8 rounded-full">
+              <span>{{ user.lname }} {{ user.name }}</span>
+            </li>
+          </ul>
       </div>
-      <div class="space-y-2 mt-4 mb-6" v-if="currentTab == 'user'">
-        <select
-          v-model="id"
-          class="select"
-          @change="ChangeId()"
-        >
-          <option disabled value="" selected hidden>
-            Выберите Пользователя
-          </option> 
-          <option v-for="opt in user?.data" :key="opt._id" :value="opt._id">
-            <div>
-
-              <img class="mx-auto h-[10px] w-[10px] flex-shrink-0 rounded-full" :src="`${url}/${opt.cover?.at(0) || opt.face?.at(0)}`" alt="">
-              {{ opt.lname }} {{ opt.name }}
-            </div>
-          </option>
-        </select>
+      <div class="space-y-2 mt-4 mb-6 relative" v-if="currentTab == 'user'">
+        <div class="relative mt-4 mb-6">
+          <input
+            type="text"
+            v-model="searchUserText"
+            placeholder="Введите имя пользователя"
+            class="w-full p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
+          <ul
+            v-if="resultsUser.length > 0"
+            class="absolute w-full mt-2 bg-white border rounded-md shadow-lg max-h-60 overflow-auto z-10"
+          >
+            <li
+              v-for="user in resultsUser"
+              :key="user._id"
+              @click="selectUser(user)"
+              class="flex items-center p-2 cursor-pointer hover:bg-gray-100"
+            >
+              <img
+                v-if="user?.cover.length>0 || user?.face.length>0"
+                class="h-8 w-8 rounded-full mr-2"
+                :src="`${url}/${user.cover?.at(0) || user.face?.at(0)}`"
+                alt=""
+              />
+              <img v-else src="@/assets/images/not-user.jpg" alt="" class="w-8 rounded-full">
+              <span>{{ user.lname }} {{ user.name }}</span>
+            </li>
+          </ul>
+        </div>
       </div>
       <!-- <div class="mt-6 flex flex-row gap-2">
         <button type="button" class="close-btn md:m-t-0 xs:m-t-0" @click="close">
@@ -63,7 +89,7 @@
   </default-modal>
 </template>
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, watch } from 'vue'
 import { storeToRefs } from 'pinia'
 
 import { DialogPanel, DialogTitle } from '@headlessui/vue'
@@ -86,13 +112,23 @@ import { useRouter } from 'vue-router';
 const router = useRouter();
 
 
+const resultsUser = ref([])
+const resultsOrganizer = ref([])
+const searchUserText = ref('')
+const searchOrganizerText = ref('')
 
-const id = ref('')
+
+
 
 
 
 const close = () => {
-  id.value = ''
+  // hammmasini tozalash
+
+  searchUserText.value = ''
+  searchOrganizerText.value = ''
+  resultsUser.value = []
+  resultsOrganizer.value = []
   usefull.setToggle(false, 0)
 }
 
@@ -105,7 +141,6 @@ const links = [
 
 let currentTab = ref("organizator"); 
 const changeTab = async(tabName) => {
-  console.log("tabName", tabName);
     currentTab.value = tabName;
     await getData()
   
@@ -116,8 +151,15 @@ const changeTab = async(tabName) => {
 
 
 
-const ChangeId = async () => {
-  const data = await store.getOneChatroom(id.value)
+
+
+
+
+
+const selectUser = async (val) => {
+  console.log(val);
+  
+  const data = await store.getOneChatroom(val._id)
   console.log("datadata", data);
   close()
   router.push({ name: 'showChat', params: { id: data?._id } });
@@ -131,6 +173,54 @@ const getData = async () => {
   }
 }
 
+
+
+// Search inputs
+
+const closeSearch = () => {
+  searchUserText.value = ''
+  resultsUser.value = []
+}
+
+// Search Users and Organizers
+const search = async(value, role) => {
+  if (value?.length < 4) return false
+  if(role == 'user') {
+    await user_store.getUsers({search:value})
+    resultsUser.value = user.value.data
+  }
+  if(role == 'organizer') {
+    await organizer_store.getorganizers({search:value})
+    resultsOrganizer.value = organizer.value.data
+  }
+};
+
+
+watch(
+  () => searchUserText.value,
+  (to) => {
+    if (to?.length == 0) {
+      closeSearch()
+      return false
+    }
+    if (to?.length > 3) {
+      search(to, 'user')
+    }
+  }
+)
+
+watch(
+  () => searchOrganizerText.value,
+  (to) => {
+    if (to?.length == 0) {
+      closeSearch()
+      return false
+    }
+    if (to?.length > 3) {
+      search(to, 'organizer')
+    }
+  }
+)
 
 onMounted(async () => {
   await getData()

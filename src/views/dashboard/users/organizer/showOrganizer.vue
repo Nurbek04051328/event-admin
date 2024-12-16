@@ -1,6 +1,13 @@
 <template>
   <headPart backLink="organizers">
     <div class="flex space-x-2 overflow-auto">
+      <button 
+        @click="ChangeId()"
+        class="flex items-center justify-center cursor-pointer mr-2"
+      >
+        <ChatBubbleLeftEllipsisIcon 
+        class="w-5 text-gray-900/80" />
+      </button>
       <div :class="`${org.user.status ? 'success-tag' : 'warning-tag'}`" v-if="org?.user?.status" class="xm-max:text-[10px]">
         {{ org.user.status ? 'Активный' : 'Не активировано' }}
       </div>
@@ -52,6 +59,7 @@
 <script setup>
 import { ref, onMounted } from 'vue'
 import { useRoute } from 'vue-router'
+import { ChatBubbleLeftEllipsisIcon } from '@heroicons/vue/20/solid'
 
 import { actions, organizerInfo } from '@/helpers/vars'
 import { organizerStore } from '@/stores/user/organizer'
@@ -60,9 +68,14 @@ import OrganizerStatistic from '@/components/data/dashboard/organizer/organizerS
 import OrganizerInfo from '@/components/data/dashboard/organizer/organizerInfo.vue'
 import OrganizerEvents from '@/components/data/dashboard/organizer/organizerEvents.vue'
 import TabList from '@/components/default/tabList.vue'
+import { useRouter } from 'vue-router';
+const router = useRouter();
+
 
 import OrganizerAccess from '@/components/data/dashboard/organizer/organizerAccess.vue'
 const store = organizerStore()
+import { messageStore } from '@/stores/data/message'
+const message_store = messageStore()
 
 const route = useRoute()
 const id = ref('')
@@ -98,6 +111,17 @@ const links = [
     title: 'Билеты'
   }
 ]
+
+
+
+
+// Message page
+const ChangeId = async () => {
+  const data = await message_store.getOneChatroom(id.value)
+  console.log("datadata", data);
+  close()
+  router.push({ name: 'showChat', params: { id: data?._id } });
+}
 
 const getData = async () => {
   if (!id.value) return false

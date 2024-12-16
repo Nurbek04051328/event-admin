@@ -12,7 +12,7 @@ export const usersStore = defineStore('usersStore', () => {
   // const notification = useNotification()
 
   const getUsers = async (params) => {
-    console.log(params);
+    console.log("userparams",params);
     
     const { data } = await api.get(base_url, {params})
     console.log('dataUser', data)

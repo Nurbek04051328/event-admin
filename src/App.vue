@@ -10,9 +10,24 @@ import { onMounted, } from 'vue'
 import { eventStore } from '@/stores/data/event';
 import { organizerStore } from '@/stores/user/organizer';
 import { activationStore } from '@/stores/data/activation';
+import { messageStore } from '@/stores/data/message'
 const event_store = eventStore();
 const organization_store = organizerStore();
 const activation_store = activationStore();
+const message_store = messageStore();
+
+
+
+import { useRoute } from 'vue-router';
+const route = useRoute();
+
+
+
+
+
+
+
+
 
 onMounted(async () => {
   if (cookies.get('dashboard-token')) {
@@ -29,7 +44,6 @@ onMounted(async () => {
     // Organization qo'shilish hodisasi
     socket.on("new-organizer", async(id) => {
       console.log("new-organizer", id);
-      
       await organization_store.getNewSocket(id)
     });
     socket.on("update-organizer", async(id) => {
@@ -45,6 +59,20 @@ onMounted(async () => {
     socket.on("update-key", async(id) => {
       console.log("updatekey", id);
       await activation_store.getActiveKey(id)
+    });
+    // New Message hodisasi
+    socket.on("new-message", async(data) => {
+      console.log("message", data);
+      if(route.params.id == data?.room) {
+        await message_store.newMessage(data?.message)
+        data.notViewed = 0
+      }
+      await message_store.filterRoom(data)
+    });
+    //  Message o'qilishi viewed hodisasi
+    socket.on("message-viewed", async(id) => {
+      console.log("messageviewed", id);
+      await message_store.viewMessage(id)
     });
   } 
 })

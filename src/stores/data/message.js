@@ -1,7 +1,11 @@
-import { reactive } from 'vue'
+import { reactive, ref } from 'vue'
 import { defineStore } from 'pinia'
 import api from '@/helpers/api'
-import { useNotification } from '../usefull/notification'
+// import { useNotification } from '../usefull/notification'
+import { authStore } from '@/stores/user/auth';
+
+
+
 
 const base_url = '/work-chat'
 
@@ -14,43 +18,94 @@ export const messageStore = defineStore('messageStore', () => {
     data: [],
     count: 0
   })
-  const notification = useNotification()
+  const selectChatRoom = ref({})
+  // const notification = useNotification()
+  const auth_store = authStore()
 
   const getChatrooms = async (params) => {
     const { data } = await api.get(base_url, { params })
-    // console.log('data', data)
+    console.log('dataroom', data)
     chatrooms.data = [...data.rooms]
     chatrooms.count = data.count
   }
   const getChatMessages = async (id,params) => {
-    console.log("id",id, params);
-    
+    chatMessages.data = []
     const { data } = await api.get(`${base_url}/chat-messages/${id}`, { params })
-    console.log('dataMessages', data)
     chatMessages.data = [...data.messages]
     chatMessages.count = data.count
+    selectChatRoom.value = data.room
   }
 
-  const getOneChatroom = async (id) => {
-
-    const { data } = await api.get(`${base_url}/${id}`)
-    // console.log("kutayapman", data);
+  const sendMessage = async (message) => {
+    const { data } = await api.post(base_url, message)
+    console.log("qaytgandata", data);
     
+    chatMessages.data = [...chatMessages.data, data]
+    chatMessages.count += 1
+
+    await filterRoom({room:data?.room, message:data, notViewed:data?.notViewed})
+  }
+
+
+  // Bitta chatroom ratib qaytarish
+  const getOneChatroom = async (id) => {
+    const { data } = await api.get(`${base_url}/${id}`)
     return data
   }
 
-  const getLastChatRooms = async () => {
-    const { data } = await api.get(base_url, { params: { limit: 1} })
-    chatrooms.data = [...data.rooms,...chatrooms.data]
-    chatrooms.count += 1
-    notification.setNotif(true, 'Добавлено новое Message', 'success')
+
+  const filterRoom = async ({ room, message, notViewed }) => {
+    let findIndex = chatrooms.data.findIndex(r => r._id === room);
+    if (findIndex === -1) {
+      const {data} = await api.get(base_url, {params:{limit:1} });
+      chatrooms.data = [...data.rooms, ...chatrooms.data];
+    } else {
+      let findData = chatrooms.data[findIndex]
+      findData = { ...findData, notViewed, lastMessage: message }
+      chatrooms.data = chatrooms.data.filter(r => r._id !== room);
+      chatrooms.data = [findData, ...chatrooms.data];
+    };
+    
   }
+
+  const selectChat = async (roomId) => {
+    chatrooms.data =  chatrooms.data.map(item => {
+      if (item._id == roomId) {
+        item.notViewed = 0
+      }
+      return item
+    })
+  }
+
+
+
+
+  // For Socket
+  const newMessage = async (message) => {
+    chatMessages.data = [...chatMessages.data, message]
+    chatMessages.count += 1
+  }
+  const viewMessage =  (id) => {
+    chatMessages.data =  chatMessages.data.map(item => {
+      if(item?.sender?._id == auth_store.user?.id  && item?.room == id) {
+        item.viewed = true
+      }
+      return item
+    })
+  }
+
+  
   return {
     chatrooms,
     chatMessages,
+    selectChatRoom,
     getChatrooms,
-    getLastChatRooms,
-    getOneChatroom,
-    getChatMessages
+    getChatMessages,
+    sendMessage,
+    newMessage,
+    viewMessage,
+    filterRoom,
+    selectChat,
+    getOneChatroom
   }
 })

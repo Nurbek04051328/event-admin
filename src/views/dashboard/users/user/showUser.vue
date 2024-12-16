@@ -1,6 +1,13 @@
 <template>
   <headPart backLink="users">
     <div class="flex space-x-2 overflow-auto">
+      <button 
+        @click="ChangeId()"
+        class="flex items-center justify-center cursor-pointer mr-2"
+      >
+        <ChatBubbleLeftEllipsisIcon 
+        class="w-5 text-gray-900/80" />
+      </button>
       <div :class="`${user?.user?.status ? 'success-tag' : 'warning-tag'}`" v-if="user?.user?.status">
         {{ user?.user?.status ? 'Активный' : 'Не активировано' }}
       </div>
@@ -49,8 +56,8 @@
 </template>
 <script setup>
 import { ref, onMounted } from 'vue'
-import { useRoute } from 'vue-router'
-
+import { useRoute, useRouter } from 'vue-router'
+import { ChatBubbleLeftEllipsisIcon } from '@heroicons/vue/20/solid'
 // import { actions, organizerInfo } from '@/helpers/vars'
 import { usersStore } from '@/stores/data/users'
 
@@ -59,10 +66,11 @@ import UserInfo from '@/components/data/dashboard/users/userInfo.vue'
 import UserEvents from '@/components/data/dashboard/users/userEvents.vue'
 import TabList from '@/components/default/tabList.vue'
 import AccessDialog from '@/components/data/dashboard/users/adultDialog.vue';
-
+import { messageStore } from '@/stores/data/message'
+const message_store = messageStore()
 // import OrganizerAccess from '@/components/data/dashboard/organizer/organizerAccess.vue'
 const store = usersStore()
-
+const router = useRouter();
 const route = useRoute()
 const id = ref('')
 const user = ref({})
@@ -118,6 +126,17 @@ const accessAdult = async () => {
 const close = () => {
   accessAdultToggle.value = false
 }
+
+
+
+// Message page
+const ChangeId = async () => {
+  const data = await message_store.getOneChatroom(id.value)
+  console.log("datadata", data);
+  close()
+  router.push({ name: 'showChat', params: { id: data?._id } });
+}
+
 
 const links = [
   {

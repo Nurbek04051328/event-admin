@@ -1,64 +1,168 @@
 <template>
-  <!-- <pre>{{ chatMessages?.data }}</pre> -->
-  <div
-    :class="`flex items-start gap-2.5 ${auth_store.user.id == chat.sender._id ? 'flex-row-reverse' : ''}`"
-    v-for="chat of chatMessages?.data"
-    :key="chat"
-    
-  >
-  
-    <img
-      class="w-8 h-8 rounded-full"
-      src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-      alt="Jese image"
-    />
-    <div
-      :class="`flex flex-col w-full max-w-[320px] leading-1.5 p-4 border-gray-200 bg-gray-100 rounded-bl-xl rounded-br-xl dark:bg-gray-900 ${auth_store.user.id == chat.sender._id ? 'rounded-tl-xl' : 'rounded-tr-xl'}`"
-    >
-      <div class="flex items-center space-x-2 rtl:space-x-reverse justify-between">
-        <span class="text-sm font-semibold text-gray-900 dark:text-white">
-          {{ chat.sender?.lname }}
-          {{ chat.sender?.name }}
-        </span>
-        <span class="text-sm font-normal text-gray-500 dark:text-gray-400">{{ chat.createdAt }}</span>
+  <div class="flex items-center pb-1 border-b border-gray-200">
+    <div class="mr-2">
+      <img
+        v-if="selectChatRoom?.cover?.length > 0"
+        class="w-8 h-8 rounded-full"
+        :src="`${url}/${selectChatRoom?.cover[0]}`"
+        alt="Jese image"
+      />
+      <div 
+        v-else
+        class="h-8 w-8 flex-none rounded-full flex items-center justify-center text-white"
+        :style="{backgroundColor: randomColor(selectChatRoom?.userName )}"
+      >
+        {{ selectChatRoom?.userName?.charAt(0).toUpperCase() }}
       </div>
-      <p class="text-sm font-normal py-2.5 text-gray-900 dark:text-white">
-        {{ chat.text }}
-      </p>
-      <span class="text-sm font-normal text-gray-500 dark:text-gray-400">Delivered</span>
     </div>
+    <div class="flex justify-between w-full">
+      <div>{{selectChatRoom?.userName }}</div>
+      <div class="text-sm">{{selectChatRoom?.participants?.find(participant => participant.role === 'organizer')
+      ? 'Организатор'
+      : selectChatRoom?.participants?.find(participant => participant.role === 'user')
+      ? 'Пользовател'
+      : selectChatRoom?.participants?.find(participant => participant.role === 'moderator')
+      ? 'Модератор'
+      : 'Неизвестно'}}</div>
+    </div>
+    <!-- {{ selectChatRoom?.participants }} -->
+  </div>
+  <div 
+    v-if="chatMessages?.data?.length>0" 
+    ref="scrollToBottom" 
+    class="overflow-auto space-y-3"
+    @scroll="handleScroll"
+  >
+    <div
+      :class="`flex items-start gap-2.5 ${auth_store.user?.id == chat?.sender._id ? 'flex-row-reverse' : ''}`"
+      v-for="chat of chatMessages?.data"
+      :key="chat"
+      
+    >
+      <img
+        v-if="chat?.sender?.cover?.length > 0"
+        class="w-8 h-8 rounded-full"
+        :src="`${url}/${chat?.sender?.cover[0]}`"
+        alt="Jese image"
+      />
+      <div 
+        v-else
+        class="h-8 w-8 flex-none rounded-full flex items-center justify-center text-white"
+        :style="{backgroundColor: randomColor(chat?.sender?.name )}"
+      >
+        {{ chat?.sender?.name?.charAt(0).toUpperCase() }}
+      </div>
+      <div
+        :class="`flex flex-col w-full max-w-[320px] leading-1.5 p-4 border-gray-200 bg-gray-100 rounded-bl-xl rounded-br-xl dark:bg-gray-900 ${auth_store.user?.id == chat?.sender._id ? 'rounded-tl-xl' : 'rounded-tr-xl'}`"
+      >
+        <div class="flex items-center space-x-2 rtl:space-x-reverse justify-between">
+          <span class="text-sm font-semibold text-gray-900 dark:text-white">
+            {{ chat?.sender?.lname }}
+            {{ chat?.sender?.name }}
+          </span>
+          <span class="text-sm font-normal text-gray-500 dark:text-gray-400">{{ convertDateShort(chat?.createdAt, 'full') }}</span>
+        </div>
+        <p 
+          class="text-sm font-normal py-2.5 text-gray-700 dark:text-white"
+          v-if="chat.text" 
+          v-html="chat?.text.replace(/\n/g, '<br>')"
+        ></p>
+        <span
+          v-if="auth_store.user.id === chat.sender._id"
+          class="text-sm font-normal text-gray-500 dark:text-gray-400 flex items-center space-x-1 relative"
+        >
+          <CheckIcon
+            v-bind:class="chat.viewed ? 'text-green-500' : 'text-gray-500'"
+            class="w-4 h-4"
+          />
+          <CheckIcon
+            v-if="chat.viewed"
+            class="w-4 h-4 text-green-500 absolute left-1 top-0"
+          />
+        </span>
+      </div>
+    </div>
+  </div>
+  <div v-else class="text-center flex items-center justify-center">
+    <span>Пока чат нет</span>
   </div>
 </template>
 <script setup>
-import { onMounted, ref, nextTick  } from 'vue'
+const url = import.meta.env.VITE_URL
+import { onMounted, ref, watch  } from 'vue'
+import { CheckIcon } from '@heroicons/vue/20/solid'
 import { storeToRefs } from 'pinia'
+import { convertDateShort } from '@/helpers/func'
 import { messageStore } from '@/stores/data/message'
 const store = messageStore()
-const { chatMessages } = storeToRefs(store)
+const { chatMessages, selectChatRoom } = storeToRefs(store)
 import { useRoute } from 'vue-router';
 
 import { authStore } from '@/stores/user/auth';
 const auth_store = authStore()
-
+const scrollToBottom = ref()
 const route = useRoute();
 // Pagination
 const page = ref(1)
-const limit = ref(30)
+const limit = ref(20)
+
+
+watch(chatMessages.value,
+  () => {
+    scrollToDown()
+  }
+)
+
+
+// Scrolni pastga tushirish
+const scrollToDown = () => {
+  setTimeout(()=>{
+    scrollToBottom.value?.lastElementChild?.scrollIntoView({
+        behavior: 'smooth',
+      });
+  },100)
+}
+
+
+
+// Scrol tepaga borganda malumot olish
+const handleScroll = async () => {
+  const scrollContainer = scrollToBottom.value;
+  if (scrollContainer.scrollTop === 0) {
+    page.value += 1; 
+    await getData(); 
+  }
+  // if (
+  //   scrollContainer.scrollTop + scrollContainer.clientHeight >=
+  //   scrollContainer.scrollHeight
+  // ) {
+  //   if (page.value > 0) {
+  //     page.value -= 1;
+  //     await getData();
+  //   }
+  // }
+};
+
+
 
 const getData = async () => {
-  console.log("aaaa");
-  
   await store.getChatMessages(route.params.id,{ limit: limit.value, page: page.value })
+  scrollToDown()
 }
+
+const randomColor = (name) => {
+  const colors = ['#FF5733', '#33FF57', '#3357FF', '#FFC300', '#C70039', '#581845', '#2ECC71'];
+  const index = name?.charCodeAt(0) % colors?.length;
+  return colors[index];
+};
+
+watch(() => route.params.id, async () => {
+  await store.selectChat(route.params.id)
+  await getData();
+});
 
 onMounted(async () => {
   await getData()
-  nextTick(() => {
-    const scrollContainer = document.querySelector('[ref="scrollToBottom"]');
-    if (scrollContainer) {
-      scrollContainer.scrollTop = scrollContainer.scrollHeight;
-    }
-  });
 })
 </script>
 <style lang=""></style>
