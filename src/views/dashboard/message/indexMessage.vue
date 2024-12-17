@@ -20,7 +20,7 @@
             <div>
               <ChatBubbleLeftRightIcon/>
             </div>
-            Пока нет чат
+            Выберите чат
           </div>
         </div>
       </div>

@@ -1,5 +1,9 @@
 <template>
-  <h3 class="text-base font-semibold leading-6 text-gray-900 w-full">Активационные ключи</h3>
+  <h3 
+    class="text-base font-semibold leading-6 text-gray-900 w-full cursor-pointer"
+    @click="$router.push({ name: 'activationkeys'})"
+  >Активационные ключи
+  </h3>
   <dd
     class="font-semibold mt-2 tracking-tight items-center h-[60%] text-white grid grid-cols-3 gap-4 md-max:justify-between xs-max:mt-4 xs-max:flex-col xs-max:w-full xs:grid-cols-1"
   >

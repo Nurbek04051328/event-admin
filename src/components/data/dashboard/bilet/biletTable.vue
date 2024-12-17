@@ -39,7 +39,7 @@
           <td class="td">{{ item?.user?.lname }} {{ item?.user?.name }}</td>
           <td class="td">{{ item?.event?.title }}</td>
           <td class="td">{{ item?.event?.organizer?.lname }} {{ item?.event?.organizer?.name }}</td>
-          <td class="td">{{ item?.entryFee }} сум</td>
+          <td class="td">{{ item?.entryFee == 0? 'Бесплатно' : `${item?.entryFee} сум` }} </td>
 
           <td class="td">
             <span class="text-blue-600" v-if="item?.status==0">В процессе</span>

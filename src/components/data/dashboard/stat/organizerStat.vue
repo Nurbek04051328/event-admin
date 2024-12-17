@@ -1,5 +1,9 @@
 <template>
-  <h3 class="text-base font-semibold leading-6 text-gray-900 w-full">Организаторы</h3>
+  <h3 
+    class="text-base font-semibold leading-6 text-gray-900 w-full cursor-pointer"
+    @click="$router.push({ name: 'organizers'})"
+  >Организаторы
+  </h3>
   <dd
     class="ont-semibold tracking-tight items-center h-[60%] text-white grid grid-cols-4 gap-4 md-max:justify-between xs-max:mt-4 mt-2 xs-max:flex-col xs-max:w-full lg:gap-2 xm-max:grid-cols-2"
   >

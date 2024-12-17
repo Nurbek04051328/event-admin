@@ -1,5 +1,9 @@
 <template>
-  <h3 class="text-base font-semibold leading-6 text-gray-900 w-full">Мероприятие</h3>
+  <h3 
+    class="text-base font-semibold leading-6 text-gray-900 w-full cursor-pointer"
+    @click="$router.push({ name: 'event'})"
+  >Мероприятие
+  </h3>
   <div
     class="text-white rounded-lg p-4 shadow text-base items-start xs-max:w-full bg-gray-900 grid grid-cols-4 divide-y-[1px] divide-gray-50/20 gap-3 gap-x-6 mt-2 xs:text-[10px]"
   >
