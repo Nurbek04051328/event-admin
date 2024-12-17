@@ -1,15 +1,17 @@
 <template>
   <div class="flex min-h-full flex-1 flex-col justify-center items-center px-6 py-12 lg:px-8">
-    <div class="bg-white rounded-lg p-16  shadow-sm" style="width: 450px;">
-
-      <div class="sm:mx-auto sm:w-full sm:max-w-sm flex justify-center">
-        <img src="../../assets/logo/logo.png" alt="" class="w-16" >
+    <div class="bg-white rounded-lg p-12 shadow-sm" style="width: 450px">
+      <div class="sm:mx-auto sm:w-full flex-col sm:max-w-sm flex justify-center items-center gap-2">
+        <img src="../../assets/logo/logo.png" alt="" class="w-16" />
+        <div class="text-2xl font-bold">Eventum</div>
       </div>
-  
+
       <div class="mt-10 mx-auto w-full max-w-80">
         <form @submit.prevent="submit" class="space-y-3">
           <div>
-            <label for="login" class="block text-sm font-medium leading-6 text-gray-900">Логин</label>
+            <label for="login" class="block text-sm font-medium leading-6 text-gray-900"
+              >Логин</label
+            >
             <div class="mt-2">
               <input
                 id="login"
@@ -29,14 +31,14 @@
               <p class="mt-2 text-xs text-red-600" id="email-error">Обезательная поля</p>
             </span>
           </div>
-  
+
           <div>
             <div class="flex items-center justify-between">
               <label for="password" class="block text-sm font-medium leading-6 text-gray-900"
                 >Пароль</label
               >
             </div>
-  
+
             <div class="mt-2 flex rounded-md">
               <div class="relative flex flex-grow items-stretch focus-within:z-10">
                 <input
@@ -52,7 +54,7 @@
                       v$.password.$invalid && v$.password.$dirty
                   }"
                 />
-  
+
                 <button
                   type="button"
                   @click="toggle = !toggle"
@@ -67,9 +69,15 @@
               <p class="mt-2 text-xs text-red-600" id="email-error">Обезательная поля</p>
             </span>
           </div>
-  
+
           <div>
-            <button type="submit" class="w-full mt-8 p-2 rounded-md text-white"  style="background: linear-gradient(to right, #ff7e5f, #7A30FB)">Войти</button>
+            <button
+              type="submit"
+              class="w-full mt-8 p-2 rounded-md text-white"
+              style="background: linear-gradient(to right, #ff7e5f, #7a30fb)"
+            >
+              Войти
+            </button>
           </div>
         </form>
       </div>
@@ -107,6 +115,4 @@ const submit = async () => {
   }
 }
 </script>
-<style lang="scss">
-
-</style>
+<style lang="scss"></style>

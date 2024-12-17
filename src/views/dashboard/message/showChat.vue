@@ -7,29 +7,35 @@
         :src="`${url}/${selectChatRoom?.cover[0]}`"
         alt="Jese image"
       />
-      <div 
+      <div
         v-else
         class="h-8 w-8 flex-none rounded-full flex items-center justify-center text-white"
-        :style="{backgroundColor: randomColor(selectChatRoom?.userName )}"
+        :style="{ backgroundColor: randomColor(selectChatRoom?.userName) }"
       >
         {{ selectChatRoom?.userName?.charAt(0).toUpperCase() }}
       </div>
     </div>
     <div class="flex justify-between w-full">
-      <div>{{selectChatRoom?.userName }}</div>
-      <div class="text-sm">{{selectChatRoom?.participants?.find(participant => participant.role === 'organizer')
-      ? 'Организатор'
-      : selectChatRoom?.participants?.find(participant => participant.role === 'user')
-      ? 'Пользовател'
-      : selectChatRoom?.participants?.find(participant => participant.role === 'moderator')
-      ? 'Модератор'
-      : 'Неизвестно'}}</div>
+      <div>{{ selectChatRoom?.userName }}</div>
+      <div class="text-sm">
+        {{
+          selectChatRoom?.participants?.find((participant) => participant.role === 'organizer')
+            ? 'Организатор'
+            : selectChatRoom?.participants?.find((participant) => participant.role === 'user')
+              ? 'Пользовател'
+              : selectChatRoom?.participants?.find(
+                    (participant) => participant.role === 'moderator'
+                  )
+                ? 'Модератор'
+                : 'Неизвестно'
+        }}
+      </div>
     </div>
     <!-- {{ selectChatRoom?.participants }} -->
   </div>
-  <div 
-    v-if="chatMessages?.data?.length>0" 
-    ref="scrollToBottom" 
+  <div
+    v-if="chatMessages?.data?.length > 0"
+    ref="scrollToBottom"
     class="overflow-auto space-y-3"
     @scroll="handleScroll"
   >
@@ -37,50 +43,8 @@
       :class="`flex items-start gap-2.5 ${auth_store.user?.id == chat?.sender._id ? 'flex-row-reverse' : ''}`"
       v-for="chat of chatMessages?.data"
       :key="chat"
-      
     >
-      <img
-        v-if="chat?.sender?.cover?.length > 0"
-        class="w-8 h-8 rounded-full"
-        :src="`${url}/${chat?.sender?.cover[0]}`"
-        alt="Jese image"
-      />
-      <div 
-        v-else
-        class="h-8 w-8 flex-none rounded-full flex items-center justify-center text-white"
-        :style="{backgroundColor: randomColor(chat?.sender?.name )}"
-      >
-        {{ chat?.sender?.name?.charAt(0).toUpperCase() }}
-      </div>
-      <div
-        :class="`flex flex-col w-full max-w-[320px] leading-1.5 p-4 border-gray-200 bg-gray-100 rounded-bl-xl rounded-br-xl dark:bg-gray-900 ${auth_store.user?.id == chat?.sender._id ? 'rounded-tl-xl' : 'rounded-tr-xl'}`"
-      >
-        <div class="flex items-center space-x-2 rtl:space-x-reverse justify-between">
-          <span class="text-sm font-semibold text-gray-900 dark:text-white">
-            {{ chat?.sender?.lname }}
-            {{ chat?.sender?.name }}
-          </span>
-          <span class="text-sm font-normal text-gray-500 dark:text-gray-400">{{ convertDateShort(chat?.createdAt, 'full') }}</span>
-        </div>
-        <p 
-          class="text-sm font-normal py-2.5 text-gray-700 dark:text-white"
-          v-if="chat.text" 
-          v-html="chat?.text.replace(/\n/g, '<br>')"
-        ></p>
-        <span
-          v-if="auth_store.user.id === chat.sender._id"
-          class="text-sm font-normal text-gray-500 dark:text-gray-400 flex items-center space-x-1 relative"
-        >
-          <CheckIcon
-            v-bind:class="chat.viewed ? 'text-green-500' : 'text-gray-500'"
-            class="w-4 h-4"
-          />
-          <CheckIcon
-            v-if="chat.viewed"
-            class="w-4 h-4 text-green-500 absolute left-1 top-0"
-          />
-        </span>
-      </div>
+      <ChatItem :chat="chat" />
     </div>
   </div>
   <div v-else class="text-center flex items-center justify-center">
@@ -89,48 +53,43 @@
 </template>
 <script setup>
 const url = import.meta.env.VITE_URL
-import { onMounted, ref, watch  } from 'vue'
-import { CheckIcon } from '@heroicons/vue/20/solid'
+import { onMounted, ref, watch } from 'vue'
+
 import { storeToRefs } from 'pinia'
-import { convertDateShort } from '@/helpers/func'
+
 import { messageStore } from '@/stores/data/message'
 const store = messageStore()
 const { chatMessages, selectChatRoom } = storeToRefs(store)
-import { useRoute } from 'vue-router';
+import { useRoute } from 'vue-router'
 
-import { authStore } from '@/stores/user/auth';
+import { authStore } from '@/stores/user/auth'
+import ChatItem from '@/components/data/dashboard/message/chatItem.vue'
 const auth_store = authStore()
 const scrollToBottom = ref()
-const route = useRoute();
+const route = useRoute()
 // Pagination
 const page = ref(1)
 const limit = ref(20)
 
-
-watch(chatMessages.value,
-  () => {
-    scrollToDown()
-  }
-)
-
+watch(chatMessages.value, () => {
+  scrollToDown()
+})
 
 // Scrolni pastga tushirish
 const scrollToDown = () => {
-  setTimeout(()=>{
+  setTimeout(() => {
     scrollToBottom.value?.lastElementChild?.scrollIntoView({
-        behavior: 'smooth',
-      });
-  },100)
+      behavior: 'smooth'
+    })
+  }, 100)
 }
-
-
 
 // Scrol tepaga borganda malumot olish
 const handleScroll = async () => {
-  const scrollContainer = scrollToBottom.value;
+  const scrollContainer = scrollToBottom.value
   if (scrollContainer.scrollTop === 0) {
-    page.value += 1; 
-    await getData(); 
+    page.value += 1
+    await getData()
   }
   // if (
   //   scrollContainer.scrollTop + scrollContainer.clientHeight >=
@@ -141,25 +100,26 @@ const handleScroll = async () => {
   //     await getData();
   //   }
   // }
-};
-
-
+}
 
 const getData = async () => {
-  await store.getChatMessages(route.params.id,{ limit: limit.value, page: page.value })
+  await store.getChatMessages(route.params.id, { limit: limit.value, page: page.value })
   scrollToDown()
 }
 
 const randomColor = (name) => {
-  const colors = ['#FF5733', '#33FF57', '#3357FF', '#FFC300', '#C70039', '#581845', '#2ECC71'];
-  const index = name?.charCodeAt(0) % colors?.length;
-  return colors[index];
-};
+  const colors = ['#FF5733', '#33FF57', '#3357FF', '#FFC300', '#C70039', '#581845', '#2ECC71']
+  const index = name?.charCodeAt(0) % colors?.length
+  return colors[index]
+}
 
-watch(() => route.params.id, async () => {
-  await store.selectChat(route.params.id)
-  await getData();
-});
+watch(
+  () => route.params.id,
+  async () => {
+    await store.selectChat(route.params.id)
+    await getData()
+  }
+)
 
 onMounted(async () => {
   await getData()
