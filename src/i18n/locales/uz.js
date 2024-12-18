@@ -128,7 +128,11 @@ const uz = {
       phone: 'Telefon',
       login: 'Login',
       role: 'Roli',
-      data: 'Vaqt'
+      data: 'Vaqt',
+      lastVisit: 'Oxirgi kirish',
+      checkedOrganizers: 'Tekshirilgan Organizer',
+      checkedEvent: 'Tekshirilgan Hodisalar',
+      messages: 'Habarlar soni',
     },
     dialog: {
       title: "Yangi ishchi qo'shish",

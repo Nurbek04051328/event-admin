@@ -77,8 +77,8 @@ const data = {
     icon: PaperClipIcon
   },
   approve: {
-    title: 'Архивированное',
-    icon: XMarkIcon
+    title: 'Подтвержденный',
+    icon: CheckIcon
   },
   process: {
     title: 'В проверке',
@@ -88,7 +88,7 @@ const data = {
 
 import {
   CalendarDaysIcon,
-  XMarkIcon,
+  CheckIcon,
   ClockIcon,
   LockClosedIcon,
   NoSymbolIcon,

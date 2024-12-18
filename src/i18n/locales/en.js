@@ -126,7 +126,11 @@ const en = {
       phone: 'Phone',
       login: 'Login',
       role: 'Role',
-      data: 'Time'
+      data: 'Time',
+      lastVisit: 'Last visit',
+      checkedOrganizers: 'Checking Organizer',
+      checkedEvent: 'Checking Event',
+      messages: 'Quantity of chat',
     },
     dialog: {
       title: 'Add New Worker',

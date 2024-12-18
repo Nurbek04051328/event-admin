@@ -7,7 +7,11 @@
             <th scope="col" class="th-first">№</th>
             <th scope="col" class="th">Ф.И.О</th>
             <th scope="col" class="th">Контакт</th>
+            <th scope="col" class="th">Мероприятие</th>
+            <th scope="col" class="th">Билети</th>
+            <th scope="col" class="th">Кол-во Собщение</th>
             <th scope="col" class="th">Статус</th>
+            <th scope="col" class="th">Последный вход</th>
             <th scope="col" class="th">Время регистрации</th>
           </tr>
         </thead>
@@ -42,9 +46,22 @@
               <div class="text-gray-900">{{ person.login }}</div>
               <div class="mt-1 text-gray-500">{{ person.phone }}</div>
             </td>
+            <td class="whitespace-nowrap px-3 py-5 text-sm text-gray-500 text-center">
+              {{ person?.events }}
+            </td>
+            <td class="whitespace-nowrap px-3 py-5 text-sm text-gray-500 text-center">
+              <span class="text-green-500">{{ person?.tickets?.generated }}</span> /
+              <span class="text-yellow-500">{{ person?.tickets?.bought }}</span>
+            </td>
+            <td class="whitespace-nowrap px-3 py-5 text-sm text-gray-500 text-center">
+              {{ person?.messages }}
+            </td>
             <td class="whitespace-nowrap px-3 py-5 text-sm text-gray-500">
               <span class="success-tag" v-if="person.activated">Активный</span>
               <span class="warning-tag" v-else>Не активный</span>
+            </td>
+            <td class="relative whitespace-nowrap py-5 pl-3 pr-4 text-sm  sm:pr-0 text-center">
+              {{ person.lastVisit?  convertDateShort(person.lastVisit, 'full') : '-' }}
             </td>
             <td class="relative whitespace-nowrap py-5 pl-3 pr-4 text-sm font-medium sm:pr-0">
               {{ convertDateShort(person.createdAt, 'full') }}
@@ -104,8 +121,11 @@
               <dd class="text-sm text-gray-500">{{ item.login }}</dd>
               <dt class="sr-only">Статус</dt>
               <dd class="mt-3 space-x-2 mb-1">
-                <span :class="`${item?.activated ? 'success-tag' : 'warning-tag'}`">
-                  {{ item?.status ? 'Активный' : 'Не активный' }}
+                <span :class="`${item?.status ? 'success-tag' : 'warning-tag'}`">
+                  {{ item?.status == "active" ? 'Активный' :
+                    item?.status == "not active" ? 'Не активный' :
+                    item?.status == "limited" ? 'Ограничен' :
+                  'Удален/Заблокирован' }}
                 </span>
               </dd>
             </dl>

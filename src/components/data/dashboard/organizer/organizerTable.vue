@@ -7,9 +7,12 @@
             <th scope="col" class="th-first">№</th>
             <th scope="col" class="th">Ф.И.О</th>
             <th scope="col" class="th">Контакт</th>
+            <th scope="col" class="th">Мероприятие</th>
+            <th scope="col" class="th">Билети</th>
+            <th scope="col" class="th">Кол-во Собщение</th>
             <th scope="col" class="th">Статус</th>
             <th scope="col" class="th">Проверка</th>
-
+            <th scope="col" class="th">Последный вход</th>
             <th scope="col" class="th">Время регистрации</th>
           </tr>
         </thead>
@@ -44,6 +47,19 @@
               <div class="text-gray-900">{{ person.login }}</div>
               <div class="mt-1 text-gray-500">{{ person.phone }}</div>
             </td>
+            <td class="whitespace-nowrap px-3 py-5 text-sm text-gray-500 text-center">
+              <span class="text-green-500">{{ person?.events?.successEvent }}</span> /
+              <span class="text-red-500">{{ person?.events?.deniedEvent }}</span> - 
+              <span>{{ person?.events?.eventCount }}</span>
+            </td>
+            <td class="whitespace-nowrap px-3 py-5 text-sm text-gray-500 text-center"> 
+              <span class="text-green-500">{{ person?.tickets?.generate }}</span> /
+              <span class="text-yellow-500">{{ person?.tickets?.bought }}</span> -
+              <span>{{ person?.tickets?.available }}</span>
+            </td>
+            <td class="whitespace-nowrap px-3 py-5 text-sm text-gray-500 text-center">
+              {{ person?.message }}
+            </td>
             <td class="whitespace-nowrap px-3 py-5 text-sm text-gray-500">
               <span class="success-tag" v-if="person.activated">Активный</span>
               <span class="warning-tag" v-else>Не активный</span>
@@ -52,6 +68,9 @@
               <span class="warning-tag" v-if="person.organizer == 'pending'"> В ожидание </span>
               <span class="danger-tag" v-if="person.organizer == 'denied'"> Отказано </span>
               <span class="success-tag" v-if="person.organizer == 'success'"> Проверено </span>
+            </td>
+            <td class="relative whitespace-nowrap py-5 pl-3 pr-4 text-sm  sm:pr-0 text-center">
+              {{ person.lastVisit?  convertDateShort(person.lastVisit, 'full') : '-' }}
             </td>
             <td class="relative whitespace-nowrap py-5 pl-3 pr-4 text-sm font-medium sm:pr-0">
               {{ convertDateShort(person.createdAt, 'full') }}

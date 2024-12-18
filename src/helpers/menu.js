@@ -4,7 +4,10 @@ import {
   UserIcon,
   SwatchIcon,
   KeyIcon,
-  TicketIcon
+  TicketIcon,
+  BookmarkSquareIcon
+
+
 } from '@heroicons/vue/24/outline'
 
 import { settingMenu } from './settingMenu'
@@ -124,6 +127,17 @@ export const links = [
         }
       }
     ]
+  },
+  {
+    path: 'logs',
+    name: 'logs',
+    component: () => import('@/views/dashboard/logger/indexLogger.vue'),
+    meta: {
+      title: 'Loggers',
+      icon: BookmarkSquareIcon,
+      toggle: false,
+      group: 'main'
+    }
   },
   // {
   //   path: 'activation-keys',

@@ -1,5 +1,5 @@
 <template>
-  <h3 class="text-base font-semibold leading-6 text-gray-900 w-full">Статистика по комиссия</h3>
+  <h3 class="text-base font-semibold leading-6 text-gray-900 w-full">Статистика по комиссионным</h3>
   <apexchart width="100%" type="bar"  :options="options" :series="series"></apexchart>
 </template>
 <script setup>
@@ -8,6 +8,7 @@ import { computed, onMounted, ref } from 'vue'
 const store = statisticStore()
 
 const stat = ref({
+  denied: [],
   labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
   datasets: [
     {
@@ -20,7 +21,7 @@ const stat = ref({
 
 const options = computed(() => {
   return {
-      colors: [ '#00E396'],
+    colors: [ '#00E396'],
     chart: {
       id: 'vuechart-profit',
       type: 'bar',
@@ -38,7 +39,7 @@ const options = computed(() => {
       }
     },
     xaxis: {
-      categories: stat.value.denied?.map((v, k) => k + 1)
+      categories: stat.value.denied?.map((v, k) => k + 1) || []
     },
     yaxis: {
       labels: {
@@ -59,7 +60,7 @@ const getData = async () => {
   const { data } = await store.profitStatistic()
   stat.value = { ...data }
 
-  let days = data?.income?.map((v, k) => k + 1)
+  let days = data?.income?.map((v, k) => k + 1) || []
   options.value.xaxis = {
     categories: [...days]
   }

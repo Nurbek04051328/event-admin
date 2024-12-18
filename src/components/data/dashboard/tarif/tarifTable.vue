@@ -9,6 +9,8 @@
             <!-- <th scope="col" class="th">{{ $t('ticketPackage.table.text') }}</th> -->
             <th scope="col" class="th md-max:text-[13px]">{{ $t('ticketPackage.table.quantity') }}</th>
             <th scope="col" class="th md-max:text-[13px]">{{ $t('ticketPackage.table.commissionRate') }}</th>
+            <th scope="col" class="th">Мероприятие</th>
+            <th scope="col" class="th">Билети</th>
             <th scope="col" class="th md-max:text-[13px]">{{ $t('ticketPackage.table.language') }}</th>
             <th scope="col" class="th md-max:text-[13px]" width="150">{{ $t('worker.table.data') }}</th>
             <th scope="col" class="th-last" width="150"></th>
@@ -27,6 +29,16 @@
             <!-- <td class="td">{{ item?.description }}</td> -->
             <td class="td md-max:text-[13px]">{{ item?.quantity }}</td>
             <td class="td md-max:text-[13px]">{{ item?.commissionRate }}</td>
+            <td class="whitespace-nowrap px-3 py-5 text-sm text-gray-500">
+              <span class="text-green-500">{{ item?.event?.approve }}</span> /
+              <span class="text-red-500">{{ item?.event?.denied }}</span> - 
+              <span>{{ item?.event?.count }}</span>
+            </td>
+            <td class="whitespace-nowrap px-3 py-5 text-sm text-gray-500"> 
+              <span class="text-green-500">{{ item?.tickets?.generated }}</span> /
+              <span class="text-yellow-500">{{ item?.tickets?.bought }}</span> -
+              <span>{{ item?.tickets?.available }}</span>
+            </td>
             <td class="td">
               <div class="flex items-start gap-2">
                 <button

@@ -38,7 +38,7 @@ const options = computed(() => {
       }
     },
     xaxis: {
-      categories: stat.value?.income?.map((v, k) => k + 1)
+      categories: stat.value?.income?.map((v, k) => k + 1) || []
     },
     yaxis: {
       labels: {
@@ -61,7 +61,7 @@ const getData = async () => {
   
   stat.value = { ...data }
 
-  let days = data?.income?.map((v, k) => k + 1)
+  let days = data?.income?.map((v, k) => k + 1) || []
   options.value.xaxis = {
     categories: [...days]
   }

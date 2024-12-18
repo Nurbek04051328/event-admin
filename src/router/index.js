@@ -13,6 +13,9 @@ const routes = [
     path: '/auth',
     name: 'authLayout',
     component: () => import('@/layouts/authLayout.vue'),
+    meta: {
+      title: 'Логин',
+    },
     children: [
       {
         path: '',

@@ -1,5 +1,5 @@
 <template>
-  <div class="ring-1 ring-gray-300 overflow-auto">
+  <div class="ring-1 w-full flex-1 ring-gray-300 overflow-auto">
     <table class="min-w-full divide-y divide-gray-300 ">
       <thead>
         <tr>
@@ -54,13 +54,13 @@
 <script setup>
 import { useI18n } from 'vue-i18n'
 const { t } = useI18n()
-import { ref, onMounted } from 'vue'
+defineProps(['page', 'limit'])
+import { ref } from 'vue'
 import { storeToRefs } from 'pinia'
 import { convertDate } from '@/helpers/func'
 import { TrashIcon, PencilIcon } from '@heroicons/vue/24/outline'
 
 const toggle = ref(false)
-const limit = ref(30)
 
 import { languageStore } from '@/stores/data/language'
 const store = languageStore()
@@ -77,11 +77,7 @@ const edit = (id) => {
   usefull.setToggle(true, id)
 }
 
-const getData = async () => {
-  await store.getlanguages({
-    limit: limit.value
-  })
-}
+
 
 const _id = ref('')
 const confirmRemove = (id) => {
@@ -99,8 +95,5 @@ const close = () => {
   toggle.value = false
 }
 
-onMounted(() => {
-  getData()
-})
 </script>
 <style lang=""></style>

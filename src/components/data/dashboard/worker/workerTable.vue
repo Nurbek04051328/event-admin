@@ -9,6 +9,10 @@
             <th scope="col" class="th w-1/6 lg:w-1/4" width="90">{{ $t('worker.table.phone') }}</th>
             <th scope="col" class="th w-1/5">{{ $t('worker.table.login') }}</th>
             <th scope="col" class="th w-1/6 lg:hidden" width="60">{{ $t('worker.table.role') }}</th>
+            <th scope="col" class="th w-1/6 lg:hidden" width="60">{{ $t('worker.table.checkedOrganizers') }}</th>
+            <th scope="col" class="th w-1/6 lg:hidden" width="60">{{ $t('worker.table.checkedEvent') }}</th>
+            <th scope="col" class="th w-1/6 lg:hidden" width="60">{{ $t('worker.table.messages') }}</th>
+            <th scope="col" class="th w-1/6 lg:hidden" width="60">{{ $t('worker.table.lastVisit') }}</th>
             <th scope="col" class="th w-1/5" width="150">{{ $t('worker.table.data') }}</th>
             <th scope="col" class="th-last w-1/6" width="150"></th>
           </tr>
@@ -26,6 +30,10 @@
             <td class="whitespace-nowrap  text-sm text-gray-500">{{ item?.phone }}</td>
             <td class="whitespace-nowrap text-sm text-gray-500">{{ item?.login }}</td>
             <td class="whitespace-nowrap  text-sm text-gray-500 lg:hidden">{{ item?.role }}</td>
+            <td class="whitespace-nowrap text-center text-sm text-gray-500 lg:hidden">{{ item?.checkedOrganizers }}</td>
+            <td class="whitespace-nowrap text-center text-sm text-gray-500 lg:hidden">{{ item?.checkedEvent }}</td>
+            <td class="whitespace-nowrap text-center text-sm text-gray-500 lg:hidden">{{ item?.messages }}</td>
+            <td class="whitespace-nowrap text-center text-sm text-gray-500 lg:hidden">{{ item?.lastVisit?  convertDateShort(item?.lastVisit, 'full') : '-' }}</td>
             <td class="relative whitespace-nowrap  text-sm font-medium">{{ convertDateShort(item.createdAt, 'full') }}</td>
             <td class="td-last flex gap-2">
               <button type="button" class="add-btn rounded size-9 lg:size-8" @click="$router.push({ name: 'worker-logger', params: { id: item?._id } })">

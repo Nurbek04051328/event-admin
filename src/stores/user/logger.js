@@ -16,6 +16,10 @@ export const loggerStore = defineStore('loggerStore', () => {
     data: [],
     count: 0
   })
+  const routeLoggers = reactive({
+    data: [],
+    count: 0
+  })
 
   //   const usefull = useFullStore()
   //   const notification = useNotification()
@@ -26,6 +30,17 @@ export const loggerStore = defineStore('loggerStore', () => {
     console.log(data)
     logger.data = [...(data?.userLoggers || [])]
     logger.count = data?.count
+
+    console.log(logger)
+  }
+
+  /// Route logs
+  const getrouteLoggers = async (params) => {
+    console.log(params)
+    const { data } = await api.get(`${base_url}/route-logs`, { params })
+    console.log("lllll",data)
+    routeLoggers.data = [...(data?.logs || [])]
+    routeLoggers.count = data?.count
 
     console.log(logger)
   }
@@ -70,6 +85,8 @@ export const loggerStore = defineStore('loggerStore', () => {
   return {
     logger,
     globalSearch,
+    routeLoggers,
+    getrouteLoggers,
     ticketLogger,
     userLogger,
     eventLogger,

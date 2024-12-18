@@ -11,7 +11,8 @@ const ru = {
     activationkeys: 'Ключ активации',
     settings: 'Настройки',
     eventDetail: 'Детали мероприятия',
-    messages: 'Чат'
+    messages: 'Чат',
+    logs: 'Лог'
   },
   settingMenu: {
     language: 'Языки',
@@ -127,7 +128,11 @@ const ru = {
       phone: 'Телефон',
       login: 'Логин',
       role: 'Роль',
-      data: 'Время'
+      data: 'Время',
+      lastVisit: 'Последный вход',
+      checkedOrganizers: 'Кол-во Организеер',
+      checkedEvent: 'Кол-во Мероприятие',
+      messages: 'Кол-во Собщение',
     },
     dialog: {
       title: 'Добавить нового работника',

@@ -1,5 +1,5 @@
 <template>
-  <h3 class="text-base font-semibold leading-6 text-gray-900 w-full">Статистика по билетом</h3>
+  <h3 class="text-base font-semibold leading-6 text-gray-900 w-full">Статистика по билетам</h3>
   <apexchart width="100%" type="area" :options="options" :series="series"></apexchart>
 </template>
 <script setup>

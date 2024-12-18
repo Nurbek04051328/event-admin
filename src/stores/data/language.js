@@ -15,6 +15,8 @@ export const languageStore = defineStore('languageStore', () => {
 
   const getlanguages = async (params) => {
     const { data } = await api.get(base_url, { params })
+    console.log("dataLanguage", data );
+    
     languages.value = [...data.languages]
     languageCount.value = data.count
   }
