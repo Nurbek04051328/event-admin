@@ -8,9 +8,17 @@
         <ChatBubbleLeftEllipsisIcon 
         class="w-5 text-gray-900/80" />
       </button>
-      <div :class="`${user?.user?.status ? 'success-tag' : 'warning-tag'}`" v-if="user?.user?.status">
-        {{ user?.user?.status ? 'Активный' : 'Не активировано' }}
-      </div>
+      <button 
+        v-if="user?.user?.status"
+        @click="confirmStatus()"
+        class="xm-max:text-[10px] cursor-pointer"
+        :class="`${user.user.status == 'active' ? 'success-tag': 
+        user.user.status == 'limited' ? 'primary-tag':
+        user.user.status == 'not active' ? 'warning-tag': 'danger-tag' }`" >
+        {{ user.user.status == 'active' ? 'Активный' :
+          user.user.status == 'limited' ? 'Ограничен' :
+          user.user.status == 'not active' ? 'Не активирован' : 'Удален/Заблокирован' }}
+      </button>
       <button @click="confirmAdult()" :class="`${user?.user?.adult == true ? 'success-tag' : 'warning-tag'}`">
         {{ user?.user?.adult == true ? "Взрослый" : "Несовершеннолетний"}}
       </button>
@@ -41,12 +49,23 @@
       </div>
     </div>
   </div>
+  <!-- Bu Alult uchun dilaog -->
   <accessDialog 
     :title="$t('event.accessDialog.accesstitle')" 
     :btnTitle="$t('event.accessDialog.btnTitle')" 
     @adult="accessAdult" 
     @closeAdult="close()" 
     :dialog="accessAdultToggle" />
+  <!-- Bu Status uchun Confirm Dialog -->
+  <accessDialog 
+    :title="$t('event.accessDialog.accesstitle')" 
+    :btnTitle="$t('event.accessDialog.btnTitle')" 
+    @adult="accessStatus" 
+    @closeAdult="closeStatusDialog()" 
+    :dialog="accessStatusToggle" />
+
+
+  
   <!-- <OrganizerAccess
     :options="{
       actions: actions.filter((act) => act.mode == mode)
@@ -95,13 +114,13 @@ const allEvents = ref({})
 //   }
 // }
 
+
+
 //Comfirm Adult dialog
 const accessAdultToggle = ref(false)
 const confirmAdult = () => {
   accessAdultToggle.value = true
 }
-
-
 const accessAdult = async () => {
   if(user.value.user.adult) {
     await store.userAccess(
@@ -125,6 +144,36 @@ const accessAdult = async () => {
 
 const close = () => {
   accessAdultToggle.value = false
+}
+
+
+//Comfirm Status dialog
+const accessStatusToggle = ref(false)
+const confirmStatus = () => {
+  accessStatusToggle.value = true
+}
+const closeStatusDialog = () => {
+  accessStatusToggle.value = false
+}
+const accessStatus = async () => {
+  if(user.value.user.status == 'active') {
+    await store.userAccess(
+      {
+      _id: id.value,
+      action: 'limited'
+      }
+    )
+    user.value.user.status = 'limited'
+  } else {
+    await store.userAccess(
+      {
+      _id: id.value,
+      action: 'allow'
+      }
+    )
+    user.value.user.status = 'active';
+  }
+  closeStatusDialog()
 }
 
 

@@ -16,7 +16,9 @@ const en = {
     language: 'Languages',
     category: 'Categories',
     subcategory: 'Subcategories',
-    social: 'Social media'
+    social: 'Social media',
+    page: 'Page',
+    tax: 'Tax',
   },
   home: {
     title: 'General report',

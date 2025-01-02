@@ -89,9 +89,6 @@ watch(
   async () => {
     if (id?.value?.length > 0) {
       const res = await store.getSocial(id.value)
-      // if (res.status == 200) {
-      console.log('res', res)
-
       edit.value = true
       data.value = {
         ...res.data,
@@ -99,7 +96,6 @@ watch(
         icon: res.data?.icon || [],
         title: res.data?.title || ''
       }
-      // }
     }
   }
 )
@@ -111,6 +107,8 @@ watch(
       icon: [],
       title: ''
     }
+    v$.value.$reset()
+    edit.value = false 
   }
 )
 
@@ -120,5 +118,7 @@ const close = () => {
     icon: [],
     title: ''
   }
+  v$.value.$reset()
+  edit.value = false 
 }
 </script>

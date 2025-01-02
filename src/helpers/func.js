@@ -3,18 +3,18 @@ import api from './api'
 
 const months = [
   { value: 0, name: 'Январь' },
-  { value: 1, name: 'Феврал' },
-  { value: 2, name: 'Mart' },
-  { value: 3, name: 'Aprel' },
-  { value: 4, name: 'May' },
-  { value: 5, name: 'Iyun' },
-  { value: 6, name: 'Iyul' },
-  { value: 7, name: 'Avgust' },
-  { value: 8, name: 'Sentabr' },
-  { value: 9, name: 'Oktabr' },
-  { value: 10, name: 'Noyabr' },
-  { value: 11, name: 'Dekabr' }
-]
+  { value: 1, name: 'Февраль' },
+  { value: 2, name: 'Март' },
+  { value: 3, name: 'Апрель' },
+  { value: 4, name: 'Май' },
+  { value: 5, name: 'Июнь' },
+  { value: 6, name: 'Июль' },
+  { value: 7, name: 'Август' },
+  { value: 8, name: 'Сентябрь' },
+  { value: 9, name: 'Октябрь' },
+  { value: 10, name: 'Ноябрь' },
+  { value: 11, name: 'Декабрь' }
+];
 
 const langs = ['tr', 'uz', 'ru']
 

@@ -78,8 +78,17 @@
             >
               Войти
             </button>
+            
           </div>
         </form>
+        <!-- <button
+              class="w-full mt-8 p-2 rounded-md text-white"
+              style="background: linear-gradient(to right, #ff7e5f, #7a30fb)"
+              @click="authenticateWithUSB"
+            >
+              Войти c fleshkoy
+            </button>
+            <p v-if="errorMessage" class="error">{{ errorMessage }}</p> -->
       </div>
     </div>
   </div>
@@ -106,6 +115,8 @@ const user = ref({
   password: ''
 })
 
+const errorMessage = ref('');
+
 const v$ = useVuelidate(rules, user)
 
 const submit = async () => {
@@ -113,6 +124,43 @@ const submit = async () => {
   if (!v$.value.$invalid) {
     await store.login(user.value)
   }
+}
+const authenticateWithUSB  = async () => {
+  if (!navigator.usb) {
+  console.error('WebUSB API is not supported in this browser.');
+  return;
+}
+  try {
+        // WebUSB API orqali fleshka qurilmasini tanlash
+        const device = await navigator.usb.requestDevice({ filters: [] });
+        console.log('Device found:', device);
+
+
+        // Fleshka qurilmasining seriya raqamini olish
+        const usbSerial = device.serialNumber || 'UNKNOWN_SERIAL';
+
+        console.log("seriya" , usbSerial);
+        
+        // Backendga so'rov yuborish
+        // const response = await fetch('http://localhost:3000/authenticate-usb', {
+        //   method: 'POST',
+        //   headers: {
+        //     'Content-Type': 'application/json',
+        //   },
+        //   body: JSON.stringify({ serial: usbSerial }),
+        // });
+
+        // const result = await response.json();
+
+        // if (result.success) {
+        //   window.location.href = '/dashboard'; // Dashboardga o'tkazish
+        // } else {
+        //   errorMessage.value = 'Unauthorized USB device.';
+        // }
+      } catch (error) {
+        console.error('Error during USB authentication:', error);
+        errorMessage.value = 'Failed to authenticate with USB.';
+      }
 }
 </script>
 <style lang="scss"></style>

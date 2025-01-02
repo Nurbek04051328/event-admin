@@ -57,3 +57,10 @@ export const organizerStore = defineStore('organizerStore', () => {
     getUpdateSocket
   }
 })
+
+//// "active", "not active", "limited", "deleted"
+// 1) Активный
+// 2) Не активирован
+// 3) Ограничен
+// 4) Удален/Заблокирован
+// Вы действительно принимаете?

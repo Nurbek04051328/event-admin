@@ -99,7 +99,7 @@
           <MenuButton class="-m-1.5 flex items-center p-1.5 mx:m-0">
             <img
               class="h-8 w-8 rounded-full bg-gray-50 xm:hidden"
-              src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+              src="../../assets/images/not-user.jpg"
               alt="Profile image"
             />
             <span class="flex lg:items-center">
@@ -229,7 +229,6 @@ const routeTo = (route, id) => {
 }
 
 const closeSearch = () => {
-  console.log('kuuu')
   searchText.value = ''
   result.value = {}
 }

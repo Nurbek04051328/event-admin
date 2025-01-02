@@ -1,7 +1,7 @@
 <template>
   <default-modal>
     <DialogPanel
-      class="relative transform overflow-hidden rounded-lg bg-white px-4 pb-4 pt-5 text-left shadow-xl transition-all w-[50%] lg:w-[80%]  xm:w-[100%]"
+      class="relative transform overflow-hidden rounded-lg bg-white px-4 pb-4 pt-5 text-left shadow-xl transition-all w-[30%] lg:w-[50%]  xm:w-[100%]"
     >
       <div class="absolute right-0 top-0 hidden pr-4 pt-4 sm:block">
         <button
@@ -25,30 +25,21 @@
           />
           <default-input
             type="number"
-            v-model="data.quantity"
-            name="quantity"
+            v-model="data.percent"
+            name="percent"
             :label="t('ticketPackage.dialog.quantity')"
-            :error="v$.quantity?.$invalid && v$.quantity?.$dirty"
+            :error="v$.percent?.$invalid && v$.percent?.$dirty"
           />
-          <default-input
-            type="number"
-            v-model="data.commissionRate"
-            name="commissionRate"
-            :label="t('ticketPackage.dialog.commissionRate')"
-            :error="v$.commissionRate?.$invalid && v$.commissionRate?.$dirty"
-          />
-        </div>
-        <div class="space-y-2 mt-4 w-full ml-1">
           <default-textarea
-            v-model="data.description"
-            name="description"
+            v-model="data.desc"
+            name="desc"
             :label="t('ticketPackage.dialog.text')"
-            :error="v$.description?.$invalid && v$.description?.$dirty"
+            :error="v$.desc?.$invalid && v$.desc?.$dirty"
           />
         </div>
       </div>
 
-      <div class="mt-6 flex flex-row gap-2">
+      <div class="mt-6 flex flex-row">
         <button type="button" class="close-btn md:m-t-0 xs:m-t-0" @click="close">
           {{ $t('ticketPackage.dialog.close') }}
         </button>
@@ -73,32 +64,30 @@ defineProps(['options'])
 
 const data = ref({
   title: '',
-  description: '',
-  quantity: 0,
-  commissionRate: 0
+  desc: '',
+  percent: 0,
 })
 
 import { useVuelidate } from '@vuelidate/core'
 import { required } from '@vuelidate/validators'
 const rules = {
   title: { required },
-  description: { required },
-  quantity: { required },
-  commissionRate: { required }
+  desc: { required },
+  percent: { required },
 }
 
 const v$ = useVuelidate(rules, data)
 const edit = ref(false)
-import { tarifStore } from '@/stores/data/tarif'
-const store = tarifStore()
+import { taxStore } from '@/stores/data/nalog'
+const store = taxStore()
 
 const send = async () => {
   v$.value.$touch()
   if (!v$.value.$invalid) {
     if (edit.value) {
       data.value.language = lang
-      await store.saveTarif({ ...data.value }, t)
-    } else await store.addTarif({ ...data.value }, t)
+      await store.saveTax({ ...data.value }, t)
+    } else await store.addTax({ ...data.value }, t)
     close()
   } else {
     console.log(data.value)
@@ -109,9 +98,8 @@ const close = () => {
   usefull.setToggle(false, 0)
   data.value = {
     title: '',
-    description: '',
-    quantity: 0,
-    commissionRate: 0
+    desc: '',
+    percent: 0,
   }
   v$.value.$reset()
 }
@@ -120,17 +108,16 @@ watch(
   () => id?.value,
   async () => {
     if (id?.value?.length > 0 && lang?.value?.length > 0) {
-      const res = await store.getTarif(id.value, lang.value)
+      const res = await store.getTax(id.value, lang.value)
       console.log('res', res)
 
       edit.value = true
       data.value = {
         ...res.data,
         _id: id.value,
-        title: res.data?.description || '',
-        description: res.data?.description || '',
-        quantity: res.data?.quantity || 0,
-        commissionRate: res.data?.commissionRate || 0
+        title: res.data?.title || '',
+        desc: res.data?.desc || '',
+        percent: res.data?.percent || 0,
         // description: res.data?.title || '',
         // translate: {
         //   title: res.data?.translate?.title || '',
@@ -146,9 +133,8 @@ watch(
   () => {
     data.value = {
       title: '',
-      description: '',
-      quantity: 0,
-      commissionRate: 0
+      desc: '',
+      percent: 0,
     }
   }
 )

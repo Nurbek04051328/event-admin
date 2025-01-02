@@ -40,5 +40,38 @@ export const settingMenu = [
       group: 'setting',
       toggleTitle: 'Yangi Social-Media'
     }
+  },
+  {
+    path: 'page',
+    name: 'page',
+    component: () => import('@/views/dashboard/settings/indexPage.vue'),
+    meta: {
+      title: 'Страница',
+      toggle: true,
+      group: 'setting',
+      toggleTitle: 'Yangi Sahifa'
+    }
+  },
+  {
+    path: 'tax',
+    name: 'tax',
+    component: () => import('@/views/dashboard/settings/indexNalog.vue'),
+    meta: {
+      title: 'Налог',
+      toggle: true,
+      group: 'setting',
+      toggleTitle: 'Новый налог'
+    }
+  },
+  {
+    path: 'refound',
+    name: 'refound',
+    component: () => import('@/views/dashboard/settings/indexRefound.vue'),
+    meta: {
+      title: 'Возврать билет',
+      toggle: true,
+      group: 'setting',
+      toggleTitle: 'Новый'
+    }
   }
 ]

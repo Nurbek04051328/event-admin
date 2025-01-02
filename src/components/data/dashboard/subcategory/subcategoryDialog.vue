@@ -93,7 +93,15 @@ const rules = {
 }
 
 const close = () => {
-  usefull.setToggle(false, 0)
+  usefull.setToggle(false, 0);
+  data.value = {
+    cover: [],
+    category: '',
+    slug: '',
+    title: ''
+  }
+  v$.value.$reset()
+  edit.value = false 
 }
 
 const v$ = useVuelidate(rules, data)
@@ -109,7 +117,6 @@ const send = async () => {
   if (!v$.value.$invalid) {
     if (edit.value) {
       data.value.language = lang
-      console.log('edit', data.value)
       await store.saveSubcategory({ ...data.value }, t)
     } else await store.addSubcategory({ ...data.value }, t)
     close()
@@ -145,6 +152,8 @@ watch(
       slug: '',
       title: ''
     }
+    v$.value.$reset()
+    edit.value = false 
   }
 )
 </script>

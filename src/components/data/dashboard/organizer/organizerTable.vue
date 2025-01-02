@@ -10,10 +10,10 @@
             <th scope="col" class="th">Мероприятие</th>
             <th scope="col" class="th">Билети</th>
             <th scope="col" class="th">Кол-во Собщение</th>
-            <th scope="col" class="th">Статус</th>
             <th scope="col" class="th">Проверка</th>
             <th scope="col" class="th">Последный вход</th>
             <th scope="col" class="th">Время регистрации</th>
+            <th scope="col" class="th">Статус</th>
           </tr>
         </thead>
         <tbody class="divide-y divide-gray-200 bg-white">
@@ -61,10 +61,6 @@
               {{ person?.message }}
             </td>
             <td class="whitespace-nowrap px-3 py-5 text-sm text-gray-500">
-              <span class="success-tag" v-if="person.activated">Активный</span>
-              <span class="warning-tag" v-else>Не активный</span>
-            </td>
-            <td class="whitespace-nowrap px-3 py-5 text-sm text-gray-500">
               <span class="warning-tag" v-if="person.organizer == 'pending'"> В ожидание </span>
               <span class="danger-tag" v-if="person.organizer == 'denied'"> Отказано </span>
               <span class="success-tag" v-if="person.organizer == 'success'"> Проверено </span>
@@ -74,6 +70,12 @@
             </td>
             <td class="relative whitespace-nowrap py-5 pl-3 pr-4 text-sm font-medium sm:pr-0">
               {{ convertDateShort(person.createdAt, 'full') }}
+            </td>
+            <td class="whitespace-nowrap px-3 py-5 text-sm text-gray-500">
+              <span class="success-tag" v-if="person?.status == 'active'">Активный</span>
+              <span class="primary-tag" v-if="person?.status == 'limited'">Ограничен</span>
+              <span class="warning-tag" v-if="person?.status == 'not active'">Не активирован</span>
+              <span class="danger-tag" v-if="person?.status == 'deleted'">Удален/Заблокирован</span>
             </td>
           </tr>
         </tbody>

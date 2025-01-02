@@ -1,71 +1,59 @@
-import { ref, computed } from 'vue'
+import { ref  } from 'vue'
 import { defineStore } from 'pinia'
 import { useNotification } from '../usefull/notification'
 import api from '@/helpers/api'
 
-const base_url = '/event-category'
+const base_url = '/page'
 
-export const categoryStore = defineStore('categoryStore', () => {
-  const categories = ref([])
-  const categoryCount = ref(0)
+export const pageStore = defineStore('pageStore', () => {
+  const pages = ref([])
+  const pagesCount = ref(0)
   const notification = useNotification()
 
-  const getCategories = async (params) => {
+  const getPages = async (params) => {
     console.log(params);
     
     const { data } = await api.get(base_url, {params})
-    console.log("category", data);
+    console.log("pages", data);
     
-    categories.value = data?.eventCategories;
-    categoryCount.value = data?.count;
+    pages.value = data?.pages;
+    pagesCount.value = data?.count;
   }
 
-  const addCategory = async (category, t) => {
+  const addPage = async (category, t) => {
     const { data } = await api.post(base_url, category)
-    categories.value = [data,...categories.value]
-    categoryCount.value += 1
+    pages.value = [data,...pages.value]
+    pagesCount.value += 1
     notification.setNotif(true, t('story.add'), 'success')
   }
 
-  const removeCategory = async (id, t) => {
+  const removePage = async (id, t) => {
     await api.delete(`${base_url}/${id}`)
-    categories.value = categories.value.filter((item) => item._id !== id)
-    categoryCount.value > 0 ? (categoryCount.value -= 1) : 0
+    pages.value = pages.value.filter((item) => item._id !== id)
+    pagesCount.value > 0 ? (pagesCount.value -= 1) : 0
     notification.setNotif(true, t('story.delete'), 'info')
   }
 
-  const saveCategory = async (category, t) => {
+  const savePage = async (category, t) => {
     const { data } = await api.put(`${base_url}`, category)
-    categories.value = categories.value.map((pay) => {
+    pages.value = pages.value.map((pay) => {
       if (pay._id == data._id) return data
       return pay
     })
     notification.setNotif(true, t('story.update'), 'info')
   }
 
-  const getCategory = async (id, language) => {
+  const getPage = async (id, language) => {
     return await api.get(`${base_url}/${id}/${language}`)
   }
 
-  const listCategories = computed(() => {
-    return [
-      ...categories.value.map((category) => {
-        return {
-          _id: category._id,
-          title: category?.translates?.at(0)?.title,
-        }
-      })
-    ]
-  })
-
   return {
-    categories,
-    categoryCount,
-    getCategories,
-    addCategory,
-    removeCategory,
-    saveCategory,
-    getCategory,
-    listCategories
+    pages,
+    pagesCount,
+    getPages,
+    addPage,
+    removePage,
+    savePage,
+    getPage,
   }
 })

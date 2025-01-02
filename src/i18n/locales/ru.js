@@ -12,13 +12,16 @@ const ru = {
     settings: 'Настройки',
     eventDetail: 'Детали мероприятия',
     messages: 'Чат',
-    logs: 'Лог'
+    logs: 'Журналы'
   },
   settingMenu: {
     language: 'Языки',
     category: 'Категории',
     subcategory: 'Подкатегории',
-    social: 'Социальные сети'
+    social: 'Социальные сети',
+    page: 'Страница',
+    tax: 'Налог',
+    refound: 'Возврать билеть',
   },
   home: {
     title: 'Общий отчет',

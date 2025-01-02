@@ -66,7 +66,7 @@ const props = defineProps({
   error: Boolean,
   modelValue: {
     type: Array,
-    default: () => [] // Use an empty array as the default
+    default: () => [] 
   },
   base_url: String
 })
@@ -76,15 +76,6 @@ const base_url = props.base_url
 
 import api from '@/helpers/api'
 
-// watch(
-//   () => props.modelValue,
-//   (newVal) => {
-//     if (newVal) {
-//       images.value = [...newVal]
-//     } // modelValue o'zgarsa, images ga o'zlashtiriladi
-//   },
-//   { immediate: true }
-// ) // Immediate: True bo'lganda dastlab ham ishlaydi
 
 const onFileChange = (event) => {
   const file = event.target.files[0]

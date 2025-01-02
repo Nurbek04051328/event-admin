@@ -139,17 +139,6 @@ export const links = [
       group: 'main'
     }
   },
-  // {
-  //   path: 'activation-keys',
-  //   name: 'activationkeys',
-  //   component: () => import('@/views/dashboard/activations/indexActivations.vue'),
-  //   meta: {
-  //     title: 'Активационные ключи',
-  //     icon: KeyIcon,
-  //     toggle: false,
-  //     group: 'main'
-  //   }
-  // },
   {
     path: 'settings',
     name: 'settings',

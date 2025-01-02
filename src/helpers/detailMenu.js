@@ -66,6 +66,14 @@ export const detailMenu = [
     ]
   },
   {
+    path: 'worker/add',
+    name: 'workerAdd',
+    component: () => import('@/components/data/dashboard/worker/workerAddPage.vue'),
+    meta: {
+      title: 'Добавить сотрдуник',
+    }
+  },
+  {
     path: 'user/:id',
     name: 'user-detail',
     component: () => import('@/views/dashboard/users/user/showUser.vue'),

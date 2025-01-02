@@ -74,7 +74,7 @@
                       </li>
                     </ul>
                   </li>
-                  <li class="mt-auto">
+                  <li class="mt-auto -mx-2">
                     <router-link
                       v-for="item in links.filter((i) => i?.meta?.group == 'setting')"
                       :key="item.name"

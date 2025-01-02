@@ -18,7 +18,9 @@ const uz = {
     language: 'Tillar',
     category: 'Kategoriyalar',
     subcategory: 'Subkategoriyalar',
-    social: 'Ijtimoiy tarmoqlar'
+    social: 'Ijtimoiy tarmoqlar',
+    page: "Sahifa",
+    tax: 'Soliq',
   },
   home: {
     title: 'Umumiy hisobot',

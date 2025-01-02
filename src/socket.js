@@ -18,13 +18,7 @@ export const socket = io(URL, {
   withCredentials: true
 })
 
-// socket.on('connect', () => {
-//   state.connected = true
-// })
 
-// socket.on('disconnect', () => {
-//   state.connected = false
-// })
 
 
 export const connectSocket = () => {

@@ -57,8 +57,10 @@
               {{ person?.messages }}
             </td>
             <td class="whitespace-nowrap px-3 py-5 text-sm text-gray-500">
-              <span class="success-tag" v-if="person.activated">Активный</span>
-              <span class="warning-tag" v-else>Не активный</span>
+              <span class="success-tag" v-if="person?.status == 'active'">Активный</span>
+              <span class="primary-tag" v-if="person?.status == 'limited'">Ограничен</span>
+              <span class="warning-tag" v-if="person?.status == 'not active'">Не активирован</span>
+              <span class="danger-tag" v-if="person?.status == 'deleted'">Удален/Заблокирован</span>
             </td>
             <td class="relative whitespace-nowrap py-5 pl-3 pr-4 text-sm  sm:pr-0 text-center">
               {{ person.lastVisit?  convertDateShort(person.lastVisit, 'full') : '-' }}

@@ -7,7 +7,7 @@
             <th scope="col" class="th-first w-10">№</th>
             <th scope="col" class="th w-1/5">{{ $t('worker.table.name') }}</th>
             <th scope="col" class="th w-1/6 lg:w-1/4" width="90">{{ $t('worker.table.phone') }}</th>
-            <th scope="col" class="th w-1/5">{{ $t('worker.table.login') }}</th>
+            <!-- <th scope="col" class="th w-1/5">{{ $t('worker.table.login') }}</th> -->
             <th scope="col" class="th w-1/6 lg:hidden" width="60">{{ $t('worker.table.role') }}</th>
             <th scope="col" class="th w-1/6 lg:hidden" width="60">{{ $t('worker.table.checkedOrganizers') }}</th>
             <th scope="col" class="th w-1/6 lg:hidden" width="60">{{ $t('worker.table.checkedEvent') }}</th>
@@ -28,7 +28,7 @@
             <td class="td-first">{{ (page - 1) * limit + index + 1 }}</td>
             <td class="whitespace-nowrap text-sm">{{ item?.lname }} {{ item?.name }}</td>
             <td class="whitespace-nowrap  text-sm text-gray-500">{{ item?.phone }}</td>
-            <td class="whitespace-nowrap text-sm text-gray-500">{{ item?.login }}</td>
+            <!-- <td class="whitespace-nowrap text-sm text-gray-500">{{ item?.login }}</td> -->
             <td class="whitespace-nowrap  text-sm text-gray-500 lg:hidden">{{ item?.role }}</td>
             <td class="whitespace-nowrap text-center text-sm text-gray-500 lg:hidden">{{ item?.checkedOrganizers }}</td>
             <td class="whitespace-nowrap text-center text-sm text-gray-500 lg:hidden">{{ item?.checkedEvent }}</td>

@@ -5,7 +5,8 @@
       :class="{
         'ring-red-300  focus:ring-2 focus:ring-inset focus:ring-red-500': error
       }"
-      >{{ label }}</ComboboxLabel
+      >{{ label }}
+    </ComboboxLabel
     >
     <div class="relative mt-2">
       <ComboboxInput
@@ -135,8 +136,5 @@ function onInput(event) {
   query.value = event.target.value
 }
 
-// Watch for changes to selectedPerson and emit only the ID
-// watch(selectedPersons, (newValue) => {
-//   emit('update:modelValue', newValue)
-// })
+
 </script>

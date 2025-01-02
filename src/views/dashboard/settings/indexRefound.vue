@@ -1,20 +1,20 @@
 <template>
   <head-part>
     <div class="mr-2 md-max:text-[14px]">
-      <span class="text-lg text-gray-500 md-max:text-[14px]">Количество</span>: {{ category_store.categoryCount }}
+      <span class="text-lg text-gray-500 md-max:text-[14px]">Количество</span>: {{ refound_store.refaundsCount }}
     </div>
   </head-part>
   <div class="p-4 flex-1 flex flex-col items-start overflow-hidden">
-    <CategoryTable
+    <RefaundTable
       :options="{
         languages
       }"
     />
   </div>
   <paginate
-    v-if="category_store.categoryCount > limit"
+    v-if="refound_store.refaundsCount > limit"
     v-model="page"
-    :page-count="Math.ceil(category_store.categoryCount / limit)"
+    :page-count="Math.ceil(refound_store.refaundsCount / limit)"
     :page-range="3"
     :margin-pages="2"
     :click-handler="clickCallback"
@@ -23,7 +23,7 @@
     :page-class="'page-item'"
     :container-class="'pagination_next shadow'"
   />
-  <CategoryDialog
+  <RefaundDialog
     :options="{
       languages
     }"
@@ -33,15 +33,15 @@
 import { storeToRefs } from 'pinia'
 import { ref, onMounted } from 'vue'
 import paginate from 'vuejs-paginate-next'
-import CategoryTable from '@/components/data/dashboard/category/categoryTable.vue'
-import CategoryDialog from '@/components/data/dashboard/category/categoryDialog.vue'
+import RefaundTable from '@/components/settings/refound/refoundTable.vue'
+import RefaundDialog from '@/components/settings/refound/refoundDialog.vue'
 
 import { languageStore } from '@/stores/data/language'
 const language_store = languageStore()
 const { languages } = storeToRefs(language_store)
 
-import { categoryStore } from '@/stores/data/categories'
-const category_store = categoryStore()
+import { refoundStore } from '@/stores/data/refound'
+const refound_store = refoundStore()
 
 const page = ref(1)
 const limit = ref(30)
@@ -52,7 +52,7 @@ const clickCallback = async (value) => {
 }
 
 const getData = async () => {
-  await category_store.getCategories({ limit: limit.value, page: page.value })
+  await refound_store.getRefaunds({ limit: limit.value, page: page.value })
 }
 
 
