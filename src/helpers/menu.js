@@ -36,7 +36,7 @@ export const links = [
       icon: UserIcon,
       title: 'Сотрудники',
       group: 'main',
-      toggle: true,
+      linkName: 'workerAdd',
       toggleTitle: 'Добавить сотрудника'
     }
   },

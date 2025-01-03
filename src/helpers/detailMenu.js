@@ -74,6 +74,14 @@ export const detailMenu = [
     }
   },
   {
+    path: 'worker/edit/:id',
+    name: 'workerEdit',
+    component: () => import('@/components/data/dashboard/worker/workerEditPage.vue'),
+    meta: {
+      title: 'Редактировать сотрдуник',
+    }
+  },
+  {
     path: 'user/:id',
     name: 'user-detail',
     component: () => import('@/views/dashboard/users/user/showUser.vue'),

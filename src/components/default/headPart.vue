@@ -16,6 +16,9 @@
         <button v-if="route?.meta?.toggle" @click="openModal" type="button" class="add-btn flex-none">
           <PlusIcon class="size-5 text-white-400" />
         </button>
+        <button v-if="route?.meta?.linkName" @click="$router.push({ name: 'workerAdd' })" type="button" class="add-btn flex-none">
+          <PlusIcon class="size-5 text-white-400" />
+        </button>
       </div>
       <div class="flex">
         <slot />

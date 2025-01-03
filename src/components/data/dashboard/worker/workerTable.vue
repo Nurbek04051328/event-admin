@@ -39,7 +39,7 @@
               <button type="button" class="add-btn rounded size-9 lg:size-8" @click="$router.push({ name: 'worker-logger', params: { id: item?._id } })">
                 <EyeIcon class="size-4" />
               </button>
-              <button type="button" class="edit-btn size-9 lg:size-8" @click="edit(item?._id)">
+              <button type="button" class="edit-btn size-9 lg:size-8" @click="$router.push({ name: 'workerEdit', params: { id: item?._id } })">
                 <PencilIcon class="size-4" />
               </button>
               <button type="button" class="danger-btn size-9 lg:size-8" @click="confirmRemove(item?._id)">
@@ -85,7 +85,7 @@
                     <MenuItem>
                       <button  
                         class="block px-3 py-1 text-sm leading-6 text-gray-900"
-                        @click="edit(item?._id)"
+                        @click="$router.push({ name: 'workerEdit', params: { id: item?._id } })"
                       >
                         Редактировать
                       </button>
@@ -156,12 +156,12 @@ const { workers } = storeToRefs(store)
 
 
 
-import { useFullStore } from '@/stores/usefull/modal'
+// import { useFullStore } from '@/stores/usefull/modal'
 
-const usefull = useFullStore()
-const edit = (id, lang) => {
-  usefull.setToggle(true, id, lang)
-}
+// const usefull = useFullStore()
+// const edit = (id, lang) => {
+//   usefull.setToggle(true, id, lang)
+// }
 
 const _id = ref('')
 const confirmRemove = (id) => {
