@@ -99,19 +99,19 @@
           </div>
           <div class="text-sm space-y-2">
             <div>
-              <input class="mr-1" true-value="show" false-value="hide" type="checkbox" v-model="organizer.show" />
+              <input class="mr-1" value="show" false-value="hide" type="checkbox" v-model="organizer.show" />
               Просмотр
             </div>
             <div>
-              <input class="mr-1" true-value="status" false-value="hide" type="checkbox" v-model="organizer.status" />
+              <input class="mr-1" value="status" false-value="hide" type="checkbox" v-model="organizer.status" />
               Менять статус
             </div>
             <div>
-              <input class="mr-1" true-value="metric" false-value="hide" type="checkbox" v-model="organizer.metric" />
+              <input class="mr-1" value="metric" false-value="hide" type="checkbox" v-model="organizer.metric" />
               Персональные данные
             </div>
             <div>
-              <input class="mr-1" true-value="chat" false-value="hide" type="checkbox" v-model="organizer.chat" />
+              <input class="mr-1" value="chat" false-value="hide" type="checkbox" v-model="organizer.chat" />
               Чат
             </div>
           </div>
@@ -183,6 +183,8 @@ const category_store = categoryStore()
 const subcategory_store = subcategoryStore()
 const { categories } = storeToRefs(category_store)
 const { subcategories } = storeToRefs(subcategory_store)
+import { useRouter } from 'vue-router'
+const router = useRouter()
 const isManager = ref(false)
 const changeRole = async (role) => {
   if (role == 'moderator') isManager.value = true
@@ -279,20 +281,17 @@ const send = async () => {
     if (data.value.role === 'moderator') {
       if (!data.value.subcategories.length) delete payload.subcategories
     }
-
-    console.log("organizer", organizer.value);
-    console.log("user", user.value);
-    console.log("event", event.value);
     const access = {
       organizer: formatAccessData(organizer.value),
       user: formatAccessData(user.value),
       event: formatAccessData(event.value),
     };
     
-    console.log("accsess",access);
     payload.access = access;
     console.log("payload", payload);
+    
     await store.addWorker(payload, t)
+    router.push({ name: 'workers' })
     clear()
   } else {
     console.log(data.value)
@@ -319,9 +318,30 @@ const clear = () => {
     categories: [],
     subcategories: []
   }
+  // Dostup
+  organizer.value ={
+    show: false,
+    status: false,
+    metric: false,
+    chat: false,
+  }
+  user.value = {
+    show: false,
+    status: false,
+    metric: false,
+    chat: false,
+  }
+  event.value = {
+    show: false,
+    status: false
+  }
   v$.value.$reset()
 }
 
+const close = () => {
+  router.push({ name: 'workers' })
+  clear()
+}
 
 onMounted(async () => {
   await category_store.getCategories({ limit: 0, type: true })

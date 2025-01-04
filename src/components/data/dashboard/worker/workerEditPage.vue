@@ -99,19 +99,19 @@
           </div>
           <div class="text-sm space-y-2">
             <div>
-              <input class="mr-1" true-value="show" false-value="hide" type="checkbox" v-model="organizer.show" />
+              <input class="mr-1" value="show"  type="checkbox" v-model="organizer.show" />
               Просмотр
             </div>
             <div>
-              <input class="mr-1" true-value="status" false-value="hide" type="checkbox" v-model="organizer.status" />
+              <input class="mr-1" value="status"  type="checkbox" v-model="organizer.status" />
               Менять статус
             </div>
             <div>
-              <input class="mr-1" true-value="metric" false-value="hide" type="checkbox" v-model="organizer.metric" />
+              <input class="mr-1" value="metric"  type="checkbox" v-model="organizer.metric" />
               Персональные данные
             </div>
             <div>
-              <input class="mr-1" true-value="chat" false-value="hide" type="checkbox" v-model="organizer.chat" />
+              <input class="mr-1" value="chat"  type="checkbox" v-model="organizer.chat" />
               Чат
             </div>
           </div>
@@ -170,7 +170,7 @@
   
 </template>
 <script setup>
-import { ref, computed, onMounted } from 'vue'
+import { ref, computed, onMounted, watch } from 'vue'
 import { storeToRefs } from 'pinia'
 import { useI18n } from 'vue-i18n'
 const { t } = useI18n()
@@ -183,6 +183,9 @@ const category_store = categoryStore()
 const subcategory_store = subcategoryStore()
 const { categories } = storeToRefs(category_store)
 const { subcategories } = storeToRefs(subcategory_store)
+import { useRouter, useRoute  } from 'vue-router'
+const router = useRouter()
+const route = useRoute()
 const isManager = ref(false)
 const changeRole = async (role) => {
   if (role == 'moderator') isManager.value = true
@@ -253,7 +256,7 @@ const rules = computed(() => {
   if (data.value.role === 'moderator') {
     baseRules.categories = { required }
   }
- if (data.value.password) {
+  if (data.value.password) {
     // Tahrirlashda faqat agar parol kiritilgan bo'lsa
     baseRules.password = {
       minLength: minLength(5, { message: t('worker.dialog.password_min_length') })
@@ -279,20 +282,18 @@ const send = async () => {
     if (data.value.role === 'moderator') {
       if (!data.value.subcategories.length) delete payload.subcategories
     }
-
-    console.log("organizer", organizer.value);
-    console.log("user", user.value);
-    console.log("event", event.value);
+    if (!data.value.password) delete payload.password
+    
     const access = {
       organizer: formatAccessData(organizer.value),
       user: formatAccessData(user.value),
       event: formatAccessData(event.value),
     };
-    
-    console.log("accsess",access);
     payload.access = access;
     console.log("payload", payload);
-    await store.addWorker(payload, t)
+    
+    await store.saveWorker(payload, t)
+    router.push({ name: 'workers' })
     clear()
   } else {
     console.log(data.value)
@@ -319,12 +320,80 @@ const clear = () => {
     categories: [],
     subcategories: []
   }
+  // Dostup
+  organizer.value ={
+    show: false,
+    status: false,
+    metric: false,
+    chat: false,
+  }
+  user.value = {
+    show: false,
+    status: false,
+    metric: false,
+    chat: false,
+  }
+  event.value = {
+    show: false,
+    status: false
+  }
   v$.value.$reset()
 }
+
+const close = () => {
+  router.push({ name: 'workers' })
+  clear()
+}
+
+watch(
+  () => data.value.categories,
+  (newCategories) => {
+    if (data.value.categories.length > 0) {
+      filterSubcat(newCategories)
+    }
+  }
+)
 
 
 onMounted(async () => {
   await category_store.getCategories({ limit: 0, type: true })
+  if(route.params.id) {
+    const res = await store.getWorker(route.params.id)
+    console.log("editres", res.data);
+    
+    if (res.data.role == 'moderator') isManager.value = true
+    else isManager.value = false
+    data.value = {
+      ...res.data,
+      _id: route.params.id,
+      categories: res.data?.categories || [],
+      subcategories: res.data?.subcategories || []
+    }
+
+    // Access ma'lumotlarini qayta ishlash
+    if (res.data.access) {
+      
+      // Accesslarni belgilash
+      organizer.value = {
+        show: res.data.access?.organizer.includes('show') || false,
+        status: res.data.access?.organizer.includes('status') || false,
+        metric: res.data.access?.organizer.includes('metric') || false,
+        chat: res.data.access?.organizer.includes('chat') || false,
+      };
+
+      user.value = {
+        show: res.data.access?.user.includes('show') || false,
+        status: res.data.access?.user.includes('status') || false,
+        metric: res.data.access?.user.includes('metric') || false,
+        chat: res.data.access?.user.includes('chat') || false,
+      };
+
+      event.value = {
+        show: res.data.access?.event.includes('show') || false,
+        status: res.data.access?.event.includes('status') || false,
+      };
+    }
+  }
 })
 </script>
 <style lang=""></style>
