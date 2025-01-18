@@ -126,6 +126,8 @@ const confirmBack = async () => {
 
 const getData = () => {
    //   karta
+   console.log("eventvalue", eventInfo.value?.event);
+   
   // DOMda xarita uchun element mavjudligini tekshirib xarita yaratish
   const mapElement = document.getElementById("map");
     if (mapElement) {
@@ -135,9 +137,9 @@ const getData = () => {
         attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
       }).addTo(map);
 
-      L.marker([event.value?.location?.latitude || 41.311081, event.value?.location?.longitude || 69.240562])
+      L.marker([eventInfo.value?.event?.location?.latitude || 41.311081, eventInfo.value?.event?.location?.longitude || 69.240562])
         .addTo(map)
-        .bindPopup(event.value?.location?.address || 'Tashkent')
+        .bindPopup(eventInfo.value?.event?.location?.address || 'Tashkent')
         .openPopup();
     } else {
       console.error("Map container not found!");
@@ -160,7 +162,7 @@ const links = [
 onMounted(async() => {
   await store.getEvent(route.params.id)
   await getData()
-  console.log(eventInfo.value);
+  console.log("eventInfo.value",eventInfo.value);
   
 
       

@@ -36,9 +36,15 @@ export const organizerStore = defineStore('organizerStore', () => {
     organizer.data = [...data.organizers,...organizer.data]
     organizer.count += 1
   }
-  const getNewSocket = async (id) => {
-    let {data} =  await api.get(`${base_url}/${id}`)
-    organizer.data = [(data?.organizers || []), ...organizer.data]
+  // const getNewSocket = async (id) => {
+  //   let {data} =  await api.get(`${base_url}/${id}`)
+  //   organizer.data = [(data?.organizers || []), ...organizer.data]
+  //   notification.setNotif(true, 'Добавлено новое Организатор', 'success')
+  // }
+  const getNewSocket = async () => {
+    const { data } = await api.get(base_url, { params: { limit: 1} })
+    organizer.data = [...data.organizers,...organizer.data]
+    organizer.count += 1
     notification.setNotif(true, 'Добавлено новое Организатор', 'success')
   }
   const getUpdateSocket = async (id) => {

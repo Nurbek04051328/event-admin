@@ -42,9 +42,6 @@ import { useRoute } from 'vue-router'
 import { workerStore } from '@/stores/data/workers'
 const store = workerStore()
 
-import { usersStore } from '@/stores/data/users'
-const user_store = usersStore()
-
 import WorkerInfo from '@/components/data/dashboard/worker/workerInfo.vue'
 import TabList from '@/components/default/tabList.vue'
 import AccessDialog from '@/components/data/dashboard/users/adultDialog.vue';
@@ -82,18 +79,18 @@ const closeStatusDialog = () => {
 }
 const accessStatus = async () => {
   if(worker.value.data.status == 'active') {
-    await user_store.userAccess(
+    await store.changeStatusWorker(
       {
-      _id: id.value,
-      action: 'limited'
+      id: id.value,
+      status: 'limited'
       }
     )
     worker.value.data.status = 'limited'
   } else {
-    await user_store.userAccess(
+    await store.changeStatusWorker(
       {
-      _id: id.value,
-      action: 'allow'
+      id: id.value,
+      status: 'active'
       }
     )
     worker.value.data.status = 'active';

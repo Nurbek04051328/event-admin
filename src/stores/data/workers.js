@@ -60,6 +60,9 @@ export const workerStore = defineStore('workerStore', () => {
   const getInfoWorker = async (id) => {
     return await api.get(`${base_url}/info/${id}`)
   }
+  const changeStatusWorker = async ({id, status}) => {
+    return await api.get(`${base_url}/status/${id}/${status}`)
+  }
 
   return {
     workers,
@@ -69,6 +72,7 @@ export const workerStore = defineStore('workerStore', () => {
     removeWorker,
     saveWorker,
     getWorker,
-    getInfoWorker
+    getInfoWorker,
+    changeStatusWorker
   }
 })

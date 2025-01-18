@@ -70,9 +70,9 @@ onMounted(async () => {
       await message_store.filterRoom(data)
     });
     //  Message o'qilishi viewed hodisasi
-    socket.on("message-viewed", async(id) => {
+    socket.on("message-viewed", (id) => {
       console.log("messageviewed", id);
-      await message_store.viewMessage(id)
+      message_store.viewMessage(id)
     });
   } 
 })

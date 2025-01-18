@@ -13,9 +13,10 @@
   </div>
   <div :class="`flex flex-col w-full max-w-[320px] leading-1.5 gap-1`">
     <div class="flex items-center space-x-2 rtl:space-x-reverse justify-between">
-      <span class="text-sm font-semibold text-gray-900">
+      <span class="text-base font-semibold text-gray-900">
         {{ chat?.sender?.lname }}
         {{ chat?.sender?.name }}
+        {{ chat?.sender?.role== 'moderator'? '(moderator)' :  chat?.sender?.role== 'admin'? '(admin)':''}}
       </span>
       <span class="text-sm font-normal text-gray-500 dark:text-gray-400">{{
         convertDateShort(chat?.createdAt, 'full')

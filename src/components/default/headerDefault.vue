@@ -249,6 +249,8 @@ watch(
 const searching = async (t) => {
   if (t?.length < 4) return false
   result.value = await logger_store.globalSearch(t)
+  console.log("result", result.value);
+  
 }
 </script>
 <style lang=""></style>

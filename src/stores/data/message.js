@@ -24,7 +24,6 @@ export const messageStore = defineStore('messageStore', () => {
 
   const getChatrooms = async (params) => {
     const { data } = await api.get(base_url, { params })
-    console.log('dataroom', data)
     chatrooms.data = [...data.rooms]
     chatrooms.count = data.count
   }
@@ -38,8 +37,6 @@ export const messageStore = defineStore('messageStore', () => {
 
   const sendMessage = async (message) => {
     const { data } = await api.post(base_url, message)
-    console.log("qaytgandata", data);
-    
     chatMessages.data = [...chatMessages.data, data]
     chatMessages.count += 1
 
