@@ -13,6 +13,8 @@ export const biletStore = defineStore('biletStore', () => {
   const notification = useNotification()
 
   const getBilets = async (params) => {
+    console.log("paramsbilet", params);
+    
     const { data } = await api.get(base_url, { params })
     console.log('data', data)
     bilets.data = [...data.tickets]

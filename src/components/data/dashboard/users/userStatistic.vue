@@ -1,5 +1,6 @@
 <template>
-  <div class="grid grid-cols-4  bg-gray-50 rounded-lg p-4 md-max:grid-cols-2 md-max:p-2">
+  <div class="grid grid-cols-5  bg-gray-50 rounded-lg p-4 md-max:grid-cols-2 md-max:p-2">
+    <!-- <pre>{{ org.statistic }}</pre> -->
     <div
       v-for="(stat, statIdx) in stats"
       :key="stat.name"
@@ -8,7 +9,7 @@
         'border-t border-white/5 '
       ]"
     >
-      <p class="text-sm font-medium leading-6 text-gray-600 md-max:text-[15px]">{{ stat.name }}</p>
+      <p class="text-[13px] font-medium leading-6 text-gray-600 md-max:text-[15px]">{{ stat.name }}</p>
       <p class="mt-2 flex items-baseline gap-x-2 md-max:mt-0">
         <span class="text-4xl font-semibold tracking-tight md-max:text-[15px]">{{ stat.value || 0 }} </span>
         <span v-if="stat.unit" class="text-sm text-gray-600 md-max:text-[15px]">{{ stat.unit }}</span>
@@ -39,7 +40,8 @@ const stats = computed(() => {
         : profits + ' сум'
 
   return [
-    { name: 'Кол. мероприятия', value: props.org?.organizerEventsCount },
+    { name: 'Кол. мероприятия', value: props.org?.statistic?.eventCount },
+    { name: 'Генерированные', value: props.org?.statistic?.generatedTickets },
     {
       name: 'Купленные билеты',
       value: allTickerPurchasesCount.split(' ').at(0) || 0,

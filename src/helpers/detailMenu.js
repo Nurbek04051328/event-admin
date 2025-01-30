@@ -4,18 +4,25 @@ export const detailMenu = [
     name: 'show-organizer',
     component: () => import('@/views/dashboard/users/organizer/showOrganizer.vue'),
     meta: {
-      title: 'Организатор'
+      title: 'Организатор',
+      active: 'organizers',
     },
     children: [
       {
         path: 'tickets',
         name: 'organizer-tickets',
-        component: () => import('@/components/data/dashboard/organizer/organizerTickets.vue')
+        component: () => import('@/components/data/dashboard/organizer/organizerTickets.vue'),
+        meta:{
+          active: 'organizers',
+        }
       },
       {
         path: 'logger',
         name: 'organizer-logger',
-        component: () => import('@/components/data/dashboard/logger/userLogger.vue')
+        component: () => import('@/components/data/dashboard/logger/userLogger.vue'),
+        meta:{
+          active: 'organizers',
+        }
       }
     ]
   },
@@ -25,12 +32,16 @@ export const detailMenu = [
     component: () => import('@/views/dashboard/event/eventDetail.vue'),
     meta: {
       title: 'Страница мероприятие',
+      active: 'event',
     },
     children: [
       {
         path: 'tickets',
         name: 'eventTicket',
-        component: () => import('@/components/data/dashboard/event/eventTickets.vue')
+        component: () => import('@/components/data/dashboard/event/eventTickets.vue'),
+        meta: {
+          active: 'event',
+        }
       },
       {
         path: 'logger',
@@ -38,22 +49,27 @@ export const detailMenu = [
         component: () => import('@/components/data/dashboard/logger/eventLogger.vue'),
         meta: {
           group: 'main',
+          active: 'event',
         }
       }
     ]
   },
   {
-    path: 'worker/:id',
+    path: 'workers/:id',
     name: 'workerDetail',
     component: () => import('@/views/dashboard/workers/showWorker.vue'),
     meta: {
       title: 'Страница сотрдуника',
+      active: 'workers',
     },
     children: [
       {
         path: 'history',
         name: 'worker-history',
-        component: () => import('@/components/data/dashboard/worker/workerHistory.vue')
+        component: () => import('@/components/data/dashboard/worker/workerHistory.vue'),
+        meta: {
+          active: 'workers',
+        }
       },
       {
         path: 'logger',
@@ -61,24 +77,27 @@ export const detailMenu = [
         component: () => import('@/components/data/dashboard/logger/workerLogger.vue'),
         meta: {
           group: 'main',
+          active: 'workers',
         }
       }
     ]
   },
   {
-    path: 'worker/add',
+    path: 'workers/add',
     name: 'workerAdd',
     component: () => import('@/components/data/dashboard/worker/workerAddPage.vue'),
     meta: {
       title: 'Добавить сотрдуник',
+      active: 'workers',
     }
   },
   {
-    path: 'worker/edit/:id',
+    path: 'workers/edit/:id',
     name: 'workerEdit',
     component: () => import('@/components/data/dashboard/worker/workerEditPage.vue'),
     meta: {
       title: 'Редактировать сотрдуник',
+      active: 'workers',
     }
   },
   {
@@ -87,17 +106,24 @@ export const detailMenu = [
     component: () => import('@/views/dashboard/users/user/showUser.vue'),
     meta: {
       title: 'Пользователи',
+      active: 'users',
     },
     children: [
       {
         path: 'tickets',
         name: 'user-tickets',
-        component: () => import('@/components/data/dashboard/organizer/organizerTickets.vue')
+        component: () => import('@/components/data/dashboard/organizer/organizerTickets.vue'),
+        meta: {
+          active: 'users',
+        },
       },
       {
         path: 'logger',
         name: 'user-logger',
-        component: () => import('@/components/data/dashboard/logger/userLogger.vue')
+        component: () => import('@/components/data/dashboard/logger/userLogger.vue'),
+        meta: {
+          active: 'users',
+        },
       }
     ]
   },

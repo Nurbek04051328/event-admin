@@ -5,22 +5,22 @@
       <span class="text-sm">Количество: {{ list.count }}</span>
     </div>
     <div class="flex-1 flex flex-col overflow-auto h-[100%]">
-      <div v-if="list?.events?.length > 0" class="space-y-2 flex-1 ">
+      <div v-if="list?.events?.length > 0" class="space-y-2 flex-1">
         <div
           v-for="item in list?.events"
           :key="item._id"
-          class="group text-sm relative grid grid-cols-6 rounded-lg border border-gray-200 bg-white md-max:flex md-max:flex-col "
+          class="group text-sm flex-start relative grid grid-cols-6 rounded-lg border border-gray-200 bg-white md-max:flex md-max:flex-col "
         >
           <div 
-            class="bg-gray-200 sm:aspect-none group-hover:opacity-75 xl:col-span-2 md-max:bg-white md-max:flex md-max:justify-center md-max:pt-1">
+            class="h-full flex float-start items-center sm:aspect-none group-hover:opacity-75 xl:col-span-2 md-max:bg-white md-max:flex md-max:justify-center md-max:pt-1">
             <router-link :to="{ name: 'eventDetail', params: { id: item._id } }">
               <img
                 :src="`${url}/${item?.cover?.at(0)}`"
-                class="object-cover object-center w-full aspect-square md-max:w-auto md-max:h-[150px]"
+                class="object-cover object-center w-full ml-2 aspect-square md-max:w-auto md-max:h-[150px] rounded-lg"
               />
             </router-link>
           </div>
-          <div class="col-span-5 flex flex-col gap-2 p-4 xl:col-span-4 ">
+          <div class="col-span-5 flex flex-col gap-2 p-4 xl:col-span-4">
             <div class="flex">
               <h3 class="text-sm flex-1 text-gray-900 font-bold xm-max:text-[13px]">
                 <router-link :to="{ name: 'eventDetail', params: { id: item._id } }">
@@ -149,13 +149,7 @@
                 <BanknotesIcon class="size-4" />
                 Бесплатно
               </div>
-              <div
-                v-if="item.location?.address"
-                class="flex items-center gap-2 font-medium text-gray-900 xl:col-span-3 xl:text-[12px]"
-              >
-                <MapIcon class="size-4" />
-                {{ item.location?.address }}
-              </div>
+              
               <div v-if="item.when" class="flex items-center gap-2 font-medium text-gray-900 xl:col-span-2 md-max:col-span-4 xm-max:text-[13px]">
                 <CalendarDaysIcon class="size-4" />
                 {{ convertDateShort(item.when) }}
@@ -165,6 +159,13 @@
                 <organizerSettings :item="item" />
               </div>
             </div>
+            <div
+                v-if="item.location?.address"
+                class="flex items-center gap-2 font-medium text-gray-900 xl:col-span-3 xl:text-[12px]"
+              >
+                <MapIcon class="size-4" />
+                {{ item.location?.address }}
+              </div>
           </div>
         </div>
       </div>

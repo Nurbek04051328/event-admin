@@ -99,24 +99,25 @@
     </Dialog>
   </TransitionRoot>
 
-  <div class="  lg:hidden min-w-[250px]">
-    <div class="flex grow flex-col gap-y-1 overflow-y-auto bg-gray-900 px-6 pb-4 h-full">
-      <div class="flex py-4 gap-4 shrink-0 items-center justify-start text-white">
-        <img class="h-10 w-auto" src="../../assets/logo/logo.png" alt="Company Logo" />
-        <span class="text-2xl">Eventum</span>
+  <div class="  lg:hidden min-w-[260px]">
+    <div class="flex grow flex-col overflow-y-auto bg-white px-6 pb-4 pt-[30px] h-full rounded-br-3xl rounded-tr-3xl">
+      <div class="flex py-4 gap-4 shrink-0 items-center justify-start mb-[50px]">
+        <img class="h-14 w-auto" src="../../assets/logo/logo.png" alt="Company Logo" />
+        <span class="text-3xl text-[#483D5B] font-bold">Eventum</span>
       </div>
       <nav class="flex flex-1 flex-col">
         <ul role="list" class="flex flex-1 flex-col gap-y-7">
           <li>
-            <ul role="list" class="-mx-2 space-y-1">
+            <ul role="list" class="-mx-2 space-y-1 text-base">
               <li v-for="item in links.filter((i) => i?.meta?.group == 'main')" :key="item.name">
                 <router-link
                   :to="{ name: item.name }"
                   :class="[
-                    item.name == route.name
-                      ? 'bg-gray-800 text-white'
-                      : 'text-gray-400 hover:text-white hover:bg-gray-800',
-                    'group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold'
+                    'group flex gap-x-3 rounded-2xl px-[16px] py-[14px] text-lg leading-6 font-medium',
+                    item.name == route.name || item.name == route.meta?.active
+                      ? 'bg-[#9E55EC] text-white'
+                      : 'text-[#483D5B] hover:text-[#483D5B] hover:bg-[#F3EBFC]'
+                    
                   ]"
                 >
                   <component :is="item?.meta.icon" class="h-6 w-6 shrink-0" aria-hidden="true" />
@@ -126,22 +127,22 @@
               </li>
             </ul>
           </li>
-          <li class="mt-auto">
+          <!-- <li class="mt-auto">
             <router-link
               v-for="item in links.filter((i) => i?.meta?.group == 'setting')"
               :key="item.name"
               :to="{ name: 'language' }"
               :class="[
-                item.name == route.name
-                  ? 'bg-gray-800 text-white'
-                  : 'text-gray-400 hover:text-white hover:bg-gray-800',
-                'group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold'
+                item.name == route.name || route.name.startsWith(item.name)
+                  ? 'bg-[#9E55EC] text-white'
+                  : 'text-[#483D5B] hover:text-[#483D5B] hover:bg-[#F3EBFC]',
+                'group flex gap-x-3 rounded-2xl px-[16px] py-[14px] text-lg leading-6 font-medium'
               ]"
             >
               <Cog6ToothIcon class="h-6 w-6 shrink-0" aria-hidden="true" />
               {{ $t('menu.' + item.name) }}
             </router-link>
-          </li>
+          </li> -->
         </ul>
       </nav>
     </div>

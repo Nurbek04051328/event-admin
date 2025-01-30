@@ -1,5 +1,5 @@
 <template>
-  <div class="h-screen flex w-full">
+  <div class="h-screen flex w-full bg-[#F9F8FC]">
     <asideDefault />
     <div class="flex flex-col h-full w-full">
       <headerDefault />

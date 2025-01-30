@@ -14,4 +14,4 @@ onMounted(async () => {
   await statistic_store.getStatistics();
 })
 </script>
-<style lang=""></style>
+

@@ -1,5 +1,7 @@
 import '@/assets/styles/app.scss'
 import { createApp } from 'vue'
+
+
 import { createPinia } from 'pinia'
 import VueCookies from 'vue-cookies'
 import i18n from './i18n/i18n'
@@ -20,6 +22,11 @@ import dialogAgree from '@/components/default/dialogAgree.vue'
 import phoneMaska from '@/components/default/phoneMaska.vue'
 
 import VueApexCharts from 'vue3-apexcharts'
+
+
+
+
+
 
 const app = createApp(App)
 
@@ -50,6 +57,10 @@ app.directive('click-outside', {
 })
 
 app.use(VueApexCharts)
+
+
+
+
 
 app.use(i18n)
 app.use(VueCookies, { expires: '7d' })

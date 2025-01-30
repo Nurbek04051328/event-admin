@@ -1,35 +1,37 @@
 <template>
-  <headPart>
-    <div class="mr-2">
-      <span class="text-lg text-gray-500">Количество</span>: {{ store.tarifsCount }}
+  <div class="h-screen flex flex-col overflow-hidden">
+    <headPart
+    :count="store.tarifsCount"
+    >
+      
+    </headPart>
+    <div class="p-4 pb-0 w-full overflow-auto flex-1">
+      <TarifTable
+        :options="{
+          languages
+        }"
+        :page="page" :limit="limit"
+      />
+      <tarifDialog
+        :options="{
+          languages
+        }"
+      />
     </div>
-  </headPart>
-  <div class="p-4 p-4 pb-0 w-full h-[78%] sm:h-[76%]">
-    <TarifTable
-      :options="{
-        languages
-      }"
-      :page="page" :limit="limit"
-    />
-    <tarifDialog
-      :options="{
-        languages
-      }"
-    />
-  </div>
-  <div class="pl-4 pb-2">
-    <paginate
-      v-if="store.tarifsCount > limit"
-      v-model="page"
-      :page-count="Math.round(store.tarifsCount / limit)"
-      :page-range="3"
-      :margin-pages="2"
-      :click-handler="clickCallback"
-      :prev-text="'Пред'"
-      :next-text="'След'"
-      :page-class="'page-item'"
-      :container-class="'pagination_next shadow'"
-    />
+    <div class="pl-4 pb-2">
+      <paginate
+        v-if="store.tarifsCount > limit"
+        v-model="page"
+        :page-count="Math.round(store.tarifsCount / limit)"
+        :page-range="3"
+        :margin-pages="2"
+        :click-handler="clickCallback"
+        :prev-text="'Пред'"
+        :next-text="'След'"
+        :page-class="'page-item'"
+        :container-class="'pagination_next shadow'"
+      />
+    </div>
   </div>
 </template>
 <script setup>

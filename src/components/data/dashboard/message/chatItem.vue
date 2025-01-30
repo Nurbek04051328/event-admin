@@ -23,7 +23,7 @@
       }}</span>
     </div>
     <p
-      :class="`p-4 rounded-bl-xl rounded-br-xl dark:bg-gray-900 text-sm font-normal py-2.5 text-gray-700 dark:text-white ${auth_store.user?.id == chat?.sender._id ? 'rounded-tl-xl' : 'rounded-tr-xl'}`"
+      :class="`p-4  text-wrap  break-words whitespace-normal rounded-bl-xl rounded-br-xl dark:bg-gray-900 text-sm font-normal py-2.5 text-gray-700 dark:text-white ${auth_store.user?.id == chat?.sender._id ? 'rounded-tl-xl' : 'rounded-tr-xl'}`"
       v-if="chat.text"
       v-html="chat?.text.replace(/\n/g, '<br>')"
     ></p>

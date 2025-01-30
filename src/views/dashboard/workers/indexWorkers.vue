@@ -1,15 +1,15 @@
 <template>
-  <div class="h-screen">
-    <headPart>
-      <div class="mr-2">
-        <span class="text-lg text-gray-500">Количество</span>: {{ store.workersCount }}
-      </div>
+  <div class="h-screen flex flex-col overflow-hidden">
+    <headPart
+    :count="store.workersCount"
+    >
+      <WorkerSearch />
     </headPart>
-    <div class="p-4 pb-0 w-full h-[78%] sm:h-[76%] xl:h-[85%]">
+    <div class="p-4 pb-0 w-full overflow-auto flex-1">
       <WorkerTable :page="page" :limit="limit" />
       <WorkerDialog />
     </div>
-    <div class="pl-4 pb-2">
+    <div class="pl-4 py-2">
       <paginate
         v-if="store.workersCount > limit"
         v-model="page"
@@ -29,6 +29,7 @@
 // import { storeToRefs } from 'pinia';
 import WorkerTable from '@/components/data/dashboard/worker/workerTable.vue'
 import WorkerDialog from '@/components/data/dashboard/worker/workerDialog.vue'
+import WorkerSearch from '@/components/data/dashboard/worker/workerSearch.vue'
 import paginate from 'vuejs-paginate-next'
 import { onMounted, ref } from 'vue'
 

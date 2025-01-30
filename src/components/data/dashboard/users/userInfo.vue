@@ -21,9 +21,9 @@
         </div>
       </div>
       <div class="py-2">
-        <div class="text-xs text-gray-500 2xl:text-[12px]">Логин</div>
+        <div class="text-xs text-gray-500 2xl:text-[12px]">Имя пользователя</div>
         <div class="text-base font-medium text-gray-800 2xl:text-[14px]">
-          {{ user?.login }}
+          {{ user?.nickName }}
         </div>
       </div>
       <div class="py-2">

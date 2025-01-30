@@ -1,15 +1,45 @@
 <template>
   <div
-    :class="`flex  text-white rounded-lg p-4 shadow text-base justify-start space-y-2 items-start flex-col xs-max:w-full ${bg || 'bg-gray-900'}`"
+    :class="`flex  text-[${textColor || '#360B64'}] rounded-[26px] p-6 cursor-pointer shadow-sm bg-white/100 hover:shadow text-base gap-6  items-center xs-max:w-full ${bg || 'bg-white'}  `"
   >
-    <div class="truncate text-sm font-medium text-gray-200 lg:text-[13px] lg:break-words lg:max-w-24 md-max:max-w-full">{{ title }}</div>
-    <div class="flex">
-      <component :is="icon" class="h-6 w-6 shrink-0 mr-4" aria-hidden="true" />
-      <div class="text-xl">{{ value }}</div>
+    <div class="w-[52px] h-[52px] rounded-full  flex items-center justify-center" :class="`${bgIconColor? bgIconColor : 'bg-[#F3EBFC]'}`">
+      <component :is="icon" class="h-9 w-9" aria-hidden="true" :class="`${iconColor? iconColor : 'text-[#9E55EC]'}`" />
+    </div>
+    <div class="flex flex-col">
+      <div 
+        class="text-[17px] font-bold lg:text-[13px] lg:break-words lg:max-w-24 md-max:max-w-full"
+        :class="`${textColor? textColor : 'text-[#B6A3D0]'}`"
+      >
+        {{ title }}
+      </div>
+      <div class="text-[26px] font-bold text-[#483D5B] mt-[8px]" >{{ value || 0}}</div>
     </div>
   </div>
 </template>
 <script setup>
-defineProps(['title', 'value', 'icon', 'bg'])
+  defineProps(['title', 'value', 'icon', 'bg', 'textColor', 'iconColor', 'bgIconColor'])
+  // defineProps({
+  //   title: {
+  //     type: String
+  //   },
+  //   value: {
+  //     type: String
+  //   },
+  //   icon: {
+  //     type: String
+  //   },
+  //   bg: {
+  //     type: String
+  //   },
+  //   textColor: {
+  //     type: String
+  //   },
+  //   hoverBg: {
+  //     type: String
+  //   },
+  //   hoverText: {
+  //     type: String
+  //   },
+  // })
 </script>
-<style lang=""></style>
+

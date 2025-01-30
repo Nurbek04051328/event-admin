@@ -9,24 +9,30 @@ export const eventStore = defineStore('eventStore', () => {
   const events = ref([])
   const eventInfo = ref({})
   const eventsCount = ref(0)
+  const comments = ref([])
   const notification = useNotification()
 
   const getEvents = async (params) => {
 
     const { data } = await api.get(base_url, { params })
-    console.log("dataEvents", data);
+    
     
     events.value = data?.events
     eventsCount.value = data?.count
   }
 
+  const getComments = async (id) => {
+
+    const { data } = await api.get(`${base_url}/rating-info/${id}`)
+    
+    comments.value = data || []
+  }
+
   const changeStatus = async (payload, t) => {
-    console.log('send', payload)
 
     const { data } = await api.post(`${base_url}/status`, payload).catch((er) => {
       console.log(er)
     })
-    console.log("datatataa",data);
     
     eventInfo.value.event = {
       ...eventInfo.value.event,
@@ -39,7 +45,6 @@ export const eventStore = defineStore('eventStore', () => {
     let res = await api.get(`${base_url}/${id}`)
     if (res.status == 200) {
       eventInfo.value = res.data
-      console.log("geteventInfo", eventInfo.value);
       
     }
   }
@@ -61,11 +66,13 @@ export const eventStore = defineStore('eventStore', () => {
   return {
     events,
     eventInfo,
+    comments,
     eventsCount,
     getEvents,
     getEvent,
     changeStatus,
     getNewSocket,
-    getUpdateSocket
+    getUpdateSocket,
+    getComments
   }
 })

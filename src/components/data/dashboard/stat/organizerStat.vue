@@ -1,44 +1,91 @@
 <template>
-  <h3 
-    class="text-base font-semibold leading-6 text-gray-900 w-full cursor-pointer"
-    @click="$router.push({ name: 'organizers'})"
-  >Организаторы
-  </h3>
-  <dd
-    class="ont-semibold tracking-tight items-center h-[60%] text-white grid grid-cols-4 gap-4 md-max:justify-between xs-max:mt-4 mt-2 xs-max:flex-col xs-max:w-full lg:gap-2 xm-max:grid-cols-2"
-  >
-    <blackStat
-      title="Все"
-      :icon="UserGroupIcon"
-      :value="
-        count?.user?.organizerSuccess + count?.user?.organizerPending + count?.user?.organizerDenied
-      "
-      bg="bg-blue-950"
-    />
-    <blackStat
-      title="Успешно проверено"
-      bg="bg-green-950"
-      :icon="CheckIcon"
-      :value="count?.user?.organizerSuccess"
-    />
-    <blackStat
-      title="В ожидании"
-      bg="bg-amber-800"
-      :icon="ClockIcon"
-      :value="count?.user?.organizerPending"
-    />
-    <blackStat
-      title="Проверку не прошли"
-      :icon="XMarkIcon"
-      :value="count?.user?.organizerDenied"
-      bg="bg-red-950"
-    />
-  </dd>
+  <div class="p-[26px]  rounded-[26px] shadow-sm bg-white">
+    <div
+      @click="$router.push({ name: 'organizers'})"
+      class="text-[#483D5B] font-bold text-[22px] relative cursor-pointer"
+    >
+      Организаторы
+      <span class="absolute bg-[#FAF4FE] py-[5px] px-[15px] rounded-2xl text-[16px] text-[#B6A3D0] top-[-10px]">{{ count?.organizerSuccess + count?.organizerPending + count?.organizerDenied }}</span>
+    </div>
+    <div class="flex justify-between">
+      <div class="text-[#817295] text-[18px] mt-[40px] ml-[30px] w-[50%]">
+        <div class="relative border-b-[1px] border-[#F2F0F5] pb-[15px] flex items-center justify-between">
+          <span class="absolute left-[-25px] top-[9px] bg-[#05CD99] w-3 h-3 rounded-full"></span> 
+          Успешно проверено 
+          <div class="text-[#483D5B] text-[22px] font-bold">{{ count?.organizerSuccess }}</div>
+        </div>
+        <div class="relative border-b-[1px] border-[#F2F0F5] pb-[15px] flex items-center justify-between">
+          <span class="absolute left-[-25px] top-[9px] bg-[#9E55EC] w-3 h-3 rounded-full"></span> 
+          В ожидании 
+          <div class="text-[#483D5B] text-[22px] font-bold">{{ count?.organizerPending }}</div>
+        </div>
+        <div class="relative  pb-[15px] flex items-center justify-between">
+          <span class="absolute left-[-25px] top-[9px] bg-[#FF5558] w-3 h-3 rounded-full"></span> 
+          Не одобрено 
+          <div class="text-[#483D5B] text-[22px] font-bold">{{ count?.organizerDenied }}</div>
+        </div>
+      </div>
+      <div>
+        <apexchart width="200" type="donut" :options="options" :series="series"></apexchart>
+      </div>
+    </div>
+  </div>
+
 </template>
 <script setup>
-defineProps(['count'])
-import blackStat from './blackStat.vue'
-import { UserGroupIcon } from '@heroicons/vue/20/solid'
-import { XMarkIcon, CheckIcon, ClockIcon } from '@heroicons/vue/24/outline'
+  import { computed, watchEffect , defineProps } from 'vue'
+  import ApexCharts from "apexcharts";
+// import VueApexCharts from "vue3-apexcharts";
+  const props = defineProps(['count'])
+
+  const series = computed(() => [
+    props?.count?.organizerSuccess || 0,
+    props?.count?.organizerPending || 0,
+    props?.count?.organizerDenied || 0,
+]);
+
+  const options = computed(() => ({
+    chart: {
+      // id: 'vuechart-organizers',
+      type: 'donut',
+      height: 300,
+    },
+    labels: ['Успешно проверено', 'В ожидании', 'Проверку не прошли'],
+    legend: {
+      show: false
+    },
+    plotOptions: {
+      pie: {
+        donut: {
+          size: '65%',
+          labels: {
+            show: true,
+            total: {
+              show: true,
+              fontSize: '14px',
+              label: 'Общ. кол-во',
+              fontWeight: 500,
+              color: '#A4A4A4',
+            }
+          }
+        }
+      }
+    },
+    colors: ['#05CD99', '#9E55EC',  '#FF5558'],
+    dataLabels: {
+      enabled: false,
+      formatter: (val) => `${Math.round(val)}`
+    }
+  }))
+
+
+
+  watchEffect(() => {
+  if (series.value.every((val) => val !== undefined)) {
+    ApexCharts.exec('vuechart-organizers', 'updateSeries', series.value);
+  }
+});
+// Icon import
+  // import { XMarkIcon, CheckIcon, ClockIcon, UserGroupIcon } from '@heroicons/vue/24/outline'
 </script>
-<style lang=""></style>
+

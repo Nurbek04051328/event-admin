@@ -5,6 +5,7 @@
       name="status"
       :options="statuses || []"
       option_title="value"
+      placeholder="Выберите статус"
     />
     <button class="edit-btn w-auto px-3 py-3  xm-max:px-[10px] xm-max:py-[8px]" @click="clear">
       <XMarkIcon class="size-4" />
@@ -21,7 +22,9 @@ import { ref } from 'vue'
 // import { useRouter } from 'vue-router'
 const store = biletStore()
 
-const search = ref({})
+const search = ref({
+  status: ''
+})
 // const router = useRouter()
 
 

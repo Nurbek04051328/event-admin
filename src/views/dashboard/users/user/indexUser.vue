@@ -1,11 +1,11 @@
 <template>
-  <div class="h-screen">
-    <headPart>
-      <div class="mr-2">
-        <span class="text-lg text-gray-500 xm:text-base">Количество</span>: {{ store.user.count }}
-      </div>
+  <div class="h-screen flex flex-col overflow-hidden">
+    <headPart
+    :count="store.user.count"
+    >
+      <UserSearch />
     </headPart>
-    <div class="p-4 pb-0 w-full h-[78%] sm:h-[76%] xl:h-[85%]">
+    <div class="p-4 pb-0 w-full overflow-auto flex-1">
       <UsersTable :page="page" :limit="limit" />
     </div>
     <div class="pl-4 pb-2">
@@ -27,6 +27,7 @@
 
 <script setup>
 import UsersTable from '@/components/data/dashboard/users/usersTable.vue'
+import UserSearch from '@/components/data/dashboard/users/userSearch.vue'
 import paginate from 'vuejs-paginate-next'
 import { onMounted, ref } from 'vue'
 import { usersStore } from '@/stores/data/users'

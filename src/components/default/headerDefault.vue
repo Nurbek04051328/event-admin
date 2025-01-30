@@ -1,6 +1,6 @@
 <template>
   <div
-    class="sticky top-0 z-40 flex h-16 shrink-0 items-center gap-x-4 border-b border-gray-200 bg-white px-4 shadow-sm sm:gap-x-6"
+    class="sticky top-0 z-40 flex h-[110px] shrink-0 items-center px-4 sm:gap-x-6"
   >
     <button
       type="button"
@@ -13,23 +13,25 @@
     <!-- Separator -->
     <!-- <div class="h-6 w-px bg-gray-900/10" aria-hidden="true" /> -->
 
-    <div class="flex flex-1 gap-x-2  self-stretch lg:gap-x-6">
-      <div class="relative flex flex-1">
-        <label for="search-field" class="sr-only"> {{ $t('header.search') }}</label>
-        <MagnifyingGlassIcon
-          class="pointer-events-none absolute inset-y-0 left-0 h-full w-5 text-gray-400"
-          aria-hidden="true"
-        />
-        <input
-          id="search-field"
-          class="block h-full w-full border-0 py-0 pl-8 pr-0 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm focus:outline-none"
-          :placeholder="$t('header.search')"
-          type="search"
-          name="search"
-          v-model="searchText"
-        />
+    <div class="flex flex-1 rounded-2xl gap-3">
+      <div class="relative flex flex-1 my-7 rounded-2xl bg-white px-[24px] py-[20px]">
+        <div class="w-full">
+          <!-- <label for="search-field" class=""> {{ $t('header.search') }}</label> -->
+          <MagnifyingGlassIcon
+            class="pointer-events-none text-[#9E55EC] absolute inset-y-0  h-full w-5"
+            aria-hidden="true"
+          />
+          <input
+            id="search-field"
+            class="block bg-inherit h-full w-full border-0 py-0 pl-8 pr-0 text-[#9E55EC] placeholder:text-[#B6A3D0] focus:ring-0 sm:text-sm focus:outline-none"
+            :placeholder="$t('header.search')"
+            type="search"
+            name="search"
+            v-model="searchText"
+          />
+        </div>
         <Combobox
-          class="absolute top-full w-full bg-white shadow rounded-br-2xl rounded-bl-2xl"
+          class="absolute top-full w-[97%] bg-white shadow rounded-br-2xl rounded-bl-2"
           v-if="filteredList.length > 0"
         >
           <ComboboxOptions
@@ -37,7 +39,7 @@
             class="max-h-80 scroll-pb-2 scroll-pt-11 space-y-2 overflow-y-auto pb-2"
           >
             <li v-for="category in filteredList" :key="category.value">
-              <h2 class="bg-gray-100 px-4 py-2.5 text-xs font-semibold text-gray-900">
+              <h2 class=" px-4 py-2.5 text-xs font-semibold text-gray-900">
                 {{ category.label }}
               </h2>
               <ul class="mt-2 text-sm text-gray-800">
@@ -81,33 +83,42 @@
           </ComboboxOptions>
         </Combobox>
       </div>
-      <div class="flex items-center gap-x-4 xm:gap-x-0">
-        <button type="button" class="-m-2.5 p-2.5 text-gray-400 hover:text-gray-500 xm:p-0">
+
+      <div class="flex items-center gap-x-3 xm:gap-x-0">
+        <div class="bg-white py-[14px] px-[15px] rounded-2xl">
+          <router-link
+            :to="{ name: 'language' }"
+            >
+              <Cog6ToothIcon class="h-8 w-8 shrink-0 text-[#9E55EC]" aria-hidden="true" />
+            </router-link>
+        </div>
+        <!-- <button type="button" class="-m-2.5 p-2.5 text-gray-400 hover:text-gray-500 xm:p-0">
           <span class="sr-only">View notifications</span>
           <BellIcon class="h-6 w-6" aria-hidden="true" />
-        </button>
+        </button> -->
         <!-- <select v-model="language" @change="changeLanguage" class="border-0 outline-none">
           <option v-for="option in languages" :key="option._id" :value="option._id">
             {{ option.title }}
           </option>
         </select> -->
-        <!-- Separator -->
-        <div class="lg:hidden h-6 w-px bg-gray-900/10" aria-hidden="true" />
-
         <!-- Profile dropdown -->
-        <Menu as="div" class="relative">
-          <MenuButton class="-m-1.5 flex items-center p-1.5 mx:m-0">
-            <img
-              class="h-8 w-8 rounded-full bg-gray-50 xm:hidden"
-              src="../../assets/images/not-user.jpg"
-              alt="Profile image"
-            />
-            <span class="flex lg:items-center">
-              <span class="ml-4 text-sm font-semibold leading-6 text-gray-900" aria-hidden="true"
-                >Admin</span
-              >
-              <ChevronDownIcon class="ml-2 h-5 w-5 text-gray-400 xm:hidden" aria-hidden="true" />
-            </span>
+        <Menu as="div" class="relative flex   bg-white  my-7 py-[10px] pl-[20px] pr-[40px]  rounded-2xl ml-20px">
+          <MenuButton class="-m-1.5 flex items-center mx:m-0">
+            <div class="w-[50px] h-[50px] bg-[#F9F8FC] rounded-full flex items-center justify-center">
+              <img
+                class="h-[35px] w-[35px] rounded-full xm:hidden"
+                src="../../assets/images/header-user.png"
+                alt="Profile image"
+              />
+            </div>
+            <div class="flex items-center lg:items-center">
+              <div class="flex flex-col items-start ml-4 font-semibold" aria-hidden="true">
+                <!-- <div class="text-[#483D5B] text-lg">{{ auth_store.user?.lname }} {{ auth_store.user?.name }}</div> -->
+                <div class="text-[#483D5B] text-lg">Adminbekov Adminali</div>
+                <div class="text-[#B6A3D0]">{{ auth_store.user?.role }}</div>
+              </div>
+              <!-- <ChevronDownIcon class="ml-2 h-5 w-5 text-gray-400 xm:hidden" aria-hidden="true" /> -->
+            </div>
           </MenuButton>
           <transition
             enter-active-class="transition ease-out duration-100"
@@ -118,16 +129,10 @@
             leave-to-class="transform opacity-0 scale-95"
           >
             <MenuItems
-              class="absolute right-0 z-10 mt-2.5 w-[150px] origin-top-right rounded-md bg-white py-2 shadow-lg ring-1 ring-gray-900/5 focus:outline-none"
+              class="absolute right-0 top-[50px] z-10 w-[150px]  rounded-md bg-white py-2 shadow-lg  ring-gray-900/5 focus:outline-none"
             >
-              <!-- <MenuItem v-for="item in userNavigation" :key="item.name" v-slot="{ active }">
-              <a :href="item.href" :class="[
-                active ? 'bg-gray-50' : '',
-                'block px-3 py-1 text-sm leading-6 text-gray-900'
-              ]">{{ item.name }}</a>
-              </MenuItem> -->
               <MenuItem>
-                <button @click="logout" class="block px-3 py-1 text-sm leading-6 text-gray-900">
+                <button @click="logout" class="block px-3 py-1 text-sm leading-6 text-[#483D5B]">
                   {{ $t('header.logout') }}
                 </button>
               </MenuItem>
@@ -143,7 +148,7 @@ import { ref, watch, computed } from 'vue'
 import { useI18n } from 'vue-i18n'
 const { locale, t } = useI18n()
 import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/vue'
-import { Bars3Icon, BellIcon } from '@heroicons/vue/24/outline'
+import { Bars3Icon, BellIcon, Cog6ToothIcon } from '@heroicons/vue/24/outline'
 import { ChevronDownIcon, MagnifyingGlassIcon } from '@heroicons/vue/20/solid'
 // const userNavigation = [{ name: 'Your profile', href: '#' }]
 

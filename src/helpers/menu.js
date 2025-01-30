@@ -5,13 +5,13 @@ import {
   SwatchIcon,
   KeyIcon,
   TicketIcon,
-  BookmarkSquareIcon
-
-
+  BookmarkSquareIcon,
+  BriefcaseIcon,
+  UsersIcon,
+  CalendarIcon
 } from '@heroicons/vue/24/outline'
 
 import { settingMenu } from './settingMenu'
-import { BriefcaseIcon, CalendarIcon, UsersIcon } from '@heroicons/vue/20/solid'
 import { ChatBubbleLeftIcon } from '@heroicons/vue/24/outline'
 
 // import { ChatBubbleBottomCenterIcon } from '@heroicons/vue/24/solid'

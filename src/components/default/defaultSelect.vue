@@ -10,6 +10,7 @@
     }"
     @change="$emit('change', model)"
   >
+    <option value="" disabled selected>{{ placeholder || '' }}</option>
     <option v-for="opt of options" :key="opt._id" :value="opt._id">
       {{ opt[option_title] }}
     </option>

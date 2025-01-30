@@ -21,9 +21,25 @@
         <WorkerInfo :user="worker.data" />
       </div>
       <!-- Main content -->
-      <div class="col-span-8 flex flex-col space-y-2 h-full overflow-auto 2xl:col-span-8 2xl:h-[670px] md-max:col-span-6 xm-max:col-span-6">
+      <div class="col-span-8 flex flex-col space-y-2 h-full overflow-hidden 2xl:col-span-8 2xl:h-[670px] md-max:col-span-6 xm-max:col-span-6">
         <TabList :list="links" />
-        <router-view />
+        <!-- <div class="overflow-auto h-full"> -->
+          <router-view/>
+        <!-- </div> -->
+        <!-- <div class="pl-4 pb-2">
+          <paginate
+            v-if="logger_store.logger.count > limit"
+            v-model="page"
+            :page-count="Math.ceil(logger_store.logger.count / limit)"
+            :page-range="3"
+            :margin-pages="2"
+            :click-handler="clickCallback"
+            :prev-text="'Пред'"
+            :next-text="'След'"
+            :page-class="'page-item'"
+            :container-class="'pagination_next shadow'"
+          />
+        </div> -->
       </div>
     </div>
   </div>
@@ -37,10 +53,25 @@
 <script setup>
 import { ref, onMounted } from 'vue'
 import { useRoute } from 'vue-router'
-
+// import paginate from 'vuejs-paginate-next'
 
 import { workerStore } from '@/stores/data/workers'
 const store = workerStore()
+
+// import { loggerStore } from '@/stores/user/logger'
+// const logger_store = loggerStore()
+
+
+
+// const clickCallback = async (value) => {
+//   page.value = value
+//   await logger_store.userLogger({
+//     limit: limit.value,
+//     page: page.value,
+//     actionFrom: id.value
+//   })
+// }
+
 
 import WorkerInfo from '@/components/data/dashboard/worker/workerInfo.vue'
 import TabList from '@/components/default/tabList.vue'

@@ -9,7 +9,6 @@
         </div>
       </div>
     <div class="p-8 w-[55%] m-auto">
-      
       <div class="flex w-full xm:block">
         <div class="space-y-2 mt-4 w-full mr-3">
           <default-input
@@ -255,7 +254,7 @@ const rules = computed(() => {
   if (data.value.role === 'moderator') {
     baseRules.categories = { required }
   }
- if (data.value.password) {
+  if (data.value.password) {
     // Tahrirlashda faqat agar parol kiritilgan bo'lsa
     baseRules.password = {
       minLength: minLength(5, { message: t('worker.dialog.password_min_length') })
@@ -298,13 +297,13 @@ const send = async () => {
   }
 }
 const filterSubcat = async (selectedCategories) => {
-  data.value.subcategories = subcategories.value.filter((subcategory) =>
-    selectedCategories.includes(subcategory.categoryId)
-  )
   await subcategory_store.getSubcategories({
     category: { $in: selectedCategories },
     type: true
   })
+  data.value.subcategories = subcategories.value.filter((subcategory) =>
+    selectedCategories.includes(subcategory.categoryId)
+  )
 }
 const clear = () => {
   data.value = {

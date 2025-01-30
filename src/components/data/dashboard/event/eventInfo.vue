@@ -56,10 +56,18 @@
           </span>
         </div>
       </div>
-      <div class="py-2">
-        <div class="text-xs text-gray-500 2xl:text-[12px]">Количество билетов</div>
-        <div class="text-base font-medium text-gray-800 2xl:text-[12px]">
-          {{ event?.ticketPackage?.quantity }}
+      <div class="py-2 flex justify-between">
+        <div>
+          <div class="text-xs text-gray-500 2xl:text-[12px]">Количество билетов</div>
+          <div class="text-base font-medium text-gray-800 2xl:text-[12px]">
+            {{ event?.ticketPackage?.quantity }}
+          </div>
+        </div>
+        <div>
+          <div class="text-xs text-gray-500 2xl:text-[12px]">Стоимость билета</div>
+          <div class="text-base font-medium text-gray-800 2xl:text-[12px]">
+            {{ event?.entryFee.toLocaleString() }} сум
+          </div>
         </div>
       </div>
       <div class="py-2">
@@ -68,14 +76,31 @@
           {{ convertDateShort(event?.createdAt, 'full') }}
         </div>
       </div>
+      <!-- <div class="py-2 space-y-1">
+        <div class="text-xs text-gray-500 2xl:text-[12px]">Адрес</div>
+        <div class="text-xs font-medium text-gray-800 2xl:text-[12px]">
+          {{ event?.location?.address }}
+          <div class="w-full h-48 mt-3">
+            <div id="map"  class="map size-full"></div>
+          </div>
+        </div>
+      </div> -->
       <div class="py-2 space-y-1">
         <div class="text-xs text-gray-500 2xl:text-[12px]">Адрес</div>
         <div class="text-xs font-medium text-gray-800 2xl:text-[12px]">
           {{ event?.location?.address }}
           <div class="w-full h-48 mt-3">
-            <div id="map" class="map size-full"></div>
+            <iframe
+              :src="mapUrl"
+              width="100%"
+              height="400"
+              style="border:0;"
+              allowfullscreen=""
+              loading="lazy"
+            ></iframe>
           </div>
         </div>
+        
       </div>
     </div>
   </div>
@@ -93,8 +118,19 @@ import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 
 
+const latitude = 41.2995; // Toshkent koordinatalari
+const longitude = 69.2401;
+// const mapUrl = `https://yandex.ru/maps/?ll=${longitude},${latitude}&z=14&l=map&mode=search`;
+const mapUrl = `https://www.google.com/maps?q=${latitude},${longitude}&z=15&output=embed`;
+
+
+//Можно использовать для различных преобразований
 
 
 
 </script>
-<style lang=""></style>
+<style>
+iframe {
+  border-radius: 8px;
+}
+</style>

@@ -56,6 +56,10 @@ const getLoggers = async () => {
   })
 }
 
+
+
+
+
 onMounted(() => {
   id.value = route.params.id
   getLoggers()

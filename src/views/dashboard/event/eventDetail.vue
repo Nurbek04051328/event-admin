@@ -27,7 +27,7 @@
         </button>
       </div>
     </headPart>
-    
+    <!-- <img src="" alt=""> -->
     <div class="p-4 flex-1 overflow-auto h-full">
       <div class="grid grid-cols-12 gap-4 h-full 2xl:h-auto md:h-full xm-max:grid-cols-6">
         <div class="col-span-3 order-first h-full overflow-auto 2xl:col-span-4 2xl:h-[670px] md-max:col-span-6 xm-max:col-span-6">
@@ -125,26 +125,38 @@ const confirmBack = async () => {
 }
 
 const getData = () => {
-   //   karta
-   console.log("eventvalue", eventInfo.value?.event);
-   
+  // karta
+  console.log("eventvalue", eventInfo.value?.event);
+
   // DOMda xarita uchun element mavjudligini tekshirib xarita yaratish
   const mapElement = document.getElementById("map");
-    if (mapElement) {
-      const map = L.map("map").setView([41.311081, 69.240562], 11);
+  if (mapElement) {
+    const map = L.map("map").setView([41.311081, 69.240562], 11);
 
-      L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
-        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-      }).addTo(map);
+    L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+    }).addTo(map);
 
-      L.marker([eventInfo.value?.event?.location?.latitude || 41.311081, eventInfo.value?.event?.location?.longitude || 69.240562])
-        .addTo(map)
-        .bindPopup(eventInfo.value?.event?.location?.address || 'Tashkent')
-        .openPopup();
-    } else {
-      console.error("Map container not found!");
-    }
-}
+    // Define a custom icon
+    const customIcon = L.icon({
+      iconUrl: "/marker.png", // Replace with your icon path
+      iconSize: [25, 30], // Size of the icon [width, height]
+      iconAnchor: [19, 38], // Point of the icon that corresponds to the marker's location [x, y]
+      popupAnchor: [0, -38], // Point from which the popup should open relative to the iconAnchor
+    });
+
+    // Add marker with the custom icon
+    L.marker(
+      [eventInfo.value?.event?.location?.latitude || 41.311081, eventInfo.value?.event?.location?.longitude || 69.240562],
+      { icon: customIcon } // Use the custom icon here
+    )
+      .addTo(map)
+      .bindPopup(eventInfo.value?.event?.location?.address || "Tashkent")
+      .openPopup();
+  } else {
+    console.error("Map container not found!");
+  }
+};
 
 
 

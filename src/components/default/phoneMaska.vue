@@ -1,6 +1,6 @@
 <template>
   <label :for="name" class="block text-sm font-medium leading-6 text-gray-900">{{ label }} </label>
-  <div class="relative mt-2 rounded-md shadow-sm">
+  <div class="relative  rounded-md shadow-sm">
     <input
       :id="name"
       autocomplete="off"

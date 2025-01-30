@@ -21,9 +21,9 @@
           <tr
             v-for="(item, index) in workers"
             :key="item?._id"
-            class=" hover:bg-gray-100"
+            class=" hover:bg-gray-100 cursor-pointer"
             :class="index % 2 === 0 ? undefined : 'bg-gray-50'"
-            
+            @click="$router.push({ name: 'worker-logger', params: { id: item?._id } })"
           >
             <td class="td-first">{{ (page - 1) * limit + index + 1 }}</td>
             <td class="whitespace-nowrap text-sm">{{ item?.lname }} {{ item?.name }}</td>
@@ -36,13 +36,21 @@
             <td class="whitespace-nowrap text-center text-sm text-gray-500 lg:hidden">{{ item?.lastVisit?  convertDateShort(item?.lastVisit, 'full') : '-' }}</td>
             <td class="relative whitespace-nowrap  text-sm font-medium">{{ convertDateShort(item.createdAt, 'full') }}</td>
             <td class="td-last flex gap-2">
-              <button type="button" class="add-btn rounded size-9 lg:size-8" @click="$router.push({ name: 'worker-logger', params: { id: item?._id } })">
+              <!-- <button type="button" class="add-btn rounded size-9 lg:size-8" @click="$router.push({ name: 'worker-logger', params: { id: item?._id } })">
                 <EyeIcon class="size-4" />
-              </button>
-              <button type="button" class="edit-btn size-9 lg:size-8" @click="$router.push({ name: 'workerEdit', params: { id: item?._id } })">
+              </button> -->
+              <button 
+                type="button" 
+                class="bg-[#FFECD9] text-[#FF7E00] hover:bg-[#FF7E00] hover:text-white rounded-lg flex items-center justify-center size-9 lg:size-8" 
+                @click.stop="$router.push({ name: 'workerEdit', params: { id: item?._id } })"
+              >
                 <PencilIcon class="size-4" />
               </button>
-              <button type="button" class="danger-btn size-9 lg:size-8" @click="confirmRemove(item?._id)">
+              <button 
+                type="button" 
+                class="bg-[#FFE6E6] text-[#FF5558] hover:bg-[#FF5558] hover:text-white rounded-lg flex items-center justify-center size-9 lg:size-8" 
+                @click.stop="confirmRemove(item?._id)"
+              >
                 <TrashIcon class="size-4" />
               </button>
             </td>
@@ -142,7 +150,7 @@
 import { ref } from 'vue'
 import { convertDateShort } from '@/helpers/func'
 import { TrashIcon, PencilIcon, PhoneIcon, EllipsisHorizontalIcon } from '@heroicons/vue/24/outline'
-import { EyeIcon } from '@heroicons/vue/20/solid';
+// import { EyeIcon } from '@heroicons/vue/20/solid';
 import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/vue'
 import { useI18n } from 'vue-i18n'
 const { t } = useI18n()

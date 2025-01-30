@@ -36,9 +36,13 @@ export const messageStore = defineStore('messageStore', () => {
   }
 
   const sendMessage = async (message) => {
+    console.log("1 message", message);
+    
     const { data } = await api.post(base_url, message)
-    chatMessages.data = [...chatMessages.data, data]
-    chatMessages.count += 1
+    console.log("2 qayt message", data);
+    
+    // chatMessages.data = [...chatMessages.data, data]
+    // chatMessages.count += 1
 
     await filterRoom({room:data?.room, message:data, notViewed:data?.notViewed})
   }
