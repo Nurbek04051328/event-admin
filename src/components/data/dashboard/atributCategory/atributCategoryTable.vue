@@ -1,30 +1,45 @@
 <template>
-  <div class="ring-1 w-full ring-gray-300 sm:mx-0 rounded-lg " :class="refounds.length > 0 ? 'overflow-auto' : ''">
+  <div class="ring-1 w-full ring-gray-300 rounded-lg sm:mx-0" :class="atributeCategories.length > 0 ? 'overflow-auto' : ''">
     <table class="w-full divide-y">
       <thead>
         <tr>
           <th scope="col" class="th-first md-max:text-[13px]">№</th>
-          <th scope="col" class="th md-max:text-[13px]">Название</th>
-          <th scope="col" class="th md-max:text-[13px]">День</th>
-          <th scope="col" class="th md-max:text-[13px]">Процент</th>
-          <!-- <th scope="col" class="th md-max:text-[13px]">Описание</th> -->
-          <th scope="col" class="th md-max:text-[13px]">Язык</th>
-          <th scope="col" class="th md-max:text-[13px]" width="150">Дата</th>
+          <th scope="col" class="th md-max:text-[13px] w-5">{{ $t('category.table.img') }}</th>
+          <th scope="col" class="th md-max:text-[13px]">{{ $t('category.table.name') }}</th>
+          <th scope="col" class="th md-max:text-[13px]">{{ $t('category.table.language') }}</th>
+          <th scope="col" class="th md-max:text-[13px]" width="150">{{ $t('category.table.data') }}</th>
           <th scope="col" class="th-last" width="150"></th>
         </tr>
       </thead>
       <tbody class="bg-white">
         <tr
-          v-for="(item, itemIdx) in refounds"
+          v-for="(item, itemIdx) in atributeCategories"
           :key="item?._id"
+          class="hover:bg-gray-100 "
           :class="itemIdx % 2 === 0 ? undefined : 'bg-gray-50'"
         >
           <td class="td-first md-max:text-[13px]">
             {{ itemIdx + 1 }}
           </td>
-          <td class="td md-max:text-[13px]">{{ item?.title  }}</td>
-          <td class="td md-max:text-[13px]">{{ item?.day  }}</td>
-          <td class="td md-max:text-[13px]">{{ item?.percent  }} %</td>
+          <td class="td flex justify-center">
+            <!-- {{ item?.cover }} -->
+            <a :href="`${url}/${item?.cover[0]}`" target="_blank" v-if="item?.cover?.length > 0">
+              <img :src="`${url}/${item?.cover[0]}`" alt="" class="w-10 rounded-md" />
+            </a>
+            <img
+              v-else
+              src="@/assets/images/not-image.png"
+              alt=""
+              class="w-14 rounded-md"
+            />
+          </td>
+          <td 
+            class="td md-max:text-[13px] cursor-pointer"
+            @click="$router.push({ name: 'subcategory', params: { id: item?._id } })"
+            >
+            {{ item?.title || $t('subcategory.table.notadd') }}
+            
+          </td>
           <td class="td md-max:text-[13px]">
             <div class="flex items-start gap-2">
               <button
@@ -69,15 +84,16 @@ import { useI18n } from 'vue-i18n'
 const { t } = useI18n()
 import { convertDateShort } from '@/helpers/func'
 import { TrashIcon } from '@heroicons/vue/24/outline'
+const url = import.meta.env.VITE_URL
 
 const toggle = ref(false)
 // const limit = ref(30)
 defineProps(['options'])
 
-import { refoundStore } from '@/stores/data/refound'
+import { atributeCategoryStore } from '@/stores/data/atributCategory'
 import { storeToRefs } from 'pinia'
-const store = refoundStore()
-const { refounds } = storeToRefs(store)
+const store = atributeCategoryStore()
+const { atributeCategories } = storeToRefs(store)
 
 // const getData = async () => {
 //   await store.getCategories({
@@ -100,7 +116,7 @@ const confirmRemove = (id) => {
 
 const remove = async (answer) => {
   if (answer) {
-    await store.removeRefaund(_id.value, t)
+    await store.removeAtributeCategory(_id.value, t)
   }
   close()
 }

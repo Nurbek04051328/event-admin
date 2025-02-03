@@ -12,6 +12,7 @@ import {
 } from '@heroicons/vue/24/outline'
 
 import { settingMenu } from './settingMenu'
+import { settingChildren } from './settingChild'
 import { ChatBubbleLeftIcon } from '@heroicons/vue/24/outline'
 
 // import { ChatBubbleBottomCenterIcon } from '@heroicons/vue/24/solid'
@@ -148,6 +149,6 @@ export const links = [
       group: 'setting',
       title: 'Настройки'
     },
-    children: settingMenu
+    children: [...settingMenu, ...settingChildren]
   }
 ]

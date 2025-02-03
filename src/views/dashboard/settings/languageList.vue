@@ -1,23 +1,26 @@
 <template>
-  <head-part>
-    <div class="mr-2 md-max:text-[14px]">
-      <span class="text-lg text-gray-500 md-max:text-[14px]">Количество</span>: {{ store.languageCount }}
+  <div class="h-screen flex flex-col overflow-hidden">
+    <head-part
+    :count="store.languageCount"
+    >
+    </head-part>
+    <div class="p-4 pb-0 w-full overflow-auto flex-1">
+      <languageTable :page="page" :limit="limit" />
     </div>
-  </head-part>
-  <div class="p-4 flex-1 flex flex-col items-start overflow-hidden">
-    <languageTable :page="page" :limit="limit" />
-    <paginate
-      v-if="store.languageCount > limit"
-      v-model="page"
-      :page-count="Math.ceil(store.languageCount / limit)"
-      :page-range="3"
-      :margin-pages="2"
-      :click-handler="clickCallback"
-      :prev-text="'Пред'"
-      :next-text="'След'"
-      :page-class="'page-item'"
-      :container-class="'pagination_next shadow'"
-    />
+    <div class="pl-4 py-2">
+      <paginate
+        v-if="store.languageCount > limit"
+        v-model="page"
+        :page-count="Math.ceil(store.languageCount / limit)"
+        :page-range="3"
+        :margin-pages="2"
+        :click-handler="clickCallback"
+        :prev-text="'Пред'"
+        :next-text="'След'"
+        :page-class="'page-item'"
+        :container-class="'pagination_next shadow'"
+      />
+    </div>
   </div>
   <languageDialog />
 </template>

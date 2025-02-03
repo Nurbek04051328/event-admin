@@ -46,7 +46,7 @@
         </div>
       </div>
 
-      <div class="mt-6 flex flex-row">
+      <div class="mt-6 flex flex-row gap-2">
         <button type="button" class="close-btn md:m-t-0 xs:m-t-0" @click="close">
           {{ $t('ticketPackage.dialog.close') }}
         </button>

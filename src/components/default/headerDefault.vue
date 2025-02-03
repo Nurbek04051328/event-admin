@@ -1,6 +1,6 @@
 <template>
   <div
-    class="sticky top-0 z-40 flex h-[110px] shrink-0 items-center px-4 sm:gap-x-6"
+    class="sticky top-0 z-40 flex h-[100px] shrink-0 items-center px-4 sm:gap-x-6"
   >
     <button
       type="button"
@@ -13,8 +13,8 @@
     <!-- Separator -->
     <!-- <div class="h-6 w-px bg-gray-900/10" aria-hidden="true" /> -->
 
-    <div class="flex flex-1 rounded-2xl gap-3">
-      <div class="relative flex flex-1 my-7 rounded-2xl bg-white px-[24px] py-[20px]">
+    <div class="flex items-center flex-1 rounded-2xl mt-7  gap-3">
+      <div class="relative flex flex-1  rounded-2xl bg-white px-[24px] py-[20px]">
         <div class="w-full">
           <!-- <label for="search-field" class=""> {{ $t('header.search') }}</label> -->
           <MagnifyingGlassIcon

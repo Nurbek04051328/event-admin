@@ -4,7 +4,7 @@ export const settingMenu = [
     name: 'language',
     component: () => import('@/views/dashboard/settings/languageList.vue'),
     meta: {
-      title: 'Настройки - Языки',
+      title: 'Настройки/Языки',
       toggle: true,
       group: 'setting'
     }
@@ -14,20 +14,19 @@ export const settingMenu = [
     name: 'category',
     component: () => import('@/views/dashboard/categories/indexCategories.vue'),
     meta: {
-      title: 'Настройки - Категорий',
+      title: 'Настройки/Категории',
       toggle: true,
       group: 'setting'
     }
   },
   {
-    path: 'subcategory',
-    name: 'subcategory',
-    component: () => import('@/views/dashboard/subcategories/indexSubcategories.vue'),
+    path: 'atribut',
+    name: 'atribut',
+    component: () => import('@/views/dashboard/settings/indexAtributCategory.vue'),
     meta: {
-      title: 'Настройки - Подкатегорий',
+      title: 'Настройки/Атрибут',
       toggle: true,
       group: 'setting',
-      toggleTitle: 'Yangi Ichki Toifa'
     }
   },
   {
@@ -35,7 +34,7 @@ export const settingMenu = [
     name: 'social',
     component: () => import('@/views/dashboard/settings/socialList.vue'),
     meta: {
-      title: 'Настройки - Соц. сетей',
+      title: 'Настройки/Соц. сетей',
       toggle: true,
       group: 'setting',
       toggleTitle: 'Yangi Social-Media'
@@ -46,7 +45,7 @@ export const settingMenu = [
     name: 'page',
     component: () => import('@/views/dashboard/settings/indexPage.vue'),
     meta: {
-      title: 'Страница',
+      title: 'Настройки/Страница',
       toggle: true,
       group: 'setting',
       toggleTitle: 'Yangi Sahifa'
@@ -57,7 +56,7 @@ export const settingMenu = [
     name: 'tax',
     component: () => import('@/views/dashboard/settings/indexNalog.vue'),
     meta: {
-      title: 'Налог',
+      title: 'Настройки/Налог',
       toggle: true,
       group: 'setting',
       toggleTitle: 'Новый налог'
@@ -68,7 +67,7 @@ export const settingMenu = [
     name: 'refound',
     component: () => import('@/views/dashboard/settings/indexRefound.vue'),
     meta: {
-      title: 'Возврать билет',
+      title: 'Настройки/Возврать билет',
       toggle: true,
       group: 'setting',
       toggleTitle: 'Новый'

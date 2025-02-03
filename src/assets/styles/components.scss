@@ -46,7 +46,7 @@
     @apply whitespace-nowrap py-2 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-3;
   }
   .td-last {
-    @apply relative whitespace-nowrap py-2 pl-3 pr-4 text-right text-sm font-medium sm:pr-3;
+    @apply relative whitespace-nowrap py-2 pl-3 pr-4 text-right flex justify-end text-sm font-medium sm:pr-3;
   }
 
   // tag

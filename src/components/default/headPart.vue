@@ -1,16 +1,17 @@
 <template>
-  <div class="border-b border-gray-200 pb-3 px-4  pt-3">
+  <div class=" pb-3 px-4  pt-3">
     <div class="flex items-center justify-between">
       <div class="min-w-0 gap-3 flex items-center">
         <button v-if="backLink" @click="router.push({ name: backLink })">
           <ArrowLongLeftIcon class="size-5 mr-2" />
         </button>
         <button v-if="route?.meta?.back" @click="router.back()">
-          <ArrowLongLeftIcon class="size-5 mr-2" />
+          <ArrowLongLeftIcon class="size-5 mr-1" />
         </button>
         <div class="flex items-center relative mr-8">
           <h2
-            class="text-[22px] font-bold leading-7 text-gray-700 xm-max:text-[15px]"
+            class="leading-7 text-[#645A77] xm-max:text-[15px]"
+            :class="route?.meta?.group == 'setting'? 'text-[16px] font-medium' : 'text-[22px] font-bold'"
           >
             {{ title || route.meta?.title || '' }}
           </h2>

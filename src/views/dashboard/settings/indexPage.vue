@@ -1,19 +1,23 @@
 <template>
-  <head-part>
-    <div class="mr-2 md-max:text-[14px]">
-      <span class="text-lg text-gray-500 md-max:text-[14px]">Количество</span>: {{ page_store.pagesCount }}
+  <div class="h-screen flex flex-col overflow-hidden">
+    <head-part
+      :count="page_store.pagesCount"
+    >
+    </head-part>
+    <div class="p-4 pb-0 w-full overflow-auto flex-1">
+      <PagesTable
+        :options="{
+          languages
+        }"
+      />
+      <PagesDialog
+        :options="{
+          languages
+        }"
+      />
     </div>
-  </head-part>
-  <PagesTable
-    :options="{
-      languages
-    }"
-  />
-  <PagesDialog
-    :options="{
-      languages
-    }"
-  />
+  </div>
+  
 </template>
 <script setup>
 import { storeToRefs } from 'pinia'

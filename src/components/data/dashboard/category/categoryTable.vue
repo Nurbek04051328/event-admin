@@ -1,10 +1,10 @@
 <template>
-  <div class="ring-1 w-full ring-gray-300 sm:mx-0 sm:rounded-lg " :class="categories.length > 0 ? 'overflow-auto' : ''">
-    <table class="w-full divide-y divide-gray-300">
+  <div class="ring-1 w-full ring-gray-300 rounded-lg sm:mx-0" :class="categories.length > 0 ? 'overflow-auto' : ''">
+    <table class="w-full divide-y">
       <thead>
         <tr>
           <th scope="col" class="th-first md-max:text-[13px]">№</th>
-          <th scope="col" class="th md-max:text-[13px]">{{ $t('category.table.img') }}</th>
+          <th scope="col" class="th md-max:text-[13px] w-5">{{ $t('category.table.img') }}</th>
           <th scope="col" class="th md-max:text-[13px]">{{ $t('category.table.name') }}</th>
           <th scope="col" class="th md-max:text-[13px]">{{ $t('category.table.language') }}</th>
           <th scope="col" class="th md-max:text-[13px]" width="150">{{ $t('category.table.data') }}</th>
@@ -15,32 +15,39 @@
         <tr
           v-for="(item, itemIdx) in categories"
           :key="item?._id"
+          class="hover:bg-gray-100 "
           :class="itemIdx % 2 === 0 ? undefined : 'bg-gray-50'"
         >
           <td class="td-first md-max:text-[13px]">
             {{ itemIdx + 1 }}
           </td>
-          <td class="td">
+          <td class="td flex justify-center">
             <!-- {{ item?.cover }} -->
             <a :href="`${url}/${item?.cover[0]}`" target="_blank" v-if="item?.cover?.length > 0">
               <img :src="`${url}/${item?.cover[0]}`" alt="" class="w-10 rounded-md" />
             </a>
             <img
               v-else
-              src="../../../../assets/images/not-image.png"
+              src="@/assets/images/not-image.png"
               alt=""
               class="w-14 rounded-md"
             />
           </td>
-          <td class="td md-max:text-[13px]">{{ item?.title || $t('subcategory.table.notadd') }}</td>
+          <td 
+            class="td md-max:text-[13px] cursor-pointer"
+            @click="$router.push({ name: 'subcategory', params: { id: item?._id } })"
+            >
+            {{ item?.title || $t('subcategory.table.notadd') }}
+            
+          </td>
           <td class="td md-max:text-[13px]">
             <div class="flex items-start gap-2">
               <button
                 @click="edit(item?._id, lang.slug)"
                 :class="`${
                   item?.translates?.some((tr) => tr.language == lang.slug)
-                    ? 'success-btn'
-                    : 'edit-btn'
+                    ? 'bg-[#DCF7DD] text-[#119A21] hover:bg-[#119A21] hover:text-white rounded-lg flex items-center justify-center size-9 lg:size-8'
+                    : 'bg-[#FFECD9] text-[#FF7E00] hover:bg-[#FF7E00] hover:text-white rounded-lg flex items-center justify-center size-9 lg:size-8'
                 } w-auto p-2 px-3 md-max:p-1 md-max:px-2`"
                 v-for="lang of options?.languages"
                 :key="lang._id"
@@ -54,7 +61,7 @@
           <td class="td-last">
             <button
               type="button"
-              class="danger-btn size-9 ml-auto md-max:size-7"
+              class="bg-[#FFE6E6] text-[#FF5558] hover:bg-[#FF5558] hover:text-white rounded-lg flex items-center justify-center size-9 lg:size-8"
               @click="confirmRemove(item?._id)"
             >
               <TrashIcon class="size-4" />

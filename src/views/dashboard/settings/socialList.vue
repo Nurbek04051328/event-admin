@@ -1,7 +1,12 @@
 <template>
-  <head-part />
-    <socialTable />
-    <socialDialog />
+  <div class="h-screen flex flex-col overflow-hidden">
+    <head-part :count="social_store.socialsCount" />
+    <div class="p-4 pb-0 w-full overflow-auto flex-1">
+      <socialTable />
+      <socialDialog />
+    </div>
+  </div>
+  
 </template>
 <script setup>
 import { onMounted } from 'vue'

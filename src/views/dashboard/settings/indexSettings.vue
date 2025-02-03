@@ -1,15 +1,15 @@
 <template>
-  <div class="flex p-4 gap-10 md-max:block">
-    <nav class="flex grid-col w-60 flex-col md-max:w-full" aria-label="Sidebar">
-      <ul role="list" class="-mx-2 space-y-2 bg-gray-50 p-1 md-max:flex md-max:w-full md-max:items-center md-max:space-y-0  ">
+  <div class="flex p-4 gap-1 md-max:block">
+    <nav class="flex grid-col w-60 h-auto flex-col md-max:w-full bg-white rounded-3xl px-4 py-2" aria-label="Sidebar">
+      <ul role="list" class="-mx-2 space-y-2 md-max:flex md-max:w-full md-max:items-center md-max:space-y-0  ">
         <li v-for="item in settingMenu" :key="item.name">
           <router-link
             :to="{ name: item.name }"
             :class="[
-              item.name == route.name
-                ? 'bg-blue-700 text-white'
-                : 'text-gray-700 hover:text-indigo-600 hover:bg-gray-50',
-              'group flex gap-x-3 rounded-md p-2 pl-3 text-sm leading-6 font-semibold'
+              item.name == route.name || item.name == route.meta?.active
+                ? 'bg-[#9E55EC] text-white'
+                : 'text-[#483D5B] hover:text-[#483D5B] hover:bg-[#F3EBFC]',
+              'group flex gap-x-3 rounded-2xl p-2 pl-3 text-base leading-6 font-semibold'
             ]"
             class="md-max:mr-2 xm-max:text-[12px] xm-max:mr-1 xs:text-[10px]"
           >
@@ -30,11 +30,11 @@
   </div>
 </template>
 <script setup>
-import { useI18n } from 'vue-i18n'
-import { useRoute } from 'vue-router'
-const route = useRoute()
-const { t } = useI18n()
-import { settingMenu } from '@/helpers/settingMenu'
+  import { useI18n } from 'vue-i18n'
+  import { useRoute } from 'vue-router'
+  const route = useRoute()
+  const { t } = useI18n()
+  import { settingMenu } from '@/helpers/settingMenu'
 // const navigation = [
 //   { name: 'Tillar', to: 'language', count: '' },
 //   { name: 'Kategoriyalar', to: 'categories', count: '' },

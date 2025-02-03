@@ -15,6 +15,7 @@ const en = {
   settingMenu: {
     language: 'Languages',
     category: 'Categories',
+    atribut: "Atributs",
     subcategory: 'Subcategories',
     social: 'Social media',
     page: 'Page',
