@@ -82,7 +82,8 @@ const store = usersStore()
 
 const send = async () => {
   v$.value.$touch()
-  if (!v$.value.$invalid) {
+  if (!v$.value.$invalid) {console.log("datavalaaaa", data.value);
+  
     const d = await store.userAccess({ ...data.value, _id: id.value })
     emit('send', d)
     close()

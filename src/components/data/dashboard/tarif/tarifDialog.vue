@@ -23,13 +23,24 @@
             :label="t('ticketPackage.dialog.name')"
             :error="v$.title?.$invalid && v$.title?.$dirty"
           />
-          <default-input
-            type="number"
-            v-model="data.quantity"
-            name="quantity"
-            :label="t('ticketPackage.dialog.quantity')"
-            :error="v$.quantity?.$invalid && v$.quantity?.$dirty"
-          />
+          <div class="flex justify-between w-full gap-2">
+            <default-input
+              type="number"
+              class="w-full"
+              v-model="price.from"
+              name="from"
+              :label="t('ticketPackage.dialog.quantity')"
+              :error="v$.from?.$invalid && v$.from?.$dirty"
+            />
+            <default-input
+              type="number"
+              class="w-full"
+              v-model="price.to"
+              name="to"
+              :label="t('ticketPackage.dialog.quantity')"
+              :error="v$.to?.$invalid && v$.to?.$dirty"
+            />
+          </div>
           <default-input
             type="number"
             v-model="data.commissionRate"
@@ -74,8 +85,11 @@ defineProps(['options'])
 const data = ref({
   title: '',
   description: '',
-  quantity: 0,
   commissionRate: 0
+})
+const price = ref({
+  from: 0,
+  to: 0
 })
 
 import { useVuelidate } from '@vuelidate/core'
@@ -83,7 +97,6 @@ import { required } from '@vuelidate/validators'
 const rules = {
   title: { required },
   description: { required },
-  quantity: { required },
   commissionRate: { required }
 }
 
@@ -97,8 +110,20 @@ const send = async () => {
   if (!v$.value.$invalid) {
     if (edit.value) {
       data.value.language = lang
+      data.value.price = price.value
+
+
+      console.log("ketdiiiiedit", data.value);
+      
       await store.saveTarif({ ...data.value }, t)
-    } else await store.addTarif({ ...data.value }, t)
+
+    } else {
+      data.value.price = price.value
+
+      console.log("ketdiiiiadd", data.value);
+      await store.addTarif({ ...data.value }, t)
+    }
+      
     close()
   } else {
     console.log(data.value)
@@ -110,8 +135,11 @@ const close = () => {
   data.value = {
     title: '',
     description: '',
-    quantity: 0,
     commissionRate: 0
+  }
+  price.value = {
+    from: 0,
+    to: 0
   }
   v$.value.$reset()
 }
@@ -129,13 +157,11 @@ watch(
         _id: id.value,
         title: res.data?.description || '',
         description: res.data?.description || '',
-        quantity: res.data?.quantity || 0,
         commissionRate: res.data?.commissionRate || 0
-        // description: res.data?.title || '',
-        // translate: {
-        //   title: res.data?.translate?.title || '',
-        //   language: res.data?.translate?.language || '',
-        // }
+      }
+      price.value = {
+        from: data.value.price.from,
+        to: data.value.price.to
       }
     }
   }
@@ -147,8 +173,11 @@ watch(
     data.value = {
       title: '',
       description: '',
-      quantity: 0,
       commissionRate: 0
+    }
+    price.value = {
+      from: 0,
+      to: 0
     }
   }
 )

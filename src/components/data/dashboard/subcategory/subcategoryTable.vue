@@ -4,7 +4,7 @@
       <thead>
         <tr>
           <th scope="col" class="th-first md-max:text-[13px]">№</th>
-          <th scope="col" class="th md-max:text-[13px] w-5">{{ $t('subcategory.table.img') }}</th>
+          <!-- <th scope="col" class="th md-max:text-[13px] w-5">{{ $t('subcategory.table.img') }}</th> -->
           <th scope="col" class="th md-max:text-[13px]">{{ $t('subcategory.table.name') }}</th>
           <th scope="col" class="th md-max:text-[13px]">{{ $t('subcategory.table.category') }}</th>
           <th scope="col" class="th md-max:text-[13px]">{{ $t('subcategory.table.language') }}</th>
@@ -22,8 +22,7 @@
           <td class="td-first md-max:text-[13px]">
             {{ itemIdx + 1 }}
           </td>
-          <td class="td">
-            <!-- {{ item?.cover }} -->
+          <!-- <td class="td">
             <a :href="`${url}/${item?.cover[0]}`" target="_blank" v-if="item?.cover.length > 0">
               <img :src="`${url}/${item?.cover[0]}`" alt="" class="w-10 rounded-md" />
             </a>
@@ -33,8 +32,13 @@
               alt=""
               class="w-14 rounded-md"
             />
+          </td> -->
+          <td 
+            class="td md-max:text-[13px] cursor-pointer"
+            @click="$router.push({ name: '2xsubcategory', params: { id: item?._id } })"
+          >
+            {{ item.title || $t('subcategory.table.notadd') }}
           </td>
-          <td class="td md-max:text-[13px]">{{ item.title || $t('subcategory.table.notadd') }}</td>
           <td class="td md-max:text-[13px]">{{ item.category }}</td>
           <td class="td">
             <div class="flex items-start gap-2">

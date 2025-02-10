@@ -3,7 +3,7 @@ import { defineStore } from 'pinia'
 import { useNotification } from '../usefull/notification'
 import api from '@/helpers/api'
 
-const base_url = '/atribute-category'
+const base_url = '/attribute-category'
 
 export const atributeCategoryStore = defineStore('atributeCategoryStore', () => {
   const atributeCategories = ref([])
@@ -16,7 +16,7 @@ export const atributeCategoryStore = defineStore('atributeCategoryStore', () => 
     const { data } = await api.get(base_url, {params})
     console.log("atributcategory", data);
     
-    atributeCategories.value = data?.eventCategories;
+    atributeCategories.value = data?.attributeCategories;
     atributeCategoryCount.value = data?.count;
   }
 

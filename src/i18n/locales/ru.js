@@ -18,7 +18,7 @@ const ru = {
     language: 'Языки',
     category: 'Категории',
     subcategory: 'Подкатегории',
-    atribut: "Атрибуты",
+    atributCategory: "Атрибуты",
     social: 'Социальные сети',
     page: 'Страница',
     tax: 'Налог',

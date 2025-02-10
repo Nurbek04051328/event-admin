@@ -37,7 +37,7 @@ export const loggerStore = defineStore('loggerStore', () => {
   /// Route logs
   const getrouteLoggers = async (params) => {
     console.log(params)
-    const { data } = await api.get(`${base_url}/route-logs`, { params })
+    const { data } = await api.get(`${base_url}/logs`, { params })
     console.log("lllll",data)
     routeLoggers.data = [...(data?.logs || [])]
     routeLoggers.count = data?.count

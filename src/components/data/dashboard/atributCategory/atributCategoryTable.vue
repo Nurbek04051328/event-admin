@@ -4,7 +4,6 @@
       <thead>
         <tr>
           <th scope="col" class="th-first md-max:text-[13px]">№</th>
-          <th scope="col" class="th md-max:text-[13px] w-5">{{ $t('category.table.img') }}</th>
           <th scope="col" class="th md-max:text-[13px]">{{ $t('category.table.name') }}</th>
           <th scope="col" class="th md-max:text-[13px]">{{ $t('category.table.language') }}</th>
           <th scope="col" class="th md-max:text-[13px]" width="150">{{ $t('category.table.data') }}</th>
@@ -21,21 +20,9 @@
           <td class="td-first md-max:text-[13px]">
             {{ itemIdx + 1 }}
           </td>
-          <td class="td flex justify-center">
-            <!-- {{ item?.cover }} -->
-            <a :href="`${url}/${item?.cover[0]}`" target="_blank" v-if="item?.cover?.length > 0">
-              <img :src="`${url}/${item?.cover[0]}`" alt="" class="w-10 rounded-md" />
-            </a>
-            <img
-              v-else
-              src="@/assets/images/not-image.png"
-              alt=""
-              class="w-14 rounded-md"
-            />
-          </td>
           <td 
             class="td md-max:text-[13px] cursor-pointer"
-            @click="$router.push({ name: 'subcategory', params: { id: item?._id } })"
+            @click="$router.push({ name: 'atribut', params: { id: item?._id } })"
             >
             {{ item?.title || $t('subcategory.table.notadd') }}
             

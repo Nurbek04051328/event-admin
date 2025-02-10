@@ -1,7 +1,7 @@
 <template>
   <default-modal>
     <DialogPanel
-      class="relative transform overflow-hidden rounded-lg bg-white px-4 pb-4 pt-5 text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg sm:p-6"
+      class="relative w-[30%] transform overflow-hidden rounded-lg bg-white px-4 pb-4 pt-5 text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg sm:p-6"
     >
       <div class="absolute right-0 top-0 hidden pr-4 pt-4 sm:block">
         <button
@@ -17,16 +17,6 @@
       </DialogTitle>
 
       <div class="space-y-2 mt-4">
-        <filter-select
-          v-model="data.category"
-          name="category"
-          :label="t('subcategory.dialog.category')"
-          :options="categories || []"
-          option_title="title"
-          :error="
-            v$.category.$invalid && v$.category.$dirty ? t('subcategory.dialog.notcategory') : null
-          "
-        />
       </div>
       <div class="space-y-2 mt-4">
         <default-input
@@ -42,14 +32,6 @@
           name="slug"
           :label="t('subcategory.dialog.slug')"
           :error="v$.slug.$invalid && v$.slug.$dirty"
-        />
-      </div>
-      <div class="space-y-2 mt-4">
-        <upload-photo
-          :title="t('subcategory.dialog.img')"
-          :placeholder="t('subcategory.dialog.placeholder')"
-          v-model="data.cover"
-          base_url="route/upload/subcategory"
         />
       </div>
       <div class="mt-6 flex flex-row gap-2">
@@ -69,11 +51,13 @@ import { storeToRefs } from 'pinia'
 import { useI18n } from 'vue-i18n'
 const { t } = useI18n()
 import { DialogPanel, DialogTitle } from '@headlessui/vue'
-import uploadPhoto from '@/components/default/uploadPhoto.vue'
+// import uploadPhoto from '@/components/default/uploadPhoto.vue'
 import { XMarkIcon } from '@heroicons/vue/20/solid'
 import { useFullStore } from '@/stores/usefull/modal'
 const usefull = useFullStore()
 const { toggle, id, lang } = storeToRefs(usefull)
+import { useRoute } from 'vue-router'
+const route = useRoute()
 defineProps(['options'])
 
 const data = ref({
@@ -86,16 +70,13 @@ const data = ref({
 import { useVuelidate } from '@vuelidate/core'
 import { required } from '@vuelidate/validators'
 const rules = {
-  category: { required },
   slug: { required },
   title: { required },
-  cover: { required }
 }
 
 const close = () => {
   usefull.setToggle(false, 0);
   data.value = {
-    cover: [],
     category: '',
     slug: '',
     title: ''
@@ -107,18 +88,22 @@ const close = () => {
 const v$ = useVuelidate(rules, data)
 const edit = ref(false)
 import { subcategoryStore } from '@/stores/data/subcategories'
-import { categoryStore } from '@/stores/data/categories'
+// import { categoryStore } from '@/stores/data/categories'
 const store = subcategoryStore()
-const category_store = categoryStore()
-const { categories } = storeToRefs(category_store)
+// const category_store = categoryStore()
+// const { categories } = storeToRefs(category_store)
 
 const send = async () => {
   v$.value.$touch()
   if (!v$.value.$invalid) {
     if (edit.value) {
       data.value.language = lang
+      data.value.category = route.params.id
       await store.saveSubcategory({ ...data.value }, t)
-    } else await store.addSubcategory({ ...data.value }, t)
+    } else {
+      data.value.category = route.params.id
+      await store.addSubcategory({ ...data.value }, t)
+    }
     close()
   } else {
     console.log(data.value)
@@ -134,7 +119,6 @@ watch(
       data.value = {
         ...res.data,
         _id: id.value,
-        cover: res.data?.cover || [],
         category: res.data?.category,
         slug: res.data?.slug || '',
         title: res.data?.title || ''
@@ -147,7 +131,6 @@ watch(
   () => toggle.value,
   () => {
     data.value = {
-      cover: [],
       category: '',
       slug: '',
       title: ''

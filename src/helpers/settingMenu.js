@@ -20,11 +20,11 @@ export const settingMenu = [
     }
   },
   {
-    path: 'atribut',
-    name: 'atribut',
+    path: 'atributcategory',
+    name: 'atributCategory',
     component: () => import('@/views/dashboard/settings/indexAtributCategory.vue'),
     meta: {
-      title: 'Настройки/Атрибут',
+      title: 'Настройки/Атрибут категорий',
       toggle: true,
       group: 'setting',
     }

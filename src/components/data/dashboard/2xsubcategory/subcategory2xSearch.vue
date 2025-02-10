@@ -11,16 +11,19 @@
 </template>
 <script setup>
 import { MagnifyingGlassIcon, XMarkIcon } from '@heroicons/vue/20/solid'
-import { categoryStore } from '@/stores/data/categories'
+import { subcategory2xStore } from '@/stores/data/2xsubcategory'
 import { ref } from 'vue'
-// import { useRouter } from 'vue-router'
-const store = categoryStore()
+import { useRoute } from 'vue-router'
+const route = useRoute()
+
+const store = subcategory2xStore()
 
 const title = ref('')
-// const router = useRouter()
+
 
 const findMe = async () => {
-  await store.getCategories({
+  await store.get2xSubcategories({
+    subcategory: route.params.id,
     page: 1,
     title: title.value.trim(),
   })

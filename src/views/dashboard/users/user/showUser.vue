@@ -3,10 +3,10 @@
     <div class="flex space-x-2 overflow-auto">
       <button 
         @click="ChangeId()"
-        class="flex items-center justify-center cursor-pointer mr-2"
+        class="flex items-center justify-center cursor-pointer mr-2 px-2 primary-tag"
       >
         <ChatBubbleLeftEllipsisIcon 
-        class="w-5 text-gray-900/80" />
+        class="w-5 text-[#9E55EC]" />
       </button>
       <button 
         v-if="user?.user?.status"
@@ -36,14 +36,14 @@
   </headPart>
   <div class="p-4 flex-1 overflow-auto h-full">
     <div class="grid grid-cols-12 gap-4 h-full 2xl:h-auto md:h-full xm-max:grid-cols-6">
-      <div class="col-span-3 order-first h-full overflow-auto 2xl:col-span-4 2xl:h-[670px] md-max:col-span-6 xm-max:col-span-6">
+      <div class="col-span-3 bg-white/100 rounded-[26px] shadow-sm order-first h-full overflow-auto 2xl:col-span-4 2xl:h-[670px] md-max:col-span-6 xm-max:col-span-6">
         <UserInfo :user="user?.user" :follow="user?.follow" />
       </div>
       <div class="col-span-6 flex flex-col space-y-2 h-full overflow-auto 2xl:col-span-8 2xl:h-[670px] md-max:col-span-6 xm-max:col-span-6">
         <UserStatistic :org="user" :allEvents="allEvents"/>
-        <UserEvents :list="allEvents" />
+        <UserEvents :list="allEvents" class="bg-white/100 rounded-[26px] shadow-sm" />
       </div>
-      <div class="col-span-3 flex flex-col h-full overflow-auto 2xl:col-span-12 2xl:h-[670px] md:col-span-12 xm-max:col-span-6">
+      <div class="col-span-3 bg-white/100 rounded-[26px] shadow-sm px-3 flex flex-col h-full overflow-auto 2xl:col-span-12 2xl:h-[670px] md:col-span-12 xm-max:col-span-6">
         <TabList :list="links" />
         <router-view />
       </div>

@@ -8,16 +8,39 @@
         <button v-if="route?.meta?.back" @click="router.back()">
           <ArrowLongLeftIcon class="size-5 mr-1" />
         </button>
+        <!-- <nav aria-label="breadcrumb">
+          <ol class="breadcrumb">
+            <li v-for="(crumb, index) in breadcrumbs" :key="index" class="breadcrumb-item">
+              <router-link :to="crumb.path">{{ crumb.title }}</router-link>
+            </li>
+          </ol>
+        </nav> -->
         <div class="flex items-center relative mr-8">
           <h2
             class="leading-7 text-[#645A77] xm-max:text-[15px]"
             :class="route?.meta?.group == 'setting'? 'text-[16px] font-medium' : 'text-[22px] font-bold'"
           >
             {{ title || route.meta?.title || '' }}
+
           </h2>
-          <div class="absolute right-[-28px] top-[-5px] bg-[#E9E7ED] px-2 rounded-2xl text-[12px]">
+          <router-link
+            v-if="category"
+            :to="{ name: item.name }"
+            :class="[
+              'group flex gap-x-3 rounded-2xl px-[16px] py-[14px] text-lg leading-6 font-medium',
+              item.name == route.name || item.name == route.meta?.active
+                ? 'bg-[#9E55EC] text-white'
+                : 'text-[#483D5B] hover:text-[#483D5B] hover:bg-[#F3EBFC]'
+              
+            ]"
+          >
+            <component :is="item?.meta.icon" class="h-6 w-6 shrink-0" aria-hidden="true" />
+            <!-- {{ item.name }} -->
+            {{ $t('menu.' + item.name) }}
+          </router-link>
+          <!-- <div class="absolute right-[-28px] top-[-5px] bg-[#E9E7ED] px-2 rounded-2xl text-[12px]">
             {{ count }}
-          </div>
+          </div> -->
         </div>
         <button v-if="route?.meta?.toggle" @click="openModal" type="button" class="bg-[#E9DCFF] text-[#360B64] hover:bg-[#9E55EC] hover:text-white p-1 rounded-lg">
           <PlusIcon class="size-5 text-white-400" />
@@ -33,16 +56,19 @@
   </div>
 </template>
 <script setup>
+
 defineProps({
   title: String,
   count: Number,
-  toggleTitle: String,
   addLink: String,
   addLinkTitle: String,
   toggle: Boolean,
   backLink: String,
   downloadLink: String,
-  grayTitle: String
+  category: {
+    title:String,
+    link:String,
+  }
 })
 
 import { PlusIcon } from '@heroicons/vue/24/outline'
@@ -54,6 +80,10 @@ const router = useRouter()
 
 import { useFullStore } from '@/stores/usefull/modal'
 const store = useFullStore()
+import { useBreadcrumbStore } from '@/stores/data/breadcrump';
+import { computed } from 'vue';
+const breadcrumbStore = useBreadcrumbStore();
+const breadcrumbs = computed(() => breadcrumbStore.breadcrumbs);
 
 const openModal = () => {
   store.setToggle(true)

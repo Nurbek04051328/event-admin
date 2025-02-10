@@ -1,6 +1,6 @@
 <template>
   <div class="flex-1 flex flex-col overflow-auto h-[100%]">
-    <div class="text-base font-medium border-b border-gray-200 mb-3 pb-2 flex justify-between items-center">
+    <div class="text-base font-medium border-b border-gray-200 mb-3 pb-2 flex justify-between items-center px-5">
       <span>Список мероприятие</span>
       <span class="text-sm">Количество: {{ list.count }}</span>
     </div>

@@ -97,22 +97,22 @@
             Организаторы:
           </div>
           <div class="text-sm space-y-2">
-            <div>
-              <input class="mr-1" value="show" false-value="hide" type="checkbox" v-model="organizer.show" />
-              Просмотр
-            </div>
-            <div>
-              <input class="mr-1" value="status" false-value="hide" type="checkbox" v-model="organizer.status" />
-              Менять статус
-            </div>
-            <div>
-              <input class="mr-1" value="metric" false-value="hide" type="checkbox" v-model="organizer.metric" />
-              Персональные данные
-            </div>
-            <div>
-              <input class="mr-1" value="chat" false-value="hide" type="checkbox" v-model="organizer.chat" />
-              Чат
-            </div>
+            <label class="flex items-center space-x-2 cursor-pointer">
+              <input class="mr-1 accent-[#9E55EC]" value="show" false-value="hide" type="checkbox" v-model="organizer.show" />
+              <span class="hover:text-[#9E55EC]">Просмотр</span>
+            </label>
+            <label class="flex items-center space-x-2 cursor-pointer">
+              <input class="mr-1 accent-[#9E55EC]" value="status" false-value="hide" type="checkbox" v-model="organizer.status" />
+              <span class="hover:text-[#9E55EC]">Менять статус</span>
+            </label>
+            <label class="flex items-center space-x-2 cursor-pointer">
+              <input class="mr-1 accent-[#9E55EC]" value="metric" false-value="hide" type="checkbox" v-model="organizer.metric" />
+              <span class="hover:text-[#9E55EC]">Персональные данные</span>
+            </label>
+            <label class="flex items-center space-x-2 cursor-pointer">
+              <input class="mr-1 accent-[#9E55EC]" value="chat" false-value="hide" type="checkbox" v-model="organizer.chat" />
+              <span class="hover:text-[#9E55EC]">Чат</span>
+            </label>
           </div>
         </div>
         <div class="space-y-4 mt-2 w-full ml-3">
@@ -120,22 +120,22 @@
             Пользователи:
           </div>
           <div class="text-sm space-y-2">
-            <div>
-              <input class="mr-1" value="show" type="checkbox" v-model="user.show" />
-              Просмотр
-            </div>
-            <div>
-              <input class="mr-1" value="status" type="checkbox" v-model="user.status" />
-              Менять статус
-            </div>
-            <div>
-              <input class="mr-1" value="metric" type="checkbox" v-model="user.metric" />
-              Персональные данные
-            </div>
-            <div>
-              <input class="mr-1" value="chat" type="checkbox" v-model="user.chat" />
-              Чат
-            </div>
+            <label class="flex items-center space-x-2 cursor-pointer">
+              <input class="mr-1 accent-[#9E55EC]" value="show" type="checkbox" v-model="user.show" />
+              <span class="hover:text-[#9E55EC]">Просмотр</span>
+            </label>
+            <label class="flex items-center space-x-2 cursor-pointer">
+              <input class="mr-1 accent-[#9E55EC]" value="status" type="checkbox" v-model="user.status" />
+              <span class="hover:text-[#9E55EC]">Менять статус</span>
+            </label>
+            <label class="flex items-center space-x-2 cursor-pointer">
+              <input class="mr-1 accent-[#9E55EC]" value="metric" type="checkbox" v-model="user.metric" />
+              <span class="hover:text-[#9E55EC]">Персональные данные</span>
+            </label>
+            <label class="flex items-center space-x-2 cursor-pointer">
+              <input class="mr-1 accent-[#9E55EC]" value="chat" type="checkbox" v-model="user.chat" />
+              <span class="hover:text-[#9E55EC]">Чат</span>
+            </label>
           </div>
         </div>
       </div>
@@ -145,14 +145,14 @@
             Мероприятие:
           </div>
           <div class="text-sm space-y-2">
-            <div>
-              <input class="mr-1" value="show" type="checkbox" v-model="event.show" />
+            <label class="flex items-center space-x-2 cursor-pointer">
+              <input class="mr-1 accent-[#9E55EC]" value="show" type="checkbox" v-model="event.show" />
               Просмотр
-            </div>
-            <div>
-              <input class="mr-1" value="status" type="checkbox" v-model="event.status" />
+            </label>
+            <label class="flex items-center space-x-2 cursor-pointer">
+              <input class="mr-1 accent-[#9E55EC]" value="status" type="checkbox" v-model="event.status" />
               Менять статус
-            </div>
+            </label>
           </div>
         </div>
       </div>

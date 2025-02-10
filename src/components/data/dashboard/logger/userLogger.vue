@@ -2,7 +2,7 @@
   <div class="divide-y-2 divide-gray-100 text-sm">
     <div v-if="store.logger.data?.length > 0">
       <div v-for="log of store.logger.data" :key="log._id" class="p-2">
-        <span class="font-bold">
+        <span class="font-medium">
           {{ log?.actionFrom?.lname }}
           {{ log?.actionFrom?.name }}
         </span>
@@ -10,7 +10,7 @@
         <span :class="actions.find((a) => a._id == log.action)?.class">
           {{ actions.find((a) => a._id == log.action)?.label }}
         </span>
-        в <span class="font-bold">{{ convertDateShort(log.createdAt, 'full') }}</span>
+        в <span class="font-medium">{{ convertDateShort(log.createdAt, 'full') }}</span>
         <span v-if="log.file?.length > 0">
           с файлами
           <button

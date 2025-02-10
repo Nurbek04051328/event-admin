@@ -1,5 +1,5 @@
 <template>
-  <div class="grid grid-cols-5  bg-gray-50 rounded-lg p-4 md-max:grid-cols-2 md-max:p-2">
+  <div class="grid-cols-5  bg-white/100 rounded-[26px] shadow-sm flex justify-around p-4 md-max:grid-cols-2 md-max:p-2 mb-2">
     <!-- <pre>{{ org.statistic }}</pre> -->
     <div
       v-for="(stat, statIdx) in stats"

@@ -1,9 +1,9 @@
 <template>
-  <div class="border border-gray-300 rounded-lg p-4 2xl:p-2 ">
+  <div class="p-4 2xl:p-2 ">
     <div class="space-y-1 divide-y">
       <div class="py-2">
-        <div class="text-xs text-gray-500 2xl:text-[12px]">Ф.И.О</div>
-        <div class="text-base font-medium text-gray-800 2xl:text-[14px]">
+        <div class="text-xs text-[#B6A3D0] 2xl:text-[12px]">Ф.И.О</div>
+        <div class="text-base font-medium text-[#483D5B] 2xl:text-[14px]">
           {{ user?.lname }}
           {{ user?.name }}
         </div>
@@ -84,33 +84,83 @@
           {{ convertDateShort(user?.createdAt, 'full') }}
         </div>
       </div>
-      <!-- <div class="flex">
-        <div class="py-2 flex-1 text-center">
-          <div class="text-xs text-gray-500 2xl:text-[12px]">Подписчики</div>
-          <div class="text-base font-medium text-gray-800 2xl:text-[14px]">
-            {{ follow?.followers || 0 }}
+      <div class="py-2">
+        <div class="text-xs text-gray-500 2xl:text-[12px]">Доступы</div>
+        <div class="grid grid-cols-2 gap-4 mt-3">
+          <!-- Organizer Section -->
+          <div v-if="user?.access?.organizer.length>0">
+            <div class="text-base font-semibold mb-2">Организаторы:</div>
+            <ul class="text-[14px] space-y-1">
+              <li v-for="item in accessOptions.organizer" :key="item.value" class="flex items-center">
+                <component 
+                  :is="user?.access?.organizer.includes(item.value) ? CheckIcon : XMarkIcon" class="h-5 w-5 mr-2" aria-hidden="true" 
+                  :class="user?.access?.organizer.includes(item.value) ? 'text-[#119A21]' : 'text-[#FF5558]'" />
+                <span :class="user?.access?.organizer.includes(item.value) ? 'text-gray-600 font-medium' : 'text-gray-500'">
+                  {{ item.label }}
+                </span>
+              </li>
+            </ul>
+          </div>
+          <!-- User Section -->
+          <div v-if="user?.access?.user.length>0">
+            <div class="text-base font-semibold mb-2">Пользователи:</div>
+            <ul class="text-[14px] space-y-1">
+              <li v-for="item in accessOptions.user" :key="item.value" class="flex items-center">
+                <component 
+                  :is="user?.access?.user.includes(item.value) ? CheckIcon : XMarkIcon" class="h-5 w-5 mr-2" aria-hidden="true" 
+                  :class="user?.access?.user.includes(item.value) ? 'text-[#119A21]' : 'text-[#FF5558]'" />
+                <span :class="user?.access?.user.includes(item.value) ? 'text-gray-600 font-medium' : 'text-gray-500'">
+                  {{ item.label }}
+                </span>
+              </li>
+            </ul>
+          </div>
+          <div v-if="user?.access?.event.length>0">
+            <div class="text-base font-semibold mb-2">Пользователи:</div>
+            <ul class="text-[14px] space-y-1">
+              <li v-for="item in accessOptions.event" :key="item.value" class="flex items-center">
+                <component 
+                  :is="user?.access?.event.includes(item.value) ? CheckIcon : XMarkIcon" class="h-5 w-5 mr-2" aria-hidden="true" 
+                  :class="user?.access?.event.includes(item.value) ? 'text-[#119A21]' : 'text-[#FF5558]'" />
+                <span :class="user?.access?.event.includes(item.value) ? 'text-gray-600 font-medium' : 'text-gray-500'">
+                  {{ item.label }}
+                </span>
+              </li>
+            </ul>
           </div>
         </div>
-        <div class="py-2 flex-1 text-center">
-          <div class="text-xs text-gray-500 2xl:text-[12px]">Подписан</div>
-          <div class="text-base font-medium text-gray-800 2xl:text-[14px]">
-            {{ follow?.followings || 0 }}
-          </div>
-        </div>
-        <div class="py-2 flex-1 text-center">
-          <div class="text-xs text-gray-500 2xl:text-[12px]">Посты</div>
-          <div class="text-base font-medium text-gray-800 2xl:text-[14px]">
-            {{ follow?.posts || 0 }}
-          </div>
-        </div>
-      </div> -->
+      </div>
     </div>
   </div>
 </template>
 <script setup>
 import { convertDateShort } from '@/helpers/func'
-
+// Icon import
+import {
+    CheckIcon,
+    XMarkIcon,
+  } from '@heroicons/vue/24/outline'
 defineProps(['user'])
+
+
+const accessOptions = {
+  organizer: [
+    { value: 'show', label: 'Просмотр' },
+    { value: 'status', label: 'Менять статус' },
+    { value: 'metric', label: 'Персональные данные' },
+    { value: 'chat', label: 'Чат' },
+  ],
+  user: [
+    { value: 'show', label: 'Просмотр' },
+    { value: 'status', label: 'Менять статус' },
+    { value: 'metric', label: 'Персональные данные' },
+    { value: 'chat', label: 'Чат' },
+  ],
+  event: [
+    { value: 'show', label: 'Просмотр' },
+    { value: 'status', label: 'Менять статус' },
+  ],
+}
 
 </script>
 <style lang=""></style>

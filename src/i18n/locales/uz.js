@@ -18,7 +18,7 @@ const uz = {
     language: 'Tillar',
     category: 'Kategoriyalar',
     subcategory: 'Subkategoriyalar',
-    atribut: "Atributlar",
+    atributCategory: "Atributlar",
     social: 'Ijtimoiy tarmoqlar',
     page: "Sahifa",
     tax: 'Soliq',

@@ -13,14 +13,14 @@
         </button>
       </div>
       <DialogTitle as="h3" class="text-lg font-semibold leading-6 text-gray-900">
-        {{ edit ? $t('category.dialog.edit') : $t('category.dialog.title') }}
+        {{ edit ? "Редактировать атрибут подкатегории" : "Новый атрибут подкатегории" }}
       </DialogTitle>
 
       <div class="space-y-2 mt-4">
         <default-input
           v-model="data.title"
           name="title"
-          :label="t('category.dialog.name')"
+          label="Название атрибут подкатегории"
           :error="v$.title.$invalid && v$.title.$dirty"
         />
       </div>
@@ -28,13 +28,13 @@
         <default-input
           v-model="data.slug"
           name="slug"
-          :label="t('category.dialog.slug')"
+          label="Код атрибут подкатегории (slug)"
           :error="v$.slug.$invalid && v$.slug.$dirty"
         />
       </div>
       <div class="mt-6 flex flex-row gap-2">
-        <button type="button" class="close-btn" @click="close">
-          {{ $t('category.dialog.close') }}
+        <button type="button" class="close-btn md:m-t-0 xs:m-t-0" @click="close">
+          {{ $t('subcategory.dialog.close') }}
         </button>
         <button type="button" class="send-btn" @click="send">
           {{ $t('category.dialog.save') }}
@@ -49,14 +49,16 @@ import { storeToRefs } from 'pinia'
 import { useI18n } from 'vue-i18n'
 const { t } = useI18n()
 import { DialogPanel, DialogTitle } from '@headlessui/vue'
-// import uploadPhoto from '@/components/default/uploadPhoto.vue'
 import { XMarkIcon } from '@heroicons/vue/20/solid'
 import { useFullStore } from '@/stores/usefull/modal'
 const usefull = useFullStore()
+import { useRoute } from 'vue-router'
+const route = useRoute()
 const { toggle, id, lang } = storeToRefs(usefull)
 defineProps(['options'])
 
 const data = ref({
+  attributeCategory: '',
   slug: '',
   title: ''
 })
@@ -65,27 +67,39 @@ import { useVuelidate } from '@vuelidate/core'
 import { required } from '@vuelidate/validators'
 const rules = {
   slug: { required },
-  title: { required }
+  title: { required },
+}
+
+const close = () => {
+  usefull.setToggle(false, 0);
+  data.value = {
+    attributeCategory: '',
+    slug: '',
+    title: ''
+  }
+  v$.value.$reset()
+  edit.value = false 
 }
 
 const v$ = useVuelidate(rules, data)
 const edit = ref(false)
-import { categoryStore } from '@/stores/data/categories'
-const store = categoryStore()
+import { atributStore } from '@/stores/data/atribut'
+const store = atributStore()
 
 const send = async () => {
   v$.value.$touch()
   if (!v$.value.$invalid) {
     if (edit.value) {
       data.value.language = lang
-      console.log("savecat", data.value);
-      
-      await store.saveCategory({ ...data.value }, t)
+      data.value.attributeCategory = route.params.id
+      await store.saveAtribut({ ...data.value }, t)
     } else {
-      console.log("addcat", data.value);
+      data.value.attributeCategory = route.params.id
+      console.log("atribut",data.value, route.params.id );
       
-      await store.addCategory({ ...data.value }, t)
+      await store.addAtribut({ ...data.value }, t)
     }
+    
     close()
   } else {
     console.log(data.value)
@@ -96,19 +110,14 @@ watch(
   () => id?.value,
   async () => {
     if (id?.value?.length > 0 && lang?.value?.length > 0) {
-      const res = await store.getCategory(id.value, lang.value)
-      console.log("res", res.data);
-      
+      const res = await store.getAtribut(id.value, lang.value)
       edit.value = true
       data.value = {
         ...res.data,
         _id: id.value,
+        attributeCategory: res.data?.attributeCategory,
         slug: res.data?.slug || '',
         title: res.data?.title || ''
-        // translate: {
-        //   title: res.data?.translate?.title || '',
-        //   language: res.data?.translate?.language || '',
-        // }
       }
     }
   }
@@ -118,6 +127,7 @@ watch(
   () => toggle.value,
   () => {
     data.value = {
+      attributeCategory: '',
       slug: '',
       title: ''
     }
@@ -125,14 +135,4 @@ watch(
     edit.value = false 
   }
 )
-
-const close = () => {
-  usefull.setToggle(false, 0)
-  data.value = {
-    slug: '',
-    title: ''
-  }
-  v$.value.$reset()
-  edit.value = false 
-}
 </script>

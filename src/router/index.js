@@ -1,5 +1,7 @@
 import { links } from '@/helpers/menu'
 import { createRouter, createWebHistory } from 'vue-router'
+import { useBreadcrumbStore } from '@/stores/data/breadcrump';
+
 
 const routes = [
   {
@@ -40,6 +42,21 @@ import { authStore } from '@/stores/user/auth'
 import { detailMenu } from '@/helpers/detailMenu'
 router.beforeEach(async (to, from, next) => {
   const auth_store = authStore()
+  const breadcrumbStore = useBreadcrumbStore();
+
+  // Breadcrumblarni hosil qilish
+  const breadcrumbs = [];
+  to.matched.forEach(route => {
+    if (route.meta && route.meta.title) {
+      breadcrumbs.push({
+        name: route.name,
+        path: route.path,
+        title: route.meta.title,
+      });
+    }
+  });
+
+  breadcrumbStore.setBreadcrumbs(breadcrumbs);
   if (!['authLayout', 'signIn'].includes(to.name)) {
     await auth_store.checkUser()
   }

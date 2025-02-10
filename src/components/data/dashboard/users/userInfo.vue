@@ -1,18 +1,18 @@
 <template>
-  <div class="border border-gray-300 rounded-lg p-4 2xl:p-2 h-[100%]">
+  <div class="p-4 2xl:p-2">
     <img
       v-if="user?.face?.length > 0"
       :src="`${url}/${user?.face?.at(0) || user.cover?.at(0)}`"
       alt=""
-      class="w-full max-w-80 m-auto rounded-lg block aspect-square object-cover 2xl:w-72 md-max:w-64 xm-max:w-56"
+      class="w-full mt-4 max-w-80 m-auto rounded-[26px] block aspect-square object-cover 2xl:w-72 md-max:w-64 xm-max:w-56"
     />
     <img
       v-else
-      class="max-w-80 m-auto rounded-lg block aspect-square object-cover w-72 md-max:w-64"
+      class="max-w-80 mt-4 m-auto rounded-[26px] block aspect-square object-cover w-72 md-max:w-64"
       src="@/assets/logo/logo.png"
       alt=""
     />
-    <div class="space-y-1 divide-y">
+    <div class="space-y-1 divide-y mt-2 px-4">
       <div class="py-2">
         <div class="text-xs text-gray-500 2xl:text-[12px]">Ф.И.О</div>
         <div class="text-base font-medium text-gray-800 2xl:text-[14px]">

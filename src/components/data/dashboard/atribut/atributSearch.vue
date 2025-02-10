@@ -11,16 +11,17 @@
 </template>
 <script setup>
 import { MagnifyingGlassIcon, XMarkIcon } from '@heroicons/vue/20/solid'
-import { categoryStore } from '@/stores/data/categories'
+import { atributStore } from '@/stores/data/atribut'
 import { ref } from 'vue'
-// import { useRouter } from 'vue-router'
-const store = categoryStore()
+import { useRoute } from 'vue-router'
+const store = atributStore()
 
 const title = ref('')
-// const router = useRouter()
+const route = useRoute()
 
 const findMe = async () => {
-  await store.getCategories({
+  await store.getAtributes({
+    attributeCategory: route.params.id,
     page: 1,
     title: title.value.trim(),
   })
