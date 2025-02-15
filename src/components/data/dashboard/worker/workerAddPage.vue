@@ -1,170 +1,186 @@
 <template>
-  <div class="flex-1 h-full w-full overflow-auto">
-    <div class="flex mt-6 ml-3">
-        <button  @click="$router.push({ name: 'workers' })">
-          <ArrowLongLeftIcon class="size-5 mr-3" />
+  <div class="h-full w-full overflow-auto">
+    <div class="flex items-center justify-between my-6 mx-4">
+      <div class="flex items-center">
+        <button  
+          @click="$router.push({ name: 'workers' })" 
+          class="w-[30px] h-[30px] rounded-full bg-[#F5F0FF] mr-[16px] flex justify-center items-center hover:bg-[#9E55EC] hover:text-white"
+          >
+            <ChevronLeftIcon class="size-7" />
         </button>
-        <div as="h3" class="text-lg font-semibold leading-6 text-gray-900">
+        <div as="h3" class="text-[22px] font-bold leading-6 text-[#483D5B]">
           {{ $t('worker.dialog.title') }}
         </div>
       </div>
-    <div class="p-8 w-[55%] m-auto">
-      <div class="flex w-full xm:block">
-        <div class="space-y-2 mt-4 w-full mr-3">
-          <default-input
-            v-model="data.lname"
-            name="lname"
-            :label="t('worker.dialog.lname')"
-            :error="v$.lname.$invalid && v$.lname.$dirty"
-          />
+      <div class="flex gap-2">
+        <div class="flex gap-2 items-center">
+          <button type="button" class="close-btn mt-0 h-[40px] min-w-[100px] rounded-[16px]" @click="close">
+            {{ $t('worker.dialog.close') }}
+          </button>
+          <button type="button" class="send-btn rounded-[16px] h-[40px] min-w-[100px]" @click="send">{{ $t('worker.dialog.save') }}</button>
         </div>
-        <div class="space-y-2 mt-4 w-full ml-1">
-          <default-input
-            v-model="data.name"
-            name="name"
-            :label="t('worker.dialog.name')"
-            :error="v$.name.$invalid && v$.name.$dirty"
-          />
-        </div>
-      </div>
-      <div class="flex w-full xm:block">
-        <div class="space-y-2 mt-4 w-full mr-3">
-          <phone-maska
-            v-model="data.phone"
-            name="phone"
-            :label="t('worker.dialog.phone')"
-            :error="v$.phone.$invalid && v$.phone.$dirty"
-          />
-        </div>
-        <div class="space-y-2 mt-4 w-full ml-3">
-          <default-select
-            v-model="data.role"
-            name="role"
-            :label="t('worker.dialog.role')"
-            :options="roles || []"
-            option_title="title"
-            :error="v$.role.$invalid && v$.role.$dirty"
-            @change="changeRole(data.role)"
-          />
-        </div>
-      </div>
-      <div class="flex w-full xm:block" v-if="isManager" >
-        <div class="space-y-2 mt-4 w-full mr-3">
-          <array-select
-            v-model="data.categories"
-            name="categories"
-            :label="t('worker.dialog.category')"
-            @input="filterSubcat(data.categories)"
-            :options="categories || []"
-            option_title="title"
-            :error="v$.categories?.$invalid && v$.categories?.$dirty"
-          />
-        </div>
-        <div class="space-y-2 mt-4 w-full ml-1">
-          <array-select
-            v-model="data.subcategories"
-            name="subcategories"
-            :label="t('worker.dialog.subcategory')"
-            :options="subcategories || []"
-            option_title="title"
-          />
-        </div>
-      </div>
-
-      <div class="flex w-full xm:block">
-        <div class="space-y-2 mt-4 w-full mr-3">
-          <default-input
-            v-model="data.login"
-            name="login"
-            :label="t('worker.dialog.login')"
-            :error="v$.login.$invalid && v$.login.$dirty"
-          />
-        </div>
-        <div class="space-y-2 mt-4 w-full ml-3">
-          <default-input
-            v-model="data.password"
-            name="password"
-            :label="t('worker.dialog.password')"
-            :error="v$.password?.$invalid && v$.password?.$dirty"
-          />
-        </div>
-      </div>
-
-      <div class="mt-7 mb-2 text-lg  text-gray-700 font-medium">Доступы</div>
-      <div class="flex w-full xm:block">
-        <div class="space-y-4 mt-2 w-full mr-3">
-          <div>
-            Организаторы:
-          </div>
-          <div class="text-sm space-y-2">
-            <label class="flex items-center space-x-2 cursor-pointer">
-              <input class="mr-1 accent-[#9E55EC]" value="show" false-value="hide" type="checkbox" v-model="organizer.show" />
-              <span class="hover:text-[#9E55EC]">Просмотр</span>
-            </label>
-            <label class="flex items-center space-x-2 cursor-pointer">
-              <input class="mr-1 accent-[#9E55EC]" value="status" false-value="hide" type="checkbox" v-model="organizer.status" />
-              <span class="hover:text-[#9E55EC]">Менять статус</span>
-            </label>
-            <label class="flex items-center space-x-2 cursor-pointer">
-              <input class="mr-1 accent-[#9E55EC]" value="metric" false-value="hide" type="checkbox" v-model="organizer.metric" />
-              <span class="hover:text-[#9E55EC]">Персональные данные</span>
-            </label>
-            <label class="flex items-center space-x-2 cursor-pointer">
-              <input class="mr-1 accent-[#9E55EC]" value="chat" false-value="hide" type="checkbox" v-model="organizer.chat" />
-              <span class="hover:text-[#9E55EC]">Чат</span>
-            </label>
-          </div>
-        </div>
-        <div class="space-y-4 mt-2 w-full ml-3">
-          <div>
-            Пользователи:
-          </div>
-          <div class="text-sm space-y-2">
-            <label class="flex items-center space-x-2 cursor-pointer">
-              <input class="mr-1 accent-[#9E55EC]" value="show" type="checkbox" v-model="user.show" />
-              <span class="hover:text-[#9E55EC]">Просмотр</span>
-            </label>
-            <label class="flex items-center space-x-2 cursor-pointer">
-              <input class="mr-1 accent-[#9E55EC]" value="status" type="checkbox" v-model="user.status" />
-              <span class="hover:text-[#9E55EC]">Менять статус</span>
-            </label>
-            <label class="flex items-center space-x-2 cursor-pointer">
-              <input class="mr-1 accent-[#9E55EC]" value="metric" type="checkbox" v-model="user.metric" />
-              <span class="hover:text-[#9E55EC]">Персональные данные</span>
-            </label>
-            <label class="flex items-center space-x-2 cursor-pointer">
-              <input class="mr-1 accent-[#9E55EC]" value="chat" type="checkbox" v-model="user.chat" />
-              <span class="hover:text-[#9E55EC]">Чат</span>
-            </label>
-          </div>
-        </div>
-      </div>
-      <div class="flex w-full xm:block mt-1">
-        <div class="space-y-4 mt-2 w-full mr-3">
-          <div>
-            Мероприятие:
-          </div>
-          <div class="text-sm space-y-2">
-            <label class="flex items-center space-x-2 cursor-pointer">
-              <input class="mr-1 accent-[#9E55EC]" value="show" type="checkbox" v-model="event.show" />
-              Просмотр
-            </label>
-            <label class="flex items-center space-x-2 cursor-pointer">
-              <input class="mr-1 accent-[#9E55EC]" value="status" type="checkbox" v-model="event.status" />
-              Менять статус
-            </label>
-          </div>
-        </div>
-      </div>
-
-      <div class="mt-6 flex flex-row gap-2">
-        <button type="button" class="close-btn mt-0" @click="close">
-          {{ $t('worker.dialog.close') }}
-        </button>
-        <button type="button" class="send-btn" @click="send">{{ $t('worker.dialog.save') }}</button>
       </div>
     </div>
-    <div></div>
+    <div class="grid grid-cols-12">
+      <div class="col-span-8 p-8 mx-4 bg-white rounded-[16px]">
+        <div class="flex w-full xm:block">
+          <div class="space-y-2 w-full mr-3">
+            <default-input
+              v-model="data.lname"
+              name="lname"
+              :placeholder="t('worker.dialog.lname')"
+              :customClass="'h-[50px] rounded-[16px] text-[16px] py-[20px] px-[16px]'"
+              :error="v$.lname.$invalid && v$.lname.$dirty"
+            />
+          </div>
+          <div class="space-y-2 w-full ml-1">
+            <default-input
+              v-model="data.name"
+              name="name"
+              :placeholder="t('worker.dialog.name')"
+              :customClass="'h-[50px] rounded-[16px] text-[16px] py-[20px] px-[16px]'"
+              :error="v$.name.$invalid && v$.name.$dirty"
+            />
+          </div>
+        </div>
+        <div class="flex items-center w-full xm:block">
+          <div class="space-y-2 mt-4 w-full mr-3">
+            <phone-maska
+              v-model="data.phone"
+              name="phone"
+              :placeholder="t('worker.dialog.phone')"
+              :customClass="'h-[50px] rounded-[16px] text-[16px] py-[20px] px-[16px]'"
+              :error="v$.phone.$invalid && v$.phone.$dirty"
+            />
+          </div>
+          <div class="space-y-2 mt-4 w-full mr-3">
+            <default-input
+              v-model="data.login"
+              name="login"
+              :placeholder="t('worker.dialog.login')"
+              :customClass="'h-[50px] rounded-[16px] text-[16px] py-[20px] px-[16px]'"
+              :error="v$.login.$invalid && v$.login.$dirty"
+            />
+          </div>
+          <div class="space-y-2 mt-4 w-full">
+            <default-input
+              v-model="data.password"
+              name="password"
+              :placeholder="t('worker.dialog.password')"
+              :customClass="'h-[50px] rounded-[16px] text-[16px] py-[20px] px-[16px]'"
+              :error="v$.password?.$invalid && v$.password?.$dirty"
+            />
+          </div>
+          <!-- <div class="space-y-2 mt-4 w-full ml-3">
+            <default-select
+              v-model="data.role"
+              name="role"
+              :placeholder="t('worker.dialog.role')"
+              :options="roles || []"
+              option_title="title"
+              :error="v$.role.$invalid && v$.role.$dirty"
+              @change="changeRole(data.role)"
+            />
+          </div> -->
+        </div>
+        <div class="mt-7 text-[19px]  text-[#483D5B] font-semibold">Категории сотрудника</div>
+        <div class="flex w-full xm:block">
+          <div class="space-y-2 mt-2 w-full mr-3">
+            <array-select
+              v-model="data.categories"
+              name="categories"
+              label="Выберите категорию"
+              :placeholder="t('worker.dialog.category')"
+              :customClass="'h-[50px] rounded-[16px] text-[16px] py-[20px] px-[16px]'"
+              @input="filterSubcat(data.categories)"
+              :options="categories || []"
+              option_title="title"
+              :error="v$.categories?.$invalid && v$.categories?.$dirty"
+            />
+          </div>
+          <div class="space-y-2 mt-2 w-full ml-1">
+            <array-select
+              v-model="data.subcategories"
+              name="subcategories"
+              label="Выберите подкатегорию"
+              :placeholder="t('worker.dialog.subcategory')"
+              :customClass="'h-[50px] rounded-[16px] text-[16px] py-[20px] px-[16px]'"
+              :options="subcategories || []"
+              option_title="title"
+            />
+          </div>
+        </div>
+  
+        <div class="flex w-full xm:block">
+          
+        </div>
+  
+        <div class="mt-7 mb-2 text-[19px]  text-[#483D5B] font-semibold">Доступы</div>
+        <div class="flex w-full xm:block">
+          <div class="space-y-4 mt-2 w-full mr-3">
+            <div class="text-[#645A77] text-[17px] font-semibold">
+              Организаторы:
+            </div>
+            <div class="text-sm space-y-2">
+              <label class="flex items-center space-x-2 cursor-pointer">
+                <input class="mr-1 text-[#645A77] accent-[#9E55EC]" value="show" false-value="hide" type="checkbox" v-model="organizer.show" />
+                <span class="hover:text-[#9E55EC] text-[16px] font-normal text-[#645A77]">Просмотр</span>
+              </label>
+              <label class="flex items-center space-x-2 cursor-pointer">
+                <input class="mr-1 accent-[#9E55EC]" value="status" false-value="hide" type="checkbox" v-model="organizer.status" />
+                <span class="hover:text-[#9E55EC] text-[16px] font-normal text-[#645A77]">Менять статус</span>
+              </label>
+              <label class="flex items-center space-x-2 cursor-pointer">
+                <input class="mr-1 accent-[#9E55EC]" value="metric" false-value="hide" type="checkbox" v-model="organizer.metric" />
+                <span class="hover:text-[#9E55EC] text-[16px] font-normal text-[#645A77]">Персональные данные</span>
+              </label>
+              <label class="flex items-center space-x-2 cursor-pointer">
+                <input class="mr-1 accent-[#9E55EC]" value="chat" false-value="hide" type="checkbox" v-model="organizer.chat" />
+                <span class="hover:text-[#9E55EC] text-[16px] font-normal text-[#645A77]">Чат</span>
+              </label>
+            </div>
+          </div>
+          <div class="space-y-4 mt-2 w-full ml-3">
+            <div class="text-[#645A77] text-[17px] font-semibold">
+              Пользователи:
+            </div>
+            <div class="text-sm space-y-2">
+              <label class="flex items-center space-x-2 cursor-pointer">
+                <input class="mr-1 accent-[#9E55EC]" value="show" type="checkbox" v-model="user.show" />
+                <span class="hover:text-[#9E55EC] text-[16px] font-normal text-[#645A77]">Просмотр</span>
+              </label>
+              <label class="flex items-center space-x-2 cursor-pointer">
+                <input class="mr-1 accent-[#9E55EC]" value="status" type="checkbox" v-model="user.status" />
+                <span class="hover:text-[#9E55EC] text-[16px] font-normal text-[#645A77]">Менять статус</span>
+              </label>
+              <label class="flex items-center space-x-2 cursor-pointer">
+                <input class="mr-1 accent-[#9E55EC]" value="metric" type="checkbox" v-model="user.metric" />
+                <span class="hover:text-[#9E55EC] text-[16px] font-normal text-[#645A77]">Персональные данные</span>
+              </label>
+              <label class="flex items-center space-x-2 cursor-pointer">
+                <input class="mr-1 accent-[#9E55EC]" value="chat" type="checkbox" v-model="user.chat" />
+                <span class="hover:text-[#9E55EC] text-[16px] font-normal text-[#645A77]">Чат</span>
+              </label>
+            </div>
+          </div>
+          <div class="space-y-4 mt-2 w-full mr-3">
+            <div class="text-[#645A77] text-[17px] font-semibold">
+              Мероприятие:
+            </div>
+            <div class="text-sm space-y-2">
+              <label class="flex items-center space-x-2 cursor-pointer">
+                <input class="mr-1 accent-[#9E55EC]" value="show" type="checkbox" v-model="event.show" />
+                <span class="hover:text-[#9E55EC] text-[16px] font-normal text-[#645A77]">Просмотр</span>
+              </label>
+              <label class="flex items-center space-x-2 cursor-pointer">
+                <input class="mr-1 accent-[#9E55EC]" value="status" type="checkbox" v-model="event.status" />
+                <span class="hover:text-[#9E55EC] text-[16px] font-normal text-[#645A77]">Менять статус</span>
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
   
 </template>
@@ -173,7 +189,7 @@ import { ref, computed, onMounted } from 'vue'
 import { storeToRefs } from 'pinia'
 import { useI18n } from 'vue-i18n'
 const { t } = useI18n()
-import { ArrowLongLeftIcon } from '@heroicons/vue/20/solid'
+import { ChevronLeftIcon } from '@heroicons/vue/20/solid'
 import { workerStore } from '@/stores/data/workers'
 const store = workerStore()
 import { subcategoryStore } from '@/stores/data/subcategories'
@@ -195,10 +211,8 @@ const data = ref({
   name: '',
   lname: '',
   phone: '',
-  // email: '',
   login: '',
   password: '',
-  role: '',
   categories: [],
   subcategories: []
 })
@@ -249,7 +263,6 @@ const rules = computed(() => {
     lname: { required },
     phone: { required },
     login: { required },
-    role: { required }
   }
   if (data.value.role === 'moderator') {
     baseRules.categories = { required }
@@ -268,15 +281,16 @@ const v$ = useVuelidate(rules, data)
 
 
 const send = async () => {
+  data.value.role = 'moderator'
   v$.value.$touch()
   if (!v$.value.$invalid) {
     const payload = { ...data.value }
 
-    // Agar role `manager` bo'lsa va categories yoki subcategories bo'sh bo'lsa, ularni o'chirib tashlaymiz
-    if (data.value.role === 'manager') {
-      if (!data.value.categories.length) delete payload.categories
-      if (!data.value.subcategories.length) delete payload.subcategories
-    }
+    // // Agar role `manager` bo'lsa va categories yoki subcategories bo'sh bo'lsa, ularni o'chirib tashlaymiz
+    // if (data.value.role === 'manager') {
+    //   if (!data.value.categories.length) delete payload.categories
+    //   if (!data.value.subcategories.length) delete payload.subcategories
+    // }
     if (data.value.role === 'moderator') {
       if (!data.value.subcategories.length) delete payload.subcategories
     }
@@ -297,10 +311,13 @@ const send = async () => {
   }
 }
 const filterSubcat = async (selectedCategories) => {
-  await subcategory_store.getSubcategories({
-    category: { $in: selectedCategories },
-    type: true
-  })
+  console.log("selectcat", selectedCategories);
+  if(selectedCategories.length>0) {
+    await subcategory_store.getSubcategories({
+      category: { $in: selectedCategories },
+      type: true
+    })
+  }
   data.value.subcategories = subcategories.value.filter((subcategory) =>
     selectedCategories.includes(subcategory.categoryId)
   )

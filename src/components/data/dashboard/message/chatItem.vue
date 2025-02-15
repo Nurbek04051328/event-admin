@@ -11,7 +11,7 @@
   >
     {{ chat?.sender?.name?.charAt(0).toUpperCase() }}
   </div>
-  <div :class="`flex flex-col w-full max-w-[320px] leading-1.5 gap-1`">
+  <div :class="`flex flex-col w-full max-w-[450px] leading-1.5 gap-1`">
     <div class="flex items-center space-x-2 rtl:space-x-reverse justify-between">
       <span class="text-base font-semibold text-gray-900">
         {{ chat?.sender?.lname }}
@@ -23,7 +23,7 @@
       }}</span>
     </div>
     <p
-      :class="`p-4  text-wrap  break-words whitespace-normal rounded-bl-xl rounded-br-xl dark:bg-gray-900 text-sm font-normal py-2.5 text-gray-700 dark:text-white ${auth_store.user?.id == chat?.sender._id ? 'rounded-tl-xl' : 'rounded-tr-xl'}`"
+      :class="`p-4  text-wrap  break-words whitespace-normal rounded-bl-[50px] rounded-tr-[50px] rounded-tl-[50px] bg-[#9E55EC] text-sm font-normal py-2.5 text-gray-700 dark:text-white ${auth_store.user?.id == chat?.sender._id ? 'rounded-tl-xl' : 'rounded-tr-xl'}`"
       v-if="chat.text"
       v-html="chat?.text.replace(/\n/g, '<br>')"
     ></p>

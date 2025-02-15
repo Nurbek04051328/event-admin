@@ -1,6 +1,8 @@
 <template>
-  <h3 class="text-base font-semibold leading-6 text-gray-900 w-full">Статистика по пользователям</h3>
-  <apexchart width="100%"  :options="options" :series="series"></apexchart>
+  <div class="p-[16px]  rounded-[26px] shadow-sm bg-white">
+    <h3 class="text-[18px] font-bold leading-6 text-[#483D5B] w-full">Статистика по пользователям</h3>
+    <apexchart width="100%"  :options="options" :series="series"></apexchart>
+  </div>
 </template>
 <script setup>
 import { statisticStore } from '@/stores/data/statistic'

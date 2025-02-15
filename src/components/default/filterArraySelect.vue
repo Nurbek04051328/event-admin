@@ -1,26 +1,31 @@
 <template>
-  <Combobox as="div" v-model="selectedPersons" multiple>
+  <Combobox as="div" @change="onInput" v-model="selectedPersons" multiple>
     <ComboboxLabel
+      v-if="label"
       class="block text-sm font-medium leading-6 text-gray-900"
-      :class="{
-        'ring-red-300  focus:ring-2 focus:ring-inset focus:ring-red-500': error
-      }"
-      >{{ label }}
+      :class="[
+        {
+          'ring-red-300  focus:ring-2 focus:ring-inset focus:ring-red-500': error
+        }
+      ]"
+      >
     </ComboboxLabel
     >
     <div class="relative mt-2">
       <ComboboxButton
       class="inset-y-0 w-full flex items-center rounded-r-md focus:outline-none"
       >
-      <ComboboxInput
-        class="w-full rounded-md border-0 bg-white py-1.5 pl-3 pr-10 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-        :placeholder="placeholder"
-        autocomplete="off"
-        @input="onInput"
-        :display-value="
-          () => selectedPersons.map((personId) => getPersonTitleById(personId)).join(', ')
-        "
-      />
+        <ComboboxInput
+          class="w-full border-0 bg-white  text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+          :placeholder="placeholder"
+          v-model:query="query"
+          autocomplete="off"
+          @change="onInput"
+          :class="customClass"
+          :display-value="
+            () => selectedPersons.map((personId) => getPersonTitleById(personId)).join(', ')
+          "
+        />
         <ChevronUpDownIcon class=" absolute right-0 h-5 w-5 text-gray-400" aria-hidden="true" />
       </ComboboxButton>
 
@@ -64,7 +69,7 @@
 </template>
 
 <script setup>
-import { computed, ref } from 'vue'
+import { computed, ref, watch } from 'vue'
 import { CheckIcon, ChevronUpDownIcon } from '@heroicons/vue/20/solid'
 import {
   Combobox,
@@ -75,16 +80,22 @@ import {
   ComboboxOptions
 } from '@headlessui/vue'
 
+
 const props = defineProps({
   label: {
     type: String,
-    required: true
+    required: true,
+    default: ''
   },
   placeholder: {
     type: String,
     default: 'Выберите из списка'
   },
   name: {
+    type: String,
+    default: ''
+  },
+  customClass: {
     type: String,
     default: ''
   },
@@ -116,7 +127,7 @@ const selectedPersons = defineModel()
 
 // Define emit for updating v-model
 // const emit = defineEmits(['update:modelValue'])
-defineEmits(['input'])
+const emit = defineEmits(['input'])
 // Computed array of filtered options based on the search query
 const filteredPeople = computed(() => {
   return query.value === ''
@@ -134,8 +145,15 @@ function getPersonTitleById(id) {
 
 // Function to handle input change and update the search query
 function onInput(event) {
+  console.log("event", event);
+  
   query.value = event.target.value
 }
+
+
+watch(selectedPersons, (newValue) => {
+  emit('input', newValue)
+})
 
 
 </script>

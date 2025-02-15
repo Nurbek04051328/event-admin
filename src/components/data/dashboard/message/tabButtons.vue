@@ -1,15 +1,15 @@
 <template>
-  <div class="border-b border-gray-200 w-full">
-    <nav class="flex space-x-8" aria-label="Tabs">
+  <div class="w-full">
+    <nav class="flex space-x-4" aria-label="Tabs">
       <button
         v-for="tab in list"
         :key="tab.name"
         @click="selectTab(tab.role)"
         :class="[
           tab.role === activeTab
-            ? 'border-blue-500 text-blue-600'
-            : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700',
-          'whitespace-nowrap border-b-[1px] py-4 px-1 text-sm font-medium'
+            ? 'text-[#322B3F]'
+            : 'border-transparent text-[#867B9A] hover:text-[#322B3F]',
+          'whitespace-nowrap   text-[16px] font-bold'
         ]"
       >
         {{ tab.title }}

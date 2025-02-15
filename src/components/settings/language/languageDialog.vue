@@ -1,7 +1,7 @@
 <template>
   <default-modal>
     <DialogPanel
-      class="relative transform overflow-hidden rounded-lg bg-white px-4 pb-4 pt-5 text-left shadow-xl transition-all md-max:w-full"
+      class="relative transform overflow-hidden rounded-lg w-[30%] bg-white px-4 pb-4 pt-5 text-left shadow-xl transition-all md-max:w-full"
     >
       <div class="absolute right-0 top-0 hidden pr-4 pt-4 sm:block">
         <button

@@ -1,6 +1,6 @@
 <template>
   <div class="gap-4">
-    <div class="grid grid-cols-12 gap-3">
+    <div class="grid grid-cols-12 gap-4">
       <!-- <pre>{{ statistic_counts }}</pre> -->
       <div class="col-span-12">
         <allStat :count="statistic_counts" />
@@ -11,12 +11,13 @@
       <div class="overflow-hidden col-span-6 md-max:col-span-12">
         <OrganizerStat :count="statistic_counts" />
       </div> -->
-      <div class="overflow-hidden mt-4 col-span-6 lg:col-span-12">
+      <div class="overflow-hidden col-span-6 lg:col-span-12">
         <EventStat :e="statistic_counts?.event" />
       </div>
-      <div class="overflow-hidden mt-4 col-span-6 md-max:col-span-12">
+      <div class="overflow-hidden col-span-6 md-max:col-span-12">
         <OrganizerStat :count="statistic_counts.user" />
-        <KeyStat :count="statistic_counts.activationKeys" class="mt-2" />
+        <UserStat :count="statistic_counts.user" class="mt-4" />
+        <KeyStat :count="statistic_counts.activationKeys" class="mt-4" />
       </div>
       <div class="overflow-hidden col-span-12 lg:col-span-12">
         <EventChart />
@@ -50,6 +51,7 @@
   import CommistionChart from './stat/commistionChart.vue'
   import UserChart from './stat/userChart.vue'
   import OrganizerChart from './stat/organizerChart.vue'
+  import UserStat from './stat/userStat.vue'
 
 // Store import
   import { statisticStore } from '@/stores/data/statistic'

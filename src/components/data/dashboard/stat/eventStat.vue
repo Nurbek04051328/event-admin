@@ -1,26 +1,25 @@
 <template>
-  <div class="p-[26px]  rounded-[26px] shadow-sm bg-white">
-    <div class="flex justify-between">
+  <div class="px-[25px] py-[10px] rounded-[26px] shadow-sm bg-white">
+    <div class="flex justify-between items-center">
       <div
         @click="$router.push({ name: 'event'})"
-        class="text-[#483D5B] font-bold text-[22px] relative cursor-pointer"
+        class="text-[#483D5B] font-bold text-[20px] relative cursor-pointer"
       >
         Мероприятия
-        <span class="absolute bg-[#FAF4FE] py-[5px] px-[15px] rounded-2xl text-[16px] text-[#B6A3D0] top-[-10px]">{{ e?.count || 0 }}</span>
+        <span class="absolute bg-[#FAF4FE] py-[2px] px-[15px] rounded-2xl text-[15px] text-[#B6A3D0] top-[-10px]">{{ e?.count || 0 }}</span>
       </div>
-      <div>
+      <div class="w-[45px]">
         <img src="@/assets/images/event-calendar.png" alt="">
       </div>
     </div>
 
     <div
-      class=" text-[#360B64]  py-4 text-base items-start xs-max:w-full grid grid-cols-2  gap-x-7 gap-y-3  mt-2 xs:text-[10px]"
+      class=" text-[#360B64]  py-4 text-base items-start xs-max:w-full xs:text-[10px]"
     > 
       <div
         v-for="(val, key) of filteredItems"
         :key="key"
-        class="flex  justify-between  pt-2 border-b border-gray-200 pb-2"
-        
+        class="flex justify-between items-center py-2 border-b border-gray-200"
       >   
   
       <!-- {{ key }} -->
@@ -30,7 +29,7 @@
           </div>
           {{ data[key]?.title }}
         </div>
-        <div class="font-bold text-[#483D5B] text-[24px]">
+        <div class="font-bold text-[#483D5B] text-[20px]">
           {{ e[key] }}
         </div>
       </div>

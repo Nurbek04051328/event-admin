@@ -67,7 +67,7 @@ export const settingMenu = [
     name: 'refound',
     component: () => import('@/views/dashboard/settings/indexRefound.vue'),
     meta: {
-      title: 'Настройки/Возврать билет',
+      title: 'Настройки/Политика возврата',
       toggle: true,
       group: 'setting',
       toggleTitle: 'Новый'

@@ -7,12 +7,12 @@
     </div>
     <div class="flex flex-col">
       <div 
-        class="text-[17px] font-bold lg:text-[13px] lg:break-words lg:max-w-24 md-max:max-w-full"
+        class="text-[16px] font-bold lg:text-[13px] lg:break-words lg:max-w-24 md-max:max-w-full"
         :class="`${textColor? textColor : 'text-[#B6A3D0]'}`"
       >
         {{ title }}
       </div>
-      <div class="text-[26px] font-bold text-[#483D5B] mt-[8px]" >{{ value || 0}}</div>
+      <div class="text-[25px] font-bold text-[#483D5B] mt-[8px]" >{{ value || 0}}</div>
     </div>
   </div>
 </template>

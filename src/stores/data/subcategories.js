@@ -11,12 +11,8 @@ export const subcategoryStore = defineStore('subcategoryStore', () => {
   const notification = useNotification()
 
   const getSubcategories = async (params) => {
-    console.log("paramssub", params);
-    
     subcategories.value = []
     const { data } = await api.get(base_url, {params})
-    console.log('datasubct', data);
-    
     subcategories.value = data?.eventSubcategories;
     subcategoryCount.value = data?.count;
   }

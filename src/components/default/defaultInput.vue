@@ -1,6 +1,6 @@
 <template>
   <div class="space-y-2">
-    <label v-if="label" :for="name" class="block text-sm font-medium leading-6 text-gray-900"
+    <label v-if="label" :for="name" class="block text-sm font-medium leading-6 text-[#645A77]"
       >{{ label }}
     </label>
     <div class="relative rounded-md shadow-sm">
@@ -10,10 +10,14 @@
         autocomplete="off"
         v-model="model"
         :placeholder="placeholder"
-        class="input-text"
-        :class="{
-          'ring-red-300  focus:ring-2 focus:ring-inset focus:ring-red-500': error
-        }"
+        class="input-text text-[#645A77]"
+        :class="[
+          customClass,
+          {
+            'ring-red-300  focus:ring-2 focus:ring-inset focus:ring-red-500': error
+          }
+        ]"
+        :disabled="disabled"
       />
     </div>
   </div>
@@ -23,6 +27,6 @@
 </template>
 <script setup>
 const model = defineModel()
-defineProps(['label', 'placeholder', 'name', 'enter', 'error', 'disabled', 'suffix', 'type'])
+defineProps(['label', 'placeholder', 'name', 'enter', 'error', 'disabled', 'suffix', 'type', 'customClass'])
 </script>
 <style lang=""></style>

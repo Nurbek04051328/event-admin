@@ -56,6 +56,8 @@
         console.log("newmessage", data);
         
         if(route.params.id == data?.room) {
+          console.log("soketif", data);
+          
           await message_store.newMessage(data?.message)
           data.notViewed = 0
         }

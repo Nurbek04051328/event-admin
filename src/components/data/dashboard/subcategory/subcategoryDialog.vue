@@ -32,6 +32,7 @@
           name="slug"
           :label="t('subcategory.dialog.slug')"
           :error="v$.slug.$invalid && v$.slug.$dirty"
+          :disabled="edit"
         />
       </div>
       <div class="mt-6 flex flex-row gap-2">

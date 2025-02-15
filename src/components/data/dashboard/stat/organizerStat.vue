@@ -1,28 +1,28 @@
 <template>
-  <div class="p-[26px]  rounded-[26px] shadow-sm bg-white">
+  <div class="px-[25px] py-[18px] rounded-[26px] shadow-sm bg-white">
     <div
       @click="$router.push({ name: 'organizers'})"
-      class="text-[#483D5B] font-bold text-[22px] relative cursor-pointer"
+      class="text-[#483D5B] font-bold text-[20px] relative cursor-pointer"
     >
       Организаторы
-      <span class="absolute bg-[#FAF4FE] py-[5px] px-[15px] rounded-2xl text-[16px] text-[#B6A3D0] top-[-10px]">{{ count?.organizerSuccess + count?.organizerPending + count?.organizerDenied }}</span>
+      <span class="absolute bg-[#FAF4FE] py-[2px] px-[15px] rounded-2xl text-[15px] text-[#B6A3D0] top-[-10px]">{{ count?.organizerSuccess + count?.organizerPending + count?.organizerDenied || 0 }}</span>
     </div>
     <div class="flex justify-between">
       <div class="text-[#817295] text-[18px] mt-[40px] ml-[30px] w-[50%]">
-        <div class="relative border-b-[1px] border-[#F2F0F5] pb-[15px] flex items-center justify-between">
-          <span class="absolute left-[-25px] top-[9px] bg-[#05CD99] w-3 h-3 rounded-full"></span> 
+        <div class="relative border-b-[1px] py-2 border-[#F2F0F5] flex items-center justify-between">
+          <span class="absolute left-[-25px]  bg-[#05CD99] w-3 h-3 rounded-full"></span> 
           Успешно проверено 
-          <div class="text-[#483D5B] text-[22px] font-bold">{{ count?.organizerSuccess }}</div>
+          <div class="text-[#483D5B] text-[20px] font-bold">{{ count?.organizerSuccess }}</div>
         </div>
-        <div class="relative border-b-[1px] border-[#F2F0F5] pb-[15px] flex items-center justify-between">
-          <span class="absolute left-[-25px] top-[9px] bg-[#9E55EC] w-3 h-3 rounded-full"></span> 
+        <div class="relative border-b-[1px] py-2 border-[#F2F0F5] flex items-center justify-between">
+          <span class="absolute left-[-25px] bg-[#9E55EC] w-3 h-3 rounded-full"></span> 
           В ожидании 
-          <div class="text-[#483D5B] text-[22px] font-bold">{{ count?.organizerPending }}</div>
+          <div class="text-[#483D5B] text-[20px] font-bold">{{ count?.organizerPending }}</div>
         </div>
-        <div class="relative  pb-[15px] flex items-center justify-between">
-          <span class="absolute left-[-25px] top-[9px] bg-[#FF5558] w-3 h-3 rounded-full"></span> 
+        <div class="relative py-2 flex items-center justify-between">
+          <span class="absolute left-[-25px] bg-[#FF5558] w-3 h-3 rounded-full"></span> 
           Не одобрено 
-          <div class="text-[#483D5B] text-[22px] font-bold">{{ count?.organizerDenied }}</div>
+          <div class="text-[#483D5B] text-[20px] font-bold">{{ count?.organizerDenied }}</div>
         </div>
       </div>
       <div>

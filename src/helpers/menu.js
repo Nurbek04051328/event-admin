@@ -79,7 +79,7 @@ export const links = [
     component: () => import('@/views/dashboard/bilet/indexBilets.vue'),
     meta: {
       icon: TicketIcon,
-      title: 'Билети',
+      title: 'Билеты',
       toggle: false,
       group: 'main'
     }

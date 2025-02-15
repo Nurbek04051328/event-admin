@@ -13,8 +13,8 @@
     <!-- Separator -->
     <!-- <div class="h-6 w-px bg-gray-900/10" aria-hidden="true" /> -->
 
-    <div class="flex items-center flex-1 rounded-2xl mt-7  gap-3">
-      <div class="relative flex flex-1  rounded-2xl bg-white px-[24px] py-[20px]">
+    <div class="flex items-center flex-1 rounded-2xl gap-3 h-[64px]">
+      <div class="relative flex flex-1  rounded-2xl bg-white px-[24px] py-[20px] h-full">
         <div class="w-full">
           <!-- <label for="search-field" class=""> {{ $t('header.search') }}</label> -->
           <MagnifyingGlassIcon
@@ -84,8 +84,8 @@
         </Combobox>
       </div>
 
-      <div class="flex items-center gap-x-3 xm:gap-x-0">
-        <div class="bg-white py-[14px] px-[15px] rounded-2xl">
+      <div class="flex items-center gap-x-3 xm:gap-x-0 h-full">
+        <div class="flex items-center bg-white p-[14px] rounded-2xl h-full">
           <router-link
             :to="{ name: 'language' }"
             >
@@ -102,20 +102,20 @@
           </option>
         </select> -->
         <!-- Profile dropdown -->
-        <Menu as="div" class="relative flex   bg-white  my-7 py-[10px] pl-[20px] pr-[40px]  rounded-2xl ml-20px">
-          <MenuButton class="-m-1.5 flex items-center mx:m-0">
-            <div class="w-[50px] h-[50px] bg-[#F9F8FC] rounded-full flex items-center justify-center">
+        <Menu as="div" class="relative flex   bg-white  p-[12px] rounded-2xl min-w-[260px] h-full">
+          <MenuButton class="flex items-center">
+            <div class="w-[38px] h-[38px] bg-[#F9F8FC] rounded-full flex items-center justify-center">
               <img
-                class="h-[35px] w-[35px] rounded-full xm:hidden"
-                src="../../assets/images/header-user.png"
+                class="h-[27px] w-[27px] rounded-full xm:hidden"
+                src="../../assets/images/header-user.svg"
                 alt="Profile image"
               />
             </div>
-            <div class="flex items-center lg:items-center">
-              <div class="flex flex-col items-start ml-4 font-semibold" aria-hidden="true">
+            <div class="flex items-center">
+              <div class="flex flex-col gap-0 items-start justify-center ml-4 font-medium leading-3" aria-hidden="true">
                 <!-- <div class="text-[#483D5B] text-lg">{{ auth_store.user?.lname }} {{ auth_store.user?.name }}</div> -->
-                <div class="text-[#483D5B] text-lg">Adminbekov Adminali</div>
-                <div class="text-[#B6A3D0]">{{ auth_store.user?.role }}</div>
+                <div class="text-[#483D5B] text-base">{{ auth_store.user?.lname }} {{ auth_store.user?.name }}</div>
+                <div class="text-[#B6A3D0] text-[14px]">{{ auth_store.user?.role }}</div>
               </div>
               <!-- <ChevronDownIcon class="ml-2 h-5 w-5 text-gray-400 xm:hidden" aria-hidden="true" /> -->
             </div>
@@ -156,10 +156,10 @@ import { ComboboxOptions, Combobox, ComboboxOption } from '@headlessui/vue'
 
 import { authStore } from '@/stores/user/auth'
 const auth_store = authStore()
-// import { useLanguageStore } from '@/stores/usefull/lang'
-// const lang_store = useLanguageStore()
+import { useLanguageStore } from '@/stores/usefull/lang'
+const lang_store = useLanguageStore()
 
-// const language = ref(localStorage.getItem('language') || 'ru')
+const language = ref(localStorage.getItem('language') || 'ru')
 // const languages = [
 //   {
 //     title: 'Uzbek',
@@ -254,8 +254,6 @@ watch(
 const searching = async (t) => {
   if (t?.length < 4) return false
   result.value = await logger_store.globalSearch(t)
-  console.log("result", result.value);
-  
 }
 </script>
 <style lang=""></style>

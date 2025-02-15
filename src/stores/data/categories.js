@@ -11,8 +11,6 @@ export const categoryStore = defineStore('categoryStore', () => {
   const notification = useNotification()
 
   const getCategories = async (params) => {
-    console.log(params);
-    
     const { data } = await api.get(base_url, {params})
     console.log("category", data);
     

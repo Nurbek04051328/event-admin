@@ -36,15 +36,11 @@ export const messageStore = defineStore('messageStore', () => {
   }
 
   const sendMessage = async (message) => {
-    console.log("1 message", message);
-    
     const { data } = await api.post(base_url, message)
-    console.log("2 qayt message", data);
     
     // chatMessages.data = [...chatMessages.data, data]
     // chatMessages.count += 1
-
-    await filterRoom({room:data?.room, message:data, notViewed:data?.notViewed})
+    // await filterRoom({room:data?.room, message:data, notViewed:data?.notViewed})
   }
 
 
@@ -58,9 +54,12 @@ export const messageStore = defineStore('messageStore', () => {
   const filterRoom = async ({ room, message, notViewed }) => {
     let findIndex = chatrooms.data.findIndex(r => r._id === room);
     if (findIndex === -1) {
+      console.log("if", findIndex, room, message, notViewed );
+      
       const {data} = await api.get(base_url, {params:{limit:1} });
       chatrooms.data = [...data.rooms, ...chatrooms.data];
     } else {
+      console.log("else", findIndex, room, message, notViewed );
       let findData = chatrooms.data[findIndex]
       findData = { ...findData, notViewed, lastMessage: message }
       chatrooms.data = chatrooms.data.filter(r => r._id !== room);

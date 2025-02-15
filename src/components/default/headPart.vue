@@ -21,11 +21,8 @@
             :class="route?.meta?.group == 'setting'? 'text-[16px] font-medium' : 'text-[22px] font-bold'"
           >
             {{ title || route.meta?.title || '' }}
-
           </h2>
-          <router-link
-            v-if="category"
-            :to="{ name: item.name }"
+          <!-- <router-link
             :class="[
               'group flex gap-x-3 rounded-2xl px-[16px] py-[14px] text-lg leading-6 font-medium',
               item.name == route.name || item.name == route.meta?.active
@@ -35,12 +32,11 @@
             ]"
           >
             <component :is="item?.meta.icon" class="h-6 w-6 shrink-0" aria-hidden="true" />
-            <!-- {{ item.name }} -->
             {{ $t('menu.' + item.name) }}
-          </router-link>
-          <!-- <div class="absolute right-[-28px] top-[-5px] bg-[#E9E7ED] px-2 rounded-2xl text-[12px]">
+          </router-link> -->
+          <div class="absolute right-[-28px] top-[-5px] bg-[#E9E7ED] px-2 rounded-2xl text-[12px]">
             {{ count }}
-          </div> -->
+          </div>
         </div>
         <button v-if="route?.meta?.toggle" @click="openModal" type="button" class="bg-[#E9DCFF] text-[#360B64] hover:bg-[#9E55EC] hover:text-white p-1 rounded-lg">
           <PlusIcon class="size-5 text-white-400" />

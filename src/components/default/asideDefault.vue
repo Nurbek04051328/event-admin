@@ -100,7 +100,7 @@
   </TransitionRoot>
 
   <div class="  lg:hidden min-w-[260px]">
-    <div class="flex grow flex-col overflow-y-auto bg-white px-6 pb-4 pt-[30px] h-full rounded-br-3xl rounded-tr-3xl">
+    <div class="flex grow flex-col overflow-y-auto bg-white px-6 pb-4 pt-[20px] h-full rounded-br-3xl rounded-tr-3xl">
       <div class="flex py-4 gap-4 shrink-0 items-center justify-start mb-[50px]">
         <img class="h-14 w-auto" src="../../assets/logo/logo.png" alt="Company Logo" />
         <span class="text-3xl text-[#483D5B] font-bold">Eventum</span>
@@ -113,14 +113,14 @@
                 <router-link
                   :to="{ name: item.name }"
                   :class="[
-                    'group flex gap-x-3 rounded-2xl px-[16px] py-[14px] text-lg leading-6 font-medium',
+                    'group flex items-center gap-x-3 rounded-2xl px-[16px] py-[10px] text-base leading-6 font-[500]',
                     item.name == route.name || item.name == route.meta?.active
                       ? 'bg-[#9E55EC] text-white'
                       : 'text-[#483D5B] hover:text-[#483D5B] hover:bg-[#F3EBFC]'
                     
                   ]"
                 >
-                  <component :is="item?.meta.icon" class="h-6 w-6 shrink-0" aria-hidden="true" />
+                  <component :is="item?.meta.icon" class="h-5 w-5 shrink-0" aria-hidden="true" />
                   <!-- {{ item.name }} -->
                   {{ $t('menu.' + item.name) }}
                 </router-link>
