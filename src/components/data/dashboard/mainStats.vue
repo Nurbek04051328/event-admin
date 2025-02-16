@@ -12,12 +12,22 @@
         <OrganizerStat :count="statistic_counts" />
       </div> -->
       <div class="overflow-hidden col-span-6 lg:col-span-12">
-        <EventStat :e="statistic_counts?.event" />
+        <DepositStat/>
       </div>
-      <div class="overflow-hidden col-span-6 md-max:col-span-12">
+      <div class="overflow-hidden col-span-6 lg:col-span-12">
+        <PurchaseStat/>
+      </div>
+      <div class="overflow-hidden col-span-4 md-max:col-span-12">
+        <UserStat :count="statistic_counts.user" />
+      </div>
+      <div class="overflow-hidden col-span-4 md-max:col-span-12">
         <OrganizerStat :count="statistic_counts.user" />
-        <UserStat :count="statistic_counts.user" class="mt-4" />
-        <KeyStat :count="statistic_counts.activationKeys" class="mt-4" />
+      </div>
+      <div class="overflow-hidden col-span-4 md-max:col-span-12">
+        <KeyStat :count="statistic_counts.activationKeys" />
+      </div>
+      <div class="overflow-hidden col-span-6 lg:col-span-12">
+        <EventStat :e="statistic_counts?.event" />
       </div>
       <div class="overflow-hidden col-span-12 lg:col-span-12">
         <EventChart />
@@ -52,6 +62,8 @@
   import UserChart from './stat/userChart.vue'
   import OrganizerChart from './stat/organizerChart.vue'
   import UserStat from './stat/userStat.vue'
+  import DepositStat from './stat/depositChart.vue'
+  import PurchaseStat from './stat/purchaseChart.vue'
 
 // Store import
   import { statisticStore } from '@/stores/data/statistic'

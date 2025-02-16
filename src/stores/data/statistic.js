@@ -26,9 +26,10 @@ export const statisticStore = defineStore('statisticStore', () => {
     return await api.get('/statistic/profit-statistic', { params })
   }
   const userStatistic = async (params) => {
-    
-    
     return await api.get('/statistic/user-statistic', { params })
+  }
+  const allDeposit = async (params) => {
+    return await api.get('/statistic/wallet-statistic', { params })
   }
 
   return {
@@ -36,6 +37,7 @@ export const statisticStore = defineStore('statisticStore', () => {
     getStatistics,
     ticketStatistic,
     profitStatistic,
-    userStatistic
+    userStatistic,
+    allDeposit
   }
 })
