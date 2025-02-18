@@ -1,5 +1,5 @@
 <template>
-  <div class=" pb-3 px-4  pt-3">
+  <div class="pb-3 px-4 pt-3">
     <div class="flex items-center justify-between">
       <div class="min-w-0 gap-3 flex items-center">
         <button v-if="backLink" @click="router.push({ name: backLink })">
@@ -34,7 +34,7 @@
             <component :is="item?.meta.icon" class="h-6 w-6 shrink-0" aria-hidden="true" />
             {{ $t('menu.' + item.name) }}
           </router-link> -->
-          <div class="absolute right-[-28px] top-[-5px] bg-[#E9E7ED] px-2 rounded-2xl text-[12px]">
+          <div class="absolute right-[-25px] top-[-7px] bg-[#E9E7ED] px-2 rounded-2xl text-[12px]">
             {{ count }}
           </div>
         </div>

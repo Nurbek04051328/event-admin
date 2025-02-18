@@ -26,18 +26,18 @@
           <div class="flex justify-between w-full gap-2">
             <default-input
               type="number"
-              class="w-full"
+              customClass="w-full"
               v-model="price.from"
               name="from"
-              :label="t('ticketPackage.dialog.quantity')"
+              :label="`Минимальная цена`"
               :error="v$.from?.$invalid && v$.from?.$dirty"
             />
             <default-input
               type="number"
-              class="w-full"
+              customClass="w-full"
               v-model="price.to"
               name="to"
-              :label="t('ticketPackage.dialog.quantity')"
+              :label="`Максимальная цена`"
               :error="v$.to?.$invalid && v$.to?.$dirty"
             />
           </div>

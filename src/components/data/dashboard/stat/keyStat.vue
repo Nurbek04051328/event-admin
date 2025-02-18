@@ -23,7 +23,7 @@
           <div class="text-[#483D5B] text-[20px] font-bold">{{ count?.activated }}</div>
         </div>
         
-        <div class="relative ml-[30px] py-2 flex items-center justify-between">
+        <div class="relative ml-[30px] pb-[40px] py-2 flex items-center justify-between">
           <span class="absolute left-[-25px] bg-[#CCBEF4] w-3 h-3 rounded-full"></span> 
           Не активированные
           <div class="text-[#483D5B] text-[20px] font-bold">{{ count?.notActivated }}</div>

@@ -22,7 +22,7 @@
       <paginate
         v-if="store.tarifsCount > limit"
         v-model="page"
-        :page-count="Math.round(store.tarifsCount / limit)"
+        :page-count="Math.ceil(store.tarifsCount / limit)"
         :page-range="3"
         :margin-pages="2"
         :click-handler="clickCallback"

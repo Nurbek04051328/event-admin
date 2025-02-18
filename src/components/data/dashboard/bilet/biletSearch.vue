@@ -1,5 +1,5 @@
 <template>
-  <div class="space-x-2 flex items-center">
+  <div class="gap-2 flex items-center">
     <defaultSelect
       v-model="search.status"
       name="status"
@@ -7,11 +7,11 @@
       option_title="value"
       placeholder="Выберите статус"
     />
-    <button class="edit-btn w-auto px-3 py-3  xm-max:px-[10px] xm-max:py-[8px]" @click="clear">
-      <XMarkIcon class="size-4" />
+    <button class="bg-[#FFECD9] text-[#FF7E00] hover:bg-[#FF7E00] hover:text-white rounded-lg w-auto p-2" @click="clear">
+      <XMarkIcon class="size-5" />
     </button>
-    <button class="success-btn w-auto px-3 py-3 xm-max:px-[10px] xm-max:py-[8px]" @click="findMe">
-      <MagnifyingGlassIcon class="size-4" />
+    <button class="bg-[#DCF7DD] text-[#119A21] hover:bg-[#119A21] hover:text-white rounded-lg w-auto p-2" @click="findMe">
+      <MagnifyingGlassIcon class="size-5" />
     </button>
   </div>
 </template>
@@ -57,7 +57,9 @@ const findMe = async () => {
 
 const clear = async() => {
   await store.getBilets({})
-  search.value = {}
+  search.value = {
+    status:''
+  }
 }
 </script>
 <style lang=""></style>

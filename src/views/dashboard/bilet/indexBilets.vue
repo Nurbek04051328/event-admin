@@ -1,29 +1,27 @@
 <template>
-  <headPart>
-    <div class="flex items-center xm-max:flex-col xm-max:items-end">
-      <div class="mr-2 md-max:text-[14px]">
-        <span class="text-lg text-gray-500 md-max:text-[14px]">Количество</span>:
-        {{ store.bilets.count }}
-      </div>
-      <div>
-        <BiletSearch />
-      </div>
+  <div class="h-screen flex flex-col overflow-hidden">
+    <headPart
+    :count="store.bilets.count"
+    >
+      <BiletSearch />
+    </headPart>
+    <div class="p-4 pb-0 w-full overflow-auto flex-1">
+      <BiletTable :page="page" :limit="limit" />
     </div>
-  </headPart>
-  <div class="p-4 flex-1 flex flex-col items-start overflow-hidden">
-    <BiletTable :page="page" :limit="limit" />
-    <paginate
-      v-if="store.bilets.count > limit"
-      v-model="page"
-      :page-count="Math.ceil(store.bilets.count / limit)"
-      :page-range="3"
-      :margin-pages="2"
-      :click-handler="clickCallback"
-      :prev-text="'Пред'"
-      :next-text="'След'"
-      :page-class="'page-item'"
-      :container-class="'pagination_next shadow'"
-    />
+    <div class="pl-4 py-2">
+      <paginate
+        v-if="store.bilets.count > limit"
+        v-model="page"
+        :page-count="Math.ceil(store.bilets.count / limit)"
+        :page-range="3"
+        :margin-pages="2"
+        :click-handler="clickCallback"
+        :prev-text="'Пред'"
+        :next-text="'След'"
+        :page-class="'page-item'"
+        :container-class="'pagination_next shadow'"
+      />
+    </div>
   </div>
 </template>
 <script setup>

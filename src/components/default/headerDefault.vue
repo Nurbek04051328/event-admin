@@ -50,7 +50,7 @@
                   as="template"
                   v-slot="{ active }"
                 >
-                  <li :class="['px-4 py-2', active && 'bg-indigo-600 text-white']">
+                  <li :class="['px-4 py-2', active && 'bg-[#9E55EC] text-white']">
                     <div
                       v-if="item.lname && item.name"
                       class="flex justify-between cursor-pointer"
@@ -102,7 +102,7 @@
           </option>
         </select> -->
         <!-- Profile dropdown -->
-        <Menu as="div" class="relative flex   bg-white  p-[12px] rounded-2xl min-w-[260px] h-full">
+        <Menu as="div" class="relative flex bg-white  p-[12px] rounded-2xl min-w-[260px] h-full">
           <MenuButton class="flex items-center">
             <div class="w-[38px] h-[38px] bg-[#F9F8FC] rounded-full flex items-center justify-center">
               <img

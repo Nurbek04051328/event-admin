@@ -26,7 +26,7 @@
       <div class="overflow-hidden col-span-4 md-max:col-span-12">
         <KeyStat :count="statistic_counts.activationKeys" />
       </div>
-      <div class="overflow-hidden col-span-6 lg:col-span-12">
+      <div class="overflow-hidden col-span-12 lg:col-span-12">
         <EventStat :e="statistic_counts?.event" />
       </div>
       <div class="overflow-hidden col-span-12 lg:col-span-12">

@@ -211,11 +211,7 @@ const { subcategories } = storeToRefs(subcategory_store)
 import { useRouter, useRoute  } from 'vue-router'
 const router = useRouter()
 const route = useRoute()
-const isManager = ref(false)
-const changeRole = async (role) => {
-  if (role == 'moderator') isManager.value = true
-  else isManager.value = false
-}
+
 
 
 const data = ref({
@@ -256,16 +252,16 @@ const formatAccessData = (organizer) => {
 
 
 
-const roles = [
-  {
-    _id: 'manager',
-    title: 'manager'
-  },
-  {
-    _id: 'moderator',
-    title: 'moderator'
-  }
-]
+// const roles = [
+//   {
+//     _id: 'manager',
+//     title: 'manager'
+//   },
+//   {
+//     _id: 'moderator',
+//     title: 'moderator'
+//   }
+// ]
 
 
 import { required, minLength } from '@vuelidate/validators'
@@ -300,10 +296,6 @@ const send = async () => {
     const payload = { ...data.value }
 
     // Agar role `manager` bo'lsa va categories yoki subcategories bo'sh bo'lsa, ularni o'chirib tashlaymiz
-    if (data.value.role === 'manager') {
-      if (!data.value.categories.length) delete payload.categories
-      if (!data.value.subcategories.length) delete payload.subcategories
-    }
     if (data.value.role === 'moderator') {
       if (!data.value.subcategories.length) delete payload.subcategories
     }
@@ -315,7 +307,6 @@ const send = async () => {
       event: formatAccessData(event.value),
     };
     payload.access = access;
-    console.log("payload", payload);
     
     await store.saveWorker(payload, t)
     router.push({ name: 'workers' })
@@ -386,20 +377,18 @@ onMounted(async () => {
   if(route.params.id) {
     const res = await store.getWorker(route.params.id)
     console.log("editres", res.data);
+    console.log("editres222222", res.data?.subcategories);
     
-    if (res.data.role == 'moderator') isManager.value = true
-    else isManager.value = false
     data.value = {
       ...res.data,
       _id: route.params.id,
       categories: res.data?.categories || [],
-      subcategories: res.data?.subcategories || []
+      subcategories: res.data?.subcategories,
     }
-    console.log("edirrrrr", data.value);
+    console.log("editres333333", data.value);
   
     // Access ma'lumotlarini qayta ishlash
     if (res.data.access) {
-      
       // Accesslarni belgilash
       organizer.value = {
         show: res.data.access?.organizer.includes('show') || false,
@@ -407,14 +396,12 @@ onMounted(async () => {
         metric: res.data.access?.organizer.includes('metric') || false,
         chat: res.data.access?.organizer.includes('chat') || false,
       };
-
       user.value = {
         show: res.data.access?.user.includes('show') || false,
         status: res.data.access?.user.includes('status') || false,
         metric: res.data.access?.user.includes('metric') || false,
         chat: res.data.access?.user.includes('chat') || false,
       };
-
       event.value = {
         show: res.data.access?.event.includes('show') || false,
         status: res.data.access?.event.includes('status') || false,

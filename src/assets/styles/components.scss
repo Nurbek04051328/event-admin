@@ -3,7 +3,7 @@
     @apply block w-full rounded-md border-0 py-1.5 px-2.5 bg-white text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-[#9E55EC] focus:outline-0 sm:text-sm sm:leading-6;
   }
   .select {
-    @apply mt-2 block w-full rounded-md border-0 py-2 pl-2 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-blue-600 sm:text-sm sm:leading-6;
+    @apply  block w-full rounded-md border-0 py-[6px] pl-2 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-[#9E55EC] sm:text-sm sm:leading-6;
   }
 
   // buttons

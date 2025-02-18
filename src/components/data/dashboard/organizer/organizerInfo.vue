@@ -10,7 +10,7 @@
       v-else 
       class="max-w-80 mt-4 m-auto rounded-[26px] block aspect-square object-cover w-72 md-max:w-64" 
       src="@/assets/logo/logo.png" alt=""/>
-    <div class="space-y-1 divide-y mt-1 px-4">
+    <div class="space-y-1 divide-y mt-12 px-4">
       <div class="py-2">
         <div class="text-xs text-gray-500 2xl:text-[12px]">Ф.И.О</div>
         <div class="text-base font-medium text-gray-800 2xl:text-[14px]">

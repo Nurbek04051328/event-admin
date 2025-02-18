@@ -7,8 +7,8 @@
             <th scope="col" class="th-first md-max:text-[13px]">№</th>
             <th scope="col" class="th md-max:text-[13px]">{{ $t('ticketPackage.table.title') }}</th>
             <!-- <th scope="col" class="th">{{ $t('ticketPackage.table.text') }}</th> -->
-            <th scope="col" class="th md-max:text-[13px]">{{ $t('ticketPackage.table.quantity') }}</th>
-            <th scope="col" class="th md-max:text-[13px]">{{ $t('ticketPackage.table.commissionRate') }}</th>
+            <th scope="col" class="th md-max:text-[13px]">Цены (сум)</th>
+            <th scope="col" class="th md-max:text-[13px]">{{ $t('ticketPackage.table.commissionRate') }} (%)</th>
             <th scope="col" class="th">Мероприятие</th>
             <th scope="col" class="th">Билети</th>
             <th scope="col" class="th md-max:text-[13px]">{{ $t('ticketPackage.table.language') }}</th>
@@ -27,12 +27,12 @@
             </td>
             <td class="td md-max:text-[13px]">{{ item?.title }}</td>
             <!-- <td class="td">{{ item?.description }}</td> -->
-            <td class="td md-max:text-[13px]">{{ item?.quantity }}</td>
-            <td class="td md-max:text-[13px]">{{ item?.commissionRate }}</td>
+            <td class="td md-max:text-[13px] font-bold">{{ item?.price?.from?.toLocaleString() }} - {{ item?.price?.to?.toLocaleString() }}</td>
+            <td class="td md-max:text-[13px]">{{ item?.commissionRate }} %</td>
             <td class="whitespace-nowrap px-3 py-5 text-sm text-gray-500">
-              <span class="text-green-500">{{ item?.event?.approve }}</span> /
-              <span class="text-red-500">{{ item?.event?.denied }}</span> - 
-              <span>{{ item?.event?.count }}</span>
+              <span class="text-green-500">{{ item?.event?.approve || 0 }}</span> /
+              <span class="text-red-500">{{ item?.event?.denied || 0 }}</span> - 
+              <span>{{ item?.event?.count || 0}}</span>
             </td>
             <td class="whitespace-nowrap px-3 py-5 text-sm text-gray-500"> 
               <span class="text-green-500">{{ item?.tickets?.generated }}</span> /
@@ -40,13 +40,13 @@
               <span>{{ item?.tickets?.available }}</span>
             </td>
             <td class="td">
-              <div class="flex items-start gap-2">
+              <div class="flex items-center gap-2">
                 <button
                   @click="edit(item._id, lang.slug)"
                   :class="`${
                     item?.translates?.some((tr) => tr.language == lang.slug)
-                      ? 'success-btn'
-                      : 'edit-btn'
+                      ? 'bg-[#DCF7DD] text-[#119A21] hover:bg-[#119A21] hover:text-white rounded-lg flex items-center justify-center size-9 lg:size-8'
+                      : 'bg-[#FFECD9] text-[#FF7E00] hover:bg-[#FF7E00] hover:text-white rounded-lg flex items-center justify-center size-9 lg:size-8'
                   } w-auto p-2 px-3 md-max:p-1 md-max:px-2`"
                   v-for="lang of options?.languages"
                   :key="lang._id"
@@ -57,10 +57,10 @@
             </td>
   
             <td class="td">{{ convertDate(item.createdAt, 'full') }}</td>
-            <td class="td flex">
+            <td class="td-last flex">
               <button
                 type="button"
-                class="danger-btn size-9 ml-auto md-max:size-7"
+                class="bg-[#FFE6E6] text-[#FF5558] hover:bg-[#FF5558] hover:text-white rounded-lg flex items-center justify-center size-9 lg:size-8"
                 @click="confirmRemove(item._id)"
               >
                 <TrashIcon class="size-4" />

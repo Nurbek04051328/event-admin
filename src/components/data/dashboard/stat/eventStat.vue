@@ -14,12 +14,13 @@
     </div>
 
     <div
-      class=" text-[#360B64]  py-4 text-base items-start xs-max:w-full xs:text-[10px]"
+      class="grid grid-cols-12 gap-x-6 text-[#360B64]  py-4 text-base items-start xs-max:w-full xs:text-[10px]"
     > 
       <div
-        v-for="(val, key) of filteredItems"
+        v-for="(val, key, index) of filteredItems"
         :key="key"
-        class="flex justify-between items-center py-2 border-b border-gray-200"
+        class="col-span-4 flex justify-between items-center py-2 border-gray-200"
+        :class="{ 'border-b': index < filteredItems.length - 3 }"
       >   
   
       <!-- {{ key }} -->
