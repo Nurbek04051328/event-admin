@@ -5,7 +5,7 @@
         <div v-for="ticket of store.workerLoggers?.data" :key="ticket._id" class="p-2 flex justify-between items-center">
           <div>
             поменял права на
-            <span class="font-bold text-[#9E55EC]">
+            <span class="font-bold text-[#483D5B] mr-2">
               {{ ticket.event?.title }} 
             </span>
             <span :class="ticket.status == 0 ? 'warning-tag' : ticket.status == 1 ? 'success-tag' : 'danger-tag'">

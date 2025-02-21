@@ -7,6 +7,7 @@
       Организаторы
       <!-- <span class="absolute bg-[#FAF4FE] py-[2px] px-[15px] rounded-2xl text-[15px] text-[#B6A3D0] top-[-10px]">{{ count?.organizerSuccess + count?.organizerPending + count?.organizerDenied || 0 }}</span> -->
     </div>
+    <!-- <pre>{{ count }}</pre> -->
     <div class="flex justify-between">
       <div class="text-[#817295] text-[18px] mt-[10px] w-[50%]">
         <div class="flex items-center gap-4">
@@ -18,17 +19,17 @@
             <div class="text-[#817295] text-[13px] font-medium">Общее количество</div>
           </div>
         </div>
-        <div class="relative ml-[30px] border-b-[1px] py-2 border-[#F2F0F5] flex items-center justify-between">
+        <div class="relative text-[18px] ml-[30px] border-b-[1px] py-2 border-[#F2F0F5] flex items-center justify-between">
           <span class="absolute left-[-25px]  bg-[#05CD99] w-3 h-3 rounded-full"></span> 
           Успешно проверено 
           <div class="text-[#483D5B] text-[20px] font-bold">{{ count?.organizerSuccess }}</div>
         </div>
-        <div class="relative ml-[30px] border-b-[1px] py-2 border-[#F2F0F5] flex items-center justify-between">
+        <div class="relative text-[18px] ml-[30px] border-b-[1px] py-2 border-[#F2F0F5] flex items-center justify-between">
           <span class="absolute left-[-25px] bg-[#9E55EC] w-3 h-3 rounded-full"></span> 
           В ожидании 
           <div class="text-[#483D5B] text-[20px] font-bold">{{ count?.organizerPending }}</div>
         </div>
-        <div class="relative ml-[30px] py-2 flex items-center justify-between">
+        <div class="relative text-[18px] ml-[30px] py-2 flex items-center justify-between">
           <span class="absolute left-[-25px] bg-[#FF5558] w-3 h-3 rounded-full"></span> 
           Не одобрено 
           <div class="text-[#483D5B] text-[20px] font-bold">{{ count?.organizerDenied }}</div>
@@ -56,8 +57,8 @@
 
   const options = computed(() => ({
     chart: {
-      // id: 'vuechart-organizers',
-      type: 'donut',
+      id: 'vuechart-organizers',
+      type: 'pie',
       height: 300,
     },
     labels: ['Успешно проверено', 'В ожидании', 'Проверку не прошли'],

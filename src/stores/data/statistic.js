@@ -9,14 +9,8 @@ export const statisticStore = defineStore('statisticStore', () => {
   const statistic_counts = ref({})
 
   const getStatistics = async (params) => {
-    console.log(params)
-
     const { data } = await api.get(base_url, { params })
-
     statistic_counts.value = { ...data }
-
-    console.log('statistic', statistic_counts.value)
-
   }
 
   const ticketStatistic = async (params) => {

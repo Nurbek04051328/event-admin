@@ -30,6 +30,7 @@
       xaxis: {
         categories: stat.value.denied?.map((v, k) => k + 1)
       },
+      colors: ['#9E55EC', '#FFCE20', '#05CD99', '#FF5558' ],
       legend: {
         position: 'top',
         horizontalAlign: 'left'
@@ -40,15 +41,14 @@
 
   const getData = async () => {
     const { data } = await store.ticketStatistic()
-    console.log(data)
     stat.value = { ...data }
     let days = data?.denied?.map((v, k) => k + 1)
     options.value.xaxis = {
       categories: [...days]
     }
     series.value.push({
-      name: 'Отказано',
-      data: stat.value.denied || []
+      name: 'Использовано',
+      data: stat.value.used || []
     })
     series.value.push({
       name: 'В процессе',
@@ -59,8 +59,8 @@
       data: stat.value.purchase || []
     })
     series.value.push({
-      name: 'Использовано',
-      data: stat.value.used || []
+      name: 'Отказано',
+      data: stat.value.denied || []
     })
   }
 

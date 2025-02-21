@@ -45,7 +45,6 @@ const series = ref([])
 
 const getData = async () => {
   const { data } = await store.allDeposit()
-  console.log("datajon",data)
   // stat.value = [ ...data ]
 
   // let days = data?.map((v, k) => k + 1) || []

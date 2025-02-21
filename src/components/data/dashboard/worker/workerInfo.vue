@@ -28,10 +28,10 @@
       </div>
       <div class="py-2" v-if="user?.categories?.length > 0">
         <div class="text-xs text-gray-500 2xl:text-[12px]"> Категория</div>
-        <div class="mt-2 flex gap-2">
+        <div class="mt-2 flex gap-2 overflow-auto">
           <div class="text-base font-medium text-gray-800" v-for="e in user?.categories" :key="e._id">
             <div 
-              class="inline-flex items-center rounded-md px-2 py-1 text-xs font-medium ring-1 ring-inset text-blue-700 ring-blue-700/10' 2xl:text-[12px]"
+              class="inline-flex items-center text-nowrap rounded-md px-2 py-1 mb-1 text-xs font-medium ring-1 ring-inset text-[#9E55EC] ring-[#9E55EC] 2xl:text-[12px]"
             >
               {{ e.title }}
           </div>
@@ -40,17 +40,17 @@
       </div>
       <div class="py-2" v-if="user?.subcategories?.length > 0">
         <div class="text-xs text-gray-500 2xl:text-[12px]"> Подкатегория</div>
-        <div class="mt-2 flex gap-2">
-          <div class="text-base font-medium text-gray-800" v-for="e in user?.subcategoriescategories" :key="e._id">
+        <div class="mt-2 flex gap-2 overflow-auto">
+          <div class="text-base font-medium text-gray-800" v-for="e in user?.subcategories" :key="e._id">
             <div 
-              class="inline-flex items-center rounded-md px-2 py-1 text-xs font-medium ring-1 ring-inset text-blue-700 ring-blue-700/10' 2xl:text-[12px]"
+              class="inline-flex items-center text-nowrap rounded-md px-2 py-1 mb-1 text-xs font-medium ring-1 ring-inset text-[#9E55EC] ring-[#9E55EC] 2xl:text-[12px]"
             >
               {{ e.title }}
           </div>
         </div>
         </div>
       </div>
-      <div class="py-2 flex justify-between">
+      <!-- <div class="py-2 flex justify-between">
         <div>
           <div class="text-xs text-gray-500 2xl:text-[12px]">Кол-во Организеер</div>
           <div class="text-base font-medium text-gray-800 2xl:text-[14px]">
@@ -63,12 +63,12 @@
             {{ user?.checkedEvent }}
           </div>
         </div>
-      </div>
+      </div> -->
       <div class="py-2 flex justify-between">
         <div>
-          <div class="text-xs text-gray-500 2xl:text-[12px]">Кол-во Собщение</div>
+          <div class="text-xs text-gray-500 2xl:text-[12px]">Дата регистрации</div>
           <div class="text-base font-medium text-gray-800 2xl:text-[14px]">
-            {{ user?.messages }}
+            {{ convertDateShort(user?.createdAt, 'full') }}
           </div>
         </div>
         <div>
@@ -76,12 +76,6 @@
           <div class="text-base font-medium text-gray-800 2xl:text-[14px]">
             {{ user?.lastVisit? convertDateShort(user?.lastVisit, 'full') : '-' }}
           </div>
-        </div>
-      </div>
-      <div class="py-2">
-        <div class="text-xs text-gray-500 2xl:text-[12px]">Дата регистрации</div>
-        <div class="text-base font-medium text-gray-800 2xl:text-[14px]">
-          {{ convertDateShort(user?.createdAt, 'full') }}
         </div>
       </div>
       <div class="py-2">

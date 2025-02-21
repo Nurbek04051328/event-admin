@@ -12,8 +12,6 @@ export const categoryStore = defineStore('categoryStore', () => {
 
   const getCategories = async (params) => {
     const { data } = await api.get(base_url, {params})
-    console.log("category", data);
-    
     categories.value = data?.eventCategories;
     categoryCount.value = data?.count;
   }

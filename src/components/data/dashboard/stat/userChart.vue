@@ -17,7 +17,7 @@ const options = computed(() => {
     chart: {
       id: 'vuechart-user',
       type: 'bar',
-      height: 400,
+      height: 300,
       // stacked: true,
     },
     xaxis: {
@@ -25,10 +25,12 @@ const options = computed(() => {
     },
     plotOptions: {
       bar: {
-        horizontal: false
+        horizontal: false,
+        borderRadius: 4,
+        borderRadiusApplication: 'end'
       }
     },
-    
+    colors: ['#892EEB'],
     legend: {
       position: 'top',
       horizontalAlign: 'left'
@@ -39,7 +41,6 @@ const series = ref([])
 
 const getData = async () => {
   const { data } = await store.userStatistic({role:'user'})
-  console.log("user",data)
   stat.value = [ ...data ]
 
   let days = data?.map((v, k) => k + 1) || []

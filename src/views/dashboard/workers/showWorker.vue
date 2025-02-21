@@ -69,12 +69,16 @@ const worker = ref({})
 
 const links = [
   {
+    name: 'worker-statistic',
+    title: 'Статистика'
+  },
+  {
     name: 'worker-logger',
     title: 'История'
   },
   {
     name: 'worker-history',
-    title: ' История мероприятие'
+    title: ' История мероприятий'
   }
 ]
 

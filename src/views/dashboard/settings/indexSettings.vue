@@ -1,6 +1,6 @@
 <template>
-  <div class="flex p-4 gap-1 md-max:block">
-    <nav class="flex grid-col w-60 h-auto flex-col md-max:w-full bg-white rounded-3xl px-4 py-2" aria-label="Sidebar">
+  <div class="flex flex-1 overflow-auto p-4 gap-1 md-max:block">
+    <nav class="flex  grid-col w-60 h-auto flex-col md-max:w-full bg-white rounded-3xl p-4" aria-label="Sidebar">
       <ul role="list" class="-mx-2 space-y-2 md-max:flex md-max:w-full md-max:items-center md-max:space-y-0  ">
         <li v-for="item in settingMenu" :key="item.name">
           <router-link

@@ -51,7 +51,7 @@
         <OrganizerEvents :list="allEvents" class="bg-white/100 rounded-[26px] shadow-sm" />
       </div>
       <!-- Tabs and router -->
-      <div class="col-span-3 bg-white/100 rounded-[26px] shadow-sm px-3 flex flex-col h-full overflow-auto 2xl:col-span-12 2xl:h-[670px] md:col-span-12 xm-max:col-span-6">
+      <div class="col-span-3 bg-white/100 rounded-[26px] shadow-sm px-3 flex flex-col h-full overflow-hidden 2xl:col-span-12 2xl:h-[670px] md:col-span-12 xm-max:col-span-6">
         <TabList :list="links" />
         <router-view />
       </div>

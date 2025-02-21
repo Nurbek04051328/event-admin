@@ -5,7 +5,7 @@
       <div class="overflow-auto">
         <div v-for="log of store.logger.data" :key="log._id" class="p-2 flex justify-between items-center" >
           <div> поменял права <span>{{ log?.user?.role == 'organizer'? 'Организатора' : "Пользователя"}}</span> 
-            <span class="font-bold ml-2">
+            <span class="font-bold text-[#483D5B] ml-2">
               {{ log?.user?.lname }}
               {{ log?.user?.name }}
             </span>

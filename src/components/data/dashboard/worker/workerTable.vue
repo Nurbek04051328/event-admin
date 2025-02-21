@@ -23,7 +23,7 @@
             :key="item?._id"
             class=" hover:bg-gray-100 cursor-pointer"
             :class="index % 2 === 0 ? undefined : 'bg-gray-50'"
-            @click="$router.push({ name: 'worker-logger', params: { id: item?._id } })"
+            @click="$router.push({ name: 'worker-statistic', params: { id: item?._id } })"
           >
             <td class="td-first">{{ (page - 1) * limit + index + 1 }}</td>
             <td class="whitespace-nowrap text-sm">{{ item?.lname }} {{ item?.name }}</td>

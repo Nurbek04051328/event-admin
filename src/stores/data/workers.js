@@ -13,10 +13,7 @@ export const workerStore = defineStore('workerStore', () => {
   const notification = useNotification()
 
   const getWorkers = async (params) => {
-    console.log("params", params);
-    
     const { data } = await api.get(base_url, {params})
-    console.log('data', data)
     workers.value = data?.employees
     workersCount.value = data?.count
   }
@@ -59,6 +56,12 @@ export const workerStore = defineStore('workerStore', () => {
   const getWorker = async (id) => {
     return await api.get(`${base_url}/${id}`)
   }
+  const getWorkerEventStat = async (params) => {
+    return await api.get(`${base_url}/event-statistic`, {params})
+  }
+  const getWorkerUserStat = async (params) => {
+    return await api.get(`${base_url}/organizer-statistic`, {params})
+  }
   const getInfoWorker = async (id) => {
     return await api.get(`${base_url}/info/${id}`)
   }
@@ -75,6 +78,8 @@ export const workerStore = defineStore('workerStore', () => {
     saveWorker,
     getWorker,
     getInfoWorker,
-    changeStatusWorker
+    changeStatusWorker,
+    getWorkerEventStat,
+    getWorkerUserStat
   }
 })

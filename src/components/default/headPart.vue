@@ -3,10 +3,14 @@
     <div class="flex items-center justify-between">
       <div class="min-w-0 gap-3 flex items-center">
         <button v-if="backLink" @click="router.push({ name: backLink })">
-          <ArrowLongLeftIcon class="size-5 mr-2" />
+          <ChevronLeftIcon 
+            class="w-[30px] h-[30px] rounded-full bg-[#F5F0FF]  flex justify-center items-center hover:bg-[#9E55EC] hover:text-white" 
+          />
         </button>
         <button v-if="route?.meta?.back" @click="router.back()">
-          <ArrowLongLeftIcon class="size-5 mr-1" />
+          <ChevronLeftIcon 
+            class="w-[30px] h-[30px] rounded-full bg-[#F5F0FF] flex justify-center items-center hover:bg-[#9E55EC] hover:text-white" 
+          />
         </button>
         <!-- <nav aria-label="breadcrumb">
           <ol class="breadcrumb">
@@ -68,7 +72,7 @@ defineProps({
 })
 
 import { PlusIcon } from '@heroicons/vue/24/outline'
-import { ArrowLongLeftIcon } from '@heroicons/vue/20/solid'
+import { ChevronLeftIcon } from '@heroicons/vue/20/solid'
 
 import { useRoute, useRouter } from 'vue-router'
 const route = useRoute()

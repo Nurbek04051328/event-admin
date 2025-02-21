@@ -26,17 +26,19 @@
       chart: {
         id: 'vuechart-profit',
         type: 'bar',
-        height: 400,
+        height: 300,
         // stacked: true,
       },
-      dataLabels: {
-        formatter: (val) => {
-          return val / 1000 + 'K'
-        }
-      },
+      // dataLabels: {
+      //   formatter: (val) => {
+      //     return val
+      //   }
+      // },
       plotOptions: {
         bar: {
-          horizontal: false
+          horizontal: false,
+          borderRadius: 4,
+          borderRadiusApplication: 'end'
         }
       },
       xaxis: {
@@ -45,10 +47,11 @@
       yaxis: {
         labels: {
           formatter: (val) => {
-            return val / 1000 + 'K'
+            return `${val.toLocaleString()} сум`
           }
         }
       },
+      colors: ['#892EEB'],
       legend: {
         position: 'top',
         horizontalAlign: 'left'

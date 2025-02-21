@@ -1,7 +1,7 @@
 <template>
   <div class="px-[25px] py-[18px] rounded-[26px] shadow-sm bg-white">
     <div
-      @click="$router.push({ name: 'activationkeys'})"
+      @click="$router.push({ name: 'users'})"
       class="text-[#483D5B] font-bold text-[20px] relative cursor-pointer"
     >
     Пользователи
@@ -17,13 +17,13 @@
             <div class="text-[#817295] text-[13px] font-medium">Общее количество</div>
           </div>
         </div>
-        <div class="relative mt-[15px] ml-[30px] py-2 border-b-[1px] border-[#F2F0F5]  flex items-center justify-between">
+        <div class="relative mt-[15px] text-[18px] ml-[30px] py-2 border-b-[1px] border-[#F2F0F5]  flex items-center justify-between">
           <span class="absolute left-[-25px] bg-[#05CD99] w-3 h-3 rounded-full"></span> 
           Активированные 
           <div class="text-[#483D5B] text-[20px] font-bold">{{ count?.activated }}</div>
         </div>
         
-        <div class="relative ml-[30px] pb-[40px] py-2 flex items-center justify-between">
+        <div class="relative text-[18px] ml-[30px] pb-[40px] py-2 flex items-center justify-between">
           <span class="absolute left-[-25px] bg-[#FF5558] w-3 h-3 rounded-full"></span> 
           Не активированные
           <div class="text-[#483D5B] text-[20px] font-bold">{{ count?.notActivated }}</div>
@@ -51,7 +51,7 @@ import { computed, watchEffect , defineProps } from 'vue'
 
   const options = computed(() => ({
     chart: {
-      // id: 'vuechart-keys',
+      id: 'vuechart-users',
       type: 'pie',
       height: 300,
     },
@@ -67,7 +67,7 @@ import { computed, watchEffect , defineProps } from 'vue'
 
   watchEffect(() => {
     if (series.value.every((val) => val !== undefined)) {
-      ApexCharts.exec('vuechart-keys', 'updateSeries', series.value);
+      ApexCharts.exec('vuechart-users', 'updateSeries', series.value);
     }
   });
 

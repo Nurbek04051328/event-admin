@@ -20,7 +20,7 @@
         v-for="(val, key, index) of filteredItems"
         :key="key"
         class="col-span-4 flex justify-between items-center py-2 border-gray-200"
-        :class="{ 'border-b': index < filteredItems.length - 3 }"
+        :class="{ 'border-b': index < Object.entries(filteredItems).length - 3 }"
       >   
   
       <!-- {{ key }} -->

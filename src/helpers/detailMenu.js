@@ -59,10 +59,18 @@ export const detailMenu = [
     name: 'workerDetail',
     component: () => import('@/views/dashboard/workers/showWorker.vue'),
     meta: {
-      title: 'Страница сотрдуника',
+      title: 'Страница сотрудника',
       active: 'workers',
     },
     children: [
+      {
+        path: 'statistic',
+        name: 'worker-statistic',
+        component: () => import('@/components/data/dashboard/worker/workerStat.vue'),
+        meta: {
+          active: 'workers',
+        }
+      },
       {
         path: 'history',
         name: 'worker-history',
