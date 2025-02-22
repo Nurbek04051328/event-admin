@@ -10,46 +10,46 @@
       v-else 
       class="max-w-80 mt-4 m-auto rounded-[26px] block aspect-square object-cover w-72 md-max:w-64" 
       src="@/assets/logo/logo.png" alt=""/>
-    <div class="space-y-1 divide-y mt-12 px-4">
-      <div class="py-2">
+    <div class="space-y-1 divide-y mt-4 px-4">
+      <div class="py-1">
         <div class="text-xs text-gray-500 2xl:text-[12px]">Ф.И.О</div>
         <div class="text-base font-medium text-gray-800 2xl:text-[14px]">
           {{ user?.lname }}
           {{ user?.name }}
         </div>
       </div>
-      <div class="py-2">
+      <div class="py-1">
         <div class="text-xs text-gray-500 2xl:text-[12px]">Имя пользователя</div>
         <div class="text-base font-medium text-gray-800 2xl:text-[14px]">
           {{ user?.nickName }}
         </div>
       </div>
-      <div class="py-2">
+      <div class="py-1">
         <div class="text-xs text-gray-500 2xl:text-[12px]">Номер телефон</div>
         <div class="text-base font-medium text-gray-800 2xl:text-[14px]">
           {{ user?.phone }}
         </div>
       </div>
-      <div class="py-2">
+      <div class="py-1">
         <div class="text-xs text-gray-500 2xl:text-[12px]">Дата регистрации</div>
         <div class="text-base font-medium text-gray-800 2xl:text-[14px]">
           {{ convertDateShort(user?.createdAt, 'full') }}
         </div>
       </div>
       <div class="flex">
-        <div class="py-2 flex-1 text-center">
+        <div class="py-1 flex-1 text-center">
           <div class="text-xs text-gray-500 2xl:text-[12px]">Подписчики</div>
           <div class="text-base font-medium text-gray-800 2xl:text-[14px]">
             {{ follow?.followers || 0 }}
           </div>
         </div>
-        <div class="py-2 flex-1 text-center ">
+        <div class="py-1 flex-1 text-center ">
           <div class="text-xs text-gray-500 2xl:text-[12px]">Подписан</div>
           <div class="text-base font-medium text-gray-800 2xl:text-[14px]">
             {{ follow?.followings || 0 }}
           </div>
         </div>
-        <div class="py-2 flex-1 text-center ">
+        <div class="py-1 flex-1 text-center ">
           <div class="text-xs text-gray-500 2xl:text-[12px]">Посты</div>
           <div class="text-base font-medium text-gray-800 2xl:text-[14px]">
             {{ follow?.posts || 0 }}

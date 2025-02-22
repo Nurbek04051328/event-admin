@@ -1,6 +1,17 @@
 <template>
-  <div class="text-sm flex-1 h-[100%]">
-    <div v-if="store.logger.data?.length > 0" class=" flex flex-col overflow-hidden">
+  <div class="text-sm flex-1 h-[100%] p-4">
+    <div class="flex items-center justify-between">
+      <div class="flex items-center text-[18px] font-semibold">
+        <div class="mr-3 w-[40px] h-[40px] bg-[#F3EBFC] rounded-full flex items-center justify-center">
+          <img src="@/assets/images/wallet.svg" alt="Wallet svg">
+        </div>
+        Кошелек
+      </div>
+      <div>
+        <span class="mr-2">{{ walletBalance.toLocaleString() }}</span>   UZS
+      </div>
+    </div>
+    <!-- <div v-if="store.logger.data?.length > 0" class=" flex flex-col overflow-hidden">
       <div v-for="ticket of store.logger.data" :key="ticket._id" class="p-2 xm-max:text-[11px] overflow-auto flex-1">
         <span class="font-bold text-[#645A77]"> {{ ticket?.user?.lname }} {{ ticket?.user?.name }} </span>
         купил {{ ticket.status }}
@@ -42,40 +53,44 @@
     </div>
     <div v-else class="text-center mt-14">
       Пока нет история билетов
-    </div>
+    </div> -->
   </div>
 </template>
 <script setup>
 import { ref, onMounted } from 'vue'
 import { useRoute } from 'vue-router'
-import paginate from 'vuejs-paginate-next'
+// import paginate from 'vuejs-paginate-next'
 const route = useRoute()
 const id = ref('')
-const limit = ref(30)
-const page = ref(1)
+const walletBalance = ref({})
+const walletLogs = ref([])
+// const limit = ref(30)
+// const page = ref(1)
 
-import { loggerStore } from '@/stores/user/logger'
+import { usersStore } from '@/stores/data/users'
 import { convertDateShort } from '@/helpers/func'
-const store = loggerStore()
+const store = usersStore()
 // import { convertDateShort } from '@/helpers/func'
 
-const clickCallback = async (value) => {
-  page.value = value
-  await getLoggers()
-}
+// const clickCallback = async (value) => {
+//   page.value = value
+//   await getLoggers()
+// }
 
-const getLoggers = async () => {
+const getWallet = async () => {
   if (!id.value) return false
-  await store.ticketLogger({
-    limit: limit.value,
-    page: page.value,
-    organizer: id.value
+  const res = await store.getUserWalletBalans({
+    _id: id.value
   })
+  walletBalance.value = res.findWallet?.balance || 0 
+  walletLogs.value = res.logs 
+  console.log("dataWallet", res);
+  
 }
 
 onMounted(() => {
   id.value = route.params.id
-  getLoggers()
+  getWallet()
 })
 </script>
 <style lang=""></style>

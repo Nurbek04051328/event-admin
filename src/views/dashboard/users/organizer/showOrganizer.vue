@@ -119,6 +119,10 @@ const handleSend = (value) => {
 
 const links = [
   {
+    name: 'organizer-wallet',
+    title: 'Транзакция'
+  },
+  {
     name: 'organizer-logger',
     title: 'История'
   },

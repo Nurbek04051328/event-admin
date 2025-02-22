@@ -15,6 +15,7 @@ export const eventStore = defineStore('eventStore', () => {
   const getEvents = async (params) => {
 
     const { data } = await api.get(base_url, { params })
+    console.log("eventdata", data);
     
     
     events.value = data?.events

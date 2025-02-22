@@ -17,6 +17,14 @@ export const detailMenu = [
         }
       },
       {
+        path: 'wallet',
+        name: 'organizer-wallet',
+        component: () => import('@/components/data/dashboard/wallet/usersWallet.vue'),
+        meta:{
+          active: 'organizers',
+        }
+      },
+      {
         path: 'logger',
         name: 'organizer-logger',
         component: () => import('@/components/data/dashboard/logger/userLogger.vue'),
@@ -125,6 +133,14 @@ export const detailMenu = [
           active: 'users',
         },
       },
+      // {
+      //   path: 'wallet',
+      //   name: 'user-wallet',
+      //   component: () => import('@/components/data/dashboard/wallet/usersWallet.vue'),
+      //   meta: {
+      //     active: 'users',
+      //   },
+      // },
       {
         path: 'logger',
         name: 'user-logger',

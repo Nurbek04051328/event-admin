@@ -38,12 +38,18 @@ export const usersStore = defineStore('usersStore', () => {
     const { data } = await api.put('/user/user-access', payload)
     return data
   }
+  const getUserWalletBalans = async (payload) => {
+    console.log(payload)
+    const { data } = await api.get('/api/wallet/user-wallet', payload)
+    return data
+  }
 
   return {
     user,
     getUsers,
     getUser,
     userAccess,
-    getuserEvents
+    getuserEvents,
+    getUserWalletBalans
   }
 })
