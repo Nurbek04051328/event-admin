@@ -21,7 +21,7 @@
             v-for="(person, index) in store.organizer.data"
             :key="person._id"
             class="cursor-pointer hover:bg-gray-100"
-            @click="$router.push({ name: 'organizer-logger', params: { id: person._id } })"
+            @click="$router.push({ name: 'organizer-wallet', params: { id: person._id } })"
             :class="index % 2 === 0 ? undefined : 'bg-gray-50'"
           >
             <td class="td-first">

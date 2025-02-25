@@ -58,12 +58,12 @@
       </div>
       <div class="py-2 space-y-1">
         <div class="text-xs text-gray-500 2xl:text-[12px]">Паспорт файлы</div>
-        <div class="text-base font-medium text-gray-800 2xl:text-[14px]">
+        <div class="text-base font-medium text-[#9E55EC] 2xl:text-[14px]">
           <button
             @click="download(pass)"
             v-for="(pass, index) of user?.passport"
             :key="index"
-            class="add-btn mr-2"
+            class="bg-[#F5F1FB] p-[10px] rounded-full mr-2 text-[#9E55EC]"
           >
             <DocumentIcon class="size-4" />
           </button>

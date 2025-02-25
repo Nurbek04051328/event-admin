@@ -24,21 +24,7 @@
       </span>
     </div>
   </headPart>
-  <!-- <div class="p-4 flex-1 overflow-auto h-[100%] ">
-    <div class="grid grid-cols-12 gap-4 h-[100%] ">
-      <div class="col-span-3 order-first h-[100%] overflow-auto 2xl:col-span-4 ">
-        <OrganizerInfo :user="org.user" :follow="org.follow" />
-      </div>
-      <div class="col-span-6 flex flex-col space-y-2 h-[100%] overflow-auto 2xl:col-span-8">
-        <OrganizerStatistic :org="org" :allEvents="allEvents" />
-        <OrganizerEvents :list="allEvents" />
-      </div>
-      <div class="col-span-3 flex flex-col h-[100%] overflow-auto 2xl:col-span-12 ">
-        <TabList :list="links" />
-        <router-view />
-      </div>
-    </div>
-  </div> -->
+
   <div class="p-4 flex-1 overflow-auto h-full">
     <div class="grid grid-cols-12 gap-4 h-full 2xl:h-auto md:h-full xm-max:grid-cols-6">
       <!-- Sidebar -->
@@ -51,7 +37,7 @@
         <OrganizerEvents :list="allEvents" class="bg-white/100 rounded-[26px] shadow-sm" />
       </div>
       <!-- Tabs and router -->
-      <div class="col-span-3 bg-white/100 rounded-[26px] shadow-sm px-3 flex flex-col h-full overflow-hidden 2xl:col-span-12 2xl:h-[670px] md:col-span-12 xm-max:col-span-6">
+      <div class="col-span-3 bg-white/100 rounded-[26px] shadow-sm px-2 flex flex-col h-full overflow-hidden 2xl:col-span-12 2xl:h-[670px] md:col-span-12 xm-max:col-span-6">
         <TabList :list="links" />
         <router-view />
       </div>
@@ -168,7 +154,6 @@ const accessStatus = async () => {
 // Message page
 const ChangeId = async () => {
   const data = await message_store.getOneChatroom(id.value)
-  console.log("datadata", data);
   close()
   router.push({ name: 'showChat', params: { id: data?._id } });
 }
@@ -177,8 +162,6 @@ const getData = async () => {
   if (!id.value) return false
   org.value = await store.getorganizer(id.value)
   allEvents.value = await store.getorganizerEvents(id.value)
-  console.log("a",org.value)
-  console.log("b",allEvents.value)
 }
 
 onMounted(() => {

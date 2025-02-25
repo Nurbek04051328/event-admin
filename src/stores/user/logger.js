@@ -25,6 +25,8 @@ export const loggerStore = defineStore('loggerStore', () => {
   //   const notification = useNotification()
 
   const userLogger = async (params) => {
+    console.log("params", params);
+    
     const { data } = await api.get(`${base_url}/user-logger`, { params })
     logger.data = [...(data?.userLoggers || [])]
     logger.count = data?.count
