@@ -28,6 +28,24 @@ export const actions = [
   }
 ]
 
+export const eventActions = [
+  {
+    _id: 0,
+    label: 'Проверка',
+    class: 'warning-tag'
+  },
+  {
+    _id: 1,
+    label: 'Одобрен',
+    class: 'success-tag'
+  },
+  {
+    _id: 2,
+    label: 'Отказан',
+    class: 'danger-tag'
+  }
+]
+
 export const walletActions = [
   {
     mode: 'refill',

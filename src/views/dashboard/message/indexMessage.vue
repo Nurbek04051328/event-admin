@@ -1,5 +1,5 @@
 <template>
-  <div class="grid grid-cols-12 overflow-hidden h-full gap-5 p-[20px]">
+  <div class="grid grid-cols-12 overflow-hidden h-full gap-5 px-[20px]">
     <div class="col-span-3 h-full">
       <div class=" flex items-center justify-between">
         <h2 class=" text-[#645A77] text-[22px] font-bold">
@@ -11,7 +11,7 @@
           <PlusIcon class="w-[25px] h-[30px]"/>
         </button>
       </div>
-      <div class="mt-6 flex flex-col gap-[26px] overflow-hidden h-full">
+      <div class="mt-6 flex flex-col gap-[20px] h-full">
         <TabList :list="links" @tab-changed="changeTab" :active="currentTab || 'all'"/>
         <div class="relative w-full rounded-[50px] bg-white p-[16px]">
           <!-- <label for="search-field" class=""> {{ $t('header.search') }}</label> -->
@@ -37,9 +37,9 @@
       <div class="flex-1 overflow-hidden flex flex-col space-y-4 h-full" >
         <router-view v-if="route.params.id" />
         <div v-else class="flex items-center justify-center h-full">
-          <div  class="text-center">
+          <div  class="text-center text-[#483D5B]">
             <div>
-              <ChatBubbleLeftRightIcon/>
+              <ChatBubbleLeftRightIcon class="text-[#9E55EC]"/>
             </div>
             Выберите чат
           </div>
@@ -55,16 +55,27 @@
             v-model="message.text"
             @keydown="handleKeydown"
             :autosize="{ minRows: 2, maxRows: 5 }"
-            class="block w-full rounded-md border-0 py-3 pl-3 pr-12 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6"
+            class="block w-full rounded-[50px] border-0 py-3 pl-6 pr-12 text-[#483D5B] ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-[#9E55EC] sm:text-sm sm:leading-6"
             placeholder="Напишите текст сообщение"
             aria-describedby="price-currency"
           />
+          <!-- Smaylik Button -->
           <button
-            class="absolute inset-y-3 right-1 flex items-center p-3 bg-blue-600 text-white cursor-pointer rounded-lg"
+            class="absolute inset-y-3 right-12 flex items-center justify-center p-3 cursor-pointer rounded-full"
+            @click="toggleEmojiPicker"
+          >
+            <img src="@/assets/images/smileIcon.svg" alt="">
+          </button>
+          <button
+            class="absolute inset-y-3 right-3 flex items-center justify-center p-3 bg-[#9E55EC] text-white cursor-pointer rounded-full"
             @click="send()"
           >
-            <PaperAirplaneIcon class="size-5" />
+            <PaperAirplaneIcon class="size-5 -rotate-45" />
           </button>
+          <!-- Smaylik paneli -->
+          <div v-if="showEmojiPicker" class="absolute bottom-14 right-12 bg-white border shadow-md rounded-md p-2">
+            <Picker @emoji-select="addEmoji" />
+          </div>
         </div>
       </div>
     </div>
@@ -116,6 +127,7 @@ import TabList from '@/components/data/dashboard/message/tabButtons.vue'
 import AllChatroom from '@/components/data/dashboard/message/chatRoom.vue'
 import MessageDialog from '@/components/data/dashboard/message/messageDialog.vue/'
 import { messageStore } from '@/stores/data/message'
+import { Picker, EmojiIndex } from "emoji-mart-vue-fast/src";
 const message_store = messageStore()
 import { useRoute } from 'vue-router';
 import { useNotification } from '@/stores/usefull/notification'
@@ -131,6 +143,18 @@ const links = [
   { name: 'OrganizerChatroom', title: 'Организаторы', role: 'organizer' },
   { name: 'UserChatroom', title: 'Пользователи', role: 'user' },
 ]
+
+let showEmojiPicker = ref(false);
+const addEmoji = (emoji) => {
+  message.value.tex += emoji.native;
+};
+
+const toggleEmojiPicker = () => {
+  showEmojiPicker.value = !showEmojiPicker.value;
+};
+
+
+
 
 
 let currentTab = ref("all"); 

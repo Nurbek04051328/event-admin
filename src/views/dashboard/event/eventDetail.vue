@@ -1,10 +1,10 @@
 <template>
     <headPart backLink="event">
-      <div class="flex space-x-2 overflow-auto" >
+      <div class="flex overflow-auto" >
         <button 
           v-if="eventInfo?.event?.status == 0"
           type="button"   
-          class="flex w-full items-center justify-center rounded-md border text-green-600 border-green-400 px-5 py-2 font-medium hover:bg-green-300 hover:text-white focus:outline-none focus:ring-2 focus:ring-green-600 focus:ring-offset-2 focus:ring-offset-gray-50 text-sm xm-max:text-xs"
+          class="flex w-full items-center justify-center rounded-md border bg-green-50 text-[#05CD99] border-[#05CD99] px-4 py-[6px] font-medium  focus:outline-none focus:ring-2 focus:ring-green-600 focus:ring-offset-2 focus:ring-offset-gray-50 text-sm xm-max:text-xs"
           @click="confirmAccess()"
         >
           {{ $t('event.detailPage.access') }}
@@ -12,7 +12,7 @@
         <button 
           v-if="eventInfo?.event?.status == 0"
           type="button" 
-          class="flex w-full items-center justify-center rounded-md border border-transparent bg-red-50 px-5 py-2 text-base font-medium text-red-700 hover:bg-red-100 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 focus:ring-offset-gray-50 xm-max:text-xs"
+          class="flex w-full items-center justify-center rounded-md border border-transparent bg-red-50 px-4 py-[6px] text-base font-medium text-[#FF5558] border-[#FF5558] focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 focus:ring-offset-gray-50 xm-max:text-xs"
           @click="confirmRefusel()"
         >
           Отказать
@@ -20,7 +20,7 @@
         <button 
           v-if="eventInfo?.event?.status !== 0"
           type="button" 
-          class="flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-50 px-5 py-2 text-base font-medium text-indigo-700 hover:bg-indigo-100 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-50 xm-max:text-xs"
+          class="flex w-full items-center justify-center rounded-md border border-transparent bg-[#F3EBFC] px-4 py-[6px] text-base font-medium text-[#9E55EC]  focus:outline-none focus:ring-2  focus:ring-offset-2 focus:ring-offset-gray-50 xm-max:text-xs"
           @click="confirmBack()"
         >
           {{ $t('event.detailPage.danger') }}
@@ -28,19 +28,22 @@
       </div>
     </headPart>
     <!-- <img src="" alt=""> -->
-    <div class="p-4 flex-1 overflow-auto h-full">
+    <div class="px-4 pb-4 flex-1 overflow-hidden h-full">
       <div class="grid grid-cols-12 gap-4 h-full 2xl:h-auto md:h-full xm-max:grid-cols-6">
-        <div class="col-span-3 order-first h-full overflow-auto 2xl:col-span-4 2xl:h-[670px] md-max:col-span-6 xm-max:col-span-6">
+        <!-- event INFO -->
+        <div class="col-span-9 bg-white/100 rounded-[26px] shadow-sm order-first h-full overflow-auto 2xl:col-span-4 2xl:h-[670px] md-max:col-span-6 xm-max:col-span-6">
           <EventInfo :event="eventInfo.event"  />
         </div>
-        <div class="col-span-6 flex flex-col space-y-2 h-full overflow-auto 2xl:col-span-8 2xl:h-[670px] md-max:col-span-6 xm-max:col-span-6">
+        <div class="col-span-3 flex flex-col space-y-3 h-full overflow-auto 2xl:col-span-8 2xl:h-[670px] md-max:col-span-6 xm-max:col-span-6">
           <EventStatistic :org="eventInfo.ticket" />
-          <TabList :list="links" />
-          <router-view />
+          <div class="bg-white/100 rounded-[26px] shadow-sm px-2 flex flex-col h-full overflow-hidden">
+            <TabList :list="links" />
+            <router-view />
+          </div>
         </div>
-        <div class="col-span-3 flex flex-col h-full overflow-auto 2xl:col-span-12 2xl:h-[670px] md:col-span-12 xm-max:col-span-6">
+        <!-- <div class="col-span-3 flex flex-col h-full overflow-auto 2xl:col-span-12 2xl:h-[670px] md:col-span-12 xm-max:col-span-6">
           <EventComment />
-        </div>
+        </div> -->
       </div>
     </div>
     <accessDialog 
@@ -78,7 +81,7 @@ import "leaflet/dist/leaflet.css";
 
 import EventInfo from '@/components/data/dashboard/event/eventInfo.vue'
 import EventStatistic from '@/components/data/dashboard/event/eventStatistic.vue'
-import EventComment from '@/components/data/dashboard/event/eventComment.vue'
+// import EventComment from '@/components/data/dashboard/event/eventComment.vue'
 import TabList from '@/components/default/tabList.vue'
 
 
@@ -168,6 +171,10 @@ const links = [
   {
     name: 'eventTicket',
     title: 'Билеты'
+  },
+  {
+    name: 'eventComment',
+    title: 'Комментарии'
   }
 ]
 

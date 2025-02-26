@@ -7,7 +7,7 @@
             <th scope="col" class="th-first">№</th>
             <th scope="col" class="th">{{ $t('event.table.title') }}</th>
             <th scope="col" class="th">{{ $t('event.table.category') }}</th>
-            <th scope="col" class="th">{{ $t('event.table.subcategory') }}</th>
+            <!-- <th scope="col" class="th">{{ $t('event.table.subcategory') }}</th> -->
             <th scope="col" class="th">{{ $t('event.table.date') }}</th>
             <th scope="col" class="th">{{ $t('event.table.organizator') }}</th>
             <th scope="col" class="th">{{ $t('event.table.check') }}</th>
@@ -43,15 +43,15 @@
               </div>
             </td>
             <td class="whitespace-nowrap px-3 py-5 text-sm text-gray-500">
-              <div v-for="cat in item.categories" :key="cat._id">
-                {{ cat.title }}
+              <div>
+                {{ item?.fCategory?.title }}
               </div>
             </td>
-            <td class="whitespace-nowrap px-3 py-5 text-sm text-gray-500">
+            <!-- <td class="whitespace-nowrap px-3 py-5 text-sm text-gray-500">
               <div v-for="subcat in item.subcategories" :key="subcat._id">
                 {{ subcat.title }}
               </div>
-            </td>
+            </td> -->
             <td class="whitespace-nowrap px-3 py-5 text-sm text-gray-500">
               {{ convertDateShort(item?.date?.from) }} {{ convertDateShort(item?.time, 'hour') }}
             </td>

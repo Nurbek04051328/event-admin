@@ -1,169 +1,126 @@
 <template>
   <div class="flex-1 flex flex-col overflow-auto h-[100%]">
-    <div class="text-base font-medium border-b border-gray-200 mb-3 pb-2 flex justify-between items-center px-5">
+    <div class="text-base text-[#483D5B] font-medium border-b border-gray-200 mb-3 py-2 flex justify-between items-center pr-6 pl-4">
       <span>Список мероприятие</span>
       <span class="text-sm">Количество: {{ list.count }}</span>
     </div>
-    <div class="flex-1 flex flex-col overflow-auto h-[100%]">
-      <div v-if="list?.events?.length > 0" class="space-y-2 flex-1 ">
+    <div class="flex-1 flex flex-col overflow-auto h-[100%] px-3">
+      <div v-if="list?.events?.length > 0" class="space-y-2 flex-1">
         <div
           v-for="item in list?.events"
           :key="item._id"
-          class="group text-sm relative grid grid-cols-6 rounded-lg border border-gray-200 bg-white md-max:flex md-max:flex-col "
+          class="group text-sm flex-start relative rounded-lg border border-gray-200 p-2"
         >
-          <div 
-            class="bg-gray-200 sm:aspect-none group-hover:opacity-75 xl:col-span-2 md-max:bg-white md-max:flex md-max:justify-center md-max:pt-1">
-            <router-link :to="{ name: 'eventDetail', params: { id: item._id } }">
-              <img
-                :src="`${url}/${item?.cover?.at(0)}`"
-                class="object-cover object-center w-full aspect-square md-max:w-auto md-max:h-[150px]"
-              />
-            </router-link>
-          </div>
-          <div class="col-span-5 flex flex-col gap-2 p-4 xl:col-span-4 ">
-            <div class="flex">
-              <h3 class="text-sm flex-1 text-gray-900 font-bold xm-max:text-[13px]">
-                <router-link :to="{ name: 'eventDetail', params: { id: item._id } }">
-                  {{ item.title }}
-                </router-link>
-              </h3>
-              <div class="space-x-2">
+        <!-- top -->
+          <div class="w-full grid grid-cols-6 gap-4">
+            <div 
+              class="h-full flex float-start items-center sm:aspect-none  col-span-2 md-max:bg-white md-max:flex md-max:justify-center md-max:pt-1">
+              <router-link :to="{ name: 'eventDetail', params: { id: item._id } }">
+                <img
+                  :src="`${url}/${item?.cover?.at(0)}`"
+                  class="object-cover object-center w-full rounded-lg"
+                />
+              </router-link>
+            </div>
+            <div class="w-full col-span-4">
+              <router-link :to="{ name: 'eventDetail', params: { id: item._id } }" class="flex justify-between items-center">
+                <div class="text-[#483D5B] text-[16px] font-semibold">{{ item.title }}</div>
+                <!-- <div>
+                  <ChevronRightIcon class="w-[20px] h-[20px] text-[#645A77]"/>
+                </div> -->
+              </router-link>
+              <div class="flex items-center gap-[3px] mt-[20px] mb-[5px]">
+                <MapPinIcon class="w-[20px] h-[20px] text-[#645A77]"/>
                 <a
                   :href="`https://www.google.com/maps?q=${item.location?.latitude},${
                     item.location?.longitude
                   }`"
                   target="_blank"
-                  class="text-xs underline text-blue-400"
-                  >В карте</a
-                >
-                <span class="warning-tag xm-max:text-[11px]" v-if="item.status == 0">Не проверено</span>
-                <span class="success-tag xm-max:text-[11px]" v-if="item.status == 1">Одобрено</span>
-                <span class="danger-tag xm-max:text-[11px]" v-if="item.status == 2">Отказано</span>
+                  class="text-[14px] text-[#483D5B] flex hover:text-black"
+                  > {{ item.location?.address }}
+                  <img src="@/assets/images/mapicon.svg" alt="map icon" class="ml-[2px]">
+                </a>
               </div>
-            </div>
-            <div class="flex flex-wrap items-end w-full gap-4 2xl:grid 2xl:grid-cols-12">
-              <div class="2xl:col-span-4 md-max:col-span-6">
-                <div class="text-xs ">Категория</div>
-                <div class="space-x-2 font-bold text-sm xm-max:text-[13px]">
-                  <span v-for="cat of item.categories" :key="cat._id">
-                    {{ cat.title }}
-                  </span>
+              <div class="text-[14px] text-[#483D5B] flex gap-[3px]">
+                <CalendarDaysIcon class="w-[20px] h-[20px] text-[#645A77]"/>
+                {{ convertDateShort(item.eventDates[0].date) }}
+              </div>
+              <div class="mt-[10px] text-[14px] text-[#483D5B] flex justify-between border-b border-[#ECEBEF] pb-[17px]">
+                <div>
+                  <span class="bg-[#F5F1FB] text-[#9E55EC] rounded-[10px] p-[3px] mr-[6px]">Тип пакета</span>
+                  {{ item.ticketPackage?.title}}
                 </div>
+                <div class="text-[#322B3F] text-[18px] font-bold">{{ item.entryFee?.toLocaleString() || 0 }} сум</div>
               </div>
-              <div class="2xl:col-span-4 md-max:col-span-6">
-                <div class="text-xs">Подкатегория</div>
-                <div class="space-x-2 font-bold text-sm xm-max:text-[13px]">
-                  <span v-for="cat of item.subcategories" :key="cat._id">
-                    {{ cat.title }}
-                  </span>
+              <div class="flex justify-between">
+                <div>
+                  Разрешения
+                  <div class="flex gap-2 mt-1">
+                    <userSettings :item="item" />
+                  </div>
                 </div>
-              </div>
-              <div class="2xl:col-span-4 md-max:col-span-12">
-                <div class="text-xs">Тип пакет</div>
-                <div class="space-x-2 font-bold text-sm xm-max:text-[13px]">
-                  {{ item.ticketPackage?.title }} / {{ item.ticketPackage?.quantity }} /
-                  {{ item.ticketPackage?.comissionRate || 0 }} %
+                <div class="ml-[-15px]">
+                  Категории
+                  <div class="flex gap-2 mt-1">
+                    <!-- <pre>{{ item }}</pre> -->
+                    <span class="text-[#9E55EC] bg-[#F9F8FC] p-[5px] rounded-[60px]">
+                      {{ item?.fCategory?.title }}
+                    </span>
+                  </div>
                 </div>
-              </div>
-              <div class="ml-auto 2xl:col-span-6 2xl:text-center 2xl:m-auto">
-                <div class="text-xs">Стат.билетов</div>
-                <div class="space-x-2 font-bold text-sm flex">
-                  <div class="group/text relative">
-                    <div
-                      class="invisible group-hover/text:visible absolute bottom-full whitespace-nowrap text-right right-0 bg-gray-100 p-1 rounded-sm text-xs"
-                    >
-                      В обработке
-                    </div>
-                    <span class="warning-tag xm-max:text-[11px]">
-                      {{ item.counts?.ticketPending }}
-                    </span>
-                  </div>
-  
-                  <div class="group/text relative">
-                    <div
-                      class="invisible group-hover/text:visible absolute bottom-full whitespace-nowrap text-right right-0 bg-gray-100 p-1 rounded-sm text-xs"
-                    >
-                      Куплен
-                    </div>
-                    <span class="success-tag xm-max:text-[11px]">
-                      {{ item.counts?.ticketPurchase }}
-                    </span>
-                  </div>
-                  <div class="group/text relative">
-                    <div
-                      class="invisible group-hover/text:visible absolute bottom-full whitespace-nowrap text-right right-0 bg-gray-100 p-1 rounded-sm text-xs"
-                    >
-                    Использован
-                    </div>
-                    <span class="primary-tag xm-max:text-[11px]">
-                      {{ item.counts?.ticketUsed }}
-                    </span>
-                  </div>
-                  <div class="group/text relative">
-                    <div
-                      class="invisible group-hover/text:visible absolute bottom-full whitespace-nowrap text-right right-0 bg-gray-100 p-1 rounded-sm text-xs"
-                    >
-                      Отказан
-                    </div>
-                    <span class="danger-tag xm-max:text-[11px]">
-                      {{ item.counts?.ticketDenied }}
-                    </span>
-                  </div>
+                <div>
                   
                 </div>
               </div>
-              <div class="2xl:col-span-6 2xl:text-center 2xl:m-auto">
-                <div class="text-xs">Стат. возвратов</div>
-                <div class="space-x-2 font-bold text-sm flex">
-                  <div class="group/text relative">
-                    <div
-                      class="invisible group-hover/text:visible absolute bottom-full whitespace-nowrap text-right right-0 bg-gray-100 p-1 rounded-sm text-xs"
-                    >
-                      Средства успешно возвращены
-                    </div>
-                    <span class="primary-tag xm-max:text-[11px]">
-                      {{ item.counts?.refoundTrue }}
-                    </span>
-                  </div>
-  
-                  <div class="group/text relative">
-                    <div
-                      class="invisible group-hover/text:visible absolute bottom-full whitespace-nowrap text-right right-0 bg-gray-100 p-1 rounded-sm text-xs"
-                    >
-                      Средства в обработке
-                    </div>
-                    <span class="warning-tag xm-max:text-[11px]">
-                      {{ item.counts?.refoundFalse }}
-                    </span>
-                  </div>
-                </div>
-              </div>
             </div>
-            <!-- <p class="text-sm text-gray-500">{{ product.description }}</p> -->
-            <div class="flex gap-4 mt-auto xl:grid xl:grid-cols-6">
-              <div v-if="item.entryFee > 0" class="flex items-center gap-2 font-medium text-gray-900 xl:col-span-3">
-                <BanknotesIcon class="size-4" />
-                {{ item.entryFee?.toLocaleString() || 'Bepul' }} сум
-              </div>
-              <div v-else class="flex items-center gap-2 font-medium text-gray-900 xl:col-span-3 xm-max:text-[13px]">
-                <BanknotesIcon class="size-4" />
-                Бесплатно
-              </div>
-              <div
-                v-if="item.location?.address"
-                class="flex items-center gap-2 font-medium text-gray-900 xl:col-span-3 xl:text-[12px]"
-              >
-                <MapIcon class="size-4" />
-                {{ item.location?.address }}
-              </div>
-              <div v-if="item.when" class="flex items-center gap-2 font-medium text-gray-900 xl:col-span-2 md-max:col-span-4 xm-max:text-[13px]">
-                <CalendarDaysIcon class="size-4" />
-                {{ convertDateShort(item.when) }}
-              </div>
-  
-              <div class="flex gap-2 ml-auto xl:col-span-4">
-                <userSettings :item="item" />
-              </div>
+          </div>
+          <!-- bottom -->
+          <div class="w-full grid grid-cols-6 mt-[10px] text-[#483D5B] text-[14px] gap-3">
+            <div class="w-full col-span-4">
+              Статистика билета
+              <ul class="flex items-center gap-4 bg-[#F9F8FC] rounded-[30px] px-[7px] py-[4px]  mr-8 mt-[5px]">
+                <li
+                  class="text-[#EEC900]"
+                >
+                  <span class="inline-block rounded-full w-[7px] h-[7px] mr-1 bg-[#EEC900]"></span>
+                  {{ item.counts?.ticketPending }} В обработке
+                </li>
+                <li
+                  class="text-[#9E55EC]"
+                >
+                  <span class="inline-block rounded-full w-[7px] h-[7px] mr-1 bg-[#9E55EC]"></span>
+                  {{ item.counts?.ticketUsed }} Использован
+                </li>
+                <li
+                  class="text-[#05CD99]"
+                >
+                  <span class="inline-block rounded-full w-[7px] h-[7px] mr-1 bg-[#05CD99]"></span>
+                  {{ item.counts?.ticketPurchase }} Куплен
+                </li>
+                <li
+                  class="text-[#FF5558]"
+                >
+                  <span class="inline-block rounded-full w-[7px] h-[7px] mr-1 bg-[#FF5558]"></span>
+                  {{ item.counts?.ticketDenied }} Отказан
+                </li>
+              </ul>
+            </div>
+            <div class="w-full col-span-2">
+              Статистика возвратов
+              <ul class="flex items-center gap-4 rounded-[30px] bg-[#F9F8FC] px-[7px] py-[4px] mt-[5px]">
+                <li
+                  class="text-[#EEC900]"
+                >
+                  <span class="inline-block rounded-full w-[7px] h-[7px] mr-1 bg-[#EEC900]" ></span>
+                  В обработке
+                </li>
+                <li
+                  class="text-[#05CD99]"
+                >
+                  <span class="inline-block rounded-full w-[7px] h-[7px] mr-1 bg-[#05CD99]" ></span>
+                  Возвращены
+                </li>
+              </ul>
             </div>
           </div>
         </div>
@@ -177,7 +134,7 @@
   </div>
 </template>
 <script setup>
-import { BanknotesIcon, CalendarDaysIcon, MapIcon } from '@heroicons/vue/20/solid'
+import { ChevronRightIcon, MapPinIcon, CalendarDaysIcon } from '@heroicons/vue/24/outline'
 defineProps(['list'])
 const url = import.meta.env.VITE_URL
 import userSettings from './userSettings.vue'

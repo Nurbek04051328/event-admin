@@ -58,14 +58,14 @@
       </div>
       <div class="py-2 space-y-1">
         <div class="text-xs text-gray-500 2xl:text-[12px]">Паспорт файлы</div>
-        <div class="text-base font-medium text-[#9E55EC] 2xl:text-[14px]">
+        <div class="text-base font-medium ">
           <button
             @click="download(pass)"
             v-for="(pass, index) of user?.passport"
             :key="index"
             class="bg-[#F5F1FB] p-[10px] rounded-full mr-2 text-[#9E55EC]"
           >
-            <DocumentIcon class="size-4" />
+            <DocumentCheckIcon class="size-4" />
           </button>
         </div>
       </div>
@@ -74,7 +74,7 @@
 </template>
 <script setup>
 import { convertDateShort } from '@/helpers/func'
-import { DocumentIcon } from '@heroicons/vue/20/solid'
+import { DocumentCheckIcon } from '@heroicons/vue/24/outline'
 const url = import.meta.env.VITE_URL
 defineProps(['user', 'follow'])
 

@@ -1,15 +1,21 @@
 <template>
-  <div class="divide-y-2 divide-gray-100 text-sm overflow-auto flex-1">
-    <div v-if="store.logger.data?.length > 0">
+  <div v-if="store.logger.data?.length > 0" class="flex flex-col overflow-hidden">
+    <div class="w-full overflow-y-auto flex-1 text-[13px]">
       <div v-for="ticket of store.logger.data" :key="ticket._id" class="p-2">
-        <span class="font-bold"> {{ ticket?.user?.lname }} {{ ticket?.user?.name }} </span>
+        <span class="font-bold text-[#645A77]"> {{ ticket?.user?.lname }} {{ ticket?.user?.name }} </span>
         купил
-        <span>
+        <span 
+          class="mr-2"
+          :class="ticket.status == 0 ? 'bg-[#FFECD9] text-[#FF7E00] rounded-lg px-2':
+            ticket.status == 1 ? 'bg-[#DCF7DD] text-[#119A21] rounded-lg px-2': 
+            ticket.status == 2 ? 'bg-[#FFE6E6] text-[#FF5558] rounded-lg px-2': 'bg-[#F5F1FB] text-[#9E55EC] rounded-lg px-2'
+            "
+        >
           {{ ticket.status == 0 ? 'Ожидание транзакции' : '' }}
           {{ ticket.status == 1 ? 'Успешно приобретен' : '' }}
           {{ ticket.status == 2 ? 'Возврат/Отменен' : '' }}
-        </span>
-        <span class="font-bold text-blue-600">
+        </span> на
+        <span class="font-bold text-[#9E55EC]">
           {{ ticket.event?.title }}
         </span>
         <span v-if="ticket.entryFee == 0" class="font-bold"> бесплатно </span>
@@ -22,7 +28,8 @@
           {{ convertDateShort(ticket.updatedAt, 'full') }}
         </span>
       </div>
-
+    </div>
+    <div class="pb-2">
       <paginate
         v-if="store.logger.count > limit"
         v-model="page"
@@ -36,8 +43,8 @@
         :container-class="'pagination_next shadow'"
       />
     </div>
-    <div v-else class="text-center mt-14">Пока нет история билетов</div>
   </div>
+  <div v-else class="text-center mt-14">Пока нет история билетов</div>
 </template>
 <script setup>
 import { ref, onMounted } from 'vue'

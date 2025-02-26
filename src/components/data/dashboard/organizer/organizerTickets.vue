@@ -1,5 +1,5 @@
 <template>
-    <div v-if="store.logger.data?.length > 0" class=" flex flex-col overflow-hidden">
+    <div v-if="store.logger.data?.length > 0" class="flex flex-col overflow-hidden">
       <div class="w-full overflow-y-auto flex-1 text-[13px]" >
         <div v-for="ticket of store.logger.data" :key="ticket._id" class="p-2 xm-max:text-[11px]">
           <span class="font-bold text-[#645A77]"> {{ ticket?.user?.lname }} {{ ticket?.user?.name }} </span>
@@ -18,9 +18,9 @@
           </span> на
           <span class="font-bold text-[#9E55EC]">
             {{ ticket.event?.title }}
-          </span> по сумме
+          </span> 
           <span v-if="ticket.entryFee == 0" class="font-bold"> бесплатно </span>
-          <span v-if="ticket.entryFee > 0" class="font-bold"> {{ ticket.entryFee }} сум </span>
+          <span v-if="ticket.entryFee > 0" class="font-bold">по сумме {{ ticket.entryFee }} сум </span>
     
           в
           <span class="font-bold">

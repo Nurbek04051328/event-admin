@@ -1,8 +1,8 @@
 <template>
   <div
-    class="group/text relative ring-1 ring-gray-200 size-8 flex items-center justify-center rounded-full"
+    class="group/text relative ring-1 ring-gray-200 size-7 flex items-center justify-center rounded-full"
     :class="{
-      'bg-green-600 ring-green-600': item?.privateSettings.allowPhotoSharing
+      'bg-[#9E55EC] ring-[#9E55EC]': item?.privateSettings.allowPhotoSharing
     }"
   >
     <div
@@ -14,14 +14,14 @@
       class="size-4 xm-max:size-3"
       :class="{
         'text-white': item?.privateSettings.allowPhotoSharing,
-        'text-gray-400': !item?.privateSettings.allowPhotoSharing
+        'text-[#9E55EC] ring-[#9E55EC]': !item?.privateSettings.allowPhotoSharing
       }"
     />
   </div>
   <div
-    class="group/text relative ring-1 ring-gray-200 size-8 flex items-center justify-center rounded-full"
+    class="group/text relative ring-1 ring-gray-200 size-7 flex items-center justify-center rounded-full"
     :class="{
-      'bg-green-600 ring-green-600': item?.privateSettings.showParticipants
+      'bg-[#9E55EC] ring-[#9E55EC]': item?.privateSettings.showParticipants
     }"
   >
     <div
@@ -33,14 +33,14 @@
       class="size-4 xm-max:size-3"
       :class="{
         'text-white': item?.privateSettings.showParticipants,
-        'text-gray-400': !item?.privateSettings.showParticipants
+        'text-[#9E55EC] ring-[#9E55EC]': !item?.privateSettings.showParticipants
       }"
     />
   </div>
   <div
-    class="group/text relative ring-1 ring-gray-200 size-8 flex items-center justify-center rounded-full"
+    class="group/text relative ring-1 ring-gray-200 size-7 flex items-center justify-center rounded-full"
     :class="{
-      'bg-green-600 ring-green-600': item?.privateSettings.locationVisibility
+      'bg-[#9E55EC] ring-[#9E55EC]': item?.privateSettings.locationVisibility
     }"
   >
     <div
@@ -52,14 +52,14 @@
       class="size-4 xm-max:size-3"
       :class="{
         'text-white': item?.privateSettings.locationVisibility,
-        'text-gray-400': !item?.privateSettings.locationVisibility
+        'text-[#9E55EC] ring-[#9E55EC]': !item?.privateSettings.locationVisibility
       }"
     />
   </div>
   <div
-    class="group/text relative ring-1 ring-gray-200 size-8 flex items-center justify-center rounded-full"
+    class="group/text relative ring-1 ring-gray-200 size-7 flex items-center justify-center rounded-full"
     :class="{
-      'bg-green-600 ring-green-600': item?.interactionOptions.adult
+      'bg-[#9E55EC] ring-[#9E55EC]': item?.interactionOptions.adult
     }"
   >
     <div
@@ -71,14 +71,14 @@
       class="size-4 xm-max:size-3"
       :class="{
         'text-white': item?.interactionOptions.adult,
-        'text-gray-400': !item?.interactionOptions.adult
+        'text-[#9E55EC] ring-[#9E55EC]': !item?.interactionOptions.adult
       }"
     />
   </div>
   <div
-    class="group/text relative ring-1 ring-gray-200 size-8 flex items-center justify-center rounded-full"
+    class="group/text relative ring-1 ring-gray-200 size-7 flex items-center justify-center rounded-full"
     :class="{
-      'bg-green-600 ring-green-600': item?.interactionOptions.allowShare
+      'bg-[#9E55EC] ring-[#9E55EC]': item?.interactionOptions.allowShare
     }"
   >
     <div
@@ -90,14 +90,14 @@
       class="size-4 xm-max:size-3"
       :class="{
         'text-white': item?.interactionOptions.allowShare,
-        'text-gray-400': !item?.interactionOptions.allowShare
+        'text-[#9E55EC] ring-[#9E55EC]': !item?.interactionOptions.allowShare
       }"
     />
   </div>
   <div
-    class="group/text relative ring-1 ring-gray-200 size-8 flex items-center justify-center rounded-full"
+    class="group/text relative ring-1 ring-gray-200 size-7 flex items-center justify-center rounded-full"
     :class="{
-      'bg-green-600 ring-green-600': item?.interactionOptions.allowSave
+      'bg-[#9E55EC] ring-[#9E55EC]': item?.interactionOptions.allowSave
     }"
   >
     <div
@@ -109,7 +109,7 @@
       class="size-4 xm-max:size-3"
       :class="{
         'text-white': item?.interactionOptions.allowSave,
-        'text-gray-400': !item?.interactionOptions.allowSave
+        'text-[#9E55EC] ring-[#9E55EC]': !item?.interactionOptions.allowSave
       }"
     />
   </div>

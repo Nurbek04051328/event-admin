@@ -59,6 +59,15 @@ export const detailMenu = [
           group: 'main',
           active: 'event',
         }
+      },
+      {
+        path: 'comment',
+        name: 'eventComment',
+        component: () => import('@/components/data/dashboard/event/eventComment.vue'),
+        meta: {
+          group: 'main',
+          active: 'event',
+        }
       }
     ]
   },
@@ -128,19 +137,19 @@ export const detailMenu = [
       {
         path: 'tickets',
         name: 'user-tickets',
-        component: () => import('@/components/data/dashboard/organizer/organizerTickets.vue'),
+        component: () => import('@/components/data/dashboard/users/userTickets.vue'),
         meta: {
           active: 'users',
         },
       },
-      // {
-      //   path: 'wallet',
-      //   name: 'user-wallet',
-      //   component: () => import('@/components/data/dashboard/wallet/usersWallet.vue'),
-      //   meta: {
-      //     active: 'users',
-      //   },
-      // },
+      {
+        path: 'wallet',
+        name: 'user-wallet',
+        component: () => import('@/components/data/dashboard/wallet/usersWallet.vue'),
+        meta:{
+          active: 'organizers',
+        }
+      },
       {
         path: 'logger',
         name: 'user-logger',

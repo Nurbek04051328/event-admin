@@ -1,6 +1,6 @@
 <template>
   <div class="text-sm flex flex-col overflow-hidden">
-    <div class="flex items-center p-4 justify-between">
+    <div class="flex items-center py-3 pl-1 pr-8 justify-between">
       <div class="flex items-center text-[18px] font-semibold">
         <div class="mr-3 w-[40px] h-[40px] bg-[#F3EBFC] rounded-full flex items-center justify-center">
           <img src="@/assets/images/wallet.svg" alt="Wallet svg">
@@ -17,6 +17,12 @@
           <table class="w-full">
             <tbody>
               <tr v-for="log of walletLogs" :key="log._id" class="px-4">
+                <td>
+                  <img v-if="log?.service == 'PayMe'" src="@/assets/images/wallet/payme.png" alt="Payme png" class="w-10">
+                  <img v-if="log?.service == 'Click'" src="@/assets/images/wallet/click.png" alt="Click png" class="w-10">
+                  <span v-if="log?.service == 'Service'">Сервис</span>
+                  <span v-if="!log?.service">Сервис</span>
+                      </td>
                 <td 
                   :class="walletActions.find((a) => a.mode == log.type)?.class"
                 >

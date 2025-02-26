@@ -18,6 +18,7 @@
     "apexcharts": "^4.1.0",
     "axios": "^1.7.7",
     "chart.js": "^4.4.7",
+    "emoji-mart-vue-fast": "^15.0.3",
     "leaflet": "^1.9.4",
     "maska": "^3.0.2",
     "mkcert": "^3.2.0",

@@ -12,7 +12,7 @@
           <XMarkIcon class="h-6 w-6" aria-hidden="true" />
         </button>
       </div>
-      <DialogTitle as="h3" class="text-lg font-semibold leading-6 text-gray-900">
+      <DialogTitle as="h3" class="text-[22px] mb-4 font-semibold leading-6 text-[#645A77]">
         Создать чат
       </DialogTitle>
 
@@ -24,7 +24,7 @@
             type="text"
             v-model="searchOrganizerText"
             placeholder="Введите имя пользователя"
-            class="w-full p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            class="w-full p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-[#9E55EC]"
           />
           <ul
             v-if="resultsOrganizer.length > 0"

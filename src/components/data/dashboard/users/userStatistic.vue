@@ -1,5 +1,5 @@
 <template>
-  <div class="grid-cols-5  bg-white/100 rounded-[26px] shadow-sm flex justify-around p-4 md-max:grid-cols-2 md-max:p-2 mb-2">
+  <div class="grid grid-cols-5  bg-white/100 rounded-[26px] shadow-sm p-4 md-max:grid-cols-2 md-max:p-2 mb-2">
     <!-- <pre>{{ org.statistic }}</pre> -->
     <div
       v-for="(stat, statIdx) in stats"
@@ -11,7 +11,7 @@
     >
       <p class="text-[13px] font-medium leading-6 text-gray-600 md-max:text-[15px]">{{ stat.name }}</p>
       <p class="mt-2 flex items-baseline gap-x-2 md-max:mt-0">
-        <span class="text-4xl font-semibold tracking-tight md-max:text-[15px]">{{ stat.value || 0 }} </span>
+        <span class="text-[22px] font-semibold tracking-tight md-max:text-[15px]">{{ stat.value || 0 }} </span>
         <span v-if="stat.unit" class="text-sm text-gray-600 md-max:text-[15px]">{{ stat.unit }}</span>
       </p>
     </div>

@@ -1,16 +1,17 @@
 <template>
-  <ul role="list" class="divide-y divide-gray-100 w-full p-1">
+  <ul role="list" class="divide-y divide-gray-100 w-full  overflow-auto flex-1">
     <div v-if="chatrooms.data.filter(person => person?.participants.filter(participant => participant.role === role).length > 0 || role === 'all').length === 0" class="text-center w-full mt-3">
       <p>Пока нет чат</p>
     </div>
     <li v-for="person in chatrooms.data" :key="person" class="relative flex justify-between gap-x-6 ">
       <div 
-        class="relative flex justify-between gap-x-6 w-full  py-4 px-2 rounded-xl" 
+        class="relative flex justify-between gap-x-6 w-full  py-4 px-2 rounded-xl hover:bg-[#F5F0FF] group" 
         v-if="person?.participants.filter(participant => participant.role === role).length > 0 || role == 'all'"
-        :class="person._id == route.params.id ? 'bg-gray-100' : ''"
+        :class="person._id == route.params.id ? 'bg-[#F5F0FF]' : ''"
       >
         <div class="flex flex-1 gap-x-4" >
-          <div
+          <!-- <pre>{{ person }}</pre> -->
+          <!-- <div
             class="h-12 w-12 flex-none rounded-full flex items-center justify-center text-white font-bold"
             :style="person?.img ? '' : { backgroundColor: randomColor(person.userName) }"
           >
@@ -23,6 +24,11 @@
             <span v-else>
               {{ person?.userName.charAt(0).toUpperCase() }}
             </span>
+          </div> -->
+          <div class="h-12 w-12 flex-none rounded-full flex items-center justify-center bg-[#F5F0FF] group-hover:bg-white"
+          :class="person._id == route.params.id ? 'bg-white' : ''"
+          >
+            <img src="@/assets/images/header-user.svg" alt="">
           </div>
           <div class="min-w-0 flex-auto relative">
             <p class="text-sm font-semibold leading-6 text-gray-900">

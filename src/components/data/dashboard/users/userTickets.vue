@@ -1,37 +1,52 @@
 <template>
-  <div class="divide-y-2 divide-gray-100 text-sm overflow-auto flex-1">
-    <div v-for="ticket of store.logger.data" :key="ticket._id" class="p-2">
-      <span class="font-bold"> {{ ticket?.user?.lname }} {{ ticket?.user?.name }} </span>
-      купил
-      <span>
-        {{ ticket.status == 0 ? 'Ожидание транзакции' : '' }}
-        {{ ticket.status == 1 ? 'Успешно приобретен' : '' }}
-        {{ ticket.status == 2 ? 'Возврат/Отменен' : '' }}
-      </span>
-      <span class="font-bold text-blue-600">
-        {{ ticket.event?.title }}
-      </span>
-      <span v-if="ticket.entryFee == 0" class="font-bold"> бесплатно </span>
-      <span v-if="ticket.entryFee > 0" class="font-bold">по сумме {{ ticket.entryFee }} сум </span>
-
-      в
-      <span class="font-bold">
-        {{ convertDateShort(ticket.updatedAt, 'full') }}
-      </span>
+  <div v-if="store.logger.data?.length > 0" class=" flex flex-col overflow-hidden">
+    <div class="w-full overflow-y-auto flex-1 text-[13px]" >
+      <div v-for="ticket of store.logger.data" :key="ticket._id" class="p-2 xm-max:text-[11px]">
+        <span class="font-bold text-[#645A77]"> {{ ticket?.user?.lname }} {{ ticket?.user?.name }} </span>
+        купил
+        <span
+          class="mr-2"
+          :class="ticket.status == 0 ? 'bg-[#FFECD9] text-[#FF7E00] rounded-lg px-2':
+          ticket.status == 1 ? 'bg-[#DCF7DD] text-[#119A21] rounded-lg px-2': 
+          ticket.status == 2 ? 'bg-[#FFE6E6] text-[#FF5558] rounded-lg px-2': 'bg-[#F5F1FB] text-[#9E55EC] rounded-lg px-2'
+          "
+        >
+          {{ ticket.status == 0 ? 'Ожидание транзакции' : '' }}
+          {{ ticket.status == 1 ? 'Успешно приобретен' : '' }}
+          {{ ticket.status == 2 ? 'Возврат/Отменен' : '' }}
+          {{ ticket.status == 3 ? 'Использован' : '' }}
+        </span> на
+        <span class="font-bold text-[#9E55EC]">
+          {{ ticket.event?.title }}
+        </span> по сумме
+        <span v-if="ticket.entryFee == 0" class="font-bold"> бесплатно </span>
+        <span v-if="ticket.entryFee > 0" class="font-bold"> {{ ticket.entryFee }} сум </span>
+  
+        в
+        <span class="font-bold">
+          {{ convertDateShort(ticket.updatedAt, 'full') }}
+        </span>
+      </div>
+    </div>
+    <div class="pb-2">
+      <paginate
+        v-if="store.logger.count > limit"
+        v-model="page"
+        :page-count="Math.ceil(store.logger.count / limit)"
+        :page-range="3"
+        :margin-pages="2"
+        :click-handler="clickCallback"
+        :prev-text="'Пред'"
+        :next-text="'След'"
+        :page-class="'page-item'"
+        :container-class="'pagination_next shadow'"
+      />
     </div>
   </div>
-  <paginate
-    v-if="store.logger.count > limit"
-    v-model="page"
-    :page-count="Math.round(store.logger.count / limit)"
-    :page-range="3"
-    :margin-pages="2"
-    :click-handler="clickCallback"
-    :prev-text="'Пред'"
-    :next-text="'След'"
-    :page-class="'page-item'"
-    :container-class="'pagination_next shadow'"
-  />
+  <div v-else class="text-center mt-14 overflow-hidden">
+    Пока нет история билетов
+  </div>
+
 </template>
 <script setup>
 import { ref, onMounted } from 'vue'
@@ -48,22 +63,22 @@ const store = loggerStore()
 // import { convertDateShort } from '@/helpers/func'
 
 const clickCallback = async (value) => {
-  page.value = value
-  await getLoggers()
+page.value = value
+await getLoggers()
 }
 
 const getLoggers = async () => {
-  if (!id.value) return false
-  await store.ticketLogger({
-    limit: limit.value,
-    page: page.value,
-    user: id.value
-  })
+if (!id.value) return false
+await store.ticketLogger({
+  limit: limit.value,
+  page: page.value,
+  user: id.value
+})
 }
 
 onMounted(() => {
-  id.value = route.params.id
-  getLoggers()
+id.value = route.params.id
+getLoggers()
 })
 </script>
 <style lang=""></style>

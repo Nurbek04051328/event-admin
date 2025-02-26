@@ -1,23 +1,27 @@
 <template>
-  <div class="flex items-center pb-1 border-b border-gray-200">
+  <div class="flex items-center border-b border-gray-200 px-4 pb-3">
     <div class="mr-2">
-      <img
+      <!-- <img
         v-if="selectChatRoom?.cover?.length > 0"
         class="w-8 h-8 rounded-full"
         :src="`${url}/${selectChatRoom?.cover[0]}`"
         alt="User avatar"
-      />
-      <div
+      /> -->
+      
+      <!-- <div
         v-else
         class="h-8 w-8 flex-none rounded-full flex items-center justify-center text-white"
         :style="{ backgroundColor: randomColor(selectChatRoom?.userName) }"
       >
         {{ selectChatRoom?.userName?.charAt(0).toUpperCase() }}
+      </div> -->
+      <div class="flex items-center justify-center rounded-full w-10 h-10 bg-[#F5F0FF]">
+        <img class="w-6 h-6" src="@/assets/images/header-user.svg" alt="">
       </div>
     </div>
     <div class="flex justify-between w-full">
-      <div>{{ selectChatRoom?.userName }}</div>
-      <div class="text-sm">
+      <div class="text-[#483D5B] text-[20px] font-semibold">{{ selectChatRoom?.userName }}</div>
+      <div class="text-base font-medium text-gray-400">
         {{
           selectChatRoom?.participants?.find((participant) => participant.role === 'organizer')
             ? 'Организатор'
@@ -264,21 +268,6 @@ onMounted(async () => {
   min-height: 300px;
 }
 
-
-::-webkit-scrollbar {
-  width: 10px;
-}
-::-webkit-scrollbar-track {
-  background-color: #f4f3f8;
-  border-radius: 10px;
-}
-::-webkit-scrollbar-thumb {
-  background: #c6c6ca; 
-  border-radius: 10px;
-  &:hover{
-    background: #c6c6ca; 
-  }
-}
 </style>
 
 
