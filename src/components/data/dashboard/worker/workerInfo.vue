@@ -40,7 +40,7 @@
       </div>
       <div class="py-1" v-if="user?.subcategories?.length > 0">
         <div class="text-xs text-gray-500 2xl:text-[12px]"> Подкатегория</div>
-        <div class="mt-2 flex gap-2 overflow-auto">
+        <div class="mt-2 flex gap-2 flex-wrap overflow-auto">
           <div class="text-base font-medium text-gray-800" v-for="e in user?.subcategories" :key="e._id">
             <div 
               class="inline-flex items-center text-nowrap rounded-md px-2 py-1 mb-1 text-xs font-medium ring-1 ring-inset text-[#9E55EC] ring-[#9E55EC] 2xl:text-[12px]"

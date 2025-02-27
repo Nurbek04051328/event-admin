@@ -1,14 +1,14 @@
 <template>
-  <div class=" p-4 2xl:p-2">
+  <div class="p-4">
     <img
     v-if="user?.face?.length > 0"
       :src="`${url}/${user?.face?.at(0)}`"
       alt=""
-      class="w-full mt-4 max-w-80 m-auto rounded-[26px] block aspect-square object-cover 2xl:w-72 md-max:w-64 xm-max:w-56"
+      class="w-full m-auto rounded-[26px] block aspect-square object-cover "
     />
     <img 
       v-else 
-      class="max-w-80 mt-4 m-auto rounded-[26px] block aspect-square object-cover w-72 md-max:w-64" 
+      class="w-full m-auto rounded-[26px] block aspect-square object-cover " 
       src="@/assets/logo/logo.png" alt=""/>
     <div class="space-y-1 divide-y mt-4 px-4">
       <div class="py-1">

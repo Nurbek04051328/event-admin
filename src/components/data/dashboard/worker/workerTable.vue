@@ -1,7 +1,7 @@
 <template>
   <div class="flex-1 h-full w-full overflow-auto rounded-[16px]">
     <div class="inline-block min-w-full align-middle sm:hidden">
-      <table class="min-w-full divide-y divide-gray-300 bg-white ">
+      <table class="min-w-full divide-y divide-gray-300 bg-white">
         <thead>
           <tr>
             <th scope="col" class="th-first w-10">№</th>
@@ -9,10 +9,18 @@
             <th scope="col" class="th w-1/6 lg:w-1/4" width="90">{{ $t('worker.table.phone') }}</th>
             <!-- <th scope="col" class="th w-1/5">{{ $t('worker.table.login') }}</th> -->
             <th scope="col" class="th w-1/6 lg:hidden" width="60">{{ $t('worker.table.role') }}</th>
-            <th scope="col" class="th w-1/6 lg:hidden" width="60">{{ $t('worker.table.checkedOrganizers') }}</th>
-            <th scope="col" class="th w-1/6 lg:hidden" width="60">{{ $t('worker.table.checkedEvent') }}</th>
-            <th scope="col" class="th w-1/6 lg:hidden" width="60">{{ $t('worker.table.messages') }}</th>
-            <th scope="col" class="th w-1/6 lg:hidden" width="60">{{ $t('worker.table.lastVisit') }}</th>
+            <th scope="col" class="th w-1/6 lg:hidden" width="60">
+              {{ $t('worker.table.checkedOrganizers') }}
+            </th>
+            <th scope="col" class="th w-1/6 lg:hidden" width="60">
+              {{ $t('worker.table.checkedEvent') }}
+            </th>
+            <th scope="col" class="th w-1/6 lg:hidden" width="60">
+              {{ $t('worker.table.messages') }}
+            </th>
+            <th scope="col" class="th w-1/6 lg:hidden" width="60">
+              {{ $t('worker.table.lastVisit') }}
+            </th>
             <th scope="col" class="th w-1/5" width="150">{{ $t('worker.table.data') }}</th>
             <th scope="col" class="th-last w-1/6" width="150"></th>
           </tr>
@@ -21,34 +29,40 @@
           <tr
             v-for="(item, index) in workers"
             :key="item?._id"
-            class=" hover:bg-gray-100 cursor-pointer"
+            class="hover:bg-gray-100 cursor-pointer"
             :class="index % 2 === 0 ? undefined : 'bg-gray-50'"
             @click="$router.push({ name: 'worker-statistic', params: { id: item?._id } })"
           >
             <td class="td-first">{{ (page - 1) * limit + index + 1 }}</td>
             <td class="whitespace-nowrap text-sm">{{ item?.lname }} {{ item?.name }}</td>
-            <td class="whitespace-nowrap  text-sm text-gray-500">{{ item?.phone }}</td>
-            <!-- <td class="whitespace-nowrap text-sm text-gray-500">{{ item?.login }}</td> -->
-            <td class="whitespace-nowrap  text-sm text-gray-500 lg:hidden">{{ item?.role }}</td>
-            <td class="whitespace-nowrap text-center text-sm text-gray-500 lg:hidden">{{ item?.checkedOrganizers }}</td>
-            <td class="whitespace-nowrap text-center text-sm text-gray-500 lg:hidden">{{ item?.checkedEvent }}</td>
-            <td class="whitespace-nowrap text-center text-sm text-gray-500 lg:hidden">{{ item?.messages }}</td>
-            <td class="whitespace-nowrap text-center text-sm text-gray-500 lg:hidden">{{ item?.lastVisit?  convertDateShort(item?.lastVisit, 'full') : '-' }}</td>
-            <td class="relative whitespace-nowrap  text-sm font-medium">{{ convertDateShort(item.createdAt, 'full') }}</td>
+            <td class="whitespace-nowrap text-sm text-gray-500">{{ item?.phone }}</td>
+            <td class="whitespace-nowrap text-sm text-gray-500 lg:hidden">{{ item?.role }}</td>
+            <td class="whitespace-nowrap text-center text-sm text-gray-500 lg:hidden">
+              {{ item?.checkedOrganizers }}
+            </td>
+            <td class="whitespace-nowrap text-center text-sm text-gray-500 lg:hidden">
+              {{ item?.checkedEvent }}
+            </td>
+            <td class="whitespace-nowrap text-center text-sm text-gray-500 lg:hidden">
+              {{ item?.messages }}
+            </td>
+            <td class="whitespace-nowrap text-center text-sm text-gray-500 lg:hidden">
+              {{ item?.lastVisit ? convertDateShort(item?.lastVisit, 'full') : '-' }}
+            </td>
+            <td class="relative whitespace-nowrap text-sm font-medium">
+              {{ convertDateShort(item.createdAt, 'full') }}
+            </td>
             <td class="td-last flex gap-2">
-              <!-- <button type="button" class="add-btn rounded size-9 lg:size-8" @click="$router.push({ name: 'worker-logger', params: { id: item?._id } })">
-                <EyeIcon class="size-4" />
-              </button> -->
-              <button 
-                type="button" 
-                class="bg-[#FFECD9] text-[#FF7E00] hover:bg-[#FF7E00] hover:text-white rounded-lg flex items-center justify-center size-9 lg:size-8" 
+              <button
+                type="button"
+                class="bg-[#FFECD9] text-[#FF7E00] hover:bg-[#FF7E00] hover:text-white rounded-lg flex items-center justify-center size-9 lg:size-8"
                 @click.stop="$router.push({ name: 'workerEdit', params: { id: item?._id } })"
               >
                 <PencilIcon class="size-4" />
               </button>
-              <button 
-                type="button" 
-                class="bg-[#FFE6E6] text-[#FF5558] hover:bg-[#FF5558] hover:text-white rounded-lg flex items-center justify-center size-9 lg:size-8" 
+              <button
+                type="button"
+                class="bg-[#FFE6E6] text-[#FF5558] hover:bg-[#FF5558] hover:text-white rounded-lg flex items-center justify-center size-9 lg:size-8"
                 @click.stop="confirmRemove(item?._id)"
               >
                 <TrashIcon class="size-4" />
@@ -58,8 +72,8 @@
         </tbody>
       </table>
     </div>
-    <div class=" hidden sm:block">
-      <ul  class="flex-1 grid grid-cols-12 gap-2  xs-max:grid-cols-1 overflow-auto">
+    <div class="hidden sm:block">
+      <ul class="flex-1 grid grid-cols-12 gap-2 xs-max:grid-cols-1 overflow-auto">
         <li
           v-for="item in workers"
           :key="item._id"
@@ -69,7 +83,7 @@
             <div class="absolute top-0 right-0 m-1">
               <Menu as="div" class="relative m-r-0">
                 <MenuButton class="-m-1.5 flex items-center p-1.5 mx:m-0">
-                  <EllipsisHorizontalIcon class="h-6 w-6 text-gray-400" aria-hidden="true"/>
+                  <EllipsisHorizontalIcon class="h-6 w-6 text-gray-400" aria-hidden="true" />
                 </MenuButton>
                 <transition
                   enter-active-class="transition ease-out duration-100"
@@ -83,7 +97,7 @@
                     class="absolute right-0 z-10 mt-2.5 w-[150px] origin-top-right rounded-md bg-white py-2 shadow-lg ring-1 ring-gray-900/5 focus:outline-none"
                   >
                     <MenuItem>
-                      <button  
+                      <button
                         class="block px-3 py-1 text-sm leading-6 text-gray-900"
                         @click="$router.push({ name: 'worker-logger', params: { id: item?._id } })"
                       >
@@ -91,7 +105,7 @@
                       </button>
                     </MenuItem>
                     <MenuItem>
-                      <button  
+                      <button
                         class="block px-3 py-1 text-sm leading-6 text-gray-900"
                         @click="$router.push({ name: 'workerEdit', params: { id: item?._id } })"
                       >
@@ -99,18 +113,20 @@
                       </button>
                     </MenuItem>
                     <MenuItem>
-                      <button  
+                      <button
                         class="block px-3 py-1 text-sm leading-6 text-gray-900"
                         @click="confirmRemove(item?._id)"
                       >
-                        Delete 
+                        Delete
                       </button>
                     </MenuItem>
                   </MenuItems>
                 </transition>
               </Menu>
             </div>
-            <h3 class="mt-6 text-sm font-medium text-gray-900">{{ item?.lname }} {{ item?.name }}</h3>
+            <h3 class="mt-6 text-sm font-medium text-gray-900">
+              {{ item?.lname }} {{ item?.name }}
+            </h3>
             <dl class="mt-1 flex flex-grow flex-col justify-between">
               <dt class="sr-only">Логин</dt>
               <dd class="text-sm text-gray-500">{{ item.login }}</dd>
@@ -162,8 +178,6 @@ import { storeToRefs } from 'pinia'
 const store = workerStore()
 const { workers } = storeToRefs(store)
 
-
-
 // import { useFullStore } from '@/stores/usefull/modal'
 
 // const usefull = useFullStore()
@@ -187,6 +201,5 @@ const remove = async (answer) => {
 const close = () => {
   toggle.value = false
 }
-
 </script>
 <style lang=""></style>

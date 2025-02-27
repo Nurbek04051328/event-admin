@@ -61,7 +61,7 @@
           />
           <!-- Smaylik Button -->
           <button
-            class="absolute inset-y-3 right-12 flex items-center justify-center p-3 cursor-pointer rounded-full"
+            class="absolute inset-y-3 right-14 flex items-center justify-center p-3 cursor-pointer rounded-full"
             @click="toggleEmojiPicker"
           >
             <img src="@/assets/images/smileIcon.svg" alt="">
@@ -73,8 +73,8 @@
             <PaperAirplaneIcon class="size-5 -rotate-45" />
           </button>
           <!-- Smaylik paneli -->
-          <div v-if="showEmojiPicker" class="absolute bottom-14 right-12 bg-white border shadow-md rounded-md p-2">
-            <Picker @emoji-select="addEmoji" />
+          <div v-if="showEmojiPicker" class="absolute z-50 bottom-14 right-12 bg-white border shadow-md rounded-md p-2">
+            <Picker :data="emojiIndex" set="twitter" @emoji-select="addEmoji" />
           </div>
         </div>
       </div>
@@ -127,7 +127,12 @@ import TabList from '@/components/data/dashboard/message/tabButtons.vue'
 import AllChatroom from '@/components/data/dashboard/message/chatRoom.vue'
 import MessageDialog from '@/components/data/dashboard/message/messageDialog.vue/'
 import { messageStore } from '@/stores/data/message'
+// all emoji sets.
+import data from "emoji-mart-vue-fast/data/all.json";
+// Import default CSS
+import "emoji-mart-vue-fast/css/emoji-mart.css";
 import { Picker, EmojiIndex } from "emoji-mart-vue-fast/src";
+
 const message_store = messageStore()
 import { useRoute } from 'vue-router';
 import { useNotification } from '@/stores/usefull/notification'
@@ -144,7 +149,9 @@ const links = [
   { name: 'UserChatroom', title: 'Пользователи', role: 'user' },
 ]
 
+let emojiIndex = new EmojiIndex(data);
 let showEmojiPicker = ref(false);
+// const emojiInde
 const addEmoji = (emoji) => {
   message.value.tex += emoji.native;
 };
