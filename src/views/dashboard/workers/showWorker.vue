@@ -28,7 +28,7 @@
     </div>
   </div>
   <accessDialog 
-    :title="$t('event.accessDialog.accesstitle')" 
+    title="Вы хотите поменять доступ сотрудника?" 
     :btnTitle="$t('event.accessDialog.btnTitle')" 
     @adult="accessStatus" 
     @closeAdult="closeStatusDialog()" 

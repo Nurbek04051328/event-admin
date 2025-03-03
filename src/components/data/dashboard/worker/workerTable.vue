@@ -5,54 +5,43 @@
         <thead>
           <tr>
             <th scope="col" class="th-first w-10">№</th>
-            <th scope="col" class="th w-1/5">{{ $t('worker.table.name') }}</th>
-            <th scope="col" class="th w-1/6 lg:w-1/4" width="90">{{ $t('worker.table.phone') }}</th>
-            <!-- <th scope="col" class="th w-1/5">{{ $t('worker.table.login') }}</th> -->
-            <th scope="col" class="th w-1/6 lg:hidden" width="60">{{ $t('worker.table.role') }}</th>
-            <th scope="col" class="th w-1/6 lg:hidden" width="60">
-              {{ $t('worker.table.checkedOrganizers') }}
-            </th>
-            <th scope="col" class="th w-1/6 lg:hidden" width="60">
-              {{ $t('worker.table.checkedEvent') }}
-            </th>
-            <th scope="col" class="th w-1/6 lg:hidden" width="60">
-              {{ $t('worker.table.messages') }}
-            </th>
-            <th scope="col" class="th w-1/6 lg:hidden" width="60">
-              {{ $t('worker.table.lastVisit') }}
-            </th>
-            <th scope="col" class="th w-1/5" width="150">{{ $t('worker.table.data') }}</th>
+            <th scope="col" class="th w-1/5">Ф.И.О</th>
+            <th scope="col" class="th w-1/6 lg:w-1/4" width="90">Номер телефон</th>
+
+            <th scope="col" class="th w-1/6 lg:hidden" width="60">Организаторы</th>
+            <th scope="col" class="th w-1/6 lg:hidden" width="60">Мероприятие</th>
+            <th scope="col" class="th w-1/6 lg:hidden" width="60">Сообщение</th>
+            <th scope="col" class="th w-1/6 lg:hidden" width="60">Последный вход</th>
+            <th scope="col" class="th w-1/5" width="150">Дата рег.</th>
             <th scope="col" class="th-last w-1/6" width="150"></th>
           </tr>
         </thead>
         <tbody class="divide-y divide-gray-200 bg-white overflow-auto">
-          <tr
-            v-for="(item, index) in workers"
-            :key="item?._id"
-            class="hover:bg-gray-100 cursor-pointer"
-            :class="index % 2 === 0 ? undefined : 'bg-gray-50'"
-            @click="$router.push({ name: 'worker-statistic', params: { id: item?._id } })"
-          >
+          <tr v-for="(item, index) in workers" :key="item?._id" class="hover:bg-gray-100">
             <td class="td-first">{{ (page - 1) * limit + index + 1 }}</td>
-            <td class="whitespace-nowrap text-sm">{{ item?.lname }} {{ item?.name }}</td>
-            <td class="whitespace-nowrap text-sm text-gray-500">{{ item?.phone }}</td>
-            <td class="whitespace-nowrap text-sm text-gray-500 lg:hidden">{{ item?.role }}</td>
-            <td class="whitespace-nowrap text-center text-sm text-gray-500 lg:hidden">
+            <td
+              class="td cursor-pointer"
+              @click="$router.push({ name: 'worker-statistic', params: { id: item?._id } })"
+            >
+              {{ item?.lname }} {{ item?.name }}
+            </td>
+            <td class="td text-gray-500">{{ item?.phone }}</td>
+            <td class="td text-gray-500 lg:hidden">
               {{ item?.checkedOrganizers }}
             </td>
-            <td class="whitespace-nowrap text-center text-sm text-gray-500 lg:hidden">
+            <td class="td text-gray-500 lg:hidden">
               {{ item?.checkedEvent }}
             </td>
-            <td class="whitespace-nowrap text-center text-sm text-gray-500 lg:hidden">
+            <td class="td text-gray-500 lg:hidden">
               {{ item?.messages }}
             </td>
-            <td class="whitespace-nowrap text-center text-sm text-gray-500 lg:hidden">
+            <td class="td text-gray-500 lg:hidden">
               {{ item?.lastVisit ? convertDateShort(item?.lastVisit, 'full') : '-' }}
             </td>
-            <td class="relative whitespace-nowrap text-sm font-medium">
+            <td class="td">
               {{ convertDateShort(item.createdAt, 'full') }}
             </td>
-            <td class="td-last flex gap-2">
+            <td class="td-last space-x-2">
               <button
                 type="button"
                 class="bg-[#FFECD9] text-[#FF7E00] hover:bg-[#FF7E00] hover:text-white rounded-lg flex items-center justify-center size-9 lg:size-8"

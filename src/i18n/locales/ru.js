@@ -18,11 +18,12 @@ const ru = {
     language: 'Языки',
     category: 'Категории',
     subcategory: 'Подкатегории',
-    atributCategory: "Атрибуты",
+    atributCategory: 'Атрибуты',
     social: 'Социальные сети',
     page: 'Страница',
     tax: 'Налог',
     refound: 'Политика возврата',
+    regions: 'Регионы'
   },
   home: {
     title: 'Общий отчет',
@@ -82,6 +83,25 @@ const ru = {
       deletetitleText: 'Данные будут удалены без возможности восстановления.'
     }
   },
+  region: {
+    table: {
+      img: 'Изображения',
+      name: 'Название',
+      language: 'Переводы',
+      data: 'Дата'
+    },
+    dialog: {
+      title: 'Новый регион',
+      edit: 'Редактировать регион',
+      name: 'Название региона',
+      slug: 'Код категории (slug)',
+      close: 'Отмена',
+      save: 'Сохранить',
+      deletetitle: 'Вы уверены, что хотите удалить региону?',
+      btnTitle: 'Да, удалить',
+      deletetitleText: 'Данные будут удалены без возможности восстановления.'
+    }
+  },
   social: {
     table: {
       icon: 'Иконки',
@@ -136,7 +156,7 @@ const ru = {
       lastVisit: 'Последный вход',
       checkedOrganizers: 'Кол-во Организеер',
       checkedEvent: 'Кол-во Мероприятие',
-      messages: 'Кол-во Собщение',
+      messages: 'Кол-во Собщение'
     },
     dialog: {
       title: 'Добавить нового работника',

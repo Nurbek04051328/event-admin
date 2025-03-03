@@ -40,38 +40,38 @@
                 </div>
                 <div class="ml-4">
                   <div class="font-medium text-gray-900">{{ person.lname }} {{ person.name }}</div>
-                </div>
+                </div> 
               </div>
             </td>
-            <td class="whitespace-nowrap px-3 py-5 text-sm text-gray-500">
+            <td class="td">
               <div class="text-gray-900">{{ person.login }}</div>
               <div class="mt-1 text-gray-500">{{ person.phone }}</div>
             </td>
-            <td class="whitespace-nowrap px-3 py-5 text-sm text-gray-500 text-center">
+            <td class="td">
               <span class="text-green-500">{{ person?.events?.successEvent }}</span> /
-              <span class="text-red-500">{{ person?.events?.deniedEvent }}</span> - 
+              <span class="text-red-500">{{ person?.events?.deniedEvent }}</span> /
               <span>{{ person?.events?.eventCount }}</span>
             </td>
-            <td class="whitespace-nowrap px-3 py-5 text-sm text-gray-500 text-center"> 
+            <td class="td">
               <span class="text-green-500">{{ person?.tickets?.generate }}</span> /
               <span class="text-yellow-500">{{ person?.tickets?.bought }}</span> -
               <span>{{ person?.tickets?.available }}</span>
             </td>
-            <td class="whitespace-nowrap px-3 py-5 text-sm text-gray-500 text-center">
+            <td class="td">
               {{ person?.message }}
             </td>
-            <td class="whitespace-nowrap px-3 py-5 text-sm text-gray-500">
+            <td class="td">
               <span class="warning-tag" v-if="person.organizer == 'pending'"> В ожидание </span>
               <span class="danger-tag" v-if="person.organizer == 'denied'"> Отказано </span>
               <span class="success-tag" v-if="person.organizer == 'success'"> Проверено </span>
             </td>
-            <td class="relative whitespace-nowrap py-5 pl-3 pr-4 text-sm  sm:pr-0 text-center">
-              {{ person.lastVisit?  convertDateShort(person.lastVisit, 'full') : '-' }}
+            <td class="td font-semibold text-black">
+              {{ person.lastVisit ? convertDateShort(person.lastVisit, 'full') : '-' }}
             </td>
-            <td class="relative whitespace-nowrap py-5 pl-3 pr-4 text-sm font-medium sm:pr-0">
+            <td class="td font-medium text-black">
               {{ convertDateShort(person.createdAt, 'full') }}
             </td>
-            <td class="whitespace-nowrap px-3 py-5 text-sm text-gray-500">
+            <td class="td">
               <span class="success-tag" v-if="person?.status == 'active'">Активный</span>
               <span class="primary-tag" v-if="person?.status == 'limited'">Ограничен</span>
               <span class="warning-tag" v-if="person?.status == 'not active'">Не активирован</span>
@@ -86,7 +86,7 @@
         <li
           v-for="item in store.organizer.data"
           :key="item._id"
-          class="flex flex-col col-span-4 xm:col-span-6 xs-max:col-span-12 divide-y border border-gray-300 divide-gray-200 rounded-lg bg-white text-center shadow mb-3"
+          class="flex flex-col col-span-4 xm:col-span-6 xs-max:col-span-12 divide-y border border-gray-300 divide-gray-200 rounded-lg bg-white shadow mb-3"
         >
           <div class="flex flex-1 flex-col relative">
             <div class="absolute top-0 right-0 m-1">

@@ -1,16 +1,18 @@
 <template>
   <div class="p-4">
     <img
-    v-if="user?.face?.length > 0"
+      v-if="user?.face?.length > 0"
       :src="`${url}/${user?.face?.at(0)}`"
       alt=""
-      class="w-full m-auto rounded-[26px] block aspect-square object-cover "
+      class="w-full m-auto rounded-[26px] block aspect-square object-cover"
     />
-    <img 
-      v-else 
-      class="w-full m-auto rounded-[26px] block aspect-square object-cover " 
-      src="@/assets/logo/logo.png" alt=""/>
-    <div class="space-y-1 divide-y mt-4 px-4">
+    <img
+      v-else
+      class="w-full m-auto rounded-[26px] block aspect-square object-cover"
+      src="@/assets/logo/logo.png"
+      alt=""
+    />
+    <div class="space-y-1 divide-y mt-4">
       <div class="py-1">
         <div class="text-xs text-gray-500 2xl:text-[12px]">Ф.И.О</div>
         <div class="text-base font-medium text-gray-800 2xl:text-[14px]">
@@ -43,13 +45,13 @@
             {{ follow?.followers || 0 }}
           </div>
         </div>
-        <div class="py-1 flex-1 text-center ">
+        <div class="py-1 flex-1 text-center">
           <div class="text-xs text-gray-500 2xl:text-[12px]">Подписан</div>
           <div class="text-base font-medium text-gray-800 2xl:text-[14px]">
             {{ follow?.followings || 0 }}
           </div>
         </div>
-        <div class="py-1 flex-1 text-center ">
+        <div class="py-1 flex-1 text-center">
           <div class="text-xs text-gray-500 2xl:text-[12px]">Посты</div>
           <div class="text-base font-medium text-gray-800 2xl:text-[14px]">
             {{ follow?.posts || 0 }}
@@ -58,7 +60,7 @@
       </div>
       <div class="py-2 space-y-1">
         <div class="text-xs text-gray-500 2xl:text-[12px]">Паспорт файлы</div>
-        <div class="text-base font-medium ">
+        <div class="text-base font-medium">
           <button
             @click="download(pass)"
             v-for="(pass, index) of user?.passport"

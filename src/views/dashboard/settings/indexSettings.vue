@@ -1,7 +1,13 @@
 <template>
   <div class="flex flex-1 overflow-auto p-4 gap-1 md-max:block">
-    <nav class="flex  grid-col w-60 h-auto flex-col md-max:w-full bg-white rounded-3xl p-4" aria-label="Sidebar">
-      <ul role="list" class="-mx-2 space-y-2 md-max:flex md-max:w-full md-max:items-center md-max:space-y-0  ">
+    <nav
+      class="flex grid-col w-60 h-auto flex-col md-max:w-full bg-white rounded-3xl p-4"
+      aria-label="Sidebar"
+    >
+      <ul
+        role="list"
+        class="-mx-2 space-y-2 md-max:flex md-max:w-full md-max:items-center md-max:space-y-0"
+      >
         <li v-for="item in settingMenu" :key="item.name">
           <router-link
             :to="{ name: item.name }"
@@ -30,17 +36,10 @@
   </div>
 </template>
 <script setup>
-  import { useI18n } from 'vue-i18n'
-  import { useRoute } from 'vue-router'
-  const route = useRoute()
-  const { t } = useI18n()
-  import { settingMenu } from '@/helpers/settingMenu'
-// const navigation = [
-//   { name: 'Tillar', to: 'language', count: '' },
-//   { name: 'Kategoriyalar', to: 'categories', count: '' },
-//   { name: 'Subkategoriyalar', to: 'subcategories', count: '' },
-//   // { name: 'Shahar/tumanlar', to: 'city', count: '' },
-//   // { name: 'Maktablar', to: 'school', count: '' },
-// ]
+import { useRoute } from 'vue-router'
+const route = useRoute()
+
+import { settingMenu } from '@/helpers/settingMenu'
+
 </script>
 <style lang=""></style>

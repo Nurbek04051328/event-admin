@@ -72,5 +72,16 @@ export const settingMenu = [
       group: 'setting',
       toggleTitle: 'Новый'
     }
+  },
+  {
+    path: 'regions',
+    name: 'regions',
+    component: () => import('@/views/dashboard/settings/regions.vue'),
+    meta: {
+      title: 'Настройки/Регионы',
+      toggle: true,
+      group: 'setting',
+      toggleTitle: 'Новый'
+    }
   }
 ]
