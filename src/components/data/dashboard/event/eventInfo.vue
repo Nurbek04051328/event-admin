@@ -132,9 +132,6 @@ defineProps(['event'])
 import { useI18n } from 'vue-i18n'
 const { t } = useI18n()
 
-// Karta
-import L from "leaflet";
-import "leaflet/dist/leaflet.css";
 
 
 const latitude = 41.2995; // Toshkent koordinatalari

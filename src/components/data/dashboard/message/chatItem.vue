@@ -1,40 +1,40 @@
 <template>
-  <div class="px-4">
-    <img
-      v-if="chat?.sender?.cover?.length > 0"
-      class="w-8 h-8 rounded-full"
-      :src="`${url}/${chat?.sender?.cover[0]}`"
-    />
-    <div
-      v-else
-      class="h-8 w-8 flex-none rounded-full flex items-center justify-center"
-      :style="{ backgroundColor: randomColor(chat?.sender?.name) }"
-    >
-      {{ chat?.sender?.name?.charAt(0).toUpperCase() }}
+  <div class="px-4 flex items-center gap-2">
+    <div v-if="auth_store.user?.id !== chat?.sender._id" class="flex items-center justify-center rounded-full w-10 h-10 bg-[#F5F0FF]">
+      <img  class="w-6 h-6" src="@/assets/images/header-user.svg" alt="">
     </div>
     <div :class="`flex flex-col w-[550px] leading-1.5 gap-1`">
-      <div class="flex items-center space-x-2 rtl:space-x-reverse justify-between">
+      <div class="flex items-center space-x-2 justify-between" v-if="auth_store.user?.id !== chat?.sender._id">
         <span class="text-base font-semibold text-gray-900">
           {{ chat?.sender?.lname }}
           {{ chat?.sender?.name }}
           {{ chat?.sender?.role== 'moderator'? '(moderator)' :  chat?.sender?.role== 'admin'? '(admin)':''}}
         </span>
-        <span class="text-sm font-normal text-gray-500 dark:text-gray-400">{{
-          convertDateShort(chat?.createdAt, 'full')
-        }}</span>
+        
       </div>
-      <p
-        :class="`p-4  text-wrap  break-words whitespace-normal rounded-bl-[50px] rounded-tr-[50px] rounded-tl-[50px] bg-[#9E55EC] text-sm font-normal py-2.5 text-gray-700 dark:text-white ${auth_store.user?.id == chat?.sender._id ? 'rounded-tl-xl' : 'rounded-tr-xl'}`"
-        v-if="chat.text"
-        v-html="chat?.text.replace(/\n/g, '<br>')"
-      ></p>
-      <span
-        v-if="auth_store.user.id === chat.sender._id"
-        class="text-sm font-normal text-gray-500 dark:text-gray-400 flex items-center space-x-1 relative"
-      >
-        <CheckIcon v-bind:class="chat.viewed ? 'text-green-500' : 'text-gray-500'" class="w-4 h-4" />
-        <CheckIcon v-if="chat.viewed" class="w-4 h-4 text-green-500 absolute left-1 top-0" />
-      </span>
+      <div :class="`${auth_store.user?.id == chat?.sender._id ? 'rounded-tl-[50px] rounded-tr-[50px] rounded-bl-[50px] bg-[#9E55EC] text-white' : 'rounded-tr-[50px] rounded-br-[50px] rounded-tl-[50px] bg-[#F5F0FF] text-[#4C435C]'}`">
+        
+        <p
+          :class="`p-4 text-wrap break-words whitespace-normal text-[16px] font-medium`"
+          v-if="chat.text"
+        >
+          {{ chat?.text.replace(/\n/g, '<br>') }}
+        </p>
+      </div>
+      <div class="flex justify-between items-center px-6 pb-2">
+        <span
+          v-if="auth_store.user.id === chat.sender._id"
+          class="text-sm font-normal text-gray-500 dark:text-gray-400 flex items-center space-x-1 relative"
+          >
+          <CheckIcon v-bind:class="chat.viewed ? 'text-green-500' : 'text-gray-500'" class="w-4 h-4" />
+          <CheckIcon v-if="chat.viewed" class="w-4 h-4 text-green-500 absolute left-1 top-0" />
+        </span>
+        <div class="flex justify-end ml-auto">
+          <span class="text-sm font-normal text-gray-500">
+            {{ convertDateShort(chat?.createdAt, 'full') }}
+          </span>
+        </div>
+      </div>
     </div>
   </div>
 </template>
