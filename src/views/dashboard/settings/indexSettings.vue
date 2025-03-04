@@ -30,7 +30,7 @@
         </li>
       </ul>
     </nav>
-    <div class="flex-1">
+    <div class="flex-1 overflow-hidden">
       <router-view />
     </div>
   </div>
