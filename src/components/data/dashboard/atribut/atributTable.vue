@@ -5,7 +5,7 @@
         <tr>
           <th scope="col" class="th-first md-max:text-[13px]">№</th>
           <th scope="col" class="th md-max:text-[13px]">{{ $t('subcategory.table.name') }}</th>
-          <th scope="col" class="th md-max:text-[13px]">{{ $t('subcategory.table.category') }}</th>
+          <!-- <th scope="col" class="th md-max:text-[13px]">{{ $t('subcategory.table.category') }}</th> -->
           <th scope="col" class="th md-max:text-[13px]">{{ $t('subcategory.table.language') }}</th>
           <th scope="col" class="th md-max:text-[13px]" width="150">{{ $t('subcategory.table.data') }}</th>
           <th scope="col" class="th-last" width="150"></th>
@@ -22,7 +22,7 @@
             {{ itemIdx + 1 }}
           </td>
           <td class="td md-max:text-[13px]">{{ item.title || $t('subcategory.table.notadd') }}</td>
-          <td class="td md-max:text-[13px]">{{ item.category }}</td>
+          <!-- <td class="td md-max:text-[13px]">{{ item.category }}</td> -->
           <td class="td">
             <div class="flex items-start gap-2">
               <button

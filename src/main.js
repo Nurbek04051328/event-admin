@@ -42,6 +42,8 @@ app.component('dublicatSelect', dublicatSelect)
 app.component('defaultCheckbox', defaultCheckbox)
 app.component('phoneMaska', phoneMaska)
 
+
+
 app.directive('click-outside', {
   bind: function (el, binding, vnode) {
     el.clickOutsideEvent = function (event) {
