@@ -10,7 +10,10 @@ const en = {
     ticket: 'Tickets',
     activationkeys: 'Activation-keys',
     settings: 'Settings',
-    eventDetail: 'Event details'
+    eventDetail: 'Event details',
+    messages: 'Messages',
+    logs: 'Loggers',
+    transaction: 'Transactons',
   },
   settingMenu: {
     language: 'Languages',

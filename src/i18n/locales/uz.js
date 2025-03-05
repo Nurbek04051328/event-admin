@@ -12,7 +12,10 @@ const uz = {
     ticket: 'Biletlar',
     activationkeys: 'Faol kalitlar',
     settings: 'Sozlamalar',
-    eventDetail: 'Tadbir Tafsilotlari'
+    eventDetail: 'Tadbir Tafsilotlari',
+    messages: 'Xabarlar',
+    logs: 'Loglar',
+    transaction: 'Transaksiyalar',
   },
   settingMenu: {
     language: 'Tillar',

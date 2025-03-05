@@ -12,7 +12,8 @@ const ru = {
     settings: 'Настройки',
     eventDetail: 'Детали мероприятия',
     messages: 'Чат',
-    logs: 'Журналы'
+    logs: 'Журналы',
+    transaction: 'Транзакция',
   },
   settingMenu: {
     language: 'Языки',

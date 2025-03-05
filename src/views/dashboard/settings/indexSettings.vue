@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-1 overflow-auto p-4 gap-1 md-max:block">
+  <div class="flex flex-1 overflow-hidden p-4 gap-1 md-max:block">
     <nav
       class="flex grid-col w-60 h-auto flex-col md-max:w-full bg-white rounded-3xl p-4"
       aria-label="Sidebar"
@@ -30,7 +30,7 @@
         </li>
       </ul>
     </nav>
-    <div class="flex-1 overflow-hidden">
+    <div class="flex-1 flex flex-col overflow-hidden">
       <router-view />
     </div>
   </div>

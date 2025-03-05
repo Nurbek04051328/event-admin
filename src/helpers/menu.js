@@ -8,7 +8,8 @@ import {
   BookmarkSquareIcon,
   BriefcaseIcon,
   UsersIcon,
-  CalendarIcon
+  CalendarIcon,
+  BanknotesIcon
 } from '@heroicons/vue/24/outline'
 
 import { settingMenu } from './settingMenu'
@@ -136,6 +137,17 @@ export const links = [
     meta: {
       title: 'Loggers',
       icon: BookmarkSquareIcon,
+      toggle: false,
+      group: 'main'
+    }
+  },
+  {
+    path: 'transaction',
+    name: 'transaction',
+    component: () => import('@/views/dashboard/transaction/indexTransaction.vue'),
+    meta: {
+      title: 'Транзакция',
+      icon: BanknotesIcon,
       toggle: false,
       group: 'main'
     }
