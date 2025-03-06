@@ -63,6 +63,17 @@ export const links = [
     }
   },
   {
+    path: 'transaction',
+    name: 'transaction',
+    component: () => import('@/views/dashboard/transaction/indexTransaction.vue'),
+    meta: {
+      title: 'Транзакция',
+      icon: BanknotesIcon,
+      toggle: false,
+      group: 'main'
+    }
+  },
+  {
     path: 'ticket-paskage',
     name: 'ticketpaskage',
     component: () => import('@/views/dashboard/tarif/indexTarif.vue'),
@@ -137,17 +148,6 @@ export const links = [
     meta: {
       title: 'Loggers',
       icon: BookmarkSquareIcon,
-      toggle: false,
-      group: 'main'
-    }
-  },
-  {
-    path: 'transaction',
-    name: 'transaction',
-    component: () => import('@/views/dashboard/transaction/indexTransaction.vue'),
-    meta: {
-      title: 'Транзакция',
-      icon: BanknotesIcon,
       toggle: false,
       group: 'main'
     }

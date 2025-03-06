@@ -5,30 +5,34 @@
     >
       
     </headPart>
-    <div class="p-4 pb-0 w-full overflow-auto flex-1">
-      <TransactionTable
-        :page="page" :limit="limit"
-      />
-    </div>
-    <div class="pl-4 pb-2">
-      <paginate
-        v-if="store.transactionsCount > limit"
-        v-model="page"
-        :page-count="Math.ceil(store.transactionsCount / limit)"
-        :page-range="3"
-        :margin-pages="2"
-        :click-handler="clickCallback"
-        :prev-text="'Пред'"
-        :next-text="'След'"
-        :page-class="'page-item'"
-        :container-class="'pagination_next shadow'"
-      />
+    <div class="p-4 pb-0 w-full grid grid-cols-12 gap-5 overflow-hidden flex-1">
+      <TransactionStatistic class="col-span-6"/>
+      <div class="col-span-6 overflow-auto flex flex-col flex-1">
+        <TransactionTable
+          :page="page" :limit="limit"
+        />
+        <div class="pl-4 pb-2">
+          <paginate
+            v-if="store.transactionsCount > limit"
+            v-model="page"
+            :page-count="Math.ceil(store.transactionsCount / limit)"
+            :page-range="3"
+            :margin-pages="2"
+            :click-handler="clickCallback"
+            :prev-text="'Пред'"
+            :next-text="'След'"
+            :page-class="'page-item'"
+            :container-class="'pagination_next shadow'"
+          />
+        </div>
+      </div>
     </div>
   </div>
 </template>
 <script setup>
 // import { storeToRefs } from 'pinia';
 import TransactionTable from '@/components/data/dashboard/transaction/transactionTable.vue'
+import TransactionStatistic from '@/components/data/dashboard/transaction/transactionStatistic.vue'
 import paginate from 'vuejs-paginate-next'
 import { onMounted, ref } from 'vue'
 

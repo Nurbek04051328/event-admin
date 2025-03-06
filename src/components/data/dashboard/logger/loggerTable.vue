@@ -1,5 +1,5 @@
 <template>
-  <div class="ring-1 w-full rounded-lg ring-gray-300 sm:mx-0 sm:rounded-lg overflow-auto">
+  <div class="ring-1 w-full rounded-[16px] ring-gray-300  overflow-auto">
     <table class="w-full divide-y divide-gray-300">
       <thead>
         <tr>
@@ -19,8 +19,8 @@
           <td class="td-first">
             {{ (page - 1) * limit + itemIdx + 1 }}
           </td>
-          <td width="800">{{ removeQueryParams(item?.url) }}</td>
-          <td>
+          <td class="td" width="800">{{ removeQueryParams(item?.url) }}</td>
+          <td class="td">
             <div>
 
             </div>

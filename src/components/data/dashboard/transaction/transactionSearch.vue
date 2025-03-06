@@ -1,6 +1,10 @@
 <template>
   <div class="space-x-2 flex items-center">
-    <default-input v-model="search.title" placeholder="Поиск по имени, email" />
+    <default-select
+      v-model="search.type"
+      name="title"
+      placeholder="Выберите транзакция"
+    />
     <button class="bg-[#FFECD9] text-[#FF7E00] hover:bg-[#FF7E00] hover:text-white rounded-lg w-auto p-2" @click="clear">
       <XMarkIcon class="size-5" />
     </button>

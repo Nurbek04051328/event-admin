@@ -1,5 +1,5 @@
 <template>
-  <div class="ring-1 w-full flex-1 rounded-lg ring-gray-300 sm:mx-0 sm:rounded-lg overflow-auto">
+  <div class="ring-1 w-full flex-1 rounded-[16px] ring-gray-300  overflow-auto">
     <table class="w-full divide-y divide-gray-300">
       <thead>
         <tr>
