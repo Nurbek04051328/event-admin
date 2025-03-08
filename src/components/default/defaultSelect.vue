@@ -4,7 +4,7 @@
     :id="name"
     :name="name"
     v-model="model"
-    class="select"
+    class="select text-[#9E98A8]"
     :class="{
       'ring-red-300  focus:ring-2 focus:ring-inset focus:ring-red-500': error
     }"

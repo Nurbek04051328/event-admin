@@ -12,7 +12,7 @@
             <th scope="col" class="th md-max:text-[13px]" width="150">Время</th>
           </tr>
         </thead>
-        <tbody class="bg-white">
+        <tbody v-if="store.transactions.length > 0" class="bg-white">
           <tr
             v-for="(item, itemIdx) in store.transactions"
             :key="item._id"
@@ -30,6 +30,13 @@
             <td class="td-last flex">{{ convertDate(item.createdAt, 'full') }}</td>
           </tr>
         </tbody>
+        <tbody v-else>
+          <tr>
+            <td colspan="5" class="text-center text-gray-500 py-4">
+              Нет данных
+            </td>
+          </tr>
+        </tbody>
       </table>
     </div>
   </div>
@@ -42,7 +49,6 @@ import { walletActions } from '@/helpers/vars'
 import { transactionStore } from '@/stores/data/transaction'
 
 const store = transactionStore()
-
 
 
 </script>

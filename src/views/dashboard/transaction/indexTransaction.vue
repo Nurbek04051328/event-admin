@@ -3,11 +3,12 @@
     <headPart
     :count="store.transactionsCount"
     >
-      
+      <TransactionSearch/>
     </headPart>
     <div class="p-4 pb-0 w-full grid grid-cols-12 gap-5 overflow-hidden flex-1">
       <TransactionStatistic class="col-span-6"/>
       <div class="col-span-6 overflow-auto flex flex-col flex-1">
+        
         <TransactionTable
           :page="page" :limit="limit"
         />
@@ -33,6 +34,7 @@
 // import { storeToRefs } from 'pinia';
 import TransactionTable from '@/components/data/dashboard/transaction/transactionTable.vue'
 import TransactionStatistic from '@/components/data/dashboard/transaction/transactionStatistic.vue'
+import TransactionSearch from '@/components/data/dashboard/transaction/transactionSearch.vue'
 import paginate from 'vuejs-paginate-next'
 import { onMounted, ref } from 'vue'
 

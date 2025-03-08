@@ -49,7 +49,7 @@ export const eventActions = [
 export const walletActions = [
   {
     mode: 'refill',
-    label: 'Пополнение',
+    label: 'Приход',
     class: 'text-[#05CD99]'
   },
   {
@@ -69,7 +69,7 @@ export const walletActions = [
   },
   {
     mode: 'deposit',
-    label: 'Депозит',
+    label: 'Пополнение',
     class: 'text-[#05CD99]'
   },
 ]
