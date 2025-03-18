@@ -243,18 +243,6 @@ const formatAccessData = (organizer) => {
 
 
 
-const roles = [
-  {
-    _id: 'manager',
-    title: 'manager'
-  },
-  {
-    _id: 'moderator',
-    title: 'moderator'
-  }
-]
-
-
 import { required, minLength } from '@vuelidate/validators'
 
 const rules = computed(() => {
@@ -284,13 +272,9 @@ const send = async () => {
   data.value.role = 'moderator'
   v$.value.$touch()
   if (!v$.value.$invalid) {
+    
     const payload = { ...data.value }
 
-    // // Agar role `manager` bo'lsa va categories yoki subcategories bo'sh bo'lsa, ularni o'chirib tashlaymiz
-    // if (data.value.role === 'manager') {
-    //   if (!data.value.categories.length) delete payload.categories
-    //   if (!data.value.subcategories.length) delete payload.subcategories
-    // }
     if (data.value.role === 'moderator') {
       if (!data.value.subcategories.length) delete payload.subcategories
     }
@@ -299,10 +283,7 @@ const send = async () => {
       user: formatAccessData(user.value),
       event: formatAccessData(event.value),
     };
-    
     payload.access = access;
-    console.log("payload", payload);
-    
     await store.addWorker(payload, t)
     router.push({ name: 'workers' })
     clear()

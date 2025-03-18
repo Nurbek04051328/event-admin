@@ -9,14 +9,15 @@ import {
   BriefcaseIcon,
   UsersIcon,
   CalendarIcon,
-  BanknotesIcon
+  BanknotesIcon,
+  ChatBubbleLeftIcon,
+  ClipboardDocumentListIcon,
+  BellIcon
 } from '@heroicons/vue/24/outline'
 
 import { settingMenu } from './settingMenu'
 import { settingChildren } from './settingChild'
-import { ChatBubbleLeftIcon } from '@heroicons/vue/24/outline'
 
-// import { ChatBubbleBottomCenterIcon } from '@heroicons/vue/24/solid'
 
 export const links = [
   {
@@ -142,11 +143,33 @@ export const links = [
     ]
   },
   {
+    path: 'ads',
+    name: 'ads',
+    component: () => import('@/views/dashboard/ad/indexAd.vue'),
+    meta: {
+      title: 'Рекламы',
+      icon: ClipboardDocumentListIcon,
+      toggle: true,
+      group: 'main'
+    }
+  },
+  {
+    path: 'notification',
+    name: 'notification',
+    component: () => import('@/views/dashboard/notifications/indexNotification.vue'),
+    meta: {
+      title: 'Уведомление',
+      icon: BellIcon,
+      toggle: true,
+      group: 'main'
+    }
+  },
+  {
     path: 'logs',
     name: 'logs',
     component: () => import('@/views/dashboard/logger/indexLogger.vue'),
     meta: {
-      title: 'Loggers',
+      title: 'Журналы',
       icon: BookmarkSquareIcon,
       toggle: false,
       group: 'main'

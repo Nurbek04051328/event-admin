@@ -14,6 +14,8 @@ const en = {
     messages: 'Messages',
     logs: 'Loggers',
     transaction: 'Transactons',
+    ads: "Ads",
+    notification:"Notifications"
   },
   settingMenu: {
     language: 'Languages',

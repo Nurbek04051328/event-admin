@@ -133,19 +133,19 @@
             </div>
             <div class="text-sm space-y-2">
               <label class="flex items-center space-x-2 cursor-pointer">
-                <input class="mr-1 text-[#645A77] accent-[#9E55EC]" value="show" false-value="hide" type="checkbox" v-model="organizer.show" />
+                <input class="mr-1 text-[#645A77] accent-[#9E55EC]" value="show" type="checkbox" v-model="organizer.show" />
                 <span class="hover:text-[#9E55EC] text-[16px] font-normal text-[#645A77]">Просмотр</span>
               </label>
               <label class="flex items-center space-x-2 cursor-pointer">
-                <input class="mr-1 accent-[#9E55EC]" value="status" false-value="hide" type="checkbox" v-model="organizer.status" />
+                <input class="mr-1 accent-[#9E55EC]" value="status" type="checkbox" v-model="organizer.status" />
                 <span class="hover:text-[#9E55EC] text-[16px] font-normal text-[#645A77]">Менять статус</span>
               </label>
               <label class="flex items-center space-x-2 cursor-pointer">
-                <input class="mr-1 accent-[#9E55EC]" value="metric" false-value="hide" type="checkbox" v-model="organizer.metric" />
+                <input class="mr-1 accent-[#9E55EC]" value="metric" type="checkbox" v-model="organizer.metric" />
                 <span class="hover:text-[#9E55EC] text-[16px] font-normal text-[#645A77]">Персональные данные</span>
               </label>
               <label class="flex items-center space-x-2 cursor-pointer">
-                <input class="mr-1 accent-[#9E55EC]" value="chat" false-value="hide" type="checkbox" v-model="organizer.chat" />
+                <input class="mr-1 accent-[#9E55EC]" value="chat" type="checkbox" v-model="organizer.chat" />
                 <span class="hover:text-[#9E55EC] text-[16px] font-normal text-[#645A77]">Чат</span>
               </label>
             </div>
@@ -247,21 +247,11 @@ const event = ref({
 })
 
 const formatAccessData = (organizer) => {
+  console.log("organizer", organizer);
+  
   return Object.keys(organizer).filter((key) => organizer[key]);
 }
 
-
-
-// const roles = [
-//   {
-//     _id: 'manager',
-//     title: 'manager'
-//   },
-//   {
-//     _id: 'moderator',
-//     title: 'moderator'
-//   }
-// ]
 
 
 import { required, minLength } from '@vuelidate/validators'
@@ -293,12 +283,12 @@ const v$ = useVuelidate(rules, data)
 const send = async () => {
   v$.value.$touch()
   if (!v$.value.$invalid) {
+    
     const payload = { ...data.value }
 
     // Agar role `manager` bo'lsa va categories yoki subcategories bo'sh bo'lsa, ularni o'chirib tashlaymiz
-    if (data.value.role === 'moderator') {
-      if (!data.value.subcategories.length) delete payload.subcategories
-    }
+    
+    if (!data.value.subcategories.length) delete payload.subcategories
     if (!data.value.password) delete payload.password
     
     const access = {
@@ -307,6 +297,7 @@ const send = async () => {
       event: formatAccessData(event.value),
     };
     payload.access = access;
+    console.log("workerketgandata", payload);
     
     await store.saveWorker(payload, t)
     router.push({ name: 'workers' })
@@ -376,16 +367,13 @@ onMounted(async () => {
   await subcategory_store.getSubcategories({ limit: 0, type: true })
   if(route.params.id) {
     const res = await store.getWorker(route.params.id)
-    console.log("editres", res.data);
-    console.log("editres222222", res.data?.subcategories);
-    
     data.value = {
       ...res.data,
       _id: route.params.id,
       categories: res.data?.categories || [],
       subcategories: res.data?.subcategories,
     }
-    console.log("editres333333", data.value);
+
   
     // Access ma'lumotlarini qayta ishlash
     if (res.data.access) {

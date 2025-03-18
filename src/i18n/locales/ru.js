@@ -14,6 +14,8 @@ const ru = {
     messages: 'Чат',
     logs: 'Журналы',
     transaction: 'Транзакция',
+    ads: 'Рекламы',
+    notification:"Уведомление"
   },
   settingMenu: {
     language: 'Языки',

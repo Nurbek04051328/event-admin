@@ -13,7 +13,7 @@
         :page="page" :limit="limit"
       />
       <tarifDialog
-        :options="{
+      :options="{
           languages
         }"
       />
@@ -35,17 +35,16 @@
   </div>
 </template>
 <script setup>
-// import { storeToRefs } from 'pinia';
+import { storeToRefs } from 'pinia';
 import TarifTable from '@/components/data/dashboard/tarif/tarifTable.vue'
 import TarifDialog from '@/components/data/dashboard/tarif/tarifDialog.vue'
 import paginate from 'vuejs-paginate-next'
 import { onMounted, ref } from 'vue'
-import { storeToRefs } from 'pinia'
 import { languageStore } from '@/stores/data/language'
-import { tarifStore } from '@/stores/data/tarif'
 const language_store = languageStore()
-const store = tarifStore()
 const { languages } = storeToRefs(language_store)
+import { tarifStore } from '@/stores/data/tarif'
+const store = tarifStore()
 
 
 // Pagination
@@ -62,7 +61,6 @@ const getData = async () => {
 }
 
 onMounted(async () => {
-  await store.getTarifs()
   await language_store.getlanguages({ limit: 0 })
   await getData()
 })

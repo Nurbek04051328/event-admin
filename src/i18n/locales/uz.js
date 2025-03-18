@@ -16,6 +16,8 @@ const uz = {
     messages: 'Xabarlar',
     logs: 'Loglar',
     transaction: 'Transaksiyalar',
+    ads: "Reklamalar",
+    notification:"E'lonlar"
   },
   settingMenu: {
     language: 'Tillar',

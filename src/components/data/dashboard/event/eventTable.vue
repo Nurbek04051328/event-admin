@@ -6,7 +6,7 @@
           <tr>
             <th scope="col" class="th-first">№</th>
             <th scope="col" class="th">{{ $t('event.table.title') }}</th>
-            <th scope="col" class="th">{{ $t('event.table.category') }}</th>
+            <!-- <th scope="col" class="th">{{ $t('event.table.category') }}</th> -->
             <!-- <th scope="col" class="th">{{ $t('event.table.subcategory') }}</th> -->
             <th scope="col" class="th">{{ $t('event.table.date') }}</th>
             <th scope="col" class="th">{{ $t('event.table.organizator') }}</th>
@@ -28,25 +28,16 @@
             </td>
             <td class="whitespace-nowrap py-5 pl-4 pr-3 text-sm sm:pl-0">
               <div class="flex items-center">
-                <div class="h-11 w-11 flex-shrink-0">
-                  <img
-                    class="h-11 w-11 rounded-full"
-                    v-if="item.cover?.length > 0"
-                    :src="`${url}/${item.cover?.at(0)}`"
-                    alt=""
-                  />
-                  <img class="h-11 w-11 rounded-full" v-else src="@/assets/logo/logo.png" alt="" />
-                </div>
-                <div class="ml-4">
-                  <div class="font-medium text-gray-900">{{ item?.title }}</div>
-                </div>
+
+                <div class="font-medium text-gray-900">{{ item?.title }}</div>
+
               </div>
             </td>
-            <td class="whitespace-nowrap px-3 py-5 text-sm text-gray-500">
+            <!-- <td class="whitespace-nowrap px-3 py-5 text-sm text-gray-500">
               <div>
                 {{ item?.fCategory?.title }}
               </div>
-            </td>
+            </td> -->
             <!-- <td class="whitespace-nowrap px-3 py-5 text-sm text-gray-500">
               <div v-for="subcat in item.subcategories" :key="subcat._id">
                 {{ subcat.title }}

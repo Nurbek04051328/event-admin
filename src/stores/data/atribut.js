@@ -11,12 +11,8 @@ export const atributStore = defineStore('atributStore', () => {
   const notification = useNotification()
 
   const getAtributes = async (params) => {
-    console.log("paramsatrib", params);
-    
     atributs.value = []
     const { data } = await api.get(base_url, {params})
-    console.log("atrdata", data);
-    
     atributs.value = data?.attributes;
     atributsCount.value = data?.count;
   }

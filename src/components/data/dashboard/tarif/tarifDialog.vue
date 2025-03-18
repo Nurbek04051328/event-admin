@@ -54,6 +54,7 @@
             v-model="data.description"
             name="description"
             :label="t('ticketPackage.dialog.text')"
+            :rows="7"
             :error="v$.description?.$invalid && v$.description?.$dirty"
           />
         </div>

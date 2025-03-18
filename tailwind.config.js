@@ -4,9 +4,6 @@ export default {
   theme: {
     extend: {
       screens: {
-        // sm735: '735px', // maxsus breakpoint
-        // xs: '425px',
-        // xl: '1280px' // maxsus breakpoint
         'xs': { 'max': '320px' },        // 320px yoki undan kichik
         'xs-max': { 'max': '375px' },   // 320px – 375px oralig'i
         'xm': { 'max': '500px' },      // 375px – 425px oralig'i

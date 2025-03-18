@@ -17,20 +17,6 @@
       iconColor="text-[#FF5558]"
       bgIconColor="bg-[#FF555826]"
     />
-    <!-- <blackStat
-      title="Организаторы"
-      :icon="BriefcaseIcon"
-      :value="count.user?.organizerSuccess + count.user?.organizerPending + count?.user?.organizerDenied"
-      @click="$router.push({ name: 'organizers'})"
-      class="cursor-pointer"
-    />
-    <blackStat 
-      title="Мероприятия" 
-      :icon="CalendarDaysIcon" 
-      :value="count?.event?.count"
-      @click="$router.push({ name: 'event'})"
-      class="cursor-pointer"
-    /> -->
     <blackStat 
       title="Билеты" 
       :icon="TicketIcon" 
@@ -62,8 +48,6 @@
     UserGroupIcon,
     TicketIcon,
     SwatchIcon,
-    CalendarDaysIcon,
-    BriefcaseIcon,
     UsersIcon
   } from '@heroicons/vue/24/outline'
 </script>

@@ -17,13 +17,13 @@
     @apply flex w-full justify-center rounded-md bg-blue-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600;
   }
   .danger-btn {
-    @apply flex w-full justify-center rounded-md bg-red-600 items-center  text-white shadow-sm hover:bg-red-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600;
+    @apply flex w-full justify-center rounded-md bg-[#FFE6E6] items-center  text-[#FF5558] shadow-sm hover:bg-[#FF5558] hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2;
   }
   .edit-btn {
-    @apply flex w-full justify-center rounded-md bg-amber-600 items-center  text-white shadow-sm hover:bg-amber-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-600;
+    @apply flex w-full justify-center rounded-md bg-[#FFECD9] items-center  text-[#FF7E00] shadow-sm hover:bg-[#FF7E00] hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2;
   }
   .success-btn {
-    @apply flex w-full justify-center rounded-md bg-green-600 items-center  text-white shadow-sm hover:bg-green-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-600;
+    @apply flex w-full justify-center rounded-md bg-[#DCF7DD] items-center  text-[#119A21] shadow-sm hover:bg-[#119A21] hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2;
   }
   .add-btn {
     @apply inline-flex flex-1 justify-center bg-blue-600 p-1 text-base font-semibold text-white shadow-sm hover:bg-blue-600  items-center rounded-full;
