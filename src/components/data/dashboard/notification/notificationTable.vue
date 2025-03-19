@@ -17,7 +17,7 @@
         <tbody class="bg-white">
           <tr
             v-for="(item, itemIdx) in notifications"
-            :key="item._id"
+            :key="item?._id"
             :class="itemIdx % 2 === 0 ? undefined : 'bg-gray-50'"
           >
             <td class="td-first md-max:text-[13px]">
@@ -44,20 +44,20 @@
                 </button>
               </div>
             </td>
-            <td class="td">{{ convertDate(item.createdAt, 'full') }}</td>
+            <td class="td">{{ convertDate(item?.createdAt, 'full') }}</td>
             <td class="td">
               <button
               @click="changeStatus(item?._id, item?.status)"
-              :class=" item.status == 'active' ? 'bg-[#DCF7DD] text-[#119A21] rounded-lg px-3 py-1 w-[80px]' : 'bg-[#FFE6E6] text-[#FF5558] rounded-lg px-3 py-1 w-[80px]'"
+              :class=" item?.status == 'active' ? 'bg-[#DCF7DD] text-[#119A21] rounded-lg px-3 py-1 w-[80px]' : 'bg-[#FFE6E6] text-[#FF5558] rounded-lg px-3 py-1 w-[80px]'"
               >
-                {{ item.status == 'active' ? "Актив" : "Не актив" }}
+                {{ item?.status == 'active' ? "Актив" : "Не актив" }}
               </button>
             </td>
             <td class="td-last">
               <button
                 type="button"
                 class="bg-[#FFE6E6] text-[#FF5558] hover:bg-[#FF5558] hover:text-white rounded-lg flex items-center justify-center size-9 lg:size-8"
-                @click="confirmRemove(item._id)"
+                @click="confirmRemove(item?._id)"
               >
                 <TrashIcon class="size-4" />
               </button>

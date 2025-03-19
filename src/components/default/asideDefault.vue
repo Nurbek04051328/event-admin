@@ -100,7 +100,7 @@
   </TransitionRoot>
 
   <div class="  lg:hidden min-w-[260px]">
-    <div class="flex grow flex-col overflow-y-auto bg-white px-6 pb-4 pt-[20px] h-full rounded-br-3xl rounded-tr-3xl">
+    <div class="flex grow flex-col overflow-y-auto bg-white px-6 pb-4 pt-[10px] h-full rounded-br-3xl rounded-tr-3xl">
       <div class="flex py-4 gap-4 shrink-0 items-center justify-start mb-[50px]">
         <img class="h-14 w-auto" src="../../assets/logo/logo.png" alt="Company Logo" />
         <span class="text-3xl text-[#483D5B] font-bold">Eventum</span>

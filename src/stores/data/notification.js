@@ -14,7 +14,7 @@ export const notificationStore = defineStore('notificationStore', () => {
     const { data } = await api.get(base_url, {params})
     console.log("dadada", data);
     
-    notifications.value = data?.cities;
+    notifications.value = data?.notifications;
     notificationCount.value = data?.count;
   }
 
@@ -49,17 +49,17 @@ export const notificationStore = defineStore('notificationStore', () => {
   const changeStatus = async (id, status) => {
     console.log("iststats", id, status);
     
-    let {data} = await api.get(`${base_url}/${id}/${status}`)
+    let {data} = await api.get(`${base_url}/status/${id}/${status}`)
     console.log(data);
     if (data) {
-      notifications.value = notifications.value.map(ad => {
-          if (ad._id == id) {
-            console.log(ad);
-            
-          }
+      notifications.value = notifications.value.map(notif => {
+        if (notif._id == id) return {
+            ...notif,
+            status: status
+        }
+        return notif
       })
     }
-    
   }
 
   return {
