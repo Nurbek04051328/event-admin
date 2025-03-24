@@ -79,12 +79,8 @@ const send = async () => {
   if (!v$.value.$invalid) {
     if (edit.value) {
       data.value.language = lang
-      console.log("savecat", data.value);
-      
       await store.saveCategory({ ...data.value }, t)
     } else {
-      console.log("addcat", data.value);
-      
       await store.addCategory({ ...data.value }, t)
     }
     close()

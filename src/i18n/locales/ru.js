@@ -15,7 +15,9 @@ const ru = {
     logs: 'Журналы',
     transaction: 'Транзакция',
     ads: 'Рекламы',
-    notification:"Уведомление"
+    notification:"Уведомление",
+    newsCategory: "Категория новостей",
+    news: "Новости"
   },
   settingMenu: {
     language: 'Языки',

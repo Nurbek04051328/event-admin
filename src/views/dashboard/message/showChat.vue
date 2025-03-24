@@ -1,20 +1,6 @@
 <template>
   <div class="flex items-center border-b border-gray-200 px-4 pb-3">
     <div class="mr-2">
-      <!-- <img
-        v-if="selectChatRoom?.cover?.length > 0"
-        class="w-8 h-8 rounded-full"
-        :src="`${url}/${selectChatRoom?.cover[0]}`"
-        alt="User avatar"
-      /> -->
-      
-      <!-- <div
-        v-else
-        class="h-8 w-8 flex-none rounded-full flex items-center justify-center text-white"
-        :style="{ backgroundColor: randomColor(selectChatRoom?.userName) }"
-      >
-        {{ selectChatRoom?.userName?.charAt(0).toUpperCase() }}
-      </div> -->
       <div class="flex items-center justify-center rounded-full w-10 h-10 bg-[#F5F0FF]">
         <img class="w-6 h-6" src="@/assets/images/header-user.svg" alt="">
       </div>
@@ -81,8 +67,7 @@ import { authStore } from '@/stores/user/auth'
 // Components
 import ChatItem from '@/components/data/dashboard/message/chatItem.vue'
 
-// Helpers
-const url = import.meta.env.VITE_URL
+
 
 // Store initialization
 const store = messageStore()
@@ -152,6 +137,8 @@ const getData = async (changePage = false, isScrollingDownwards = false) => {
 
   try {
     if (changePage) {
+      console.log("changepage", changePage, isScrollingDownwards);
+      
       if (isScrollingDownwards && page.value > 1) {
         page.value -= 1
       } else if (!isScrollingDownwards) {
@@ -160,6 +147,8 @@ const getData = async (changePage = false, isScrollingDownwards = false) => {
       }
     }
 
+    console.log(page.value, limit.value);
+    
     const response = await store.getChatMessages(route.params.id, { 
       limit: limit.value, 
       page: page.value 

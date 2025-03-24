@@ -23,10 +23,9 @@
             :class="itemIdx % 2 === 0 ? undefined : 'bg-gray-50'"
           >
             <td class="td-first md-max:text-[13px]">
-              {{ itemIdx + 1 }}
+              {{ (page - 1) * limit + itemIdx + 1 }}
             </td>
             <td class="td md-max:text-[13px]">{{ item?.title }}</td>
-            <!-- <td class="td">{{ item?.description }}</td> -->
             <td class="td md-max:text-[13px] font-bold">{{ item?.price?.from?.toLocaleString() }} - {{ item?.price?.to?.toLocaleString() }}</td>
             <td class="td md-max:text-[13px]">{{ item?.commissionRate }} %</td>
             <td class="whitespace-nowrap px-3 py-5 text-sm text-gray-500">

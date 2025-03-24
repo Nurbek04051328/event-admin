@@ -12,7 +12,9 @@ import {
   BanknotesIcon,
   ChatBubbleLeftIcon,
   ClipboardDocumentListIcon,
-  BellIcon
+  BellIcon,
+  FolderIcon,
+  NewspaperIcon
 } from '@heroicons/vue/24/outline'
 
 import { settingMenu } from './settingMenu'
@@ -110,6 +112,39 @@ export const links = [
     }
   },
   {
+    path: 'ads',
+    name: 'ads',
+    component: () => import('@/views/dashboard/ad/indexAd.vue'),
+    meta: {
+      title: 'Рекламы',
+      icon: ClipboardDocumentListIcon,
+      toggle: true,
+      group: 'main'
+    }
+  },
+  {
+    path: 'news-category',
+    name: 'newsCategory',
+    component: () => import('@/views/dashboard/newscategory/indexNewsCategory.vue'),
+    meta: {
+      title: 'Категория новостей',
+      icon: FolderIcon,
+      toggle: true,
+      group: 'main'
+    }
+  },
+  {
+    path: 'news',
+    name: 'news',
+    component: () => import('@/views/dashboard/news/indexNews.vue'),
+    meta: {
+      title: 'Новости',
+      icon: NewspaperIcon,
+      toggle: true,
+      group: 'main'
+    }
+  },
+  {
     path: 'activation-keys',
     name: 'activationkeys',
     component: () => import('@/views/dashboard/activations/indexActivations.vue'),
@@ -117,7 +152,7 @@ export const links = [
       title: 'Активационные ключи',
       icon: KeyIcon,
       toggle: false,
-      group: 'main'
+      group: 'header'
     }
   },
   {
@@ -128,7 +163,7 @@ export const links = [
       title: 'Сообщение',
       icon: ChatBubbleLeftIcon,
       toggle: false,
-      group: 'main',
+      group: 'header',
       toggleTitle: 'Создать чат'
     },
     children: [
@@ -143,17 +178,6 @@ export const links = [
     ]
   },
   {
-    path: 'ads',
-    name: 'ads',
-    component: () => import('@/views/dashboard/ad/indexAd.vue'),
-    meta: {
-      title: 'Рекламы',
-      icon: ClipboardDocumentListIcon,
-      toggle: true,
-      group: 'main'
-    }
-  },
-  {
     path: 'notification',
     name: 'notification',
     component: () => import('@/views/dashboard/notifications/indexNotification.vue'),
@@ -161,7 +185,7 @@ export const links = [
       title: 'Уведомление',
       icon: BellIcon,
       toggle: true,
-      group: 'main'
+      group: 'header'
     }
   },
   {
@@ -172,7 +196,7 @@ export const links = [
       title: 'Журналы',
       icon: BookmarkSquareIcon,
       toggle: false,
-      group: 'main'
+      group: 'header'
     }
   },
   {

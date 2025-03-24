@@ -17,7 +17,9 @@ const uz = {
     logs: 'Loglar',
     transaction: 'Transaksiyalar',
     ads: "Reklamalar",
-    notification:"E'lonlar"
+    notification:"E'lonlar",
+    newsCategory: "Yangilik turlari",
+    news: "Yangiliklar"
   },
   settingMenu: {
     language: 'Tillar',

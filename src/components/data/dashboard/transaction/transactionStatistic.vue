@@ -105,6 +105,19 @@ const options = computed(() => {
       x: {
         format: 'dd/MM/yy HH:mm'
       },
+      y: {
+        formatter: (value) => value.toLocaleString('ru-RU') // Raqamni vergul bilan ajratish uchun
+      }
+    },
+    yaxis: {
+      labels: {
+        formatter: (value) => value.toLocaleString('ru-RU')
+      }
+    },
+    xaxis: {
+      labels: {
+        formatter: (value) => value.toLocaleString('ru-RU') // Agar xaxis ham raqam bo‘lsa
+      }
     },
     legend: {
       position: 'top',
@@ -129,7 +142,6 @@ const getData = async (params) => {
 }
 
 watch(date, (newDate) => {
-  console.log('Yangi sana tanlandi:', newDate);
   getData(newDate)
 });
 

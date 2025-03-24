@@ -1,5 +1,19 @@
 <template>
   <div class="gap-2 flex items-center">
+    <!-- <defaultSelect
+      v-model="search.status"
+      name="status"
+      :options="statuses || []"
+      option_title="value"
+      placeholder="Выберите статус"
+    />
+    <filterSelect
+      v-model="search.organizer"
+      name="organizer"
+      :options="organizer__store.organizer.data || []"
+      option_title="lname name"
+      placeholder="Выберите организер"
+    /> -->
     <defaultSelect
       v-model="search.status"
       name="status"
@@ -16,11 +30,16 @@
   </div>
 </template>
 <script setup>
+import { onMounted } from 'vue'
 import { MagnifyingGlassIcon, XMarkIcon } from '@heroicons/vue/20/solid'
+// import { useRouter } from 'vue-router'
 import { biletStore } from '@/stores/data/bilet'
 import { ref } from 'vue'
-// import { useRouter } from 'vue-router'
 const store = biletStore()
+
+// Filter uchun ma'lumotlar
+import { organizerStore } from '@/stores/user/organizer'
+const organizer__store = organizerStore()
 
 const search = ref({
   status: ''
@@ -61,5 +80,11 @@ const clear = async() => {
     status:''
   }
 }
+
+
+
+onMounted(async () => {
+  await organizer__store.getorganizers()
+})
 </script>
 <style lang=""></style>

@@ -7,8 +7,6 @@
             <th scope="col" class="th-first md-max:text-[13px]">№</th>
             <th scope="col" class="th-first md-max:text-[13px]">Фото</th>
             <th scope="col" class="th md-max:text-[13px]">Название</th>
-            <th scope="col" class="th md-max:text-[13px]">Slug</th>
-            <th scope="col" class="th md-max:text-[13px]">Цены (сум)</th>
             <th scope="col" class="th md-max:text-[13px]">Переводы</th>
             <th scope="col" class="th md-max:text-[13px]" width="150">Время</th>
             <th scope="col" class="th">Статус</th>
@@ -17,7 +15,7 @@
         </thead>
         <tbody class="bg-white">
           <tr
-            v-for="(item, itemIdx) in ads"
+            v-for="(item, itemIdx) in newCategories"
             :key="item?._id"
             :class="itemIdx % 2 === 0 ? undefined : 'bg-gray-50'"
           >
@@ -25,8 +23,8 @@
               {{ (page - 1) * limit + itemIdx + 1 }}
             </td>
             <td class="td">
-              <a :href="`${url}/${item?.cover[0]}`" target="_blank" v-if="item?.cover?.length > 0">
-                <img :src="`${url}/${item?.cover[0]}`" alt="" class="w-10 rounded-md" />
+              <a :href="`${url}/${item?.icon[0]}`" target="_blank" v-if="item?.icon?.length > 0">
+                <img :src="`${url}/${item?.icon[0]}`" alt="" class=" h-12 rounded-md" />
               </a>
               <img
                 v-else
@@ -38,8 +36,6 @@
             <td class="td md-max:text-[13px]">
               {{ item?.title }}
             </td>
-            <td class="td">{{ item?.slug }}</td>
-            <td class="td md-max:text-[13px] font-bold">{{ item?.price?.toLocaleString() }} сум</td>
             <td class="td md-max:text-[13px]">
               <div class="flex items-start gap-2">
                 <button
@@ -97,16 +93,11 @@ const toggle = ref(false)
 // const limit = ref(30)
 defineProps(['options', 'page', 'limit'])
 
-import { adsStore } from '@/stores/data/ads'
+import { newsCategoryStore } from '@/stores/data/newscategory'
 import { storeToRefs } from 'pinia'
-const store = adsStore()
-const { ads } = storeToRefs(store)
+const store = newsCategoryStore()
+const { newCategories } = storeToRefs(store)
 
-// const getData = async () => {
-//   await store.getCategories({
-//     limit: limit.value
-//   })
-// }
 const _id = ref('')
 
 import { useFullStore } from '@/stores/usefull/modal'
@@ -130,7 +121,7 @@ const confirmRemove = (id) => {
 
 const remove = async (answer) => {
   if (answer) {
-    await store.removeAd(_id.value, t)
+    await store.removeNewsCategory(_id.value, t)
   }
   close()
 }

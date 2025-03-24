@@ -15,7 +15,9 @@ const en = {
     logs: 'Loggers',
     transaction: 'Transactons',
     ads: "Ads",
-    notification:"Notifications"
+    notification:"Notifications",
+    newsCategory: "News category",
+    news: "News"
   },
   settingMenu: {
     language: 'Languages',

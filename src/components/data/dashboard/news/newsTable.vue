@@ -8,7 +8,6 @@
             <th scope="col" class="th-first md-max:text-[13px]">Фото</th>
             <th scope="col" class="th md-max:text-[13px]">Название</th>
             <th scope="col" class="th md-max:text-[13px]">Slug</th>
-            <th scope="col" class="th md-max:text-[13px]">Цены (сум)</th>
             <th scope="col" class="th md-max:text-[13px]">Переводы</th>
             <th scope="col" class="th md-max:text-[13px]" width="150">Время</th>
             <th scope="col" class="th">Статус</th>
@@ -17,7 +16,7 @@
         </thead>
         <tbody class="bg-white">
           <tr
-            v-for="(item, itemIdx) in ads"
+            v-for="(item, itemIdx) in news"
             :key="item?._id"
             :class="itemIdx % 2 === 0 ? undefined : 'bg-gray-50'"
           >
@@ -39,7 +38,6 @@
               {{ item?.title }}
             </td>
             <td class="td">{{ item?.slug }}</td>
-            <td class="td md-max:text-[13px] font-bold">{{ item?.price?.toLocaleString() }} сум</td>
             <td class="td md-max:text-[13px]">
               <div class="flex items-start gap-2">
                 <button
@@ -97,10 +95,10 @@ const toggle = ref(false)
 // const limit = ref(30)
 defineProps(['options', 'page', 'limit'])
 
-import { adsStore } from '@/stores/data/ads'
+import { newsStore } from '@/stores/data/news'
 import { storeToRefs } from 'pinia'
-const store = adsStore()
-const { ads } = storeToRefs(store)
+const store = newsStore()
+const { news } = storeToRefs(store)
 
 // const getData = async () => {
 //   await store.getCategories({
@@ -109,7 +107,7 @@ const { ads } = storeToRefs(store)
 // }
 const _id = ref('')
 
-import { useFullStore } from '@/stores/usefull/modal'
+import { useFullStore } from '@/stores/usefull/modal'    
 const usefull = useFullStore()
 const edit = (id, lang) => {
   usefull.setToggle(true, id, lang)
@@ -130,7 +128,7 @@ const confirmRemove = (id) => {
 
 const remove = async (answer) => {
   if (answer) {
-    await store.removeAd(_id.value, t)
+    await store.removeNews(_id.value, t)
   }
   close()
 }

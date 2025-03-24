@@ -31,7 +31,7 @@
           />
         </div>
         <Combobox
-          class="absolute top-full w-[97%] bg-white shadow rounded-br-2xl rounded-bl-2"
+          class="absolute top-full w-[97%] bg-white shadow rounded-br-2xl rounded-bl-2xl"
           v-if="filteredList.length > 0"
         >
           <ComboboxOptions
@@ -85,11 +85,42 @@
       </div>
 
       <div class="flex items-center gap-x-3 xm:gap-x-0 h-full">
-        <div class="flex items-center bg-white p-[14px] rounded-2xl h-full">
+        <div 
+          class="flex items-center bg-white p-[14px] rounded-2xl h-full cursor-pointer hover:bg-[#F3EBFC]"
+          active-class="bg-[#F3EBFC]"
+          >
+          <router-link
+            :to="{ name: 'notification' }"
+            >
+              <BellIcon class="h-7 w-7 shrink-0 text-[#9E55EC]" aria-hidden="true" />
+            </router-link>
+        </div>
+        <div class="flex items-center bg-white p-[14px] rounded-2xl h-full cursor-pointer hover:bg-[#F3EBFC]">
+          <router-link
+            :to="{ name: 'activationkeys' }"
+            >
+              <KeyIcon class="h-7 w-7 shrink-0 text-[#9E55EC]" aria-hidden="true" />
+            </router-link>
+        </div>
+        <div class="flex items-center bg-white p-[14px] rounded-2xl h-full cursor-pointer hover:bg-[#F3EBFC]">
+          <router-link
+            :to="{ name: 'logs' }"
+            >
+              <BookmarkSquareIcon class="h-7 w-7 shrink-0 text-[#9E55EC]" aria-hidden="true" />
+            </router-link>
+        </div>
+        <div class="flex items-center bg-white p-[14px] rounded-2xl h-full cursor-pointer hover:bg-[#F3EBFC]">
+          <router-link
+            :to="{ name: 'messages' }"
+            >
+              <ChatBubbleLeftIcon class="h-7 w-7 shrink-0 text-[#9E55EC]" aria-hidden="true" />
+            </router-link>
+        </div>
+        <div class="flex items-center bg-white p-[14px] rounded-2xl h-full cursor-pointer hover:bg-[#F3EBFC]">
           <router-link
             :to="{ name: 'language' }"
             >
-              <Cog6ToothIcon class="h-8 w-8 shrink-0 text-[#9E55EC]" aria-hidden="true" />
+              <Cog6ToothIcon class="h-7 w-7 shrink-0 text-[#9E55EC]" aria-hidden="true" />
             </router-link>
         </div>
         <!-- <button type="button" class="-m-2.5 p-2.5 text-gray-400 hover:text-gray-500 xm:p-0">
@@ -148,7 +179,7 @@ import { ref, watch, computed } from 'vue'
 import { useI18n } from 'vue-i18n'
 const { locale, t } = useI18n()
 import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/vue'
-import { Bars3Icon, BellIcon, Cog6ToothIcon } from '@heroicons/vue/24/outline'
+import { Bars3Icon, BellIcon, Cog6ToothIcon, ChatBubbleLeftIcon, BookmarkSquareIcon, KeyIcon } from '@heroicons/vue/24/outline'
 import { ChevronDownIcon, MagnifyingGlassIcon } from '@heroicons/vue/20/solid'
 // const userNavigation = [{ name: 'Your profile', href: '#' }]
 
@@ -193,7 +224,7 @@ const logout = async () => {
 }
 
 import { loggerStore } from '@/stores/user/logger'
-import { useRouter } from 'vue-router'
+import { useRouter, useRoute } from 'vue-router'
 const logger_store = loggerStore()
 const searchText = ref('')
 
@@ -228,6 +259,7 @@ const result = ref({})
 const filteredList = computed(() => categories.filter((cat) => result.value[cat.value]?.length > 0))
 
 const router = useRouter()
+const route = useRoute()
 const routeTo = (route, id) => {
   router.push({ name: route, params: { id } })
   closeSearch()

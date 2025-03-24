@@ -16,7 +16,6 @@ export const biletStore = defineStore('biletStore', () => {
     console.log("paramsbilet", params);
     
     const { data } = await api.get(base_url, { params })
-    console.log('data', data)
     bilets.data = [...data.tickets]
     bilets.count = data.count
   }
@@ -25,7 +24,7 @@ export const biletStore = defineStore('biletStore', () => {
     const { data } = await api.get(base_url, { params: { limit: 1} })
     bilets.data = [...data.tickets,...bilets.data]
     bilets.count += 1
-    notification.setNotif(true, 'Добавлено новое Bilet', 'success')
+    notification.setNotif(true, 'Добавлено новое Билет', 'success')
   }
   const getBilet = async (id) => {
     bilets.data = bilets.data.map(item => {

@@ -25,22 +25,11 @@
             :class="index % 2 === 0 ? undefined : 'bg-gray-50'"
           >
             <td class="td-first">
-              {{ index + 1 }}
+              {{ (page - 1) * limit + index + 1 }}
             </td>
             <td class="whitespace-nowrap py-5 pl-4 pr-3 text-sm sm:pl-0">
               <div class="flex items-center">
-                <div class="h-11 w-11 flex-shrink-0">
-                  <img
-                    class="h-11 w-11 rounded-full object-cover"
-                    v-if="person.cover?.length > 0 || person.face?.at(0)?.length > 0"
-                    :src="`${url}/${person.cover?.at(0) || person.face?.at(0)}`"
-                    alt=""
-                  />
-                  <img class="h-11 w-11 rounded-full" v-else src="@/assets/logo/logo.png" alt="" />
-                </div>
-                <div class="ml-4">
-                  <div class="font-medium text-gray-900">{{ person.lname }} {{ person.name }}</div>
-                </div> 
+                <div class="font-medium text-gray-900">{{ person.lname }} {{ person.name }}</div>
               </div>
             </td>
             <td class="td">
