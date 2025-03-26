@@ -1,12 +1,13 @@
 <template>
   <Combobox as="div" v-model="selectedPerson">
     <ComboboxLabel class="block text-sm font-medium leading-6 text-[#645A77]">{{ label }}</ComboboxLabel>
-    <div class="relative">
+    <div class="relative mt-2">
       <ComboboxInput
-        class="w-full rounded-md border-0 bg-white py-[6px] pl-3 pr-10 text-[#645A77] shadow-sm ring-1 ring-inset ring-gray-300 "
+        class="w-full rounded-md border-0 bg-white py-1.5 pl-3 pr-10 text-[#645A77] shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-[#9E55EC] focus:outline-0"
         :placeholder="placeholder"
         @input="onInput"
         :display-value="(person) => getPersonTitleById(person)"
+        autocomplete="off"
       />
       <ComboboxButton class="absolute inset-y-0 right-0 flex items-center rounded-r-md px-2 focus:outline-none">
         <ChevronUpDownIcon class="h-5 w-5 text-gray-400" aria-hidden="true" />
@@ -23,7 +24,7 @@
           as="template"
           v-slot="{ active, selected }"
         >
-          <li :class="['relative cursor-default select-none py-2 pl-3 pr-9', active ? 'bg-indigo-600 text-white' : 'text-gray-900']">
+          <li :class="['relative cursor-default select-none py-2 pl-3 pr-9', active ? 'bg-[#9E55EC] text-white' : 'text-gray-800']">
             <span :class="['block truncate', selected && 'font-semibold']">
               {{ person[option_title] }}
             </span>
@@ -91,15 +92,6 @@ const selectedPerson = ref(null)
 // Define emit for updating v-model
 const emit = defineEmits(['update:modelValue'])
 
-
-// Yangi computed array qo‘shamiz
-const enhancedOptions = computed(() => {
-  return props.options.map(person => ({
-    ...person,
-    fullName: `${person.lname} ${person.name}`.trim(),
-  }))
-})
-
 // Computed array of filtered options based on the search query
 const filteredPeople = computed(() => {
   return query.value === ''
@@ -109,8 +101,6 @@ const filteredPeople = computed(() => {
 
 // Function to get the title of a person by their ID (for display purposes)
 function getPersonTitleById(id) {
-  console.log(props.option_title, "dsdsd");
-  
   const person = props.options.find((p) => p._id === id)
   return person ? person[props.option_title] : ''
 }

@@ -1,14 +1,14 @@
 <template>
-  <div class="block text-sm font-medium leading-6 text-gray-900" v-if="title">{{ title }}</div>
+  <div class="block text-sm font-medium leading-6 text-[#645A77]" v-if="title">{{ title }}</div>
   <div class="mt-2">
     <label
       type="button"
       for="photo"
-      class="relative w-full rounded-lg flex-col border-2 border-dashed border-gray-300 p-6 text-center hover:border-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 flex gap-3 justify-center"
+      class="relative w-full rounded-lg flex-col border-2 border-dashed border-gray-300 p-2 text-center hover:border-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 flex gap-3 justify-center"
     >
       <div class="flex justify-center items-center flex-grow-0 flex-shrink-0 relative gap-2">
         <PaperClipIcon class="size-6 text-gray-400" />
-        <span class="text-sm font-medium text-blue-500">{{ placeholder }}</span>
+        <span class="text-sm font-medium text-[#9E55EC]">{{ placeholder }}</span>
       </div>
 
       <div v-if="images.length" class="space-y-2">

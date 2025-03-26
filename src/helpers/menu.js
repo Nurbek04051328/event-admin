@@ -140,8 +140,9 @@ export const links = [
     meta: {
       title: 'Новости',
       icon: NewspaperIcon,
-      toggle: true,
-      group: 'main'
+      linkName: 'newsAdd',
+      group: 'main',
+      toggleTitle: 'Добавить новости'
     }
   },
   {

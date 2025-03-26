@@ -45,7 +45,7 @@
         <button v-if="route?.meta?.toggle" @click="openModal" type="button" class="bg-[#E9DCFF] text-[#360B64] hover:bg-[#9E55EC] hover:text-white p-1 rounded-lg">
           <PlusIcon class="size-5 text-white-400" />
         </button>
-        <button v-if="route?.meta?.linkName" @click="$router.push({ name: 'workerAdd' })" type="button" class="bg-[#E9DCFF] text-[#360B64] hover:bg-[#9E55EC] hover:text-white p-1 rounded-lg">
+        <button v-if="route?.meta?.linkName" @click="$router.push({ name: route?.meta?.linkName })" type="button" class="bg-[#E9DCFF] text-[#360B64] hover:bg-[#9E55EC] hover:text-white p-1 rounded-lg">
           <PlusIcon class="size-5 text-white-400" />
         </button>
       </div>

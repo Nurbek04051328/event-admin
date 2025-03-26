@@ -1,5 +1,4 @@
 import '@/assets/styles/app.scss'
-
 import { createApp } from 'vue'
 
 
@@ -24,7 +23,10 @@ import phoneMaska from '@/components/default/phoneMaska.vue'
 
 import VueApexCharts from 'vue3-apexcharts'
 
-// Import datapicker
+import { QuillEditor } from '@vueup/vue-quill'
+import '@vueup/vue-quill/dist/vue-quill.snow.css'
+
+
 import VueDatePicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css'
 
@@ -45,6 +47,7 @@ app.component('dublicatSelect', dublicatSelect)
 app.component('defaultCheckbox', defaultCheckbox)
 app.component('phoneMaska', phoneMaska)
 app.component('VueDatePicker', VueDatePicker);
+app.component('QuillEditor', QuillEditor)
 
 
 app.directive('click-outside', {

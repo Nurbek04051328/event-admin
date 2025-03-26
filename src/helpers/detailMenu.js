@@ -159,7 +159,17 @@ export const detailMenu = [
         }
       }
     ]
-  }
+  },
+  {
+    path: 'news/add',
+    name: 'newsAdd',
+    component: () => import('@/components/data/dashboard/news/newsAddPage.vue'),
+    meta: {
+      title: 'Добавить новости',
+      active: 'news'
+    }
+  },
+
   // {
   //   path: 'message/:id',
   //   name: 'user-detail',

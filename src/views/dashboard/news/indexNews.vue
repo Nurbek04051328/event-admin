@@ -45,6 +45,8 @@ import { storeToRefs } from 'pinia'
 import { newsStore } from '@/stores/data/news'
 const store = newsStore()
 
+import { newsCategoryStore } from '@/stores/data/newscategory'
+const newscategory_store = newsCategoryStore()
 
 import { languageStore } from '@/stores/data/language'
 const language_store = languageStore()
@@ -66,6 +68,7 @@ const getData = async () => {
 
 onMounted(async () => {
   await language_store.getlanguages({ limit: 0 })
+  await newscategory_store.getNewsCategories({ limit: 0 })
   await getData()
 })
 </script>
