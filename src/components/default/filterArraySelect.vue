@@ -16,7 +16,7 @@
       class="inset-y-0 w-full flex items-center rounded-r-md focus:outline-none"
       >
         <ComboboxInput
-          class="w-full border-0 bg-white  text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+          class="w-full border-0 bg-white  text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-[#9E55EC] sm:text-sm sm:leading-6"
           :placeholder="placeholder"
           v-model:query="query"
           autocomplete="off"
@@ -43,7 +43,7 @@
           <li
             :class="[
               'relative cursor-default select-none py-2 pl-3 pr-9 z-10',
-              active ? 'bg-indigo-600 text-white' : 'text-gray-900'
+              active ? 'bg-[#9E55EC] text-white' : 'text-gray-900'
             ]"
           >
             <span :class="['block truncate', selected && 'font-semibold']">

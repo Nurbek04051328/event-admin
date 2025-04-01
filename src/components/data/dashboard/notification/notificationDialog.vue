@@ -13,7 +13,7 @@
         </button>
       </div>
       <DialogTitle as="h3" class="text-lg font-semibold leading-6 text-gray-900">
-        {{ edit ? "Редактировать реклама" : "Добавить новая реклама" }}
+        {{ edit ? "Редактировать уведомление" : "Добавить новая уведомление" }}
       </DialogTitle>
       <div class="flex w-full xs-max:flex-col">
         <div class="space-y-2 mt-4 w-full mr-1">

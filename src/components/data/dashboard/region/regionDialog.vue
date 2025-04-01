@@ -13,7 +13,7 @@
         </button>
       </div>
       <DialogTitle as="h3" class="text-lg font-semibold leading-6 text-gray-900">
-        {{ edit ? 'Редактировать' : 'Добавить' }}
+        {{ edit ? 'Редактировать регион' : 'Добавить регион' }}
       </DialogTitle>
 
       <div class="space-y-2 mt-4">
@@ -24,7 +24,26 @@
           :error="v$.title.$invalid && v$.title.$dirty"
         />
       </div>
-      <div class="mt-6 flex flex-row gap-2">
+      <div class="flex items-center justify-between gap-4">
+        <div class="space-y-2 mt-4 w-full">
+          <default-input
+            type="number"
+            v-model="data.cordinates.lat"
+            name="lat"
+            label="Широта (lat)"
+            min="0"
+          />
+        </div>
+        <div class="space-y-2 mt-4 w-full">
+          <default-input
+            type="number"
+            v-model="data.cordinates.long"
+            name="lat"
+            label="Долгота (long)"
+          />
+        </div>
+      </div>
+      <div class="mt-8 flex flex-row gap-2">
         <button type="button" class="close-btn" @click="close">
           {{ $t('category.dialog.close') }}
         </button>
@@ -49,7 +68,11 @@ const { toggle, id, lang } = storeToRefs(usefull)
 defineProps(['options'])
 
 const data = ref({
-  title: ''
+  title: '',
+  cordinates: {
+    lat: null,
+    long: null,
+  }
 })
 
 import { useVuelidate } from '@vuelidate/core'
@@ -68,12 +91,8 @@ const send = async () => {
   if (!v$.value.$invalid) {
     if (edit.value) {
       data.value.language = lang
-      console.log('savecat', data.value)
-
       await store.saveRegion({ ...data.value }, t)
     } else {
-      console.log('addcat', data.value)
-
       await store.addRegion({ ...data.value }, t)
     }
     close()
@@ -81,6 +100,8 @@ const send = async () => {
     console.log(data.value)
   }
 }
+
+
 
 watch(
   () => id?.value,
@@ -93,7 +114,6 @@ watch(
       data.value = {
         ...res.data,
         _id: id.value,
-        slug: res.data?.slug || '',
         title: res.data?.title || ''
         // translate: {
         //   title: res.data?.translate?.title || '',
@@ -108,8 +128,11 @@ watch(
   () => toggle.value,
   () => {
     data.value = {
-      slug: '',
-      title: ''
+      title: '',
+      cordinates: {
+        lat: null,
+        long: null,
+      }
     }
     v$.value.$reset()
     edit.value = false
@@ -119,8 +142,11 @@ watch(
 const close = () => {
   usefull.setToggle(false, 0)
   data.value = {
-    slug: '',
-    title: ''
+    title: '',
+    cordinates: {
+      lat: null,
+      long: null,
+    }
   }
   v$.value.$reset()
   edit.value = false

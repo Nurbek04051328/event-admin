@@ -56,6 +56,20 @@ export const regionStore = defineStore('regionStore', () => {
     ]
   })
 
+
+  const changeStatus = async (id, status) => {
+    let {data} = await api.get(`${base_url}/status/${id}/${status}`)
+    if (data) {
+      regions.value = regions.value.map(reg => {
+        if (reg._id == id) return {
+            ...reg,
+            status: status
+        }
+        return reg
+      })
+    }
+  }
+
   return {
     regions,
     regionCount,
@@ -64,6 +78,7 @@ export const regionStore = defineStore('regionStore', () => {
     removeRegion,
     saveRegion,
     getRegion,
-    listCategories
+    listCategories,
+    changeStatus
   }
 })

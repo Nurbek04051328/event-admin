@@ -13,7 +13,7 @@
         </button>
       </div>
       <DialogTitle as="h3" class="text-lg font-semibold leading-6 text-gray-900">
-        {{ edit ? $t('subcategory.dialog.edit') : $t('subcategory.dialog.title') }}
+        {{ edit ? 'Редактировать 2x подкатегорию' : 'Новая 2x подкатегория' }}
       </DialogTitle>
 
       <div class="space-y-2 mt-4">
@@ -22,7 +22,7 @@
         <default-input
           v-model="data.title"
           name="title"
-          :label="t('subcategory.dialog.name')"
+          label="Название 2x подкатегории"
           :error="v$.title.$invalid && v$.title.$dirty"
         />
       </div>
@@ -30,7 +30,7 @@
         <default-input
           v-model="data.slug"
           name="slug"
-          :label="t('subcategory.dialog.slug')"
+          label="Код 2x подкатегории (slug)"
           :error="v$.slug.$invalid && v$.slug.$dirty"
           :disabled="edit"
         />
@@ -101,10 +101,12 @@ const send = async () => {
   if (!v$.value.$invalid) {
     if (edit.value) {
       data.value.language = lang
-      data.value.subcategory = route.params.id
+      console.log("edit2x", data.value);
+      
       await store.save2xSubcategory({ ...data.value }, t)
     } else {
-      data.value.category = route.params.id
+      data.value.category = route.params.category
+      data.value.subcategory = route.params.subcategory
       await store.add2xSubcategory({ ...data.value }, t)
     }
     close()

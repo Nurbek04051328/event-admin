@@ -2,15 +2,15 @@
   <Combobox as="div" v-model="selectedPerson">
     <ComboboxLabel class="block text-sm font-medium leading-6 text-[#645A77]">{{ label }}</ComboboxLabel>
     <div class="relative mt-2">
-      <ComboboxInput
-        class="w-full rounded-md border-0 bg-white py-1.5 pl-3 pr-10 text-[#645A77] shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-[#9E55EC] focus:outline-0"
-        :placeholder="placeholder"
-        @input="onInput"
-        :display-value="(person) => getPersonTitleById(person)"
-        autocomplete="off"
-      />
-      <ComboboxButton class="absolute inset-y-0 right-0 flex items-center rounded-r-md px-2 focus:outline-none">
-        <ChevronUpDownIcon class="h-5 w-5 text-gray-400" aria-hidden="true" />
+      <ComboboxButton class="inset-y-0 flex items-center rounded-r-md px-2 focus:outline-none">
+        <ComboboxInput
+          class="w-full rounded-md border-0 bg-white py-1.5 pl-3 pr-10 text-[#645A77] shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-[#9E55EC] focus:outline-0"
+          :placeholder="placeholder"
+          @input="onInput"
+          :display-value="(person) => getPersonTitleById(person)"
+          autocomplete="off"
+        />
+        <ChevronUpDownIcon class="absolute right-0 h-5 w-5 text-gray-400" aria-hidden="true" />
       </ComboboxButton>
 
       <ComboboxOptions

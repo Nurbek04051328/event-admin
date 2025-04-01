@@ -47,8 +47,6 @@ export const notificationStore = defineStore('notificationStore', () => {
 
 
   const changeStatus = async (id, status) => {
-    console.log("iststats", id, status);
-    
     let {data} = await api.get(`${base_url}/status/${id}/${status}`)
     console.log(data);
     if (data) {

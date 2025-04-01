@@ -12,7 +12,7 @@ export const settingChildren = [
     }
   },
   {
-    path: 'subcategory/:id',
+    path: 'subcategory/:category/:subcategory',
     name: '2xsubcategory',
     component: () => import('@/views/dashboard/2xsubcategory/index2xSubcategory.vue'),
     meta: {

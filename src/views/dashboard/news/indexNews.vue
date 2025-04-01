@@ -12,11 +12,6 @@
         }"
         :page="page" :limit="limit"
       />
-      <NewsDialog
-        :options="{
-          languages
-        }"
-      />
     </div>
     <div class="pl-4 pb-2">
       <paginate
@@ -36,7 +31,6 @@
 </template>
 <script setup>
 import NewsTable from '@/components/data/dashboard/news/newsTable.vue'
-import NewsDialog from '@/components/data/dashboard/news/newsDialog.vue'
 import NewsSearch from '@/components/data/dashboard/news/newsSearch.vue'
 import paginate from 'vuejs-paginate-next'
 import { onMounted, ref } from 'vue'
@@ -44,9 +38,6 @@ import { storeToRefs } from 'pinia'
 
 import { newsStore } from '@/stores/data/news'
 const store = newsStore()
-
-import { newsCategoryStore } from '@/stores/data/newscategory'
-const newscategory_store = newsCategoryStore()
 
 import { languageStore } from '@/stores/data/language'
 const language_store = languageStore()
@@ -68,7 +59,6 @@ const getData = async () => {
 
 onMounted(async () => {
   await language_store.getlanguages({ limit: 0 })
-  await newscategory_store.getNewsCategories({ limit: 0 })
   await getData()
 })
 </script>

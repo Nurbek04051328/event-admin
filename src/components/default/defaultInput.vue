@@ -17,6 +17,7 @@
             'ring-red-300  focus:ring-2 focus:ring-inset focus:ring-red-500': error
           }
         ]"
+        :min="min"
         :disabled="disabled"
       />
     </div>
@@ -27,6 +28,6 @@
 </template>
 <script setup>
 const model = defineModel()
-defineProps(['label', 'placeholder', 'name', 'enter', 'error', 'disabled', 'suffix', 'type', 'customClass'])
+defineProps(['label', 'placeholder', 'min', 'name', 'enter', 'error', 'disabled', 'suffix', 'type', 'customClass'])
 </script>
 <style lang=""></style>

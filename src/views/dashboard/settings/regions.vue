@@ -6,6 +6,7 @@
         :options="{
           languages
         }"
+        :page="page" :limit="limit"
       />
       <RegionDialog
         :options="{

@@ -11,12 +11,8 @@ export const subcategory2xStore = defineStore('subcategory2xStore', () => {
   const notification = useNotification()
 
   const get2xSubcategories = async (params) => {
-    console.log("paramssub", params);
-    
     subcategories2x.value = []
     const { data } = await api.get(base_url, {params})
-    console.log("datatatata", data);
-    
     subcategories2x.value = data?.data;
     subcategory2xCount.value = data?.count;
   }
@@ -44,6 +40,19 @@ export const subcategory2xStore = defineStore('subcategory2xStore', () => {
     notification.setNotif(true, t('story.update'), 'info')
   }
 
+  const changeStatus = async (id, status) => {
+    let {data} = await api.get(`${base_url}/status/${id}/${status}`)
+    if (data) {
+      subcategories2x.value = subcategories2x.value.map(sub => {
+        if (sub._id == id) return {
+            ...sub,
+            status: status
+        }
+        return sub
+      })
+    }
+  }
+
   const get2xtSubcategory = async (id, language) => {
     return await api.get(`${base_url}/${id}/${language}`)
   }
@@ -56,5 +65,6 @@ export const subcategory2xStore = defineStore('subcategory2xStore', () => {
     remove2xSubcategory,
     save2xSubcategory,
     get2xtSubcategory,
+    changeStatus
   }
 })

@@ -10,6 +10,7 @@
         :options="{
           languages
         }"
+        :page="page" :limit="limit"
       />
       <CategoryDialog
         :options="{

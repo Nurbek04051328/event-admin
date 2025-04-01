@@ -10,6 +10,7 @@
         :options="{
           languages
         }"
+        :page="page" :limit="limit"
       />
       <Subcategory2xDialog
         :options="{
@@ -46,11 +47,10 @@ import { languageStore } from '@/stores/data/language'
 const language_store = languageStore()
 const { languages } = storeToRefs(language_store)
 
-import { subcategoryStore } from '@/stores/data/subcategories'
+
 import { subcategory2xStore } from '@/stores/data/2xsubcategory'
 
 const subcategory2x_store = subcategory2xStore()
-const subcategory_store = subcategoryStore()
 
 
 const page = ref(1)
@@ -63,8 +63,7 @@ const clickCallback = async (value) => {
 
 const getData = async () => {
   await language_store.getlanguages({ limit: 0 })
-  await subcategory2x_store.get2xSubcategories({ limit: 0, subcategory: route.params.id })
-  // await subcategory_store.getSubcategories()
+  await subcategory2x_store.get2xSubcategories({ limit: 0, subcategory: route.params.subcategory })
 }
 
 

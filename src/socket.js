@@ -31,6 +31,8 @@ export const connectSocket = () => {
     });
 
     state.socket.on("connect", () => {
+      console.log("stateSocket", state.socket);
+      
       state.connected = true;
       console.log("Socket ulandi!");
     });

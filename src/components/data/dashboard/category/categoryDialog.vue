@@ -15,7 +15,6 @@
       <DialogTitle as="h3" class="text-lg font-semibold leading-6 text-gray-900">
         {{ edit ? $t('category.dialog.edit') : $t('category.dialog.title') }}
       </DialogTitle>
-
       <div class="space-y-2 mt-4">
         <default-input
           v-model="data.title"
@@ -31,6 +30,14 @@
           :label="t('category.dialog.slug')"
           :error="v$.slug.$invalid && v$.slug.$dirty"
           :disabled="edit"
+        />
+      </div>
+      <div class="space-y-2 mt-4">
+        <uploadPhoto
+          :title="t('category.dialog.img')"
+          :placeholder="t('category.dialog.placeholder')"
+          v-model="data.cover"
+          base_url="route/upload/category"
         />
       </div>
       <div class="mt-6 flex flex-row gap-2">
@@ -50,7 +57,7 @@ import { storeToRefs } from 'pinia'
 import { useI18n } from 'vue-i18n'
 const { t } = useI18n()
 import { DialogPanel, DialogTitle } from '@headlessui/vue'
-// import uploadPhoto from '@/components/default/uploadPhoto.vue'
+import uploadPhoto from '@/components/default/uploadPhoto.vue'
 import { XMarkIcon } from '@heroicons/vue/20/solid'
 import { useFullStore } from '@/stores/usefull/modal'
 const usefull = useFullStore()
@@ -58,6 +65,7 @@ const { toggle, id, lang } = storeToRefs(usefull)
 defineProps(['options'])
 
 const data = ref({
+  cover: [],
   slug: '',
   title: ''
 })
@@ -100,6 +108,7 @@ watch(
       data.value = {
         ...res.data,
         _id: id.value,
+        cover: res.data?.cover || [],
         slug: res.data?.slug || '',
         title: res.data?.title || ''
         // translate: {
@@ -115,6 +124,7 @@ watch(
   () => toggle.value,
   () => {
     data.value = {
+      cover: [],
       slug: '',
       title: ''
     }
@@ -126,6 +136,7 @@ watch(
 const close = () => {
   usefull.setToggle(false, 0)
   data.value = {
+    cover: [],
     slug: '',
     title: ''
   }

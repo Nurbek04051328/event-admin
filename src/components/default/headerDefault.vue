@@ -86,39 +86,44 @@
 
       <div class="flex items-center gap-x-3 xm:gap-x-0 h-full">
         <div 
-          class="flex items-center bg-white p-[14px] rounded-2xl h-full cursor-pointer hover:bg-[#F3EBFC]"
+          class="flex items-center bg-white rounded-2xl h-full cursor-pointer hover:bg-[#F3EBFC]"
           active-class="bg-[#F3EBFC]"
           >
           <router-link
             :to="{ name: 'notification' }"
+            class="p-[14px]"
             >
               <BellIcon class="h-7 w-7 shrink-0 text-[#9E55EC]" aria-hidden="true" />
             </router-link>
         </div>
-        <div class="flex items-center bg-white p-[14px] rounded-2xl h-full cursor-pointer hover:bg-[#F3EBFC]">
+        <div class="flex items-center bg-white rounded-2xl h-full cursor-pointer hover:bg-[#F3EBFC]">
           <router-link
             :to="{ name: 'activationkeys' }"
+            class="p-[14px]"
             >
               <KeyIcon class="h-7 w-7 shrink-0 text-[#9E55EC]" aria-hidden="true" />
             </router-link>
         </div>
-        <div class="flex items-center bg-white p-[14px] rounded-2xl h-full cursor-pointer hover:bg-[#F3EBFC]">
+        <div class="flex items-center bg-white rounded-2xl h-full cursor-pointer hover:bg-[#F3EBFC]">
           <router-link
             :to="{ name: 'logs' }"
+            class="p-[14px]"
             >
               <BookmarkSquareIcon class="h-7 w-7 shrink-0 text-[#9E55EC]" aria-hidden="true" />
             </router-link>
         </div>
-        <div class="flex items-center bg-white p-[14px] rounded-2xl h-full cursor-pointer hover:bg-[#F3EBFC]">
+        <div class="flex items-center bg-white rounded-2xl h-full cursor-pointer hover:bg-[#F3EBFC]">
           <router-link
             :to="{ name: 'messages' }"
+            class="p-[14px]"
             >
               <ChatBubbleLeftIcon class="h-7 w-7 shrink-0 text-[#9E55EC]" aria-hidden="true" />
             </router-link>
         </div>
-        <div class="flex items-center bg-white p-[14px] rounded-2xl h-full cursor-pointer hover:bg-[#F3EBFC]">
+        <div class="flex items-center bg-white rounded-2xl h-full cursor-pointer hover:bg-[#F3EBFC]">
           <router-link
             :to="{ name: 'language' }"
+            class="p-[14px]"
             >
               <Cog6ToothIcon class="h-7 w-7 shrink-0 text-[#9E55EC]" aria-hidden="true" />
             </router-link>

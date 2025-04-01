@@ -7,10 +7,16 @@
           <th scope="col" class="th md-max:text-[13px]" width="150">{{ $t('social.table.icon') }}</th>
           <th scope="col" class="th md-max:text-[13px]">{{ $t('social.table.name') }}</th>
           <th scope="col" class="th md-max:text-[13px]" width="150">{{ $t('social.table.data') }}</th>
+          <th scope="col" class="th">Статус</th>
           <th scope="col" class="th-last" width="150"></th>
         </tr>
       </thead>
       <tbody class="bg-white">
+        <tr v-if="socials.length === 0">
+          <td colspan="5" class="text-center py-4 text-gray-500">
+            Нет данных
+          </td>
+        </tr>
         <tr
           v-for="(item, itemIdx) in socials"
           :key="item?._id"
@@ -18,10 +24,9 @@
           :class="itemIdx % 2 === 0 ? undefined : 'bg-gray-50'"
         >
           <td class="td-first">
-            {{ itemIdx + 1 }}
+            {{ (page - 1) * limit + itemIdx + 1 }}
           </td>
           <td class="td">
-            <!-- {{ item?.cover }} -->
             <a :href="`${url}/${item?.icon[0]}`" target="_blank" v-if="item?.icon?.length > 0">
               <img :src="`${url}/${item?.icon[0]}`" alt="" class="w-10 rounded-md" />
             </a>
@@ -29,6 +34,14 @@
           </td>
           <td class="td md-max:text-[13px]">{{ item?.title || '' }}</td>
           <td class="td md-max:text-[13px]">{{ convertDate(item?.createdAt, 'full') }}</td>
+          <td class="td">
+            <button
+              @click="changeStatus(item?._id, item?.status)"
+              :class=" item?.status == true ? 'bg-[#DCF7DD] text-[#119A21] rounded-lg px-3 py-1 w-[80px]' : 'bg-[#FFE6E6] text-[#FF5558] rounded-lg px-3 py-1 w-[80px]'"
+            >
+              {{ item?.status == true ? "Актив" : "Не актив" }}
+            </button>
+          </td>
           <td class="td-last">
             <div class="flex gap-2">
               <button type="button" class="bg-[#FFECD9] text-[#FF7E00] hover:bg-[#FF7E00] hover:text-white rounded-lg flex items-center justify-center size-9 lg:size-8" @click="edit(item._id)">
@@ -59,19 +72,15 @@ import { TrashIcon, PencilIcon } from '@heroicons/vue/24/outline'
 const url = import.meta.env.VITE_URL
 
 const toggle = ref(false)
-// const limit = ref(30)
-defineProps(['options'])
+
+defineProps(['options', 'page', 'limit'])
 
 import { socialStore } from '@/stores/data/social'
 import { storeToRefs } from 'pinia'
 const store = socialStore()
 const { socials } = storeToRefs(store)
 
-// const getData = async () => {
-//   await store.getCategories({
-//     limit: limit.value
-//   })
-// }
+
 
 import { useFullStore } from '@/stores/usefull/modal'
 const usefull = useFullStore()
@@ -93,12 +102,15 @@ const remove = async (answer) => {
   close()
 }
 
+const changeStatus = async(id, status) => {
+  let newStatus = status === true ? false : true;
+  await store.changeStatus(id,newStatus)
+}
+
 const close = () => {
   toggle.value = false
 }
 
-// onMounted(() => {
-//   getData()
-// })
+
 </script>
 <style lang=""></style>

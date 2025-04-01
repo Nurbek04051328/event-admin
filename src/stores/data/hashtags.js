@@ -9,14 +9,8 @@ export const tagStore = defineStore('tagStore', () => {
 
 
   const getHashtags = async (params) => {
-    console.log("hashparams", params);
-    
     const { data } = await api.get(base_url, {params})
-    console.log("hashtag", data);
     return data
-    
-    // ads.value = data?.ad;
-
   }
 
 

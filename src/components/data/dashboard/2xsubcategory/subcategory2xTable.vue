@@ -4,14 +4,19 @@
       <thead>
         <tr>
           <th scope="col" class="th-first md-max:text-[13px]">№</th>
-          <!-- <th scope="col" class="th md-max:text-[13px] w-5">{{ $t('subcategory.table.img') }}</th> -->
           <th scope="col" class="th md-max:text-[13px]">{{ $t('subcategory.table.name') }}</th>
           <th scope="col" class="th md-max:text-[13px]">{{ $t('subcategory.table.language') }}</th>
           <th scope="col" class="th md-max:text-[13px]" width="150">{{ $t('subcategory.table.data') }}</th>
+          <th scope="col" class="th">Статус</th>
           <th scope="col" class="th-last" width="150"></th>
         </tr>
       </thead>
       <tbody class="bg-white">
+        <tr v-if="subcategories2x.length === 0">
+          <td colspan="5" class="text-center py-4 text-gray-500">
+            Нет данных
+          </td>
+        </tr>
         <tr
           v-for="(item, itemIdx) in subcategories2x"
           :key="item._id"
@@ -19,19 +24,8 @@
           :class="itemIdx % 2 === 0 ? undefined : 'bg-gray-50'"
         >
           <td class="td-first md-max:text-[13px]">
-            {{ itemIdx + 1 }}
+            {{ (page - 1) * limit + itemIdx + 1 }}
           </td>
-          <!-- <td class="td">
-            <a :href="`${url}/${item?.cover[0]}`" target="_blank" v-if="item?.cover.length > 0">
-              <img :src="`${url}/${item?.cover[0]}`" alt="" class="w-10 rounded-md" />
-            </a>
-            <img
-              v-else
-              src="@/assets/images/not-image.png"
-              alt=""
-              class="w-14 rounded-md"
-            />
-          </td> -->
           <td class="td md-max:text-[13px]">{{ item.title || $t('subcategory.table.notadd') }}</td>
           <td class="td">
             <div class="flex items-start gap-2">
@@ -51,6 +45,14 @@
           </td>
 
           <td class="td">{{ convertDate(item.createdAt, 'full') }}</td>
+          <td class="td">
+            <button
+              @click="changeStatus(item?._id, item?.status)"
+              :class=" item?.status == 'active' ? 'bg-[#DCF7DD] text-[#119A21] rounded-lg px-3 py-1 w-[80px]' : 'bg-[#FFE6E6] text-[#FF5558] rounded-lg px-3 py-1 w-[80px]'"
+              >
+                {{ item?.status == 'active' ? "Актив" : "Не актив" }}
+              </button>
+            </td>
           <td class="td-last">
             <button
               type="button"
@@ -79,19 +81,15 @@ const url = import.meta.env.VITE_URL
 import { useI18n } from 'vue-i18n'
 const { t } = useI18n()
 const toggle = ref(false)
-// const limit = ref(30)
-defineProps(['options'])
+
+defineProps(['options', 'page', 'limit'])
 
 import { subcategory2xStore } from '@/stores/data/2xsubcategory'
 import { storeToRefs } from 'pinia'
 const store = subcategory2xStore()
 const { subcategories2x } = storeToRefs(store)
 
-// const getData = async () => {
-//   await store.getCategories({
-//     limit: limit.value
-//   })
-// }
+
 
 import { useFullStore } from '@/stores/usefull/modal'
 const usefull = useFullStore()
@@ -106,6 +104,12 @@ const confirmRemove = (id) => {
   toggle.value = true
 }
 
+
+const changeStatus = async(id, status) => {
+  let newStatus = status === "active" ? "inactive" : "active";
+  await store.changeStatus(id,newStatus)
+}
+
 const remove = async (answer) => {
   if (answer) {
     await store.remove2xSubcategory(_id.value, t)
@@ -117,8 +121,5 @@ const close = () => {
   toggle.value = false
 }
 
-// onMounted(() => {
-//   getData()
-// })
 </script>
 <style lang=""></style>

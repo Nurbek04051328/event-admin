@@ -12,17 +12,15 @@ export const newsStore = defineStore('newsStore', () => {
 
   const getNews = async (params) => {
     const { data } = await api.get(base_url, {params})
-    console.log("datas", data);
-    
     news.value = data?.news;
     newsCount.value = data?.count;
   }
 
-  const addNews = async (news, t) => {
-    const { data } = await api.post(base_url, news)
-    news.value = [data,...news.value]
+  const addNews = async (n, ) => {
+    const { data } = await api.post(base_url, n)
+    news.value = [data, ...news.value]
     newsCount.value += 1
-    notification.setNotif(true, t('story.add'), 'success')
+    notification.setNotif(true, 'Добавлена новая новость.', 'success')
   }
 
   const removeNews = async (id, t) => {
@@ -32,19 +30,20 @@ export const newsStore = defineStore('newsStore', () => {
     notification.setNotif(true, t('story.delete'), 'info')
   }
 
-  const saveNews = async (news, t) => {
-    const { data } = await api.put(`${base_url}`, news)
+  const saveNews = async (n,) => {
+    const { data } = await api.put(`${base_url}`, n)
     news.value = news.value.map((pay) => {
       if (pay._id == data._id) return data
       return pay
     })
-    notification.setNotif(true, t('story.update'), 'info')
+    notification.setNotif(true, 'Новость отредактирована.', 'info')
   }
 
   const getOneNews = async (id, language) => {
     return await api.get(`${base_url}/${id}/${language}`)
   }
 
+  
   const changeStatus = async (id, status) => {
     let {data} = await api.get(`${base_url}/status/${id}/${status}`)
     if (data) {

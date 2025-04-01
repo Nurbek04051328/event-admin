@@ -57,7 +57,7 @@
                 v-model="data.category"
                 name="category"
                 :label="t('subcategory.dialog.category')"
-                :options="newscategory_store.newCategories || []"
+                :options="category_store.categories || []"
                 option_title="title"
                 :error="
                   v$.category.$invalid && v$.category.$dirty ? t('subcategory.dialog.notcategory') : null
@@ -65,18 +65,22 @@
               />
             </div>
           </div>
-          <div class="flex items-center w-full xm:block">
-            <div class="space-y-2 mt-2 w-full">
-              <default-input
-                v-model="data.slug"
-                name="slug"
-                label="Slug"
-                disabled
+          <div class="flex w-full xm:block">
+            <div class="space-y-2 mt-4 w-full">
+              <filter-select
+                v-model="data.subcategory"
+                name="category"
+                label="Выберите подкатегорию"
+                :options="subcategory_store.subcategories || []"
+                option_title="title"
+                :error="
+                  v$.subcategory.$invalid && v$.subcategory.$dirty ? t('subcategory.dialog.notcategory') : null
+                "
               />
             </div>
           </div>
           <div class="flex items-center w-full xm:block">
-            <div class="space-y-2 mt-2 w-full">
+            <div class="space-y-2 mt-4 w-full">
               <uploadPhoto
                 title="Изображения новости"
                 placeholder="Загрузить изображение новости"
@@ -87,7 +91,7 @@
           </div>
           <div class="flex flex-col items-center w-full xm:block">
             <!-- Hashtag Input -->
-            <div class="space-y-2 mt-2 w-full">
+            <div class="space-y-2 mt-4 w-full">
               <label class="block text-sm font-medium text-[#645A77]">Хештеги</label>
               <input 
                 type="text" 
@@ -137,8 +141,12 @@ import { QuillEditor } from '@vueup/vue-quill'
 import '@vueup/vue-quill/dist/vue-quill.snow.css'
 
 
-import { newsCategoryStore } from '@/stores/data/newscategory'
-const newscategory_store = newsCategoryStore()
+import { categoryStore } from '@/stores/data/categories'
+const category_store = categoryStore()
+
+import { subcategoryStore } from '@/stores/data/subcategories'
+const subcategory_store = subcategoryStore()
+
 import { tagStore } from '@/stores/data/hashtags'
 const hashtags_store = tagStore()
 
@@ -154,7 +162,7 @@ const data = ref({
   title: '',
   text: '',
   category: '',
-  slug: '',
+  subcategory: '',
   cover: [],
   tags:[]
 })
@@ -165,8 +173,8 @@ import { required } from '@vuelidate/validators'
 const rules = {
   title: { required },
   category: { required },
+  subcategory: { required },
   text: { required },
-  slug: { required }
 }
 const v$ = useVuelidate(rules, data)
 
@@ -222,10 +230,12 @@ const removeHashtag = (index) => {
 const send = async () => {
   v$.value.$touch()
   if (!v$.value.$invalid) {
-    console.log("ketayotgan daat", data.value  );
+    console.log("ketayotgan daat", data.value );
+    console.log("ketayotgan t",   );
+    
     
     const payload = { ...data.value }
-    await store.addNews(payload, t)
+    await store.addNews(payload)
     router.push({ name: 'news' })
     clear()
   } else {
@@ -254,9 +264,10 @@ const clear = () => {
   data.value = {
     title: '',
     category: '',
+    subcategory: '',
     text: '',
-    slug: '',
     cover: [],
+    tags: [],
   }
   v$.value.$reset()
 }
@@ -267,26 +278,20 @@ const close = () => {
 }
 
 
-// Slug generatsiyasi
-watch(
-  () => data.value.title,
-  (newTitle) => {
-    if (newTitle) {
-      data.value.slug = newTitle
-        .toLowerCase()
-        .trim()
-        .replace(/\s+/g, '-') 
-        .replace(/[^a-z0-9\-]/g, '') 
-    } else {
-      data.value.slug = ''
-    }
+watch(() => data.value.category, async (newCategory) => {
+  if (newCategory) {
+    await subcategory_store.getSubcategories({ category: newCategory });
   }
-)
+});
+
 
 
 onMounted(async () => {
-  await newscategory_store.getNewsCategories({ limit: 0 })
+  await category_store.getCategories({ limit: 0 })
 })
+
+
+
 </script>
 <style>
   .custom-quill-editor {

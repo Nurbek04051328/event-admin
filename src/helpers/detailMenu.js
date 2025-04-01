@@ -169,6 +169,15 @@ export const detailMenu = [
       active: 'news'
     }
   },
+  {
+    path: 'news/edit/:id/:lang',
+    name: 'newsEdit',
+    component: () => import('@/components/data/dashboard/news/newsEditPage.vue'),
+    meta: {
+      title: 'Редактировать новости',
+      active: 'news'
+    }
+  },
 
   // {
   //   path: 'message/:id',

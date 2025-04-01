@@ -5,13 +5,18 @@
         <tr>
           <th scope="col" class="th-first md-max:text-[13px]">№</th>
           <th scope="col" class="th md-max:text-[13px]">{{ $t('subcategory.table.name') }}</th>
-          <!-- <th scope="col" class="th md-max:text-[13px]">{{ $t('subcategory.table.category') }}</th> -->
           <th scope="col" class="th md-max:text-[13px]">{{ $t('subcategory.table.language') }}</th>
           <th scope="col" class="th md-max:text-[13px]" width="150">{{ $t('subcategory.table.data') }}</th>
+          <th scope="col" class="th">Статус</th>
           <th scope="col" class="th-last" width="150"></th>
         </tr>
       </thead>
       <tbody class="bg-white">
+        <tr v-if="atributs.length === 0">
+          <td colspan="5" class="text-center py-4 text-gray-500">
+            Нет данных
+          </td>
+        </tr>
         <tr
           v-for="(item, itemIdx) in atributs"
           :key="item._id"
@@ -19,7 +24,7 @@
           :class="itemIdx % 2 === 0 ? undefined : 'bg-gray-50'"
         >
           <td class="td-first md-max:text-[13px]">
-            {{ itemIdx + 1 }}
+            {{ (page - 1) * limit + itemIdx + 1 }}
           </td>
           <td class="td md-max:text-[13px]">{{ item.title || $t('subcategory.table.notadd') }}</td>
           <!-- <td class="td md-max:text-[13px]">{{ item.category }}</td> -->
@@ -40,6 +45,14 @@
             </div>
           </td>
           <td class="td">{{ convertDate(item.createdAt, 'full') }}</td>
+          <td class="td">
+            <button
+              @click="changeStatus(item?._id, item?.status)"
+              :class=" item?.status == 'active' ? 'bg-[#DCF7DD] text-[#119A21] rounded-lg px-3 py-1 w-[80px]' : 'bg-[#FFE6E6] text-[#FF5558] rounded-lg px-3 py-1 w-[80px]'"
+            >
+              {{ item?.status == 'active' ? "Актив" : "Не актив" }}
+            </button>
+          </td>
           <td class="td-last">
             <button
               type="button"
@@ -68,19 +81,13 @@ const url = import.meta.env.VITE_URL
 import { useI18n } from 'vue-i18n'
 const { t } = useI18n()
 const toggle = ref(false)
-// const limit = ref(30)
-defineProps(['options'])
+defineProps(['options', 'page', 'limit'])
 
 import { atributStore } from '@/stores/data/atribut'
 import { storeToRefs } from 'pinia'
 const store = atributStore()
 const { atributs } = storeToRefs(store)
 
-// const getData = async () => {
-//   await store.getCategories({
-//     limit: limit.value
-//   })
-// }
 
 import { useFullStore } from '@/stores/usefull/modal'
 const usefull = useFullStore()
@@ -95,6 +102,11 @@ const confirmRemove = (id) => {
   toggle.value = true
 }
 
+const changeStatus = async(id, status) => {
+  let newStatus = status === "active" ? "inactive" : "active";
+  await store.changeStatus(id,newStatus)
+}
+
 const remove = async (answer) => {
   if (answer) {
     await store.removeAtribut(_id.value, t)
@@ -106,8 +118,6 @@ const close = () => {
   toggle.value = false
 }
 
-// onMounted(() => {
-//   getData()
-// })
+
 </script>
 <style lang=""></style>

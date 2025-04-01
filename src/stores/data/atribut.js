@@ -43,6 +43,19 @@ export const atributStore = defineStore('atributStore', () => {
   const getAtribut = async (id, language) => {
     return await api.get(`${base_url}/${id}/${language}`)
   }
+
+  const changeStatus = async (id, status) => {
+    let {data} = await api.get(`${base_url}/status/${id}/${status}`)
+    if (data) {
+      atributs.value = atributs.value.map(atr => {
+        if (atr._id == id) return {
+            ...atr,
+            status: status
+        }
+        return atr
+      })
+    }
+  }
   
 
   return {
@@ -53,5 +66,6 @@ export const atributStore = defineStore('atributStore', () => {
     removeAtribut,
     saveAtribut,
     getAtribut,
+    changeStatus
   }
 })

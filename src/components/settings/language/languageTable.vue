@@ -12,6 +12,11 @@
         </tr>
       </thead>
       <tbody class="bg-white">
+        <tr v-if="languages.length === 0">
+          <td colspan="5" class="text-center py-4 text-gray-500">
+            Нет данных
+          </td>
+        </tr>
         <tr
           v-for="(item, itemIdx) in languages"
           :key="item._id"
@@ -19,7 +24,7 @@
           :class="itemIdx % 2 === 0 ? undefined : 'bg-gray-50'"
         >
           <td class="td-first md-max:text-[13px]">
-            {{ itemIdx + 1 }}
+            {{ (page - 1) * limit + itemIdx + 1 }}
           </td>
           <td class="td md-max:text-[13px]">{{ item.title }}</td>
           <td class="td md-max:text-[13px]">{{ item.slug }}</td>

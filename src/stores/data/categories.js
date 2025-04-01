@@ -54,6 +54,19 @@ export const categoryStore = defineStore('categoryStore', () => {
     ]
   })
 
+  const changeStatus = async (id, status) => {
+    let {data} = await api.get(`${base_url}/status/${id}/${status}`)
+    if (data) {
+      categories.value = categories.value.map(cat => {
+        if (cat._id == id) return {
+            ...cat,
+            status: status
+        }
+        return cat
+      })
+    }
+  }
+
   return {
     categories,
     categoryCount,
@@ -62,6 +75,7 @@ export const categoryStore = defineStore('categoryStore', () => {
     removeCategory,
     saveCategory,
     getCategory,
-    listCategories
+    listCategories,
+    changeStatus
   }
 })

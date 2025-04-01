@@ -13,7 +13,6 @@ import {
   ChatBubbleLeftIcon,
   ClipboardDocumentListIcon,
   BellIcon,
-  FolderIcon,
   NewspaperIcon
 } from '@heroicons/vue/24/outline'
 
@@ -118,17 +117,6 @@ export const links = [
     meta: {
       title: 'Рекламы',
       icon: ClipboardDocumentListIcon,
-      toggle: true,
-      group: 'main'
-    }
-  },
-  {
-    path: 'news-category',
-    name: 'newsCategory',
-    component: () => import('@/views/dashboard/newscategory/indexNewsCategory.vue'),
-    meta: {
-      title: 'Категория новостей',
-      icon: FolderIcon,
       toggle: true,
       group: 'main'
     }

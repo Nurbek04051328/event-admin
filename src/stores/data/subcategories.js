@@ -45,16 +45,18 @@ export const subcategoryStore = defineStore('subcategoryStore', () => {
   }
   
 
-  // const listCategories = computed(() => {
-  //   return [
-  //     ...subcategories.value.map((category) => {
-  //       return {
-  //         _id: category._id,
-  //         title: category?.translates?.at(0)?.title,
-  //       }
-  //     })
-  //   ]
-  // })
+  const changeStatus = async (id, status) => {
+    let {data} = await api.get(`${base_url}/status/${id}/${status}`)
+    if (data) {
+      subcategories.value = subcategories.value.map(sub => {
+        if (sub._id == id) return {
+            ...sub,
+            status: status
+        }
+        return sub
+      })
+    }
+  }
 
   return {
     subcategories,
@@ -64,5 +66,6 @@ export const subcategoryStore = defineStore('subcategoryStore', () => {
     removeSubcategory,
     saveSubcategory,
     getSubcategory,
+    changeStatus
   }
 })

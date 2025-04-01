@@ -7,7 +7,7 @@
             <th scope="col" class="th-first md-max:text-[13px]">№</th>
             <th scope="col" class="th-first md-max:text-[13px]">Фото</th>
             <th scope="col" class="th md-max:text-[13px]">Название</th>
-            <th scope="col" class="th md-max:text-[13px]">Slug</th>
+            <th scope="col" class="th md-max:text-[13px]">Категория</th>
             <th scope="col" class="th md-max:text-[13px]">Переводы</th>
             <th scope="col" class="th md-max:text-[13px]" width="150">Время</th>
             <th scope="col" class="th">Статус</th>
@@ -37,11 +37,11 @@
             <td class="td md-max:text-[13px]">
               {{ item?.title }}
             </td>
-            <td class="td">{{ item?.slug }}</td>
+            <td class="td">{{ item?.category }}</td>
             <td class="td md-max:text-[13px]">
               <div class="flex items-start gap-2">
                 <button
-                  @click="edit(item?._id, lang.slug)"
+                  @click="$router.push({ name: 'newsEdit', params: { id: item?._id, lang: lang.slug } })"
                   :class="`${
                     item?.translates?.some((tr) => tr.language == lang.slug)
                       ? 'bg-[#DCF7DD] text-[#119A21] hover:bg-[#119A21] hover:text-white rounded-lg flex items-center justify-center size-9 lg:size-8'
@@ -86,6 +86,8 @@
 </template>
 <script setup>
 import { ref } from 'vue'
+import { useRouter } from 'vue-router'
+const router = useRouter()
 import { convertDate } from '@/helpers/func'
 import { TrashIcon } from '@heroicons/vue/24/outline'
 const url = import.meta.env.VITE_URL

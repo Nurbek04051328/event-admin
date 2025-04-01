@@ -11,11 +11,8 @@ export const atributeCategoryStore = defineStore('atributeCategoryStore', () => 
   const notification = useNotification()
 
   const getAtributeCategories = async (params) => {
-    console.log(params);
-    
+
     const { data } = await api.get(base_url, {params})
-    console.log("atributcategory", data);
-    
     atributeCategories.value = data?.attributeCategories;
     atributeCategoryCount.value = data?.count;
   }
@@ -47,7 +44,18 @@ export const atributeCategoryStore = defineStore('atributeCategoryStore', () => 
     return await api.get(`${base_url}/${id}/${language}`)
   }
 
-  
+  const changeStatus = async (id, status) => {
+    let {data} = await api.get(`${base_url}/status/${id}/${status}`)
+    if (data) {
+      atributeCategories.value = atributeCategories.value.map(cat => {
+        if (cat._id == id) return {
+            ...cat,
+            status: status
+        }
+        return cat
+      })
+    }
+  }
 
   return {
     atributeCategories,
@@ -57,5 +65,6 @@ export const atributeCategoryStore = defineStore('atributeCategoryStore', () => 
     removeAtributeCategory,
     saveAtributeCategory,
     getAtributeCategory,
+    changeStatus
   }
 })
