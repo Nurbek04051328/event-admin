@@ -36,6 +36,12 @@
             label="Текст"
             :error="v$.desc?.$invalid && v$.desc?.$dirty"
           />
+          <div class="mt-4">
+            <label class="flex mt-4 items-center space-x-2 cursor-pointer">
+              <input class="mr-1 accent-[#9E55EC]" value="metric" false-value="hide" type="checkbox" v-model="data.toUser" />
+              <span class="hover:text-[#9E55EC] text-[16px] font-normal text-[#645A77]">Для пользователей</span>
+            </label>
+          </div>
         </div>
       </div>
 
@@ -66,6 +72,7 @@ const data = ref({
   title: '',
   desc: '',
   percent: 0,
+  toUser: false
 })
 
 import { useVuelidate } from '@vuelidate/core'
@@ -100,6 +107,7 @@ const close = () => {
     title: '',
     desc: '',
     percent: 0,
+    toUser: false
   }
   v$.value.$reset()
 }
@@ -118,6 +126,7 @@ watch(
         title: res.data?.title || '',
         desc: res.data?.desc || '',
         percent: res.data?.percent || 0,
+        toUser: res.data?.toUser,
         // description: res.data?.title || '',
         // translate: {
         //   title: res.data?.translate?.title || '',
@@ -135,6 +144,7 @@ watch(
       title: '',
       desc: '',
       percent: 0,
+      toUser: false
     }
   }
 )

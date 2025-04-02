@@ -17,6 +17,8 @@ export const taxStore = defineStore('taxStore', () => {
   }
 
   const addTax = async (category, t) => {
+    console.log("nalog", category);
+    
     const { data } = await api.post(base_url, category)
     taxes.value = [data,...taxes.value]
     taxesCount.value += 1

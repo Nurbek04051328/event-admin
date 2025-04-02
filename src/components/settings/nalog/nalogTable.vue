@@ -6,6 +6,7 @@
           <th scope="col" class="th-first md-max:text-[13px]">№</th>
           <th scope="col" class="th md-max:text-[13px]">Название</th>
           <th scope="col" class="th md-max:text-[13px]">Процентная ставка</th>
+          <th scope="col" class="th md-max:text-[13px]">Для пользователей</th>
           <th scope="col" class="th md-max:text-[13px]">Язык</th>
           <th scope="col" class="th md-max:text-[13px]" width="150">Дата</th>
           <th scope="col" class="th">Статус</th>
@@ -28,6 +29,9 @@
           </td>
           <td class="td md-max:text-[13px]">{{ item?.title  }}</td>
           <td class="td md-max:text-[13px]">{{ item?.percent  }} %</td>
+          <td class="td md-max:text-[13px]">
+            <CheckIcon v-if="item?.toUser" class="size-4 text-[#9E55EC]"/>
+          </td>
           <td class="td md-max:text-[13px]">
             <div class="flex items-start gap-2">
               <button
@@ -79,7 +83,7 @@ import { ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 const { t } = useI18n()
 import { convertDateShort } from '@/helpers/func'
-import { TrashIcon } from '@heroicons/vue/24/outline'
+import { TrashIcon, CheckIcon } from '@heroicons/vue/24/outline'
 
 const toggle = ref(false)
 
