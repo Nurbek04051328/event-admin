@@ -74,7 +74,8 @@ import { useVuelidate } from '@vuelidate/core'
 import { required } from '@vuelidate/validators'
 const rules = {
   slug: { required },
-  title: { required }
+  title: { required },
+  cover: { required } 
 }
 
 const v$ = useVuelidate(rules, data)

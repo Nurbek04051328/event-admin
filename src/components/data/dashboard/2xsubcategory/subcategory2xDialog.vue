@@ -62,7 +62,6 @@ const route = useRoute()
 defineProps(['options'])
 
 const data = ref({
-  cover: [],
   category: '',
   subcategory: '',
   slug: '',
@@ -107,6 +106,8 @@ const send = async () => {
     } else {
       data.value.category = route.params.category
       data.value.subcategory = route.params.subcategory
+      console.log(data.value);
+      
       await store.add2xSubcategory({ ...data.value }, t)
     }
     close()

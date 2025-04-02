@@ -4,6 +4,7 @@
       <thead>
         <tr>
           <th scope="col" class="th-first md-max:text-[13px]">№</th>
+          <th scope="col" class="th md-max:text-[13px] w-5">{{ $t('subcategory.table.img') }}</th>
           <th scope="col" class="th md-max:text-[13px]">{{ $t('subcategory.table.name') }}</th>
           <th scope="col" class="th md-max:text-[13px]">{{ $t('subcategory.table.category') }}</th>
           <th scope="col" class="th md-max:text-[13px]">{{ $t('subcategory.table.language') }}</th>
@@ -14,7 +15,7 @@
       </thead>
       <tbody class="bg-white">
         <tr v-if="subcategories.length === 0">
-          <td colspan="5" class="text-center py-4 text-gray-500">
+          <td colspan="8" class="text-center py-4 text-gray-500">
             Нет данных
           </td>
         </tr>
@@ -26,6 +27,17 @@
         >
           <td class="td-first md-max:text-[13px]">
             {{ (page - 1) * limit + itemIdx + 1 }}
+          </td>
+          <td class="td flex justify-center">
+            <a :href="`${url}/${item?.cover[0]}`" target="_blank" v-if="item?.cover?.length > 0">
+              <img :src="`${url}/${item?.cover[0]}`" alt="" class="w-10 rounded-md" />
+            </a>
+            <img
+              v-else
+              src="@/assets/images/not-image.png"
+              alt=""
+              class="w-14 rounded-md"
+            />
           </td>
           <td 
             class="td md-max:text-[13px] cursor-pointer"

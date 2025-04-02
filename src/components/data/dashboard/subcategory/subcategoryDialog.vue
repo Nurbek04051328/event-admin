@@ -35,6 +35,14 @@
           :disabled="edit"
         />
       </div>
+      <div class="space-y-2 mt-4">
+        <uploadPhoto
+          :title="t('subcategory.dialog.img')"
+          :placeholder="t('subcategory.dialog.placeholder')"
+          v-model="data.cover"
+          base_url="route/upload/subcategory"
+        />
+      </div>
       <div class="mt-6 flex flex-row gap-2">
         <button type="button" class="close-btn md:m-t-0 xs:m-t-0" @click="close">
           {{ $t('subcategory.dialog.close') }}
@@ -52,7 +60,7 @@ import { storeToRefs } from 'pinia'
 import { useI18n } from 'vue-i18n'
 const { t } = useI18n()
 import { DialogPanel, DialogTitle } from '@headlessui/vue'
-// import uploadPhoto from '@/components/default/uploadPhoto.vue'
+import uploadPhoto from '@/components/default/uploadPhoto.vue'
 import { XMarkIcon } from '@heroicons/vue/20/solid'
 import { useFullStore } from '@/stores/usefull/modal'
 const usefull = useFullStore()
@@ -80,7 +88,8 @@ const close = () => {
   data.value = {
     category: '',
     slug: '',
-    title: ''
+    title: '',
+    cover: [],
   }
   v$.value.$reset()
   edit.value = false 
@@ -121,6 +130,7 @@ watch(
         ...res.data,
         _id: id.value,
         category: res.data?.category,
+        cover: res.data?.cover || [],
         slug: res.data?.slug || '',
         title: res.data?.title || ''
       }
@@ -134,7 +144,8 @@ watch(
     data.value = {
       category: '',
       slug: '',
-      title: ''
+      title: '',
+      cover: [],
     }
     v$.value.$reset()
     edit.value = false 
