@@ -19,7 +19,6 @@ import {
 import { settingMenu } from './settingMenu'
 import { settingChildren } from './settingChild'
 
-
 export const links = [
   {
     path: 'dashboard',

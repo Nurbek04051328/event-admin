@@ -71,7 +71,7 @@ export const walletActions = [
     mode: 'deposit',
     label: 'Пополнение',
     class: 'text-[#05CD99]'
-  },
+  }
 ]
 
 export const actionsall = [
@@ -121,3 +121,45 @@ export const organizerInfo = {
     title: 'Проверено'
   }
 }
+
+export const languages = [
+  { _id: 'uz', title: "O'zbekcha" },
+  { _id: 'en', title: 'English' },
+  { _id: 'ru', title: 'Русский' },
+  { _id: 'es', title: 'Español' },
+  { _id: 'zh', title: '中文' },
+  { _id: 'hi', title: 'हिन्दी' },
+  { _id: 'ar', title: 'العربية' },
+  { _id: 'fr', title: 'Français' },
+  { _id: 'pt', title: 'Português' },
+  { _id: 'de', title: 'Deutsch' }
+]
+
+
+// export const addGuests = () => {
+//   let hours = [...Array(6)].map((a, v) => {
+//     return {
+//       _id: (v + 1) * 3,
+//       title: t('11.deadline_hours_select', { hour: (v + 1) * 3 })
+//     }
+//   })
+//   let days = [...Array(4)].map((a, v) => {
+//     return {
+//       _id: v + 2,
+//       title: t('11.deadline_days_select', { day: v + 2 })
+//     }
+//   })
+//   console.log(hours)
+//   return [
+//     {
+//       _id: 1,
+//       title: t('11.deadline_hour_select')
+//     },
+//     ...hours,
+//     {
+//       _id: 24,
+//       title: t('11.deadline_day_select')
+//     },
+//     ...days
+//   ]
+// }

@@ -7,7 +7,7 @@ const ru = {
     organizers: 'Организаторы',
     event: 'Мероприятия',
     ticketpaskage: 'Тарифы',
-    ticket: 'Билети',
+    ticket: 'Билеты',
     activationkeys: 'Ключ активации',
     settings: 'Настройки',
     eventDetail: 'Детали мероприятия',
@@ -15,9 +15,9 @@ const ru = {
     logs: 'Журналы',
     transaction: 'Транзакция',
     ads: 'Рекламы',
-    notification:"Уведомление",
-    newsCategory: "Категория новостей",
-    news: "Новости"
+    notification: 'Уведомление',
+    newsCategory: 'Категория новостей',
+    news: 'Новости'
   },
   settingMenu: {
     language: 'Языки',
@@ -237,6 +237,11 @@ const ru = {
       btnTitle: 'Да',
       close: 'Отмена'
     }
+  },
+  show: {
+    deadline_hours_select: '{hour} часов до начала',
+    deadline_day_select: '1 день до начала',
+    deadline_days_select: '{day} дней до начала'
   }
 }
 

@@ -1,21 +1,23 @@
 <template>
   <Combobox as="div" v-model="selectedPerson">
-    <ComboboxLabel class="block text-sm font-medium leading-6 text-[#645A77]">{{ label }}</ComboboxLabel>
-    <div class="relative mt-2">
+    <ComboboxLabel class="block text-sm font-medium leading-6 text-[#645A77]">{{
+      label
+    }}</ComboboxLabel>
+    <div class="relative border-[1px] border-gray-300 rounded-md mt-2">
       <ComboboxButton class="inset-y-0 flex items-center rounded-r-md px-2 focus:outline-none">
         <ComboboxInput
-          class="w-full rounded-md border-0 bg-white py-1.5 pl-3 pr-10 text-[#645A77] shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-[#9E55EC] focus:outline-0"
+          class="w-full rounded-md border-0 bg-white py-1.5 pl-2 pr-10 text-[#645A77] shadow-sm focus:ring-2 focus:ring-inset focus:ring-[#9E55EC] focus:outline-0"
           :placeholder="placeholder"
           @input="onInput"
           :display-value="(person) => getPersonTitleById(person)"
           autocomplete="off"
         />
-        <ChevronUpDownIcon class="absolute right-0 h-5 w-5 text-gray-400" aria-hidden="true" />
+        <ChevronUpDownIcon class="absolute right-1 h-5 w-5 text-gray-400" aria-hidden="true" />
       </ComboboxButton>
 
       <ComboboxOptions
         v-if="filteredPeople.length > 0"
-        class="absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
+        class="absolute z-10 mt-1 max-h-60 w-full overflow-auto bg-white py-1 text-base shadow-lg focus:outline-none sm:text-sm ring-0 border-0 outline-none"
       >
         <ComboboxOption
           v-for="person in filteredPeople"
@@ -24,11 +26,22 @@
           as="template"
           v-slot="{ active, selected }"
         >
-          <li :class="['relative cursor-default select-none py-2 pl-3 pr-9', active ? 'bg-[#9E55EC] text-white' : 'text-gray-800']">
+          <li
+            :class="[
+              'relative cursor-default select-none py-2 pl-3 pr-9',
+              active ? 'bg-[#9E55EC] text-white' : 'text-gray-800'
+            ]"
+          >
             <span :class="['block truncate', selected && 'font-semibold']">
               {{ person[option_title] }}
             </span>
-            <span v-if="selected" :class="['absolute inset-y-0 right-0 flex items-center pr-4', active ? 'text-white' : 'text-indigo-600']">
+            <span
+              v-if="selected"
+              :class="[
+                'absolute inset-y-0 right-0 flex items-center pr-4',
+                active ? 'text-white' : 'text-indigo-600'
+              ]"
+            >
               <CheckIcon class="h-5 w-5" aria-hidden="true" />
             </span>
           </li>
@@ -47,42 +60,42 @@ import {
   ComboboxInput,
   ComboboxLabel,
   ComboboxOption,
-  ComboboxOptions,
+  ComboboxOptions
 } from '@headlessui/vue'
 
 const props = defineProps({
   label: {
     type: String,
-    required: true,
+    required: true
   },
   placeholder: {
     type: String,
-    default: 'Выберите из списка',
+    default: 'Выберите из списка'
   },
   name: {
     type: String,
-    default: '',
+    default: ''
   },
   options: {
     type: Array,
-    default: () => [],
+    default: () => []
   },
   option_title: {
     type: String,
-    default: 'title', // Default to 'title', but can be overridden
+    default: 'title' // Default to 'title', but can be overridden
   },
   error: {
     type: [String, Boolean],
-    default: null,
+    default: null
   },
   disabled: {
     type: Boolean,
-    default: false,
+    default: false
   },
   suffix: {
     type: String,
-    default: '',
-  },
+    default: ''
+  }
 })
 
 // Internal state for the search query and selected person ID
@@ -96,7 +109,9 @@ const emit = defineEmits(['update:modelValue'])
 const filteredPeople = computed(() => {
   return query.value === ''
     ? props.options
-    : props.options.filter((person) => person[props.option_title].toLowerCase().includes(query.value.toLowerCase()))
+    : props.options.filter((person) =>
+        person[props.option_title].toLowerCase().includes(query.value.toLowerCase())
+      )
 })
 
 // Function to get the title of a person by their ID (for display purposes)
