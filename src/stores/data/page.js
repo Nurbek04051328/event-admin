@@ -14,7 +14,6 @@ export const pageStore = defineStore('pageStore', () => {
     console.log(params);
     
     const { data } = await api.get(base_url, {params})
-    console.log("pages", data);
     
     pages.value = data?.pages;
     pagesCount.value = data?.count;
@@ -46,6 +45,19 @@ export const pageStore = defineStore('pageStore', () => {
   const getPage = async (id, language) => {
     return await api.get(`${base_url}/${id}/${language}`)
   }
+
+  // const changeStatus = async (id, status) => {
+  //     let {data} = await api.get(`${base_url}/status/${id}/${status}`)
+  //     if (data) {
+  //       pages.value = pages.value.map(reg => {
+  //         if (reg._id == id) return {
+  //             ...reg,
+  //             status: status
+  //         }
+  //         return reg
+  //       })
+  //     }
+  //   }
 
   return {
     pages,

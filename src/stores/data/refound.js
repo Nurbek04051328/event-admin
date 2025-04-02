@@ -36,8 +36,6 @@ export const refoundStore = defineStore('refoundStore', () => {
 
   const saveRefaund = async (category, t) => {
     const { data } = await api.put(`${base_url}`, category)
-    console.log("saverefaund",data);
-    
     refounds.value = refounds.value.map((pay) => {
       if (pay._id == data._id) return data
       return pay
@@ -49,6 +47,19 @@ export const refoundStore = defineStore('refoundStore', () => {
     return await api.get(`${base_url}/${id}/${language}`)
   }
 
+  const changeStatus = async (id, status) => {
+    let {data} = await api.get(`${base_url}/status/${id}/${status}`)
+    if (data) {
+      refounds.value = refounds.value.map(ref => {
+        if (ref._id == id) return {
+            ...ref,
+            status: status
+        }
+        return ref
+      })
+    }
+  }
+
   return {
     refounds,
     refaundsCount,
@@ -57,5 +68,6 @@ export const refoundStore = defineStore('refoundStore', () => {
     removeRefaund,
     saveRefaund,
     getRefaund,
+    changeStatus
   }
 })

@@ -11,11 +11,7 @@ export const taxStore = defineStore('taxStore', () => {
   const notification = useNotification()
 
   const getTaxes = async (params) => {
-    console.log(params);
-    
     const { data } = await api.get(base_url, {params})
-    console.log("taxes", data);
-    
     taxes.value = data?.taxes;
     taxesCount.value = data?.count;
   }
@@ -36,8 +32,6 @@ export const taxStore = defineStore('taxStore', () => {
 
   const saveTax = async (category, t) => {
     const { data } = await api.put(`${base_url}`, category)
-    console.log("savetaxdata",data);
-    
     taxes.value = taxes.value.map((pay) => {
       if (pay._id == data._id) return data
       return pay
@@ -49,6 +43,19 @@ export const taxStore = defineStore('taxStore', () => {
     return await api.get(`${base_url}/${id}/${language}`)
   }
 
+  const changeStatus = async (id, status) => {
+    let {data} = await api.get(`${base_url}/status/${id}/${status}`)
+    if (data) {
+      taxes.value = taxes.value.map(reg => {
+        if (reg._id == id) return {
+            ...reg,
+            status: status
+        }
+        return reg
+      })
+    }
+  }
+
   return {
     taxes,
     taxesCount,
@@ -57,5 +64,6 @@ export const taxStore = defineStore('taxStore', () => {
     removeTax,
     saveTax,
     getTax,
+    changeStatus
   }
 })

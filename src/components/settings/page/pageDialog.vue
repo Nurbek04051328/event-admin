@@ -42,8 +42,8 @@
       </div>
       <div class="space-y-2 mt-4">
         <uploadPhoto
-          :title="t('category.dialog.img')"
-          :placeholder="t('category.dialog.placeholder')"
+          title="Изображение"
+          placeholder="Загрузить изображение страница"
           v-model="data.cover"
           base_url="route/upload/page"
         />

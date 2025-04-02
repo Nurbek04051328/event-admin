@@ -7,9 +7,9 @@
           <th scope="col" class="th md-max:text-[13px]">Название</th>
           <th scope="col" class="th md-max:text-[13px]">День</th>
           <th scope="col" class="th md-max:text-[13px]">Процент</th>
-          <!-- <th scope="col" class="th md-max:text-[13px]">Описание</th> -->
           <th scope="col" class="th md-max:text-[13px]">Язык</th>
           <th scope="col" class="th md-max:text-[13px]" width="150">Дата</th>
+          <th scope="col" class="th">Статус</th>
           <th scope="col" class="th-last" width="150"></th>
         </tr>
       </thead>
@@ -20,7 +20,7 @@
           :class="itemIdx % 2 === 0 ? undefined : 'bg-gray-50'"
         >
           <td class="td-first md-max:text-[13px]">
-            {{ itemIdx + 1 }}
+            {{ (page - 1) * limit + itemIdx + 1 }}
           </td>
           <td class="td md-max:text-[13px]">{{ item?.title  }}</td>
           <td class="td md-max:text-[13px]">{{ item?.day  }}</td>
@@ -43,6 +43,14 @@
           </td>
 
           <td class="td">{{ convertDateShort(item?.createdAt, 'full') }}</td>
+          <td class="td">
+            <button
+              @click="changeStatus(item?._id, item?.status)"
+              :class=" item?.status == 'active' ? 'bg-[#DCF7DD] text-[#119A21] rounded-lg px-3 py-1 w-[80px]' : 'bg-[#FFE6E6] text-[#FF5558] rounded-lg px-3 py-1 w-[80px]'"
+            >
+              {{ item?.status == 'active' ? "Актив" : "Не актив" }}
+            </button>
+          </td>
           <td class="td-last">
             <button
               type="button"
@@ -71,19 +79,14 @@ import { convertDateShort } from '@/helpers/func'
 import { TrashIcon } from '@heroicons/vue/24/outline'
 
 const toggle = ref(false)
-// const limit = ref(30)
-defineProps(['options'])
+
+defineProps(['options', 'page', 'limit'])
 
 import { refoundStore } from '@/stores/data/refound'
 import { storeToRefs } from 'pinia'
 const store = refoundStore()
 const { refounds } = storeToRefs(store)
 
-// const getData = async () => {
-//   await store.getCategories({
-//     limit: limit.value
-//   })
-// }
 
 import { useFullStore } from '@/stores/usefull/modal'
 const usefull = useFullStore()
@@ -96,6 +99,11 @@ const _id = ref('')
 const confirmRemove = (id) => {
   _id.value = id
   toggle.value = true
+}
+
+const changeStatus = async(id, status) => {
+  let newStatus = status === "active" ? "inactive" : "active";
+  await store.changeStatus(id,newStatus)
 }
 
 const remove = async (answer) => {

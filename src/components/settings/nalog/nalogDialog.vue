@@ -20,20 +20,20 @@
           <default-input
             v-model="data.title"
             name="title"
-            :label="t('ticketPackage.dialog.name')"
+            label="Название"
             :error="v$.title?.$invalid && v$.title?.$dirty"
           />
           <default-input
             type="number"
             v-model="data.percent"
             name="percent"
-            :label="t('ticketPackage.dialog.quantity')"
+            label="Процент"
             :error="v$.percent?.$invalid && v$.percent?.$dirty"
           />
           <default-textarea
             v-model="data.desc"
             name="desc"
-            :label="t('ticketPackage.dialog.text')"
+            label="Текст"
             :error="v$.desc?.$invalid && v$.desc?.$dirty"
           />
         </div>

@@ -9,6 +9,7 @@
         :options="{
           languages
         }"
+        :page="page" :limit="limit"
       />
       <TaxesDialog
         :options="{
