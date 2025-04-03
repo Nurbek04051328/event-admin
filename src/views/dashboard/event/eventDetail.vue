@@ -1,6 +1,6 @@
 <template>
   <headPart backLink="event">
-    <div class="flex overflow-auto">
+    <div class="flex overflow-auto gap-2">
       <button
         v-if="eventInfo?.event?.status == 0"
         type="button"
@@ -12,7 +12,7 @@
       <button
         v-if="eventInfo?.event?.status == 0"
         type="button"
-        class="flex w-full items-center justify-center rounded-md border border-transparent bg-red-50 px-4 py-[6px] text-base font-medium text-[#FF5558] border-[#FF5558] focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 focus:ring-offset-gray-50 xm-max:text-xs"
+        class="flex w-full items-center justify-center rounded-md border border-transparent bg-red-50 px-4 py-[6px] text-base font-medium text-[#FF5558]  focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 focus:ring-offset-gray-50 xm-max:text-xs"
         @click="confirmRefusel()"
       >
         Отказать
@@ -27,10 +27,8 @@
       </button>
     </div>
   </headPart>
-  <!-- <img src="" alt=""> -->
   <div class="px-4 pb-4 flex-1 overflow-hidden h-full">
     <div class="grid grid-cols-12 gap-4 h-full 2xl:h-auto md:h-full xm-max:grid-cols-6">
-      <!-- event INFO -->
       <div
         class="col-span-9 bg-white/100 rounded-[13px] shadow-sm order-first h-full overflow-auto 2xl:col-span-4 md-max:col-span-6 xm-max:col-span-6"
       >
@@ -47,9 +45,6 @@
           <router-view />
         </div>
       </div>
-      <!-- <div class="col-span-3 flex flex-col h-full overflow-auto 2xl:col-span-12 2xl:h-[670px] md:col-span-12 xm-max:col-span-6">
-          <EventComment />
-        </div> -->
     </div>
   </div>
   <accessDialog

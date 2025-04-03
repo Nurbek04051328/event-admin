@@ -90,7 +90,6 @@
 
           <div class="border-b-[1px] pb-2">
             <div class="text-xs text-gray-500 2xl:text-[12px]">Категория</div>
-            <!-- <pre>{{ event }}</pre> -->
             <div class="text-base font-medium text-gray-800 mt-1 flex flex-wrap gap-1">
               <span
                 class="inline-flex items-center rounded-md px-2 py-1 text-xs font-medium border bg-[#F5F0FF] text-[#9E55EC] border-[#9E55EC]' 2xl:text-[12px] space-x-1"
@@ -121,12 +120,12 @@
             <div class="text-xs text-gray-500 2xl:text-[12px] mb-2">Даты</div>
             <swiper
               v-if="event?.eventDates?.length > 0"
-              :slides-per-view="event?.eventDates?.length >= 5 ? 5 : event?.eventDates?.length"
-              :loop="event?.eventDates?.length >= 5"
+              :slides-per-view="event?.eventDates?.length >= 4 ? 4 : event?.eventDates?.length"
+              :loop="event?.eventDates?.length >= 4"
               :space-between="20"
             >
               <swiper-slide v-for="d of event.eventDates" :key="d._id">
-                <div class="p-4 rounded-lg border text-gray-600 border-[#9E55EC] bg-gray-50">
+                <div class="p-3 rounded-lg border text-gray-600 border-[#9E55EC] bg-gray-50">
                   <div class="text-sm">Дата:</div>
                   <div class="text-lg font-semibold text-gray-800 mb-2">
                     {{ moment(d.date).format('DD.MM.YYYY') }}
