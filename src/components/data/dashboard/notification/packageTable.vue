@@ -6,8 +6,9 @@
           <tr>
             <th scope="col" class="th-first md-max:text-[13px]">№</th>
             <th scope="col" class="th md-max:text-[13px]">Название</th>
-            <th scope="col" class="th md-max:text-[13px]">Slug</th>
-            <th scope="col" class="th md-max:text-[13px]">Цены (сум)</th>
+            <th scope="col" class="th md-max:text-[13px]">Тип уведомление</th>
+            <th scope="col" class="th md-max:text-[13px]">Количество</th>
+            <th scope="col" class="th md-max:text-[13px]">Скидка (%)</th>
             <th scope="col" class="th md-max:text-[13px]">Переводы</th>
             <th scope="col" class="th">Статус</th>
             <th scope="col" class="th-last" width="150"></th>
@@ -15,7 +16,7 @@
         </thead>
         <tbody class="bg-white">
           <tr
-            v-for="(item, itemIdx) in notifications"
+            v-for="(item, itemIdx) in notifpackages"
             :key="item?._id"
             :class="itemIdx % 2 === 0 ? undefined : 'bg-gray-50'"
           >
@@ -23,10 +24,11 @@
               {{ itemIdx + 1 }}
             </td>
             <td class="td md-max:text-[13px]">
-              {{ notifType.find((n) => n._id == item?.type)?.title }}
+              {{ item?.title }}
             </td>
-            <td class="td">{{ item?.slug }}</td>
-            <td class="td md-max:text-[13px] font-bold">{{ item?.price?.toLocaleString() }} сум</td>
+            <td class="td">{{ item?.parent }}</td>
+            <td class="td md-max:text-[13px] font-bold">{{ item?.count?.toLocaleString() }} шт</td>
+            <td class="td md-max:text-[13px] font-bold">{{ item?.sale?.toLocaleString() }} %</td>
             <td class="td md-max:text-[13px]">
               <div class="flex items-start gap-2">
                 <button
@@ -56,9 +58,6 @@
               </button>
             </td>
             <td class="td-last space-x-4">
-              <button class="edit-btn size-9" @click="edit(item?._id)">
-                <PencilIcon class="size-4" />
-              </button>
               <button
                 type="button"
                 class="bg-[#FFE6E6] text-[#FF5558] hover:bg-[#FF5558] hover:text-white rounded-lg flex items-center justify-center size-9 lg:size-8"
@@ -87,10 +86,10 @@ const { t } = useI18n()
 const toggle = ref(false)
 defineProps(['options', 'page', 'limit'])
 
-import { notificationStore } from '@/stores/data/notification'
+import { notifpackageStore } from '@/stores/data/notifPackage'
 import { storeToRefs } from 'pinia'
-const store = notificationStore()
-const { notifications } = storeToRefs(store)
+const store = notifpackageStore()
+const { notifpackages } = storeToRefs(store)
 
 const _id = ref('')
 
@@ -114,7 +113,7 @@ const confirmRemove = (id) => {
 
 const remove = async (answer) => {
   if (answer) {
-    await store.removeNotification(_id.value, t)
+    await store.removeNotifpackage(_id.value, t)
   }
   close()
 }

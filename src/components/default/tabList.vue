@@ -1,6 +1,6 @@
 <template>
   <div class="border-b border-gray-200 w-full">
-    <nav class="flex space-x-8" aria-label="Tabs">
+    <nav class="flex justify-around" aria-label="Tabs">
       <router-link
         :to="{ name: tab.name }"
         v-for="tab in list"

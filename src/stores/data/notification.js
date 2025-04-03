@@ -1,4 +1,4 @@
-import { ref, computed } from 'vue'
+import { ref } from 'vue'
 import { defineStore } from 'pinia'
 import { useNotification } from '../usefull/notification'
 import api from '@/helpers/api'
@@ -11,16 +11,15 @@ export const notificationStore = defineStore('notificationStore', () => {
   const notification = useNotification()
 
   const getNotifications = async (params) => {
-    const { data } = await api.get(base_url, {params})
-    console.log("dadada", data);
-    
-    notifications.value = data?.notifications;
-    notificationCount.value = data?.count;
+    const { data } = await api.get(base_url, { params })
+    console.log(data)
+    notifications.value = data?.notifications
+    notificationCount.value = data?.count
   }
 
-  const addNotification = async (notif,t) => {
+  const addNotification = async (notif, t) => {
     const { data } = await api.post(base_url, notif)
-    notifications.value = [data,...notifications.value]
+    notifications.value = [data, ...notifications.value]
     notificationCount.value += 1
     notification.setNotif(true, t('story.add'), 'success')
   }
@@ -45,16 +44,16 @@ export const notificationStore = defineStore('notificationStore', () => {
     return await api.get(`${base_url}/${id}/${language}`)
   }
 
-
   const changeStatus = async (id, status) => {
-    let {data} = await api.get(`${base_url}/status/${id}/${status}`)
-    console.log(data);
+    let { data } = await api.get(`${base_url}/status/${id}/${status}`)
+    console.log(data)
     if (data) {
-      notifications.value = notifications.value.map(notif => {
-        if (notif._id == id) return {
+      notifications.value = notifications.value.map((notif) => {
+        if (notif._id == id)
+          return {
             ...notif,
             status: status
-        }
+          }
         return notif
       })
     }

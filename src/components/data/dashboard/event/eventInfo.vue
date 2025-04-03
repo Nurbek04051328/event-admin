@@ -49,15 +49,27 @@
           <div class="text-base font-medium text-gray-800">
             {{ event?.location?.address }}
           </div>
-          <div class="w-full h-48 mt-3">
+          <div class="w-full h-[410px] mt-3">
             <iframe
-              :src="mapUrl"
+              :src="`https://www.google.com/maps?q=${event?.location?.coordinates[1]},${event?.location?.coordinates[0]}&z=13&output=embed`"
               width="100%"
               height="400"
               style="border: 0"
               allowfullscreen=""
               loading="lazy"
             ></iframe>
+          </div>
+        </div>
+        <div class="border-b-[1px] pb-2">
+          <div class="text-xs text-gray-500 2xl:text-[12px]">Описание локации</div>
+          <div class="text-base font-medium text-gray-800">
+            {{ event?.locationDesc }}
+          </div>
+        </div>
+        <div class="border-b-[1px] pb-2">
+          <div class="text-xs text-gray-500 2xl:text-[12px]">Уникальные навыки у организатора</div>
+          <div class="text-base font-medium text-gray-800">
+            {{ event?.uniqueEventSkill }}
           </div>
         </div>
       </div>
@@ -70,7 +82,7 @@
             </div>
           </div>
           <div class="border-b-[1px] pb-2">
-            <div class="text-xs text-gray-500 2xl:text-[12px]">{{ $t('event.table.text') }}</div>
+            <div class="text-xs text-gray-500 2xl:text-[12px]">Описание</div>
             <div class="text-base font-medium text-gray-800">
               {{ event?.description }}
             </div>
@@ -104,10 +116,119 @@
               </span>
             </div>
           </div>
+
+          <div class="border-b-[1px] pb-2">
+            <div class="text-xs text-gray-500 2xl:text-[12px] mb-2">Даты</div>
+            <swiper
+              v-if="event?.eventDates?.length > 0"
+              :slides-per-view="event?.eventDates?.length >= 5 ? 5 : event?.eventDates?.length"
+              :loop="event?.eventDates?.length >= 5"
+              :space-between="20"
+            >
+              <swiper-slide v-for="d of event.eventDates" :key="d._id">
+                <div class="p-4 rounded-lg border text-gray-600 border-[#9E55EC] bg-gray-50">
+                  <div class="text-sm">Дата:</div>
+                  <div class="text-lg font-semibold text-gray-800 mb-2">
+                    {{ moment(d.date).format('DD.MM.YYYY') }}
+                  </div>
+                  <div class="text-sm">Цена:</div>
+                  <div class="text-gray-800 font-semibold">
+                    {{ event.entryFee?.toLocaleString() }} сум
+                  </div>
+                  <div v-if="event?.entryFeeChild" class="text-gray-800 font-semibold">
+                    {{ event.entryFeeChild?.toLocaleString() }} сум (для детей)
+                  </div>
+                  <div class="text-sm mt-2">Время:</div>
+                  <div class="text-gray-800 font-semibold">
+                    {{ moment(d.date).format('HH:mm') }} -
+                    {{ moment(d.date).add(event?.duration, 'h').format('HH:mm') }}
+                  </div>
+                  <div class="text-sm mt-2">Билеты:</div>
+                  <div class="text-gray-800 text-lg font-semibold">
+                    <span class="primary-tag">0</span> / <span class="success-tag">0</span> /
+                    <span class="warning-tag">0</span> / {{ event.quantity }}
+                  </div>
+                </div>
+              </swiper-slide>
+            </swiper>
+          </div>
           <div class="border-b-[1px] pb-2">
             <div class="text-xs text-gray-500 2xl:text-[12px]">Атрибуты</div>
             <!-- <pre>{{ event }}</pre> -->
             <div class="text-sm font-medium text-gray-800 mt-1 space-y-2">
+              <div class="flex items-center justify-between" v-if="event?.languages?.length > 0">
+                <div>Язык</div>
+                <div class="flex flex-wrap gap-2">
+                  <span
+                    v-for="lang of event?.languages"
+                    :key="lang"
+                    class="py-1 px-2 rounded-lg border bg-[#F5F0FF] text-[#9E55EC] border-[#9E55EC]"
+                  >
+                    {{ languages.find((l) => l._id == lang)?.title }}
+                  </span>
+                </div>
+              </div>
+              <div class="flex items-center justify-between">
+                <div>Группа</div>
+                <div class="flex flex-wrap gap-2">
+                  <span
+                    class="py-1 px-2 rounded-lg border bg-[#F5F0FF] text-[#9E55EC] border-[#9E55EC]"
+                  >
+                    {{ event?.includeGroup ? 'Да' : 'Нет' }}
+                  </span>
+                </div>
+              </div>
+              <div class="flex items-center justify-between">
+                <div>Кол. участников открытый группы</div>
+                <div class="flex flex-wrap gap-2">
+                  <span
+                    class="py-1 px-2 rounded-lg border bg-[#F5F0FF] text-[#9E55EC] border-[#9E55EC]"
+                  >
+                    {{ event?.size?.open }}
+                  </span>
+                </div>
+              </div>
+              <div class="flex items-center justify-between">
+                <div>Кол. участников закрытого группы</div>
+                <div class="flex flex-wrap gap-2">
+                  <span
+                    class="py-1 px-2 rounded-lg border bg-[#F5F0FF] text-[#9E55EC] border-[#9E55EC]"
+                  >
+                    {{ event?.size?.closed }}
+                  </span>
+                </div>
+              </div>
+              <div class="flex items-center justify-between">
+                <div>Необходимый уровень активности</div>
+                <div class="flex flex-wrap gap-2">
+                  <span
+                    class="py-1 px-2 rounded-lg border bg-[#F5F0FF] text-[#9E55EC] border-[#9E55EC]"
+                  >
+                    {{ t(`8.${event?.activity}`) }}
+                  </span>
+                </div>
+              </div>
+              <div class="flex items-center justify-between">
+                <div>Необходимый уровень навыков</div>
+                <div class="flex flex-wrap gap-2">
+                  <span
+                    class="py-1 px-2 rounded-lg border bg-[#F5F0FF] text-[#9E55EC] border-[#9E55EC]"
+                  >
+                    {{ t(`8.${event?.skill}`) }}
+                  </span>
+                </div>
+              </div>
+              <div class="flex items-start justify-between">
+                <div>Что взять с собой</div>
+                <div class="flex flex-wrap gap-2 w-2/3">
+                  <span
+                    v-for="val of event?.guestNeed?.bring"
+                    class="py-1 px-2 rounded-lg border bg-[#F5F0FF] text-[#9E55EC] border-[#9E55EC]"
+                    :key="val"
+                    >{{ val }}</span
+                  >
+                </div>
+              </div>
               <div
                 class="flex items-center justify-between"
                 v-for="atr of event?.attributes"
@@ -117,7 +238,7 @@
                 <div class="flex flex-wrap gap-2">
                   <span
                     v-for="val of atr.values"
-                    class="ring-1 ring-inset ring-gray-300 py-1 px-2"
+                    class="py-1 px-2 rounded-lg border bg-[#F5F0FF] text-[#9E55EC] border-[#9E55EC]"
                     :key="val._id"
                     >{{ val?.title }}</span
                   >
@@ -132,16 +253,20 @@
               <div class="flex items-center justify-between">
                 <div>Крайний срок для первого гостя</div>
                 <div class="flex flex-wrap gap-2">
-                  <span class="ring-1 ring-inset ring-gray-300 py-1 px-2">
-                    {{ addGuests?.find((a) => a._id == event.booking?.firstGuest)?.title }}
+                  <span
+                    class="py-1 px-2 rounded-lg border bg-[#F5F0FF] text-[#9E55EC] border-[#9E55EC]"
+                  >
+                    {{ addGuests?.find((a) => a._id == event?.booking?.firstGuest)?.title }}
                   </span>
                 </div>
               </div>
               <div class="flex items-center justify-between">
                 <div>Крайний срок добавления гостей</div>
                 <div class="flex flex-wrap gap-2">
-                  <span class="ring-1 ring-inset ring-gray-300 py-1 px-2">
-                    {{ addGuests?.find((a) => a._id == event.booking?.addingGuests)?.title }}
+                  <span
+                    class="py-1 px-2 rounded-lg border bg-[#F5F0FF] text-[#9E55EC] border-[#9E55EC]"
+                  >
+                    {{ addGuests?.find((a) => a._id == event?.booking?.addingGuests)?.title }}
                   </span>
                 </div>
               </div>
@@ -160,9 +285,30 @@
                 <div class="flex flex-wrap gap-2">
                   <span
                     v-for="val of atr.values"
-                    class="ring-1 ring-inset ring-gray-300 py-1 px-2"
+                    class="py-1 px-2 rounded-lg border bg-[#F5F0FF] text-[#9E55EC] border-[#9E55EC]"
                     :key="val._id"
                     >{{ val?.title }}</span
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="border-b-[1px] pb-2">
+            <div class="text-xs text-gray-500 2xl:text-[12px]">Вождение</div>
+            <!-- <pre>{{ event }}</pre> -->
+            <div class="text-sm font-medium text-gray-800 mt-1 space-y-2">
+              <div
+                class="flex items-center justify-between"
+                v-for="atr of event?.provide"
+                :key="atr?._id"
+              >
+                <div>{{ t(`6.${atr.eventTransport}`) }}</div>
+                <div class="flex flex-wrap gap-2">
+                  <span
+                    v-for="(val, index) of atr.whoWillDrive"
+                    class="py-1 px-2 rounded-lg border bg-[#F5F0FF] text-[#9E55EC] border-[#9E55EC]"
+                    :key="index"
+                    >{{ t(`6.${val}`) }}</span
                   >
                 </div>
               </div>
@@ -183,12 +329,10 @@ import { Swiper, SwiperSlide } from 'swiper/vue'
 import 'swiper/css'
 
 import { useI18n } from 'vue-i18n'
-const { t } = useI18n()
+import moment from 'moment'
+import { languages } from '@/helpers/vars'
 
-const latitude = 41.2995 // Toshkent koordinatalari
-const longitude = 69.2401
-// const mapUrl = `https://yandex.ru/maps/?ll=${longitude},${latitude}&z=14&l=map&mode=search`;
-const mapUrl = `https://www.google.com/maps?q=${latitude},${longitude}&z=13&output=embed`
+const { t } = useI18n()
 
 //Можно использовать для различных преобразований
 

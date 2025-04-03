@@ -13,39 +13,31 @@
         </button>
       </div>
       <DialogTitle as="h3" class="text-lg font-semibold leading-6 text-gray-900">
-        {{ edit ? 'Редактировать уведомление' : 'Добавить новая уведомление' }}
+        {{ edit ? 'Редактировать пакета' : 'Добавить пакет уведомлении' }}
       </DialogTitle>
       <div class="flex w-full xs-max:flex-col">
         <div class="space-y-2 mt-4 w-full mr-1">
           <default-input
             v-model="data.title"
             name="title"
-            label="Название тип уведомление"
+            label="Название пакета"
             :error="v$.title?.$invalid && v$.title?.$dirty"
           />
-          <DefaultTextarea
-            v-model="data.description"
-            name="description"
-            label="Описание тип уведомление"
-            :error="v$.description?.$invalid && v$.description?.$dirty"
-          />
           <DefaultSelect
-            v-model="data.type"
-            :options="notifType"
+            v-model="data.parent"
+            :options="notif_store.notifications"
             option_title="title"
             name="type"
             label="Тип уведомление"
           />
-          <div class="grid grid-cols-2 gap-4">
-            <default-input v-model="data.slug" name="slug" label="Slug" />
-            <default-input
-              type="number"
-              v-model="data.price"
-              name="price"
-              label="Цена за одного"
-              :error="v$.price?.$invalid && v$.price?.$dirty"
-            />
-          </div>
+          <default-input
+            type="number"
+            v-model="data.count"
+            name="count"
+            label="Количество в пакете"
+            :error="v$.count?.$invalid && v$.count?.$dirty"
+          />
+          <default-input type="number" v-model="data.sale" name="sale" label="Скидка (%) " />
         </div>
       </div>
 
@@ -72,28 +64,26 @@ const usefull = useFullStore()
 const { toggle, id, lang } = storeToRefs(usefull)
 
 const data = ref({
-  type: '',
-  slug: '',
-  price: 0
+  title: '',
+  parent: '',
+  count: 0
 })
+
+import { notificationStore } from '@/stores/data/notification'
+const notif_store = notificationStore()
 
 import { useVuelidate } from '@vuelidate/core'
 import { required } from '@vuelidate/validators'
 const rules = {
-  type: { required },
   title: { required },
-  description: { required },
-  slug: { required },
-  price: { required }
+  count: { required }
 }
 
 const v$ = useVuelidate(rules, data)
 const edit = ref(false)
-import { notificationStore } from '@/stores/data/notification'
+import { notifpackageStore } from '@/stores/data/notifPackage'
 import DefaultSelect from '@/components/default/defaultSelect.vue'
-import { notifType } from '@/helpers/vars'
-import DefaultTextarea from '@/components/default/defaultTextarea.vue'
-const store = notificationStore()
+const store = notifpackageStore()
 
 const send = async () => {
   v$.value.$touch()
@@ -101,9 +91,9 @@ const send = async () => {
     if (edit.value) {
       data.value.language = lang
 
-      await store.saveNotification({ ...data.value }, t)
+      await store.saveNotifpackage({ ...data.value }, t)
     } else {
-      await store.addNotification({ ...data.value }, t)
+      await store.addNotifpackage({ ...data.value }, t)
     }
 
     close()
@@ -115,9 +105,8 @@ const send = async () => {
 const close = () => {
   usefull.setToggle(false, 0)
   data.value = {
-    type: '',
-    slug: '',
-    price: 0
+    parent: '',
+    count: 0
   }
   v$.value.$reset()
 }
@@ -126,16 +115,17 @@ watch(
   () => id?.value,
   async () => {
     if (id?.value?.length > 0 && lang?.value?.length > 0) {
-      const res = await store.getNotification(id.value, lang.value)
+      const res = await store.getNotifpackage(id.value, lang.value)
       console.log('res', res)
 
       edit.value = true
       data.value = {
         ...res.data,
         _id: id.value,
-        type: res.data?.type || '',
-        slug: res.data?.slug || '',
-        price: res.data?.price || 0
+        parent: res.data?.parent || '',
+        title: res.data?.title || '',
+        count: res.data?.count || 0,
+        sale: res.data?.sale || 0
       }
     }
   }
@@ -145,9 +135,9 @@ watch(
   () => toggle.value,
   () => {
     data.value = {
-      type: '',
-      slug: '',
-      price: 0
+      parent: '',
+      count: 0,
+      sale: 0
     }
   }
 )

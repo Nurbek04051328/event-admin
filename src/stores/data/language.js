@@ -15,8 +15,7 @@ export const languageStore = defineStore('languageStore', () => {
 
   const getlanguages = async (params) => {
     const { data } = await api.get(base_url, { params })
-    console.log("dataLanguage", data );
-    
+
     languages.value = [...data.languages]
     languageCount.value = data.count
   }
@@ -36,7 +35,7 @@ export const languageStore = defineStore('languageStore', () => {
     const { data } = await api.post(base_url, language)
     languages.value = [data, ...languages.value]
     languageCount.value += 1
-    notification.setNotif(true,  t('story.add'), 'success')
+    notification.setNotif(true, t('story.add'), 'success')
   }
 
   const removelanguage = async (id, t) => {
@@ -47,8 +46,8 @@ export const languageStore = defineStore('languageStore', () => {
   }
 
   const savelanguage = async (language, t) => {
-    console.log("langue", language);
-    
+    console.log('langue', language)
+
     const { data } = await api.put(`${base_url}`, language)
     languages.value = languages.value.map((item) => {
       if (item._id == data._id) return data

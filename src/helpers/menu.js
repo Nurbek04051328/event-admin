@@ -174,7 +174,25 @@ export const links = [
       icon: BellIcon,
       toggle: true,
       group: 'header'
-    }
+    },
+    children: [
+      {
+        path: '',
+        name: 'type-notification',
+        component: () => import('@/views/dashboard/notifications/typeNotification.vue'),
+        meta: {
+          title: 'Тип уведомление'
+        }
+      },
+      {
+        path: 'packages',
+        name: 'package-notification',
+        component: () => import('@/views/dashboard/notifications/notificationPackages.vue'),
+        meta: {
+          title: 'Пакет уведомление'
+        }
+      }
+    ]
   },
   {
     path: 'logs',

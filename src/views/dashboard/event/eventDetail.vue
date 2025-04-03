@@ -32,7 +32,7 @@
     <div class="grid grid-cols-12 gap-4 h-full 2xl:h-auto md:h-full xm-max:grid-cols-6">
       <!-- event INFO -->
       <div
-        class="col-span-9 bg-white/100 rounded-[26px] shadow-sm order-first h-full overflow-auto 2xl:col-span-4 md-max:col-span-6 xm-max:col-span-6"
+        class="col-span-9 bg-white/100 rounded-[13px] shadow-sm order-first h-full overflow-auto 2xl:col-span-4 md-max:col-span-6 xm-max:col-span-6"
       >
         <EventInfo :event="eventInfo.event" />
       </div>
@@ -41,7 +41,7 @@
       >
         <EventStatistic :org="eventInfo.ticket" />
         <div
-          class="bg-white/100 rounded-[26px] shadow-sm px-2 flex flex-col h-full overflow-hidden"
+          class="bg-white/100 rounded-[13px] shadow-sm px-2 flex flex-col h-full overflow-hidden"
         >
           <TabList :list="links" />
           <router-view />

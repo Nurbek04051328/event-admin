@@ -135,6 +135,16 @@ export const languages = [
   { _id: 'de', title: 'Deutsch' }
 ]
 
+export const notifType = [
+  {
+    _id: 'sms',
+    title: 'СМС'
+  },
+  {
+    _id: 'notification',
+    title: 'Уведомление через моб.прил'
+  }
+]
 
 // export const addGuests = () => {
 //   let hours = [...Array(6)].map((a, v) => {
