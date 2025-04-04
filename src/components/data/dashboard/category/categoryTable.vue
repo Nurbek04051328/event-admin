@@ -14,7 +14,7 @@
       </thead>
       <tbody class="bg-white">
         <tr v-if="categories.length === 0">
-          <td colspan="5" class="text-center py-4 text-gray-500">
+          <td colspan="7" class="text-center py-4 text-gray-500">
             Нет данных
           </td>
         </tr>

@@ -103,8 +103,6 @@ watch(
   async () => {
     if (id?.value?.length > 0 && lang?.value?.length > 0) {
       const res = await store.getCategory(id.value, lang.value)
-      console.log("res", res.data);
-      
       edit.value = true
       data.value = {
         ...res.data,
@@ -112,10 +110,6 @@ watch(
         cover: res.data?.cover || [],
         slug: res.data?.slug || '',
         title: res.data?.title || ''
-        // translate: {
-        //   title: res.data?.translate?.title || '',
-        //   language: res.data?.translate?.language || '',
-        // }
       }
     }
   }

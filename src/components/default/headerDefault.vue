@@ -10,13 +10,9 @@
       <Bars3Icon class="h-6 w-6" aria-hidden="true" />
     </button>
 
-    <!-- Separator -->
-    <!-- <div class="h-6 w-px bg-gray-900/10" aria-hidden="true" /> -->
-
     <div class="flex items-center flex-1 rounded-2xl gap-3 h-[64px]">
       <div class="relative flex flex-1  rounded-2xl bg-white px-[24px] py-[20px] h-full">
         <div class="w-full">
-          <!-- <label for="search-field" class=""> {{ $t('header.search') }}</label> -->
           <MagnifyingGlassIcon
             class="pointer-events-none text-[#9E55EC] absolute inset-y-0  h-full w-5"
             aria-hidden="true"

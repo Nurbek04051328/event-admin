@@ -112,19 +112,13 @@ const send = async () => {
     if (edit.value) {
       data.value.language = lang
       data.value.price = price.value
-
-
-      console.log("ketdiiiiedit", data.value);
-      
       await store.saveTarif({ ...data.value }, t)
 
     } else {
       data.value.price = price.value
-
-      console.log("ketdiiiiadd", data.value);
       await store.addTarif({ ...data.value }, t)
     }
-      
+    
     close()
   } else {
     console.log(data.value)
@@ -143,6 +137,7 @@ const close = () => {
     to: 0
   }
   v$.value.$reset()
+  edit.value = false 
 }
 
 watch(
@@ -150,13 +145,11 @@ watch(
   async () => {
     if (id?.value?.length > 0 && lang?.value?.length > 0) {
       const res = await store.getTarif(id.value, lang.value)
-      console.log('res', res)
-
       edit.value = true
       data.value = {
         ...res.data,
         _id: id.value,
-        title: res.data?.description || '',
+        title: res.data?.title || '',
         description: res.data?.description || '',
         commissionRate: res.data?.commissionRate || 0
       }
@@ -180,6 +173,8 @@ watch(
       from: 0,
       to: 0
     }
+    v$.value.$reset()
+    edit.value = false 
   }
 )
 </script>

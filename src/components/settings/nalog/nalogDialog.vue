@@ -110,6 +110,7 @@ const close = () => {
     toUser: false
   }
   v$.value.$reset()
+  edit.value = false 
 }
 
 watch(
@@ -117,8 +118,6 @@ watch(
   async () => {
     if (id?.value?.length > 0 && lang?.value?.length > 0) {
       const res = await store.getTax(id.value, lang.value)
-      console.log('res', res)
-
       edit.value = true
       data.value = {
         ...res.data,
@@ -127,11 +126,6 @@ watch(
         desc: res.data?.desc || '',
         percent: res.data?.percent || 0,
         toUser: res.data?.toUser,
-        // description: res.data?.title || '',
-        // translate: {
-        //   title: res.data?.translate?.title || '',
-        //   language: res.data?.translate?.language || '',
-        // }
       }
     }
   }
@@ -146,6 +140,8 @@ watch(
       percent: 0,
       toUser: false
     }
+    v$.value.$reset()
+    edit.value = false
   }
 )
 </script>

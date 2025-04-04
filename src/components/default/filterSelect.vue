@@ -4,7 +4,7 @@
       label
     }}</ComboboxLabel>
     <div class="relative border-[1px] border-gray-300 rounded-md mt-2">
-      <ComboboxButton class="inset-y-0 flex items-center rounded-r-md px-2 focus:outline-none">
+      <ComboboxButton class="inset-y-0 w-full flex items-center rounded-r-md focus:outline-none">
         <ComboboxInput
           class="w-full rounded-md border-0 bg-white py-1.5 pl-2 pr-10 text-[#645A77] shadow-sm focus:ring-2 focus:ring-inset focus:ring-[#9E55EC] focus:outline-0"
           :placeholder="placeholder"
