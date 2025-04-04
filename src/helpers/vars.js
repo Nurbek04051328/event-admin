@@ -121,6 +121,26 @@ export const organizerInfo = {
     title: 'Проверено'
   }
 }
+// ["active", "not active", "pending", "denied", "deleted", "archive"],
+
+export const eventInfo = {
+  pending: {
+    label: 'Не превено',
+    class: 'warning-tag'
+  },
+  active: {
+    label: 'Одобрен',
+    class: 'success-tag'
+  },
+  deleted: {
+    label: 'Удалено',
+    class: 'danger-tag'
+  },
+  denied: {
+    label: 'Отказан',
+    class: 'danger-tag'
+  }
+}
 
 export const languages = [
   { _id: 'uz', title: "O'zbekcha" },

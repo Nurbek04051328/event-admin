@@ -217,11 +217,14 @@
                   </span>
                 </div>
               </div>
-              <div class="flex items-start justify-between">
-                <div>Что взять с собой</div>
-                <div class="flex flex-wrap gap-2 w-2/3">
+              <div
+                class="flex items-start justify-between"
+                v-if="event?.guestNeed?.bring?.filter((s) => s).length > 0"
+              >
+                <div class="flex">Что взять с собой</div>
+                <div class="flex flex-1 flex-wrap gap-2 justify-end">
                   <span
-                    v-for="val of event?.guestNeed?.bring"
+                    v-for="val of event?.guestNeed?.bring?.filter((s) => s)"
                     class="py-1 px-2 rounded-lg border bg-[#F5F0FF] text-[#9E55EC] border-[#9E55EC]"
                     :key="val"
                     >{{ val }}</span
@@ -233,8 +236,8 @@
                 v-for="atr of event?.attributes"
                 :key="atr?._id"
               >
-                <div>{{ atr.category?.title }}</div>
-                <div class="flex flex-wrap gap-2">
+                <div class="flex-1">{{ atr.category?.title }}</div>
+                <div class="flex flex-1 flex-wrap gap-2 justify-end">
                   <span
                     v-for="val of atr.values"
                     class="py-1 px-2 rounded-lg border bg-[#F5F0FF] text-[#9E55EC] border-[#9E55EC]"
@@ -251,7 +254,7 @@
             <div class="text-sm font-medium text-gray-800 mt-1 space-y-2">
               <div class="flex items-center justify-between">
                 <div>Крайний срок для первого гостя</div>
-                <div class="flex flex-wrap gap-2">
+                <div class="flex flex-wrap gap-2 justify-end">
                   <span
                     class="py-1 px-2 rounded-lg border bg-[#F5F0FF] text-[#9E55EC] border-[#9E55EC]"
                   >
@@ -261,7 +264,7 @@
               </div>
               <div class="flex items-center justify-between">
                 <div>Крайний срок добавления гостей</div>
-                <div class="flex flex-wrap gap-2">
+                <div class="flex flex-wrap gap-2 justify-end">
                   <span
                     class="py-1 px-2 rounded-lg border bg-[#F5F0FF] text-[#9E55EC] border-[#9E55EC]"
                   >
@@ -281,7 +284,7 @@
                 :key="atr?._id"
               >
                 <div>{{ atr.category?.title }}</div>
-                <div class="flex flex-wrap gap-2">
+                <div class="flex flex-wrap gap-2 justify-end">
                   <span
                     v-for="val of atr.values"
                     class="py-1 px-2 rounded-lg border bg-[#F5F0FF] text-[#9E55EC] border-[#9E55EC]"
@@ -297,18 +300,24 @@
             <!-- <pre>{{ event }}</pre> -->
             <div class="text-sm font-medium text-gray-800 mt-1 space-y-2">
               <div
-                class="flex items-center justify-between"
+                class="flex flex-col items-start justify-between gap-2"
                 v-for="atr of event?.provide"
                 :key="atr?._id"
               >
-                <div>{{ t(`6.${atr.eventTransport}`) }}</div>
-                <div class="flex flex-wrap gap-2">
-                  <span
+                <div class="flex-1">{{ t(`6.${atr.eventTransport}`) }}</div>
+                <div class="flex flex-1 flex-wrap gap-2 justify-end">
+                  <div
                     v-for="(val, index) of atr.whoWillDrive"
-                    class="py-1 px-2 rounded-lg border bg-[#F5F0FF] text-[#9E55EC] border-[#9E55EC]"
                     :key="index"
-                    >{{ t(`6.${val}`) }}</span
+                    class="flex flex-wrap gap-2"
                   >
+                    <span
+                      v-for="i of val"
+                      :key="i"
+                      class="py-1 px-2 rounded-lg border bg-[#F5F0FF] text-[#9E55EC] border-[#9E55EC]"
+                      >{{ t(`6.${i}`) }}</span
+                    >
+                  </div>
                 </div>
               </div>
             </div>

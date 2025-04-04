@@ -239,6 +239,7 @@ const ru = {
     }
   },
   show: {
+    deadline_hour_select: '1 час до начала',
     deadline_hours_select: '{hour} часов до начала',
     deadline_day_select: '1 день до начала',
     deadline_days_select: '{day} дней до начала'

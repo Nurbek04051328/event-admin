@@ -8,9 +8,9 @@
             <th scope="col" class="th">{{ $t('event.table.title') }}</th>
             <!-- <th scope="col" class="th">{{ $t('event.table.category') }}</th> -->
             <!-- <th scope="col" class="th">{{ $t('event.table.subcategory') }}</th> -->
-            <th scope="col" class="th">{{ $t('event.table.date') }}</th>
+            <th scope="col" class="th">Цена</th>
             <th scope="col" class="th">{{ $t('event.table.organizator') }}</th>
-            <th scope="col" class="th">{{ $t('event.table.check') }}</th>
+
             <th scope="col" class="th">{{ $t('event.table.status') }}</th>
             <th scope="col" class="th">{{ $t('event.table.CreatedAt') }}</th>
           </tr>
@@ -26,25 +26,20 @@
             <td class="td-first">
               {{ (page - 1) * limit + index + 1 }}
             </td>
-            <td class="whitespace-nowrap py-5 pl-4 pr-3 text-sm sm:pl-0">
-              <div class="flex items-center">
-
-                <div class="font-medium text-gray-900">{{ item?.title }}</div>
-
+            <td class="whitespace-nowrap py-5 pl-4 pr-3 text-sm sm:pl-0 space-y-2">
+              <div class="font-medium text-gray-900">{{ item?.title }}</div>
+              <div class="flex gap-2">
+                <span class="primary-tag" v-if="item?.fCategory?.category?.title">{{
+                  item?.fCategory?.category?.title
+                }}</span>
+                <span class="primary-tag" v-if="item?.sCategory?.category?.title">{{
+                  item?.sCategory?.category?.title
+                }}</span>
               </div>
             </td>
-            <!-- <td class="whitespace-nowrap px-3 py-5 text-sm text-gray-500">
-              <div>
-                {{ item?.fCategory?.title }}
-              </div>
-            </td> -->
-            <!-- <td class="whitespace-nowrap px-3 py-5 text-sm text-gray-500">
-              <div v-for="subcat in item.subcategories" :key="subcat._id">
-                {{ subcat.title }}
-              </div>
-            </td> -->
             <td class="whitespace-nowrap px-3 py-5 text-sm text-gray-500">
-              {{ convertDateShort(item?.date?.from) }} {{ convertDateShort(item?.time, 'hour') }}
+              <div>{{ item?.entryFee?.toLocaleString() }} сум</div>
+              <div></div>
             </td>
             <td class="whitespace-nowrap px-3 py-5 text-sm text-gray-500">
               {{ item.organizer?.lname }} {{ item?.organizer?.name }}
@@ -52,46 +47,10 @@
 
             <td class="relative whitespace-nowrap py-5 pl-3 pr-4 text-sm font-medium sm:pr-0">
               <span
-                class="inline-flex items-center rounded-md px-2 py-1 text-xs font-medium ring-1 ring-inset"
-                :class="
-                  item?.status == 2
-                    ? 'text-red-700 ring-red-600/10'
-                    : item?.status == 1
-                      ? 'text-green-700 ring-green-600/20'
-                      : 'text-blue-700 ring-blue-700/10'
-                "
+                class="inline-flex items-center rounded-md px-2 py-1 text-xs font-medium"
+                :class="eventInfo[item?.status]?.class"
               >
-                {{
-                  item?.status == 0
-                    ? $t('event.table.statusPanding')
-                    : item?.status == 1
-                      ? $t('event.table.statusAccess')
-                      : $t('event.table.statusRefused')
-                }}
-              </span>
-            </td>
-            <td class="relative whitespace-nowrap py-5 pl-3 pr-4 text-sm font-medium sm:pr-0">
-              <span
-                class="inline-flex items-center rounded-md px-2 py-1 text-xs font-medium ring-1 ring-inset"
-                :class="
-                  item?.eventStatus == 'canceled'
-                    ? 'text-red-700 ring-red-600/10'
-                    : item?.eventStatus == 'completed'
-                      ? 'text-green-700 ring-green-600/20'
-                      : item?.eventStatus == 'upcoming'
-                        ? 'text-primary-700 ring-primary-600/20'
-                        : 'text-blue-700 ring-blue-700/10'
-                "
-              >
-                {{
-                  item?.eventStatus == 'canceled'
-                    ? $t('event.table.canceled')
-                    : item?.eventStatus == 'completed'
-                      ? $t('event.table.completed')
-                      : item?.eventStatus == 'upcoming'
-                        ? $t('event.table.upcoming')
-                        : $t('event.table.ongoing')
-                }}
+                {{ eventInfo[item?.status]?.label }}
               </span>
             </td>
             <td class="relative whitespace-nowrap py-5 pl-3 pr-4 text-sm font-medium sm:pr-0">
@@ -201,6 +160,7 @@ import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/vue'
 import { EllipsisHorizontalIcon } from '@heroicons/vue/24/outline'
 import { convertDateShort } from '@/helpers/func'
 import { eventStore } from '@/stores/data/event'
+import { eventInfo } from '@/helpers/vars'
 const store = eventStore()
 const { events } = storeToRefs(store)
 </script>
