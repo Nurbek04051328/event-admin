@@ -32,7 +32,7 @@ const store = loggerStore()
 
 
 const page = ref(1)
-const limit = ref(300)
+const limit = ref(30)
 
 const clickCallback = async (value) => {
   page.value = value

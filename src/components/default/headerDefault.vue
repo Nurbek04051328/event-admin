@@ -86,7 +86,7 @@
           active-class="bg-[#F3EBFC]"
           >
           <router-link
-            :to="{ name: 'notification' }"
+            :to="{ name: 'type-notification' }"
             class="p-[14px]"
             >
               <BellIcon class="h-7 w-7 shrink-0 text-[#9E55EC]" aria-hidden="true" />
