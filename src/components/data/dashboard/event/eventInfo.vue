@@ -49,7 +49,7 @@
           <div class="text-base font-medium text-gray-800">
             {{ event?.location?.address }}
           </div>
-          <div class="w-full h-[410px] mt-3">
+          <div class="w-full h-[400px] mt-3">
             <iframe
               :src="`https://www.google.com/maps?q=${event?.location?.coordinates[1]},${event?.location?.coordinates[0]}&z=13&output=embed`"
               width="100%"
