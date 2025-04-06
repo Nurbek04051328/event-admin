@@ -80,7 +80,7 @@ export const links = [
     component: () => import('@/views/dashboard/tarif/indexTarif.vue'),
     meta: {
       icon: SwatchIcon,
-      title: 'Таърифы',
+      title: 'Тарифы',
       toggle: true,
       group: 'main',
       toggleTitle: 'Добавить тариф'
