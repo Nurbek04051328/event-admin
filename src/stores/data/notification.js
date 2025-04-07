@@ -1,4 +1,4 @@
-import { ref } from 'vue'
+import { reactive, ref } from 'vue'
 import { defineStore } from 'pinia'
 import { useNotification } from '../usefull/notification'
 import api from '@/helpers/api'
@@ -59,7 +59,36 @@ export const notificationStore = defineStore('notificationStore', () => {
     }
   }
 
+  const boughtNotif = reactive({
+    data: [],
+    count: 0
+  })
+
+  const getBoughtNotif = async (params) => {
+    try {
+      const { data } = await api.get('/api/notification/user-notifs', { params })
+      console.log(data)
+      boughtNotif.data = [...data.notifs]
+      boughtNotif.count = data.count
+    } catch (error) {
+      notification.setNotif(true, error?.response?.data?.message, 'error')
+    }
+  }
+
+  const sendNotification = async (payload) => {
+    try {
+      const { data } = await api.post('/api/notification/buy-notif-package', payload)
+      console.log(data)
+    } catch (error) {
+      notification.setNotif(true, error?.response?.data?.message, 'danger')
+    }
+  }
+
   return {
+    boughtNotif,
+    getBoughtNotif,
+    sendNotification,
+
     notifications,
     notificationCount,
     getNotifications,

@@ -18,6 +18,14 @@
         >
           Пакеты уведомлении
         </router-link>
+        <router-link
+          :to="{ name: 'bought-notification' }"
+          :class="{
+            'text-gray-800 underline underline-offset-2': route.name == 'bought-notification'
+          }"
+        >
+          Куплено
+        </router-link>
       </div>
     </headPart>
     <router-view />

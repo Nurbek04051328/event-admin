@@ -200,11 +200,11 @@ const { categories } = storeToRefs(category_store)
 const { subcategories } = storeToRefs(subcategory_store)
 import { useRouter } from 'vue-router'
 const router = useRouter()
-const isManager = ref(false)
-const changeRole = async (role) => {
-  if (role == 'moderator') isManager.value = true
-  else isManager.value = false
-}
+// const isManager = ref(false)
+// const changeRole = async (role) => {
+//   if (role == 'moderator') isManager.value = true
+//   else isManager.value = false
+// }
 
 
 const data = ref({

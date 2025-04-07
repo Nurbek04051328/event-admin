@@ -191,6 +191,14 @@ export const links = [
         meta: {
           title: 'Пакет уведомление'
         }
+      },
+      {
+        path: 'bought',
+        name: 'bought-notification',
+        component: () => import('@/views/dashboard/notifications/boughtNotif.vue'),
+        meta: {
+          title: 'Купленные пакеты'
+        }
       }
     ]
   },
