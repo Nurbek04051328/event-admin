@@ -1,9 +1,7 @@
 <template>
   <div class="h-screen flex flex-col overflow-hidden">
-    <headPart
-    :count="store.user.count"
-    >
-      <UserSearch />
+    <headPart :count="store.user.count">
+      <UserSearch v-model="search" @searching="getData"/>
     </headPart>
     <div class="p-4 pb-0 w-full overflow-auto flex-1">
       <UsersTable :page="page" :limit="limit" />
@@ -32,24 +30,27 @@ import paginate from 'vuejs-paginate-next'
 import { onMounted, ref } from 'vue'
 import { usersStore } from '@/stores/data/users'
 const store = usersStore()
-
+import { useRoute, useRouter } from 'vue-router'
+const route = useRoute()
+const router = useRouter()
 // Pagination
 const page = ref(1)
 const limit = ref(30)
-
+const search = ref({})
 const clickCallback = async (value) => {
   page.value = value
   await getData()
 }
 
 const getData = async () => {
-  await store.getUsers({ limit: limit.value, page: page.value })
+  router.push({ name: 'users', query: { ...search.value } })
+  await store.getUsers({ limit: limit.value, page: page.value, ...search.value })
 }
 
 onMounted(async () => {
+  search.value = { ...route.query }
   await getData()
 })
-
 </script>
 
 <style lang=""></style>

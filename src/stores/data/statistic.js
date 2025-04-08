@@ -10,6 +10,7 @@ export const statisticStore = defineStore('statisticStore', () => {
 
   const getStatistics = async (params) => {
     const { data } = await api.get(base_url, { params })
+    console.log(data)
     statistic_counts.value = { ...data }
   }
 
@@ -23,8 +24,6 @@ export const statisticStore = defineStore('statisticStore', () => {
     return await api.get('/statistic/user-statistic', { params })
   }
   const allDeposit = async (params) => {
-    console.log("paasss",params);
-    
     return await api.get('/statistic/wallet-statistic', { params })
   }
 

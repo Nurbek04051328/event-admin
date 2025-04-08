@@ -8,7 +8,7 @@
             <th scope="col" class="th">Ф.И.О</th>
             <th scope="col" class="th">Контакт</th>
             <th scope="col" class="th">Мероприятие</th>
-            <th scope="col" class="th">Билети</th>
+            <th scope="col" class="th">Билеты</th>
             <th scope="col" class="th">Кол-во Собщение</th>
             <th scope="col" class="th">Проверка</th>
             <th scope="col" class="th">Последный вход</th>

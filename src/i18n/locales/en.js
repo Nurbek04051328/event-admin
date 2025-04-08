@@ -1,4 +1,7 @@
-const en = {
+import en from './event/en'
+
+const enLang = {
+  ...en,
   menu: {
     dashboard: 'Statistic',
     workers: 'Workers',
@@ -216,7 +219,8 @@ const en = {
       btnTitle: 'Yes',
       close: 'Cancel'
     }
-  }
+  },
+  
 }
 
-export default en
+export default enLang

@@ -8,11 +8,17 @@
             <th scope="col" class="th md-max:text-[13px]">{{ $t('ticketPackage.table.title') }}</th>
             <!-- <th scope="col" class="th">{{ $t('ticketPackage.table.text') }}</th> -->
             <th scope="col" class="th md-max:text-[13px]">Цены (сум)</th>
-            <th scope="col" class="th md-max:text-[13px]">{{ $t('ticketPackage.table.commissionRate') }} (%)</th>
+            <th scope="col" class="th md-max:text-[13px]">
+              {{ $t('ticketPackage.table.commissionRate') }} (%)
+            </th>
             <th scope="col" class="th">Мероприятие</th>
-            <th scope="col" class="th">Билети</th>
-            <th scope="col" class="th md-max:text-[13px]">{{ $t('ticketPackage.table.language') }}</th>
-            <th scope="col" class="th md-max:text-[13px]" width="150">{{ $t('worker.table.data') }}</th>
+            <th scope="col" class="th">Билеты</th>
+            <th scope="col" class="th md-max:text-[13px]">
+              {{ $t('ticketPackage.table.language') }}
+            </th>
+            <th scope="col" class="th md-max:text-[13px]" width="150">
+              {{ $t('worker.table.data') }}
+            </th>
             <th scope="col" class="th-last" width="150"></th>
           </tr>
         </thead>
@@ -26,14 +32,16 @@
               {{ (page - 1) * limit + itemIdx + 1 }}
             </td>
             <td class="td md-max:text-[13px]">{{ item?.title }}</td>
-            <td class="td md-max:text-[13px] font-bold">{{ item?.price?.from?.toLocaleString() }} - {{ item?.price?.to?.toLocaleString() }}</td>
+            <td class="td md-max:text-[13px] font-bold">
+              {{ item?.price?.from?.toLocaleString() }} - {{ item?.price?.to?.toLocaleString() }}
+            </td>
             <td class="td md-max:text-[13px]">{{ item?.commissionRate }} %</td>
             <td class="whitespace-nowrap px-3 py-5 text-sm text-gray-500">
               <span class="text-green-500">{{ item?.event?.approve || 0 }}</span> /
-              <span class="text-red-500">{{ item?.event?.denied || 0 }}</span> - 
-              <span>{{ item?.event?.count || 0}}</span>
+              <span class="text-red-500">{{ item?.event?.denied || 0 }}</span> -
+              <span>{{ item?.event?.count || 0 }}</span>
             </td>
-            <td class="whitespace-nowrap px-3 py-5 text-sm text-gray-500"> 
+            <td class="whitespace-nowrap px-3 py-5 text-sm text-gray-500">
               <span class="text-green-500">{{ item?.tickets?.generated }}</span> /
               <span class="text-yellow-500">{{ item?.tickets?.bought }}</span> -
               <span>{{ item?.tickets?.available }}</span>
@@ -54,7 +62,7 @@
                 </button>
               </div>
             </td>
-  
+
             <td class="td">{{ convertDate(item.createdAt, 'full') }}</td>
             <td class="td-last flex">
               <button
@@ -81,7 +89,7 @@
 import { ref } from 'vue'
 import { convertDate } from '@/helpers/func'
 import { TrashIcon } from '@heroicons/vue/24/outline'
-import { useI18n } from 'vue-i18n' 
+import { useI18n } from 'vue-i18n'
 const { t } = useI18n()
 const toggle = ref(false)
 // const limit = ref(30)
@@ -121,6 +129,5 @@ const remove = async (answer) => {
 const close = () => {
   toggle.value = false
 }
-
 </script>
 <style lang=""></style>

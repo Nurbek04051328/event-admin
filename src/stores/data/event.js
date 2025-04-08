@@ -58,12 +58,18 @@ export const eventStore = defineStore('eventStore', () => {
     notification.setNotif(true, 'Мероприятие изменено', 'success')
   }
 
+  const getEditEvent = async (id) => {
+    let { data } = await api.get(`${base_url}/get-one/${id}`)    
+    return data
+  }
+
   return {
     events,
     eventInfo,
     comments,
     eventsCount,
     getEvents,
+    getEditEvent,
     getEvent,
     changeStatus,
     getNewSocket,

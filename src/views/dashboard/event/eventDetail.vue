@@ -1,6 +1,9 @@
 <template>
   <headPart backLink="event">
-    <div class="flex overflow-auto gap-2">
+    <div class="flex overflow-auto gap-2 items-center">
+      <router-link :to="{ name: 'event-edit', params: { id: route.params.id } }">
+        Редактировать
+      </router-link>
       <button
         v-if="eventInfo?.event?.status == 0"
         type="button"
@@ -12,7 +15,7 @@
       <button
         v-if="eventInfo?.event?.status == 0"
         type="button"
-        class="flex w-full items-center justify-center rounded-md border border-transparent bg-red-50 px-4 py-[6px] text-base font-medium text-[#FF5558]  focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 focus:ring-offset-gray-50 xm-max:text-xs"
+        class="flex w-full items-center justify-center rounded-md border border-transparent bg-red-50 px-4 py-[6px] text-base font-medium text-[#FF5558] focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 focus:ring-offset-gray-50 xm-max:text-xs"
         @click="confirmRefusel()"
       >
         Отказать

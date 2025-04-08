@@ -72,6 +72,15 @@ export const detailMenu = [
     ]
   },
   {
+    path: 'event/edit/:id',
+    name: 'event-edit',
+    component: () => import('@/views/dashboard/event/eventEdit.vue'),
+    meta: {
+      title: 'Редактировать мероприятие',
+      back: true
+    }
+  },
+  {
     path: 'workers/:id',
     name: 'workerDetail',
     component: () => import('@/views/dashboard/workers/showWorker.vue'),
@@ -177,7 +186,7 @@ export const detailMenu = [
       title: 'Редактировать новости',
       active: 'news'
     }
-  },
+  }
 
   // {
   //   path: 'message/:id',

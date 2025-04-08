@@ -1,13 +1,14 @@
 import '@/assets/styles/app.scss'
 import { createApp } from 'vue'
 
-
 import { createPinia } from 'pinia'
 import VueCookies from 'vue-cookies'
 import i18n from './i18n/i18n'
 
 import App from './App.vue'
 import router from './router'
+
+import { createYmaps } from 'vue-yandex-maps'
 
 import headPart from '@/components/default/headPart.vue'
 import defaultModal from '@/components/default/defaultModal.vue'
@@ -26,12 +27,8 @@ import VueApexCharts from 'vue3-apexcharts'
 import { QuillEditor } from '@vueup/vue-quill'
 import '@vueup/vue-quill/dist/vue-quill.snow.css'
 
-
-import VueDatePicker from '@vuepic/vue-datepicker';
+import VueDatePicker from '@vuepic/vue-datepicker'
 import '@vuepic/vue-datepicker/dist/main.css'
-
-
-
 
 const app = createApp(App)
 
@@ -46,9 +43,8 @@ app.component('arraySelect', filterArraySelect)
 app.component('dublicatSelect', dublicatSelect)
 app.component('defaultCheckbox', defaultCheckbox)
 app.component('phoneMaska', phoneMaska)
-app.component('VueDatePicker', VueDatePicker);
+app.component('VueDatePicker', VueDatePicker)
 app.component('QuillEditor', QuillEditor)
-
 
 app.directive('click-outside', {
   bind: function (el, binding, vnode) {
@@ -66,13 +62,14 @@ app.directive('click-outside', {
 
 app.use(VueApexCharts)
 
-
-
-
-
 app.use(i18n)
 app.use(VueCookies, { expires: '7d' })
 app.use(createPinia())
 app.use(router)
+app.use(
+  createYmaps({
+    apikey: 'e8c6c0be-268b-40de-85e7-3a4eb031b22d'
+  })
+)
 
 app.mount('#app')

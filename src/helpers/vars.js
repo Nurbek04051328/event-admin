@@ -166,6 +166,25 @@ export const notifType = [
   }
 ]
 
+export const userStatus = {
+  active: {
+    title: 'Активный',
+    class: 'success-tag'
+  },
+  limited: {
+    title: 'Ограничен',
+    class: 'primary-tag'
+  },
+  'not active': {
+    title: 'Не активирован',
+    class: 'warning-tag'
+  },
+  deleted: {
+    title: 'Удален/Заблокирован',
+    class: 'danger-tag'
+  }
+}
+
 // export const addGuests = () => {
 //   let hours = [...Array(6)].map((a, v) => {
 //     return {

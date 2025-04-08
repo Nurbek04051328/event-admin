@@ -1,9 +1,7 @@
 <template>
   <div class="h-screen flex flex-col overflow-hidden">
-    <headPart
-    :count="store.organizer.count"
-    >
-    <OrganizerSearch />
+    <headPart :count="store.organizer.count">
+      <OrganizerSearch v-model="search" @searching="getData" />
     </headPart>
     <div class="p-4 pb-0 w-full overflow-auto flex-1">
       <OrganizerTable :page="page" :limit="limit" />
@@ -33,9 +31,14 @@ import { onMounted, ref } from 'vue'
 import { organizerStore } from '@/stores/user/organizer'
 const store = organizerStore()
 
+import { useRoute, useRouter } from 'vue-router'
+const route = useRoute()
+const router = useRouter()
+
 // Pagination
 const page = ref(1)
 const limit = ref(30)
+const search = ref({})
 
 const clickCallback = async (value) => {
   page.value = value
@@ -43,7 +46,8 @@ const clickCallback = async (value) => {
 }
 
 const getData = async () => {
-  await store.getorganizers({ limit: limit.value, page: page.value })
+  router.push({ name: route.name, query: { ...search.value } })
+  await store.getorganizers({ limit: limit.value, page: page.value, ...search.value })
 }
 
 onMounted(async () => {

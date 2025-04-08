@@ -3,13 +3,13 @@
     <div class="flex items-center justify-between">
       <div class="min-w-0 gap-3 flex items-center">
         <button v-if="backLink" @click="router.push({ name: backLink })">
-          <ChevronLeftIcon 
-            class="w-[30px] h-[30px] rounded-full bg-[#F5F0FF]  flex justify-center items-center hover:bg-[#9E55EC] hover:text-white" 
+          <ChevronLeftIcon
+            class="w-[30px] h-[30px] rounded-full bg-[#F5F0FF] flex justify-center items-center hover:bg-[#9E55EC] hover:text-white"
           />
         </button>
         <button v-if="route?.meta?.back" @click="router.back()">
-          <ChevronLeftIcon 
-            class="w-[30px] h-[30px] rounded-full bg-[#F5F0FF] flex justify-center items-center hover:bg-[#9E55EC] hover:text-white" 
+          <ChevronLeftIcon
+            class="w-[30px] h-[30px] rounded-full bg-[#F5F0FF] flex justify-center items-center hover:bg-[#9E55EC] hover:text-white"
           />
         </button>
         <!-- <nav aria-label="breadcrumb">
@@ -22,7 +22,9 @@
         <div class="flex items-center relative mr-8">
           <h2
             class="leading-7 text-[#645A77] xm-max:text-[15px]"
-            :class="route?.meta?.group == 'setting'? 'text-[16px] font-medium' : 'text-[22px] font-bold'"
+            :class="
+              route?.meta?.group == 'setting' ? 'text-[16px] font-medium' : 'text-[22px] font-bold'
+            "
           >
             {{ title || route.meta?.title || '' }}
           </h2>
@@ -42,10 +44,20 @@
             {{ count }}
           </div>
         </div>
-        <button v-if="route?.meta?.toggle" @click="openModal" type="button" class="bg-[#E9DCFF] text-[#360B64] hover:bg-[#9E55EC] hover:text-white p-1 rounded-lg">
+        <button
+          v-if="route?.meta?.toggle"
+          @click="openModal"
+          type="button"
+          class="bg-[#E9DCFF] text-[#360B64] hover:bg-[#9E55EC] hover:text-white p-1 rounded-lg"
+        >
           <PlusIcon class="size-5 text-white-400" />
         </button>
-        <button v-if="route?.meta?.linkName" @click="$router.push({ name: route?.meta?.linkName })" type="button" class="bg-[#E9DCFF] text-[#360B64] hover:bg-[#9E55EC] hover:text-white p-1 rounded-lg">
+        <button
+          v-if="route?.meta?.linkName"
+          @click="$router.push({ name: route?.meta?.linkName })"
+          type="button"
+          class="bg-[#E9DCFF] text-[#360B64] hover:bg-[#9E55EC] hover:text-white p-1 rounded-lg"
+        >
           <PlusIcon class="size-5 text-white-400" />
         </button>
       </div>
@@ -56,7 +68,6 @@
   </div>
 </template>
 <script setup>
-
 defineProps({
   title: String,
   count: Number,
@@ -66,8 +77,8 @@ defineProps({
   backLink: String,
   downloadLink: String,
   category: {
-    title:String,
-    link:String,
+    title: String,
+    link: String
   }
 })
 
@@ -80,10 +91,10 @@ const router = useRouter()
 
 import { useFullStore } from '@/stores/usefull/modal'
 const store = useFullStore()
-import { useBreadcrumbStore } from '@/stores/data/breadcrump';
-import { computed } from 'vue';
-const breadcrumbStore = useBreadcrumbStore();
-const breadcrumbs = computed(() => breadcrumbStore.breadcrumbs);
+// import { useBreadcrumbStore } from '@/stores/data/breadcrump';
+// import { computed } from 'vue';
+// const breadcrumbStore = useBreadcrumbStore();
+// const breadcrumbs = computed(() => breadcrumbStore.breadcrumbs);
 
 const openModal = () => {
   store.setToggle(true)

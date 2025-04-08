@@ -1,4 +1,7 @@
-const ru = {
+import ru from './event/ru'
+
+const ruLang = {
+  ...ru,
   menu: {
     dashboard: 'Статистика',
     workers: 'Сотрудники',
@@ -295,7 +298,6 @@ const ru = {
     inventory_desc: 'Спортивное оборудование, защитное снаряжение'
   },
   8: {
-    
     activity_title: 'Какой уровень активности ожидать гостям?',
     easy: 'Легкий',
     moderate: 'Умеренный',
@@ -313,4 +315,4 @@ const ru = {
   }
 }
 
-export default ru
+export default ruLang

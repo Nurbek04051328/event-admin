@@ -8,7 +8,7 @@
             <th scope="col" class="th">Ф.И.О</th>
             <th scope="col" class="th">Контакт</th>
             <th scope="col" class="th">Мероприятие</th>
-            <th scope="col" class="th">Билети</th>
+            <th scope="col" class="th">Билеты</th>
             <th scope="col" class="th">Кол-во Собщение</th>
             <th scope="col" class="th">Статус</th>
             <th scope="col" class="th">Последный вход</th>
@@ -39,20 +39,19 @@
               {{ person?.events }}
             </td>
             <td class="whitespace-nowrap px-3 py-5 text-sm text-gray-500 text-center">
-              <span class="text-green-500">{{ person?.tickets?.generated }}</span> /
-              <span class="text-yellow-500">{{ person?.tickets?.bought }}</span>
+              <span class="text-green-500">{{ person?.tickets?.bought }}</span> /
+              <span class="text-blue-500">{{ person?.tickets?.generated }}</span>
             </td>
             <td class="whitespace-nowrap px-3 py-5 text-sm text-gray-500 text-center">
               {{ person?.messages }}
             </td>
             <td class="whitespace-nowrap px-3 py-5 text-sm text-gray-500">
-              <span class="success-tag" v-if="person?.status == 'active'">Активный</span>
-              <span class="primary-tag" v-if="person?.status == 'limited'">Ограничен</span>
-              <span class="warning-tag" v-if="person?.status == 'not active'">Не активирован</span>
-              <span class="danger-tag" v-if="person?.status == 'deleted'">Удален/Заблокирован</span>
+              <span :class="userStatus[person.status]?.class">{{
+                userStatus[person.status].title
+              }}</span>
             </td>
-            <td class="relative whitespace-nowrap py-5 pl-3 pr-4 text-sm  sm:pr-0 text-center">
-              {{ person.lastVisit?  convertDateShort(person.lastVisit, 'full') : '-' }}
+            <td class="relative whitespace-nowrap py-5 pl-3 pr-4 text-sm sm:pr-0 text-center">
+              {{ person.lastVisit ? convertDateShort(person.lastVisit, 'full') : '-' }}
             </td>
             <td class="relative whitespace-nowrap py-5 pl-3 pr-4 text-sm font-medium sm:pr-0">
               {{ convertDateShort(person.createdAt, 'full') }}
@@ -61,8 +60,8 @@
         </tbody>
       </table>
     </div>
-    <div class=" hidden sm:block">
-      <ul  class="flex-1 grid grid-cols-12 gap-2  xs-max:grid-cols-1 overflow-auto">
+    <div class="hidden sm:block">
+      <ul class="flex-1 grid grid-cols-12 gap-2 xs-max:grid-cols-1 overflow-auto">
         <li
           v-for="item in store.user.data"
           :key="item._id"
@@ -72,7 +71,7 @@
             <div class="absolute top-0 right-0 m-1">
               <Menu as="div" class="relative m-r-0">
                 <MenuButton class="-m-1.5 flex items-center p-1.5 mx:m-0">
-                  <EllipsisHorizontalIcon class="h-6 w-6 text-gray-400" aria-hidden="true"/>
+                  <EllipsisHorizontalIcon class="h-6 w-6 text-gray-400" aria-hidden="true" />
                 </MenuButton>
                 <transition
                   enter-active-class="transition ease-out duration-100"
@@ -86,7 +85,7 @@
                     class="absolute right-0 z-10 mt-2.5 w-[150px] origin-top-right rounded-md bg-white py-2 shadow-lg ring-1 ring-gray-900/5 focus:outline-none"
                   >
                     <MenuItem>
-                      <button  
+                      <button
                         class="block px-3 py-1 text-sm leading-6 text-gray-900"
                         @click="$router.push({ name: 'user-logger', params: { id: item._id } })"
                       >
@@ -104,19 +103,31 @@
                 :src="`${url}/${item.cover?.at(0) || item.face?.at(0)}`"
                 alt=""
               />
-              <img v-else class="mx-auto h-[100px] w-[100px]  rounded-full" src="@/assets/logo/logo.png" alt=""/>
+              <img
+                v-else
+                class="mx-auto h-[100px] w-[100px] rounded-full"
+                src="@/assets/logo/logo.png"
+                alt=""
+              />
             </div>
-            <h3 class="mt-6 text-sm font-medium text-gray-900">{{ item?.lname }} {{ item?.name }}</h3>
+            <h3 class="mt-6 text-sm font-medium text-gray-900">
+              {{ item?.lname }} {{ item?.name }}
+            </h3>
             <dl class="mt-1 flex flex-grow flex-col justify-between">
               <dt class="sr-only">Логин</dt>
               <dd class="text-sm text-gray-500">{{ item.login }}</dd>
               <dt class="sr-only">Статус</dt>
               <dd class="mt-3 space-x-2 mb-1">
                 <span :class="`${item?.status ? 'success-tag' : 'warning-tag'}`">
-                  {{ item?.status == "active" ? 'Активный' :
-                    item?.status == "not active" ? 'Не активный' :
-                    item?.status == "limited" ? 'Ограничен' :
-                  'Удален/Заблокирован' }}
+                  {{
+                    item?.status == 'active'
+                      ? 'Активный'
+                      : item?.status == 'not active'
+                        ? 'Не активный'
+                        : item?.status == 'limited'
+                          ? 'Ограничен'
+                          : 'Удален/Заблокирован'
+                  }}
                 </span>
               </dd>
             </dl>
@@ -146,13 +157,7 @@ const url = import.meta.env.VITE_URL
 import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/vue'
 import { PhoneIcon, EllipsisHorizontalIcon } from '@heroicons/vue/24/outline'
 import { usersStore } from '@/stores/data/users'
+import { userStatus } from '@/helpers/vars'
 const store = usersStore()
-
-
-
-
-
-
 </script>
 <style lang=""></style>
-
