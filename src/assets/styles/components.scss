@@ -62,4 +62,13 @@
   .primary-tag {
     @apply inline-flex items-center rounded-md bg-[#F3EBFC] px-2 py-1 text-xs font-medium text-[#9E55EC];
   }
+
+  .unchecked {
+    @apply size-[18px] rounded-full border-[1.5px] border-event-200;
+  }
+  .checked {
+    @apply size-[18px] rounded-full bg-main;
+  }
+ 
+
 }

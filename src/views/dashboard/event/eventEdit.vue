@@ -29,10 +29,13 @@ const main = mainStore()
 import { eventStore } from '@/stores/data/event'
 const store = eventStore()
 
-const menuIndex = ref(0)
+const menuIndex = ref(3)
 
 const pages = [
-  MainPart
+  MainPart,
+  Atributes,
+  Location,
+  Calendar
   // Choose_category,
   // Description,
   // About_yourself,
@@ -123,10 +126,36 @@ const route = useRoute()
 
 const toggleLeave = ref(false)
 
+import { categoryStore } from '@/stores/data/categories'
+const category_store = categoryStore()
+
+import { subcategoryStore } from '@/stores/data/subcategories'
+const subcategory_store = subcategoryStore()
+
+import { subcategory2xStore } from '@/stores/data/2xsubcategory'
+import Atributes from '@/components/data/dashboard/event/edit/atributes.vue'
+import Calendar from '@/components/data/dashboard/event/edit/calendar.vue'
+const sub2x_store = subcategory2xStore()
+
 onMounted(async () => {
   await main.getRegions({ limit: 0 })
+  await category_store.getCategories({ limit: 0, language: 'ru' })
+  await main.getAtributes()
   if (route.params.id) {
     data.value = await store.getEditEvent(route.params.id)
+
+    if (data.value.fCategory.subcategory?.length > 0) {
+      await subcategory_store.getSubcategories({
+        limit: 0,
+        category: data.value.fCategory.category,
+        language: 'ru'
+      })
+      await sub2x_store.get2xSubcategories({
+        limit: 0,
+        subcategory: data.value.fCategory.subcategory,
+        language: 'ru'
+      })
+    }
   }
 })
 </script>

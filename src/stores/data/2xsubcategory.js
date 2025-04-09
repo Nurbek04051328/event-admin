@@ -7,19 +7,24 @@ const base_url = '/2x-subcategory'
 
 export const subcategory2xStore = defineStore('subcategory2xStore', () => {
   const subcategories2x = ref([])
+  const sSubcategories2x = ref([])
   const subcategory2xCount = ref(0)
   const notification = useNotification()
 
-  const get2xSubcategories = async (params) => {
-    subcategories2x.value = []
-    const { data } = await api.get(base_url, {params})
-    subcategories2x.value = data?.data;
-    subcategory2xCount.value = data?.count;
+  const get2xSubcategories = async (params, forSecond = false) => {
+    if (!forSecond) subcategories2x.value = []
+    const { data } = await api.get(base_url, { params })
+    if (forSecond) {
+      sSubcategories2x.value = data?.data
+      return
+    }
+    subcategories2x.value = data?.data
+    subcategory2xCount.value = data?.count
   }
 
   const add2xSubcategory = async (subcategory, t) => {
     const { data } = await api.post(base_url, subcategory)
-    subcategories2x.value = [data,...subcategories2x.value]
+    subcategories2x.value = [data, ...subcategories2x.value]
     subcategory2xCount.value += 1
     notification.setNotif(true, t('story.add'), 'success')
   }
@@ -41,13 +46,14 @@ export const subcategory2xStore = defineStore('subcategory2xStore', () => {
   }
 
   const changeStatus = async (id, status) => {
-    let {data} = await api.get(`${base_url}/status/${id}/${status}`)
+    let { data } = await api.get(`${base_url}/status/${id}/${status}`)
     if (data) {
-      subcategories2x.value = subcategories2x.value.map(sub => {
-        if (sub._id == id) return {
+      subcategories2x.value = subcategories2x.value.map((sub) => {
+        if (sub._id == id)
+          return {
             ...sub,
             status: status
-        }
+          }
         return sub
       })
     }
@@ -60,6 +66,7 @@ export const subcategory2xStore = defineStore('subcategory2xStore', () => {
   return {
     subcategories2x,
     subcategory2xCount,
+    sSubcategories2x,
     get2xSubcategories,
     add2xSubcategory,
     remove2xSubcategory,

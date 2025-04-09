@@ -1,85 +1,65 @@
 <template>
-  <div class="flex-1 overflow-auto space-y-[20px] relative pb-8">
-    <div class="px-4">
-      <div class="title mb-[5px]">{{ t('5.title') }}</div>
-      <div class="text mb-[15px]">
-        {{ t('5.text') }}
+  <div class="space-y-4 flex-1 flex flex-col">
+    <div class="flex item gap-6">
+      <div class="space-y-2 flex-1">
+        <div class="font-semibold">Регион</div>
+        <CustomSelect
+          :options="regions"
+          name="region"
+          @change="handleMapCoords"
+          v-model="data.region"
+          option_title="title"
+        />
+      </div>
+      <div class="space-y-2 flex-1">
+        <div class="font-semibold">Адрес</div>
+        <input
+          v-model="data.location.address"
+          class="mt-2 block w-full rounded-2xl border-[1px] pl-4 py-3 pr-10 text-gray-900 ring-0 ring-inset ring-gray-300 focus:outline-0 focus:ring-0 focus:outline-none outline-none sm:text-sm sm:leading-6"
+        />
       </div>
     </div>
-    <!-- <YandexMap
-      style="width: 100%; height: 100vh"
-      @map-was-initialized="initMap"
-      :settings="{
-        location: {
-          center: mapCoords,
-          zoom: 13
-        }
-      }"
-    >
-      <YandexMapDefaultSchemeLayer />
-      <YandexMapDefaultFeaturesLayer />
-      <yandex-map-listener :settings="{ onClick: logMapClick }" />
+    <div class="flex-1 space-y-2">
+      <div class="font-semibold">Локация мероприятие</div>
+      <YandexMap
+        style="width: 100%; height: 600px"
+        @map-was-initialized="initMap"
+        :settings="{
+          location: {
+            center: mapCoords,
+            zoom: 13
+          }
+        }"
+      >
+        <YandexMapDefaultSchemeLayer />
+        <YandexMapDefaultFeaturesLayer />
+        <yandex-map-listener :settings="{ onClick: logMapClick }" />
 
-      <YandexMapDefaultMarker
-        v-if="markerCoords"
-        :settings="{ coordinates: markerCoords }"
-        :marker-id="'1'"
-        :properties="{ iconColor: 'red', glyph: 'home' }"
-      />
-    </YandexMap> -->
-    <!-- <yandex-map
-      v-model="map"
-      :settings="{
-        location: {
-          center: [37.617644, 55.755819],
-          zoom: 9,
-        },
-      }"
-      width="100%"
-      height="500px"
-    >
-      <yandex-map-default-scheme-layer />
-      <yandex-map-default-features-layer />
-      <yandex-map-default-marker :settings="{ coordinates: [37.617644, 55.755819] }" />
-    </yandex-map> -->
-
-    <div
-      :class="`absolute duration-300 ease-in ${hintContent?.length > 0 ? 'bottom-4' : '-bottom-44'} bg-main p-4 rounded-2xl mx-auto left-0 right-0 w-11/12 text-white`"
-    >
-      {{ hintContent }}
+        <YandexMapDefaultMarker
+          v-if="data.location?.coordinates?.length > 0"
+          :settings="{
+            coordinates: [data.location?.coordinates.at(0), data.location?.coordinates.at(1)]
+          }"
+          :marker-id="'1'"
+          :properties="{ iconColor: 'red', glyph: 'home' }"
+        />
+      </YandexMap>
     </div>
-  </div>
-
-  <div class="p-4 w-full">
-    <button
-      :class="[statusBtn ? 'btn' : 'btn-disabled', 'mt-auto w-full']"
-      @click="statusBtn ? nextPage() : false"
-    >
-      {{ t('continue') }}
-      <ChevronRightIcon class="size-5" />
-    </button>
   </div>
 </template>
 <script setup>
-import { ChevronRightIcon } from '@heroicons/vue/24/outline'
-import { onMounted, computed, ref } from 'vue'
+import { onMounted, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
-
-const statusBtn = computed(() => {
-  return data.value.location.coordinates && data.value.location.address
-})
-
-const { t } = useI18n()
 
 import { mainStore } from '@/stores/data/default'
 const main = mainStore()
-const nextPage = () => {
-  main.setPage(1, 0)
-}
 
 const data = defineModel()
 
 import { shallowRef } from 'vue'
+
+import { storeToRefs } from 'pinia'
+const { regions } = storeToRefs(main)
 
 import {
   YandexMap,
@@ -88,6 +68,7 @@ import {
   YandexMapDefaultMarker,
   YandexMapListener
 } from 'vue-yandex-maps'
+import CustomSelect from './layout/customSelect.vue'
 
 const logMapClick = async (object, event) => {
   try {
@@ -134,6 +115,12 @@ const initMap = (map) => {
   })
 }
 
+const handleMapCoords = async () => {
+  let coors = regions.value.find((r) => r._id == data.value.region)
+
+  mapCoords.value = [coors.cordinates.long, coors.cordinates.lat]
+}
+
 // Получение адреса по координатам
 const getAddress = async (coords) => {
   try {
@@ -157,6 +144,10 @@ onMounted(async () => {
   let res = await main.getRegions()
   let coors = res.find((r) => r._id == data.value.region)
   console.log(coors, res)
+  markerCoords.value = [
+    data.value.location?.coordinates.at(1),
+    data.value.location?.coordinates.at(0)
+  ]
   mapCoords.value = [coors.cordinates.long, coors.cordinates.lat]
 })
 </script>

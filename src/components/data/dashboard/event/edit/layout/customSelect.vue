@@ -57,7 +57,7 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 import {
   Listbox,
   ListboxButton,
@@ -88,6 +88,10 @@ const emit = defineEmits(['change', 'clear'])
 const handleClear = () => {
   emit('clear')
 }
+
+watch(model, () => {
+  emit('change')
+})
 
 import { XCircleIcon, XMarkIcon } from '@heroicons/vue/24/outline'
 </script>

@@ -1,5 +1,5 @@
 <template>
-  <div v-if="data?.eventDates?.length > 0" class="space-y-4">
+  <div class="space-y-4 flex-1">
     <div
       v-for="(date, index) of data?.eventDates"
       :key="index"

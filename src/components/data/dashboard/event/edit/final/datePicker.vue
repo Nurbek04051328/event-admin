@@ -1,5 +1,5 @@
 <template>
-  <div class="max-w-md mx-auto mt-2">
+  <div class="flex-1 mx-auto mt-2">
     <!-- Переключение месяцев -->
     <div class="flex justify-between items-center mb-1">
       <button @click="prevMonth" class="p-2 hover:bg-gray-100 rounded">
@@ -23,7 +23,7 @@
           @click="toggleDay(day)"
           :class="[
             'p-2 rounded cursor-pointer',
-            isSelected(day) ? 'bg-main text-white' : 'hover:bg-gray-100 text-black',
+            isSelected(day) ? 'bg-main text-white' : 'hover:bg-gray-100 text-black'
           ]"
         >
           {{ day.day }}
@@ -36,7 +36,7 @@
 
 <script setup>
 import { ArrowLeftIcon, ArrowRightIcon } from '@heroicons/vue/24/outline'
-import { ref, computed } from 'vue'
+import { ref, computed, onMounted } from 'vue'
 
 // Реактивные данные
 const currentDate = ref(new Date())
@@ -67,7 +67,7 @@ const calendarDays = computed(() => {
     days.push({
       day: i,
       isCurrentMonth: true,
-      date: new Date(year, month, i, 10),
+      date: new Date(year, month, i, 10)
     })
   }
   return days
@@ -93,7 +93,7 @@ const toggleDay = (day) => {
     data.value.push({
       date: day.date,
       status: 'open',
-      time: `${new Date(day.date).getHours().toString().padStart(2, '0')}:${new Date(day.date).getMinutes().toString().padStart(2, '0')}`,
+      time: `${new Date(day.date).getHours().toString().padStart(2, '0')}:${new Date(day.date).getMinutes().toString().padStart(2, '0')}`
     })
   } else {
     // Если дата уже выбрана, удаляем её
@@ -102,5 +102,9 @@ const toggleDay = (day) => {
 }
 
 const isSelected = (day) =>
-  day.date && data.value.some((d) => d.date.toDateString() === day.date.toDateString())
+  day.date && data?.value?.some((d) => d ?? d?.date?.toDateString() === day.date?.toDateString())
+
+onMounted(() => {
+  console.log(data.value)
+})
 </script>

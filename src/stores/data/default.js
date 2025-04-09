@@ -85,11 +85,19 @@ export const mainStore = defineStore('mainStore', () => {
     }
   }
 
+  
+  const getAtributes = async (params) => {
+    const { data } = await api.get('/api/default/all-attribute-category', {
+      params})
+    return data
+  }
+
   return {
     addEvent,
     commission,
     commissionRate,
     getTaxes,
+    getAtributes,
     getTicketPackages,
     taxes,
     page,
