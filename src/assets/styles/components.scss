@@ -3,7 +3,7 @@
     @apply block w-full rounded-md border-0 py-1.5 px-2.5 bg-white text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-[#9E55EC] focus:outline-0 sm:text-sm sm:leading-6;
   }
   .select {
-    @apply  block w-full rounded-md border-0 py-[6px] pl-2 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-[#9E55EC] sm:text-sm sm:leading-6;
+    @apply block w-full rounded-md border-0 py-[6px] pl-2 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-[#9E55EC] sm:text-sm sm:leading-6;
   }
 
   // buttons
@@ -69,6 +69,10 @@
   .checked {
     @apply size-[18px] rounded-full bg-main;
   }
- 
-
+  .input-box {
+    @apply rounded-2xl  border-event-200 border-[1px] w-full flex overflow-hidden items-center;
+  }
+  .input-inbox {
+    @apply py-[17px] pl-[25px] rounded-lg border-0 border-none outline-none outline-0 ring-0 focus:ring-0 focus:outline-none;
+  }
 }

@@ -59,7 +59,8 @@ export const eventStore = defineStore('eventStore', () => {
   }
 
   const getEditEvent = async (id) => {
-    let { data } = await api.get(`${base_url}/get-one/${id}`)    
+    let { data } = await api.get(`${base_url}/get-one/${id}`)
+    console.log({ ...data })
     return data
   }
 

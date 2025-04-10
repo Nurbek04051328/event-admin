@@ -48,7 +48,6 @@ export const mainStore = defineStore('mainStore', () => {
         limit: 0
       }
     })
-    console.log(data)
     regions.value = [...data]
     return data
   }
@@ -67,7 +66,7 @@ export const mainStore = defineStore('mainStore', () => {
   const commission = ref({})
   const getTicketPackages = async (entryFee) => {
     const { data } = await api.post('api/default/get-ticket-package', { entryFee })
-    console.log(data)
+
     commission.value = { ...data }
     commissionRate.value = data.commissionRate
     // ticketPackage.value = data
