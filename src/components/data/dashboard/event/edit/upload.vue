@@ -1,22 +1,8 @@
 <template>
   <div class="flex-1 overflow-auto pb-8">
-    <div class="title mb-[15px]">{{ t('10.title') }}</div>
-    <div v-if="step == 0">
-      <div class="flex gap-1.5 mb-[10px]">
-        <img src="@/assets/upload_req.svg" alt="" />
-        <span class="text-event-700 font-nt-medium text-lg">{{ t('10.req') }}</span>
-      </div>
-      <ul class="list-disc pl-6 mb-6">
-        <li>{{ t('10.req_1') }}</li>
-        <li>{{ t('10.req_2') }}</li>
-        <li>{{ t('10.req_3') }}</li>
-      </ul>
-      <div class="flex items-center justify-between">
-        <span class="underline underline-offset-2">{{ t('10.more') }}</span>
-        <ChevronRightIcon class="size-5" />
-      </div>
-    </div>
-    <div v-if="step == 1" class="grid gap-5 grid-cols-2">
+    <div class="title mb-[15px]">Изображения мероприятия</div>
+
+    <div class="grid gap-5 grid-cols-4">
       <div v-for="(cover, index) of data.cover" :key="index" class="relative">
         <div
           v-if="index == data.cover?.length - 1 && loading"
@@ -79,7 +65,7 @@
                       'block px-4 py-2 text-sm'
                     ]"
                   >
-                    {{ t('edit') }}
+                    Редактировать
                   </label>
                 </MenuItem>
                 <MenuItem v-slot="{ active }">
@@ -90,7 +76,7 @@
                       'block px-4 py-2 text-sm'
                     ]"
                   >
-                    {{ t('delete') }}
+                    Удалить
                   </div>
                 </MenuItem>
               </div>
@@ -116,20 +102,12 @@
       accept="image/*"
     />
   </div>
-  <button
-    class="mt-4 btn"
-    :class="[step == 0 || (step == 1 && statusBtn) ? 'btn' : 'btn-disabled', 'mt-auto']"
-    @click="step == 0 ? step++ : statusBtn ? nextPage() : false"
-  >
-    {{ step == 0 ? t('understand') : t('continue') }}
-    <ChevronRightIcon class="size-5" />
-  </button>
   <DialogAgree
     :dialog="toggle"
-    :title="t('10.sure_title')"
-    :text="t('10.sure_text')"
-    :aggree-btn="t('delete')"
-    :cancel-btn="t('cancel')"
+    title="Вы уверены, что хотите удалить?"
+    text="Это действие нельзя отменить?"
+    aggree-btn="Удалить"
+    cancel-btn="Отмена"
     @answer="handleAnswer"
   />
 </template>
@@ -137,14 +115,12 @@
 import { ref } from 'vue'
 import axios from 'axios'
 import { url } from '@/utils/api'
-// import cookies from 'vue-cookies'
 import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/vue'
 import { EllipsisVerticalIcon } from '@heroicons/vue/20/solid'
-import { ArrowUpTrayIcon, ChevronRightIcon } from '@heroicons/vue/24/outline'
+import { ArrowUpTrayIcon } from '@heroicons/vue/24/outline'
 
-import { useI18n } from 'vue-i18n'
 import DialogAgree from './layout/dialogAgree.vue'
-const { t } = useI18n()
+
 import cookies from 'vue-cookies'
 const data = defineModel()
 
@@ -164,7 +140,6 @@ const handleAnswer = (answer) => {
 
 const editIndex = ref(-1)
 
-const step = ref(1)
 const fileInput = ref()
 const loading = ref(false)
 const handleFileChange = async (e) => {
@@ -177,8 +152,6 @@ const handleFileChange = async (e) => {
       data.value.cover.push('')
     }
 
-    const token = cookies.get('qabul-token')
-
     const formData = new FormData()
     formData.append('file', file)
     try {
@@ -186,7 +159,7 @@ const handleFileChange = async (e) => {
       const response = await axios.post(`${url}/route/upload/cover`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
-          Authorization: `Bearer ${cookies.get('add-event') || ''}`
+          Authorization: `Bearer ${cookies.get('dashboard-token') || ''}`
         }
       })
       if (editIndex.value > -1) {
@@ -201,15 +174,5 @@ const handleFileChange = async (e) => {
     }
   }
 }
-import { mainStore } from '@/stores/data/default'
-const main = mainStore()
-const nextPage = () => {
-  main.setPage(1, 0)
-}
-
-import { computed } from 'vue'
-const statusBtn = computed(() => {
-  return data.value.cover?.length > 2
-})
 </script>
 <style lang=""></style>

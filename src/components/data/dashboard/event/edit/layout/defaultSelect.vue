@@ -8,7 +8,7 @@
     @change="$emit('change', model)"
   >
     <option value="" class="text-gray-500" selected disabled>
-      {{ placeholder || 'Ro`yhatdan tanlang' }}
+      {{ placeholder || 'Выберите из списка' }}
     </option>
     <option v-for="opt of options" :key="opt._id" :value="opt._id">
       {{ opt[option_title] }}
@@ -28,7 +28,7 @@ defineProps([
   'disabled',
   'suffix',
   'mini',
-  'default',
+  'default'
 ])
 defineEmits(['change'])
 import { XCircleIcon } from '@heroicons/vue/24/outline'

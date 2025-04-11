@@ -144,8 +144,9 @@
                   </div>
                   <div class="text-sm mt-2">Билеты:</div>
                   <div class="text-gray-800 text-lg font-semibold">
-                    <span class="primary-tag">0</span> / <span class="success-tag">0</span> /
-                    <span class="warning-tag">0</span> / {{ event.quantity }}
+                    <span class="primary-tag">{{ d.pending || 0 }}</span> /
+                    <span class="success-tag">{{ d.bought || 0 }}</span> /
+                    <span class="warning-tag">{{ d.denied || 0 }}</span> / {{ d.quantity || 0 }}
                   </div>
                 </div>
               </swiper-slide>

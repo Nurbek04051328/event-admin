@@ -1,6 +1,5 @@
 <template>
   <div class="flex-1 mx-auto mt-2">
-    <!-- Переключение месяцев -->
     <div class="flex justify-between items-center mb-1">
       <button @click="prevMonth" class="p-2 hover:bg-gray-100 rounded">
         <ArrowLeftIcon class="size-4" />
@@ -30,14 +29,13 @@
         </div>
       </div>
     </div>
-    <!-- Дни недели -->
   </div>
 </template>
 
 <script setup>
 import { ArrowLeftIcon, ArrowRightIcon } from '@heroicons/vue/24/outline'
 import { ref, computed, onMounted } from 'vue'
-
+import moment from 'moment'
 // Реактивные данные
 const currentDate = ref(new Date())
 const data = defineModel() // Массив для хранения нескольких выбранных дат
@@ -85,8 +83,9 @@ const nextMonth = () => {
 const toggleDay = (day) => {
   if (!day.isCurrentMonth || !day.date) return
 
-  const dateStr = day.date.toDateString()
-  const index = data.value.findIndex((d) => d.date.toDateString() === dateStr)
+  const index = data.value.findIndex(
+    (d) => moment(d.date).format('DD/MM/YYYY') === moment(day.date).format('DD/MM/YYYY')
+  )
 
   if (index === -1) {
     // Если дата не выбрана, добавляем её
@@ -102,7 +101,10 @@ const toggleDay = (day) => {
 }
 
 const isSelected = (day) =>
-  day.date && data?.value?.some((d) => d ?? d?.date?.toDateString() === day.date?.toDateString())
+  day.date &&
+  data?.value?.some(
+    (d) => moment(d.date).format('DD/MM/YYYY') === moment(day.date).format('DD/MM/YYYY')
+  )
 
 onMounted(() => {
   console.log(data.value)

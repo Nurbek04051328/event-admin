@@ -185,6 +185,17 @@ export const userStatus = {
   }
 }
 
+export const dateStatus = [
+  {
+    _id: 'open',
+    title: 'Открытый'
+  },
+  {
+    _id: 'close',
+    title: 'Закрытый'
+  }
+]
+
 // export const addGuests = () => {
 //   let hours = [...Array(6)].map((a, v) => {
 //     return {

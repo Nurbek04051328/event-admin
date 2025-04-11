@@ -11,43 +11,17 @@
 <script setup>
 import { onMounted, ref } from 'vue'
 import MainPart from '@/components/data/dashboard/event/edit/main.vue'
-import Choose_category from '@/components/data/dashboard/event/edit/choose_category.vue'
-import Description from '@/components/data/dashboard/event/edit/description.vue'
-import About_yourself from '@/components/data/dashboard/event/edit/about_yourself.vue'
 import Location from '@/components/data/dashboard/event/edit/location.vue'
-import Provide from '@/components/data/dashboard/event/edit/provide.vue'
-import Bring from '@/components/data/dashboard/event/edit/bring.vue'
-import Title from '@/components/data/dashboard/event/edit/title.vue'
-import Visit from '@/components/data/dashboard/event/edit/visit.vue'
-import Upload from '@/components/data/dashboard/event/edit/upload.vue'
-import Final from '@/components/data/dashboard/event/edit/final.vue'
 
 import { mainStore } from '@/stores/data/default'
-import Result from '@/components/data/dashboard/event/edit/result.vue'
 const main = mainStore()
 
 import { eventStore } from '@/stores/data/event'
 const store = eventStore()
 
-const menuIndex = ref(3)
+const menuIndex = ref(6)
 
-const pages = [
-  MainPart,
-  Atributes,
-  Location,
-  Calendar
-  // Choose_category,
-  // Description,
-  // About_yourself,
-  // Location,
-  // Provide,
-  // Bring,
-  // Visit,
-  // Title,
-  // Upload,
-  // Final,
-  // Result
-]
+const pages = [MainPart, Atributes, Location, Calendar, Ticket, Upload, Settings]
 
 const data = ref({
   region: '',
@@ -124,8 +98,6 @@ import { useRoute } from 'vue-router'
 import EventMenu from '@/components/data/dashboard/event/edit/eventMenu.vue'
 const route = useRoute()
 
-const toggleLeave = ref(false)
-
 import { categoryStore } from '@/stores/data/categories'
 const category_store = categoryStore()
 
@@ -135,6 +107,9 @@ const subcategory_store = subcategoryStore()
 import { subcategory2xStore } from '@/stores/data/2xsubcategory'
 import Atributes from '@/components/data/dashboard/event/edit/atributes.vue'
 import Calendar from '@/components/data/dashboard/event/edit/calendar.vue'
+import Ticket from '@/components/data/dashboard/event/edit/ticket.vue'
+import Upload from '@/components/data/dashboard/event/edit/upload.vue'
+import Settings from '@/components/data/dashboard/event/edit/settings.vue'
 const sub2x_store = subcategory2xStore()
 
 onMounted(async () => {
@@ -143,7 +118,13 @@ onMounted(async () => {
   await main.getAtributes()
   if (route.params.id) {
     data.value = await store.getEditEvent(route.params.id)
-
+    data.value.eventDates = data.value.eventDates?.map((day) => {
+      return {
+        date: day.date,
+        status: 'open',
+        time: `${new Date(day.date).getHours().toString().padStart(2, '0')}:${new Date(day.date).getMinutes().toString().padStart(2, '0')}`
+      }
+    })
     if (data.value.fCategory.subcategory?.length > 0) {
       await subcategory_store.getSubcategories({
         limit: 0,
