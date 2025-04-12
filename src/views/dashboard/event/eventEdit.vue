@@ -122,8 +122,9 @@ onMounted(async () => {
     data.value = await store.getEditEvent(route.params.id)
     data.value.eventDates = data.value.eventDates?.map((day) => {
       return {
+        _id: day._id,
         date: day.date,
-        status: 'open',
+        status: day.status,
         time: `${new Date(day.date).getHours().toString().padStart(2, '0')}:${new Date(day.date).getMinutes().toString().padStart(2, '0')}`
       }
     })
