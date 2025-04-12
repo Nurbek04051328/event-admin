@@ -21,7 +21,7 @@ const main = mainStore()
 import { eventStore } from '@/stores/data/event'
 const store = eventStore()
 
-const menuIndex = ref(6)
+const menuIndex = ref(0)
 
 const pages = [MainPart, Atributes, Location, Calendar, Ticket, Upload, Settings]
 

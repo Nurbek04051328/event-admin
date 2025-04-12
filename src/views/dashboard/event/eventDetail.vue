@@ -1,7 +1,10 @@
 <template>
   <headPart backLink="event">
     <div class="flex overflow-auto gap-2 items-center">
-      <router-link :to="{ name: 'event-edit', params: { id: route.params.id } }">
+      <router-link
+        class="primary-btn"
+        :to="{ name: 'event-edit', params: { id: route.params.id } }"
+      >
         Редактировать
       </router-link>
       <button
