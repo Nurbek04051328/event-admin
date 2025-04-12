@@ -1,5 +1,7 @@
 <template>
-  <headPart />
+  <headPart>
+    <button class="primary-btn" @click="store.saveEvent(data)">Сохранить</button>
+  </headPart>
   <section class="overflow-auto flex p-4 gap-4 flex-1">
     <EventMenu v-model="menuIndex" />
     <div class="flex-1 overflow-auto rounded-xl bg-white p-4">

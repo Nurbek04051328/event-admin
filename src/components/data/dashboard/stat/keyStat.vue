@@ -24,7 +24,7 @@
             class="py-2 flex items-center justify-between"
           >
             <div class="flex items-center gap-2">
-              <div :class="['w-3 h-3 rounded-full', `bg-[${item.class}]`]"></div>
+              <div :class="['w-3 h-3 rounded-full', `${item.class}`]"></div>
               <div>{{ item.title }}</div>
             </div>
             <div class="text-[#483D5B] text-[20px] font-bold">{{ item.value }}</div>
@@ -48,13 +48,15 @@ const series = computed(() => [props?.count?.activated || 0, props?.count?.notAc
 
 const list = computed(() => [
   {
-    class: '#05CD99',
+    class: '#16a34a',
+    bg: 'bg-green-600',
     title: 'Активированные',
     value: props.count?.activated || 0,
     status: 'active'
   },
   {
-    class: '#9ca3af',
+    class: '#6b7280',
+     bg: 'bg-gray-500',
     title: 'Не активированные',
     value: props.count?.notActivated || 0,
     status: 'not active'

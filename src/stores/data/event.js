@@ -2,6 +2,7 @@ import { ref } from 'vue'
 import { defineStore } from 'pinia'
 import { useNotification } from '../usefull/notification'
 import api from '@/helpers/api'
+import router from '@/router'
 
 const base_url = '/event'
 
@@ -60,8 +61,13 @@ export const eventStore = defineStore('eventStore', () => {
 
   const getEditEvent = async (id) => {
     let { data } = await api.get(`${base_url}/get-one/${id}`)
-    console.log({ ...data })
+    console.log(data.communicativeAmenities)
     return data
+  }
+
+  const saveEvent = async (payload) => {
+    await api.put(`${base_url}`, payload)
+    router.push({ name: 'eventDetail', params: { id: payload._id } })
   }
 
   return {
@@ -70,6 +76,7 @@ export const eventStore = defineStore('eventStore', () => {
     comments,
     eventsCount,
     getEvents,
+    saveEvent,
     getEditEvent,
     getEvent,
     changeStatus,
