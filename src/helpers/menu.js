@@ -18,6 +18,7 @@ import {
 
 import { settingMenu } from './settingMenu'
 import { settingChildren } from './settingChild'
+import { PhotoIcon } from '@heroicons/vue/20/solid'
 
 export const links = [
   {
@@ -130,6 +131,16 @@ export const links = [
       linkName: 'newsAdd',
       group: 'main',
       toggleTitle: 'Добавить новости'
+    }
+  },
+  {
+    path: 'posts',
+    name: 'posts',
+    component: () => import('@/views/dashboard/post/indexPost.vue'),
+    meta: {
+      title: 'Посты',
+      icon: PhotoIcon,
+      group: 'main'
     }
   },
   {

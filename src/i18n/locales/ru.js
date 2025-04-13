@@ -20,7 +20,8 @@ const ruLang = {
     ads: 'Рекламы',
     notification: 'Уведомление',
     newsCategory: 'Категория новостей',
-    news: 'Новости'
+    news: 'Новости',
+    posts: 'Посты'
   },
   settingMenu: {
     language: 'Языки',

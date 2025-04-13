@@ -309,6 +309,24 @@ export const settingsTitles = {
   add_placeholder: 'Расскажите гостям, что они должны уметь делать на мероприятии ...'
 }
 
+export const postStatus = [
+  {
+    _id: 'active',
+    title: 'Активный',
+    class: 'bg-green-500'
+  },
+  {
+    _id: 'pending',
+    title: 'На расмотрение',
+    class: 'bg-amber-500'
+  },
+  {
+    _id: 'denied',
+    title: 'Удалено',
+    class: 'bg-red-500'
+  }
+]
+
 // export const addGuests = () => {
 //   let hours = [...Array(6)].map((a, v) => {
 //     return {
