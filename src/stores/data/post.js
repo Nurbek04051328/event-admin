@@ -24,12 +24,20 @@ export const postStore = defineStore('postStore', () => {
     }
   }
 
-  const changeStatus = async (payload) => {
+  const changeStatus = async (payload, t) => {
     try {
-      console.log(payload)
       const { data } = await api.post(`${base_url}/status`, payload)
-      console.log(data)
-      notification.setNotif(true, t('story.update'), 'success')
+      if (data) {
+        posts.data = posts.data.map((p) => {
+          if (p._id == payload._id)
+            return {
+              ...p,
+              status: payload.status
+            }
+          return p
+        })
+      }
+      notification.setNotif(true, 'Обновлено', 'success')
     } catch (error) {
       notification.setNotif(true, error?.response?.data?.message, 'error')
     }
