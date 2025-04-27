@@ -52,7 +52,7 @@ const stats = computed(() => {
       value: allPurchasesSum.split(' ')?.at(0) || 0,
       unit: allPurchasesSum.split(' ')?.at(1)
     },
-    { name: 'Успешность', value: `${props.org.statistic?.success.toFixed(1)} %` ||  0 }
+    { name: 'Успешность', value: `${props.org?.statistic?.success?.toFixed(1) || 0} %` ||  0  }
   ]
 })
 </script>

@@ -46,6 +46,8 @@ const clickCallback = async (value) => {
 }
 
 const getData = async () => {
+  console.log("search.value", search.value);
+  
   router.push({ name: route.name, query: { ...search.value } })
   await store.getorganizers({ limit: limit.value, page: page.value, ...search.value })
 }

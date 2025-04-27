@@ -54,12 +54,9 @@ export const messageStore = defineStore('messageStore', () => {
   const filterRoom = async ({ room, message, notViewed }) => {
     let findIndex = chatrooms.data.findIndex(r => r._id === room);
     if (findIndex === -1) {
-      console.log("if", findIndex, room, message, notViewed );
-      
       const {data} = await api.get(base_url, {params:{limit:1} });
       chatrooms.data = [...data.rooms, ...chatrooms.data];
     } else {
-      console.log("else", findIndex, room, message, notViewed );
       let findData = chatrooms.data[findIndex]
       findData = { ...findData, notViewed, lastMessage: message }
       chatrooms.data = chatrooms.data.filter(r => r._id !== room);

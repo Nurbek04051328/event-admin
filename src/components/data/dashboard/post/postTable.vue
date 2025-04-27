@@ -45,7 +45,7 @@
         </div>
         <div class="">
           <div class="text-sm">Описание</div>
-          <div class="font-semibold">{{ post.comment }}</div>
+          <div class="font-semibold description-text">{{ post.comment }}</div>
         </div>
       </div>
     </div>
@@ -93,4 +93,11 @@ const close = () => {
   _id.value = ''
 }
 </script>
-<style lang=""></style>
+<style>
+.description-text {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+</style>

@@ -17,6 +17,8 @@ export const authStore = defineStore('authStore', () => {
       console.log(data)
       if (data?.accessToken) {
         cookies.set('dashboard-token', data?.accessToken)
+        console.log("user", data);
+        
         user = { ...data.user }
         connectSocket()
         router.push({ name: 'dashboard' })

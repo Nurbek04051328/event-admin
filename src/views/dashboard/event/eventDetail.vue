@@ -34,7 +34,8 @@
     </div>
   </headPart>
   <div class="px-4 pb-4 flex-1 overflow-hidden h-full">
-    <div class="grid grid-cols-12 gap-4 h-full 2xl:h-auto md:h-full xm-max:grid-cols-6">
+    <Loading v-if="loading" class="h-full" />
+    <div v-else class="grid grid-cols-12 gap-4 h-full 2xl:h-auto md:h-full xm-max:grid-cols-6">
       <div
         class="col-span-9 bg-white/100 rounded-[13px] shadow-sm order-first h-full overflow-auto 2xl:col-span-4 md-max:col-span-6 xm-max:col-span-6"
       >
@@ -52,6 +53,7 @@
         </div>
       </div>
     </div>
+
   </div>
   <accessDialog
     :title="$t('event.accessDialog.accesstitle')"
@@ -81,10 +83,11 @@ const { t } = useI18n()
 // import { Tab, TabGroup, TabList, TabPanel, TabPanels } from '@headlessui/vue'
 import AccessDialog from '@/components/data/dashboard/event/accessDialog.vue'
 import RefusalDialog from '@/components/data/dashboard/event/refusalDialog.vue'
+import Loading from '@/components/default/loadingDefault.vue';
 // import { convertDateShort } from '@/helpers/func'
 import { eventStore } from '@/stores/data/event'
 const store = eventStore()
-const { eventInfo } = storeToRefs(store)
+const { eventInfo, loading } = storeToRefs(store)
 
 // Components
 

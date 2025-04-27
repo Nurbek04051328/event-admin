@@ -104,6 +104,8 @@ const mapInstance = ref(null)
 
 // Инициализация карты
 const initMap = (map) => {
+  console.log("initMap", map);
+  
   mapInstance.value = map
 
   // Добавляем обработчик клика по карте
@@ -111,6 +113,8 @@ const initMap = (map) => {
     const coords = e.get('coords') // Получаем координаты клика
     markerCoords.value = coords // Устанавливаем координаты маркера
     hintContent.value = 'Получение адреса...'
+    console.log("coords",coords);
+    
     getAddress(coords) // Запрашиваем адрес
   })
 }

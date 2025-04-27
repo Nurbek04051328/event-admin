@@ -44,15 +44,7 @@
           </div>
         </div>
         <div class="flex items-center w-full xm:block">
-          <div class="space-y-2 mt-4 w-full mr-3">
-            <phone-maska
-              v-model="data.phone"
-              name="phone"
-              :placeholder="t('worker.dialog.phone')"
-              :customClass="'h-[50px] rounded-[16px] text-[16px] py-[20px] px-[16px]'"
-              :error="v$.phone.$invalid && v$.phone.$dirty"
-            />
-          </div>
+          
           <div class="space-y-2 mt-4 w-full mr-3">
             <default-input
               v-model="data.login"
@@ -71,17 +63,29 @@
               :error="v$.password?.$invalid && v$.password?.$dirty"
             />
           </div>
-          <!-- <div class="space-y-2 mt-4 w-full ml-3">
+        </div>
+        <div class="flex items-center w-full xm:block">
+          <div class="space-y-2 mt-4 w-full mr-3">
+            <phone-maska
+              v-model="data.phone"
+              name="phone"
+              :placeholder="t('worker.dialog.phone')"
+              :customClass="'h-[50px] rounded-[16px] text-[16px] py-[20px] px-[16px]'"
+              :error="v$.phone.$invalid && v$.phone.$dirty"
+            />
+          </div>
+          <div class="space-y-2 mt-4 w-full">
             <default-select
               v-model="data.role"
               name="role"
               :placeholder="t('worker.dialog.role')"
               :options="roles || []"
+              :customClass="'rounded-[16px] text-[16px] py-[13px] px-[16px]'"
               option_title="title"
               :error="v$.role.$invalid && v$.role.$dirty"
               @change="changeRole(data.role)"
             />
-          </div> -->
+          </div>
         </div>
         <div class="mt-7 text-[19px]  text-[#483D5B] font-semibold">Категории сотрудника</div>
         <div class="flex w-full xm:block">
@@ -123,19 +127,19 @@
             </div>
             <div class="text-sm space-y-2">
               <label class="flex items-center space-x-2 cursor-pointer">
-                <input class="mr-1 text-[#645A77] accent-[#9E55EC]" value="show" false-value="hide" type="checkbox" v-model="organizer.show" />
+                <input class="mr-1 text-[#645A77] accent-[#9E55EC]" value="show" false-value="hide" type="checkbox" v-model="organizer.show" :disabled="isContent"/>
                 <span class="hover:text-[#9E55EC] text-[16px] font-normal text-[#645A77]">Просмотр</span>
               </label>
               <label class="flex items-center space-x-2 cursor-pointer">
-                <input class="mr-1 accent-[#9E55EC]" value="status" false-value="hide" type="checkbox" v-model="organizer.status" />
+                <input class="mr-1 accent-[#9E55EC]" value="status" false-value="hide" type="checkbox" v-model="organizer.status" :disabled="isContent"/>
                 <span class="hover:text-[#9E55EC] text-[16px] font-normal text-[#645A77]">Менять статус</span>
               </label>
               <label class="flex items-center space-x-2 cursor-pointer">
-                <input class="mr-1 accent-[#9E55EC]" value="metric" false-value="hide" type="checkbox" v-model="organizer.metric" />
+                <input class="mr-1 accent-[#9E55EC]" value="metric" false-value="hide" type="checkbox" v-model="organizer.metric" :disabled="isContent"/>
                 <span class="hover:text-[#9E55EC] text-[16px] font-normal text-[#645A77]">Персональные данные</span>
               </label>
               <label class="flex items-center space-x-2 cursor-pointer">
-                <input class="mr-1 accent-[#9E55EC]" value="chat" false-value="hide" type="checkbox" v-model="organizer.chat" />
+                <input class="mr-1 accent-[#9E55EC]" value="chat" false-value="hide" type="checkbox" v-model="organizer.chat" :disabled="isContent"/>
                 <span class="hover:text-[#9E55EC] text-[16px] font-normal text-[#645A77]">Чат</span>
               </label>
             </div>
@@ -146,19 +150,19 @@
             </div>
             <div class="text-sm space-y-2">
               <label class="flex items-center space-x-2 cursor-pointer">
-                <input class="mr-1 accent-[#9E55EC]" value="show" type="checkbox" v-model="user.show" />
+                <input class="mr-1 accent-[#9E55EC]" value="show" type="checkbox" v-model="user.show" :disabled="isContent"/>
                 <span class="hover:text-[#9E55EC] text-[16px] font-normal text-[#645A77]">Просмотр</span>
               </label>
               <label class="flex items-center space-x-2 cursor-pointer">
-                <input class="mr-1 accent-[#9E55EC]" value="status" type="checkbox" v-model="user.status" />
+                <input class="mr-1 accent-[#9E55EC]" value="status" type="checkbox" v-model="user.status" :disabled="isContent"/>
                 <span class="hover:text-[#9E55EC] text-[16px] font-normal text-[#645A77]">Менять статус</span>
               </label>
               <label class="flex items-center space-x-2 cursor-pointer">
-                <input class="mr-1 accent-[#9E55EC]" value="metric" type="checkbox" v-model="user.metric" />
+                <input class="mr-1 accent-[#9E55EC]" value="metric" type="checkbox" v-model="user.metric" :disabled="isContent"/>
                 <span class="hover:text-[#9E55EC] text-[16px] font-normal text-[#645A77]">Персональные данные</span>
               </label>
               <label class="flex items-center space-x-2 cursor-pointer">
-                <input class="mr-1 accent-[#9E55EC]" value="chat" type="checkbox" v-model="user.chat" />
+                <input class="mr-1 accent-[#9E55EC]" value="chat" type="checkbox" v-model="user.chat" :disabled="isContent"/>
                 <span class="hover:text-[#9E55EC] text-[16px] font-normal text-[#645A77]">Чат</span>
               </label>
             </div>
@@ -169,11 +173,11 @@
             </div>
             <div class="text-sm space-y-2">
               <label class="flex items-center space-x-2 cursor-pointer">
-                <input class="mr-1 accent-[#9E55EC]" value="show" type="checkbox" v-model="event.show" />
+                <input class="mr-1 accent-[#9E55EC]" value="show" type="checkbox" v-model="event.show" :disabled="isContent"/>
                 <span class="hover:text-[#9E55EC] text-[16px] font-normal text-[#645A77]">Просмотр</span>
               </label>
               <label class="flex items-center space-x-2 cursor-pointer">
-                <input class="mr-1 accent-[#9E55EC]" value="status" type="checkbox" v-model="event.status" />
+                <input class="mr-1 accent-[#9E55EC]" value="status" type="checkbox" v-model="event.status" :disabled="isContent" />
                 <span class="hover:text-[#9E55EC] text-[16px] font-normal text-[#645A77]">Менять статус</span>
               </label>
             </div>
@@ -200,17 +204,19 @@ const { categories } = storeToRefs(category_store)
 const { subcategories } = storeToRefs(subcategory_store)
 import { useRouter } from 'vue-router'
 const router = useRouter()
-// const isManager = ref(false)
-// const changeRole = async (role) => {
-//   if (role == 'moderator') isManager.value = true
-//   else isManager.value = false
-// }
+
+const isContent = ref(false)
+const changeRole = async (role) => {
+  if (role == 'content_manager') isContent.value = true
+  else isContent.value = false
+}
 
 
 const data = ref({
   name: '',
   lname: '',
   phone: '',
+  role: '',
   login: '',
   password: '',
   categories: [],
@@ -249,6 +255,7 @@ const rules = computed(() => {
   const baseRules = {
     name: { required },
     lname: { required },
+    role: { required },
     phone: { required },
     login: { required },
   }
@@ -268,14 +275,30 @@ const v$ = useVuelidate(rules, data)
 
 
 
+const roles = [
+  {
+    _id: 'moderator',
+    title: 'Модератор'
+  },
+  {
+    _id: 'content_manager',
+    title: 'Контент менеджер'
+  },
+  {
+    _id: 'buxgalter',
+    title: 'Бухгалтер'
+  }
+]
+
+
+
 const send = async () => {
-  data.value.role = 'moderator'
   v$.value.$touch()
   if (!v$.value.$invalid) {
     
     const payload = { ...data.value }
 
-    if (data.value.role === 'moderator') {
+    if (data.value.role === 'moderator'&& data.value.role === 'content_manager') {
       if (!data.value.subcategories.length) delete payload.subcategories
     }
     const access = {
@@ -308,7 +331,7 @@ const clear = () => {
     name: '',
     lname: '',
     phone: '',
-    // email: '',
+    role: '',
     login: '',
     password: '',
     role: '',

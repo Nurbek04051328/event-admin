@@ -12,6 +12,8 @@ export const newsStore = defineStore('newsStore', () => {
 
   const getNews = async (params) => {
     const { data } = await api.get(base_url, {params})
+    console.log("news", data);
+    
     news.value = data?.news;
     newsCount.value = data?.count;
   }

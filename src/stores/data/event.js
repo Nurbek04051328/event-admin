@@ -8,6 +8,7 @@ const base_url = '/event'
 
 export const eventStore = defineStore('eventStore', () => {
   const events = ref([])
+  const loading = ref(false)
   const eventInfo = ref({})
   const eventsCount = ref(0)
   const comments = ref([])
@@ -40,9 +41,17 @@ export const eventStore = defineStore('eventStore', () => {
   }
 
   const getEvent = async (id) => {
-    let { data } = await api.get(`${base_url}/${id}`)
-    console.log(data.event)
-    eventInfo.value = { ...data }
+    loading.value = true
+    try {
+      let { data } = await api.get(`${base_url}/${id}`)
+      console.log(data.event)
+      eventInfo.value = { ...data }
+
+    } catch (error) {
+      console.log(error)
+    } finally {
+      loading.value = false
+    }
   }
 
   const getNewSocket = async (id) => {
@@ -72,6 +81,7 @@ export const eventStore = defineStore('eventStore', () => {
 
   return {
     events,
+    loading,
     eventInfo,
     comments,
     eventsCount,

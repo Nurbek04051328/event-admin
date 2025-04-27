@@ -1,3 +1,26 @@
+// Worker roles
+export const roles = [
+  {
+    _id: 'moderator',
+    title: 'Модератор'
+  },
+  {
+    _id: 'content_manager',
+    title: 'Контент менеджер'
+  },
+  {
+    _id: 'buxgalter',
+    title: 'Бухгалтер'
+  }
+]
+
+
+
+
+
+
+
+
 export const reasons = {
   register: 'Регистрация',
   resend: 'Переотправка',

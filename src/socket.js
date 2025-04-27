@@ -11,6 +11,8 @@ const URL = import.meta.env.VITE_URL
 // const URL = `http://localhost:3004`
 // const URL = 'http://192.168.100.137:4100'
 
+
+
 export const socket = io(URL, {
   extraHeaders: {
     Authorization:  `Bearer ${cookies.get('dashboard-token')}`

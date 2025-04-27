@@ -1,6 +1,8 @@
 <template>
   <div class="flex-1 flex flex-col overflow-auto h-[100%]">
-    <div class="text-base text-[#483D5B] font-medium border-b border-gray-200 mb-3 py-2 flex justify-between items-center pr-6 pl-4">
+    <div 
+      class="text-base text-[#483D5B] font-medium border-b border-gray-200 mb-3 py-2 flex justify-between items-center pr-6 pl-4"
+    >
       <span>Список мероприятие</span>
       <span class="text-sm">Количество: {{ list.count }}</span>
     </div>
@@ -18,7 +20,7 @@
               <router-link :to="{ name: 'eventDetail', params: { id: item._id } }">
                 <img
                   :src="`${url}/${item?.cover?.at(0)}`"
-                  class="object-cover object-center w-full rounded-lg"
+                  class="object-cover object-center w-full rounded-lg aspect-square"
                 />
               </router-link>
             </div>
@@ -61,10 +63,13 @@
                 </div>
                 <div class="ml-[-15px]">
                   Категории
-                  <div class="flex gap-2 mt-1">
+                  <div class="flex flex-col gap-2 mt-1">
                     <!-- <pre>{{ item }}</pre> -->
                     <span class="text-[#9E55EC] bg-[#F9F8FC] p-[5px] rounded-[60px]">
-                      {{ item?.fCategory?.title }}
+                      {{ item?.fCategory?.category?.title }}
+                    </span>
+                    <span v-if="item?.sCategory.category" class="text-[#9E55EC] bg-[#F9F8FC] p-[5px] rounded-[60px]">
+                      {{ item?.sCategory?.category?.title }}
                     </span>
                   </div>
                 </div>

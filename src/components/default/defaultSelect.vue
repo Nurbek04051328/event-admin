@@ -4,10 +4,13 @@
     :id="name"
     :name="name"
     v-model="model"
-    class="select text-gray-600"
-    :class="{
+    class="select text-gray-600 py-1.5 px-2.5 rounded-2xl"
+    :class="[
+      customClass,
+      {
       'ring-red-300  focus:ring-2 focus:ring-inset focus:ring-red-500': error
-    }"
+      }
+    ]"
     @change="$emit('change', model)"
   >
     <option value="" disabled selected>{{ placeholder || 'Выберите из списка' }}</option>
@@ -30,7 +33,8 @@ defineProps([
   'name_value',
   'error',
   'disabled',
-  'suffix'
+  'suffix',
+  'customClass'
 ])
 defineEmits(['change'])
 </script>

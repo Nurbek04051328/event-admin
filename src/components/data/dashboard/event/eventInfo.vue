@@ -87,7 +87,6 @@
               {{ event?.description }}
             </div>
           </div>
-
           <div class="border-b-[1px] pb-2">
             <div class="text-xs text-gray-500 2xl:text-[12px]">Категория</div>
             <div class="text-base font-medium text-gray-800 mt-1 flex flex-wrap gap-1">
@@ -115,8 +114,22 @@
               </span>
             </div>
           </div>
+          <div class="border-b-[1px] pb-2">
+            <div class="text-xs text-gray-500 2xl:text-[12px]">Тарифы</div>
+            <div class="text-base font-medium text-gray-800 mt-1 flex flex-wrap gap-1">
+              <span
+                class="inline-flex items-center rounded-md px-2 py-1 text-xs font-medium border bg-[#F5F0FF] text-[#9E55EC] border-[#9E55EC]' 2xl:text-[12px] space-x-1"
+                v-if="event?.ticketPackage?.title"
+              >
+                <span v-if="event?.ticketPackage?.title">
+                  {{ event?.ticketPackage?.title }} {{ event?.ticketPackage?.commissionRate }} %
+                </span>
+              </span>
+            </div>
+          </div>
 
           <div class="border-b-[1px] pb-2">
+            <pre>{{ event?.eventDates.length }}</pre>
             <div class="text-xs text-gray-500 2xl:text-[12px] mb-2">Даты</div>
             <swiper
               v-if="event?.eventDates?.length > 0"

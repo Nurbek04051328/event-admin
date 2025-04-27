@@ -74,10 +74,13 @@
                 </div>
                 <div class="ml-[-15px]">
                   Категории
-                  <div class="flex gap-2 mt-1">
+                  <div class="flex flex-col gap-2 mt-1">
                     <!-- <pre>{{ item }}</pre> -->
                     <span class="text-[#9E55EC] bg-[#F9F8FC] p-[5px] rounded-[60px]">
-                      {{ item?.fCategory?.title }}
+                      {{ item?.fCategory?.category?.title }}
+                    </span>
+                    <span v-if="item?.sCategory.category" class="text-[#9E55EC] bg-[#F9F8FC] p-[5px] rounded-[60px]">
+                      {{ item?.sCategory?.category?.title }}
                     </span>
                   </div>
                 </div>

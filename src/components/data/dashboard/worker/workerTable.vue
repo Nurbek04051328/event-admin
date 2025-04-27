@@ -7,7 +7,7 @@
             <th scope="col" class="th-first w-10">№</th>
             <th scope="col" class="th w-1/5">Ф.И.О</th>
             <th scope="col" class="th w-1/6 lg:w-1/4" width="90">Номер телефон</th>
-
+            <th scope="col" class="th w-1/6 lg:w-1/4" width="90">Роль</th>
             <th scope="col" class="th w-1/6 lg:hidden" width="60">Организаторы</th>
             <th scope="col" class="th w-1/6 lg:hidden" width="60">Мероприятие</th>
             <th scope="col" class="th w-1/6 lg:hidden" width="60">Сообщение</th>
@@ -26,6 +26,7 @@
               {{ item?.lname }} {{ item?.name }}
             </td>
             <td class="td text-gray-500">{{ item?.phone }}</td>
+            <td class="td text-gray-500">{{ item?.role }}</td>
             <td class="td text-gray-500 lg:hidden">
               {{ item?.checkedOrganizers }}
             </td>
