@@ -1,9 +1,9 @@
 <template>
   <Combobox as="div" v-model="selectedPerson">
-    <ComboboxLabel class="block text-sm font-medium leading-6 text-[#645A77]">{{
+    <ComboboxLabel class="block text-sm font-medium leading-6 text-[#645A77]" v-if="label">{{
       label
     }}</ComboboxLabel>
-    <div class="relative border-[1px] border-gray-300 rounded-md mt-2">
+    <div class="relative border-[1px] border-gray-300 rounded-md">
       <ComboboxButton class="inset-y-0 w-full flex items-center rounded-r-md focus:outline-none">
         <ComboboxInput
           class="w-full rounded-md border-0 bg-white py-1.5 pl-2 pr-10 text-[#645A77] shadow-sm focus:ring-2 focus:ring-inset focus:ring-[#9E55EC] focus:outline-0"
@@ -33,7 +33,7 @@
             ]"
           >
             <span :class="['block truncate', selected && 'font-semibold']">
-              {{ person[option_title] }}
+              {{ getPersonTitle(person) }}
             </span>
             <span
               v-if="selected"
@@ -63,10 +63,21 @@ import {
   ComboboxOptions
 } from '@headlessui/vue'
 
+
+function getPersonTitle(person) {
+  if (Array.isArray(props.option_title)) {
+    return props.option_title
+      .map(field => person[field])
+      .filter(Boolean)
+      .join(' ')
+  }
+  return person[props.option_title]
+}
+
+
 const props = defineProps({
   label: {
     type: String,
-    required: true
   },
   placeholder: {
     type: String,
@@ -81,8 +92,8 @@ const props = defineProps({
     default: () => []
   },
   option_title: {
-    type: String,
-    default: 'title' // Default to 'title', but can be overridden
+    type: [String, Array],
+    default: [] // Default to 'title', but can be overridden
   },
   error: {
     type: [String, Boolean],
@@ -117,7 +128,7 @@ const filteredPeople = computed(() => {
 // Function to get the title of a person by their ID (for display purposes)
 function getPersonTitleById(id) {
   const person = props.options.find((p) => p._id === id)
-  return person ? person[props.option_title] : ''
+  return person ? getPersonTitle(person) : ''
 }
 
 // Function to handle input change and update the search query

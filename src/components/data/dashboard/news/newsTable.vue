@@ -34,7 +34,10 @@
                 class="w-14 rounded-md"
               />
             </td>
-            <td class="td md-max:text-[13px]">
+            <td 
+              class="td md-max:text-[13px] cursor-pointer"
+              @click="$router.push({ name: 'ru', params: { id: item?._id, lang: 'ru' } })"
+            >
               {{ item?.title }}
             </td>
             <td class="td">{{ item?.category }}</td>

@@ -89,7 +89,7 @@ const options = computed(() => {
     chart: {
       id: 'vuechart-deposit',
       type: 'area',
-      height: 400,
+      height: 200,
       width: 500
     },
     stroke: {

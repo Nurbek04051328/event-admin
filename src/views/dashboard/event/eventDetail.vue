@@ -1,5 +1,5 @@
 <template>
-  <headPart backLink="event">
+  <headPart>
     <div class="flex overflow-auto gap-2 items-center">
       <router-link
         class="primary-btn"

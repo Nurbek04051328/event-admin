@@ -140,7 +140,9 @@ export const links = [
     meta: {
       title: 'Посты',
       icon: PhotoIcon,
-      group: 'main'
+      group: 'main',
+      toggleTitle: 'Добавить пост',
+      linkName: 'postAdd',
     }
   },
   {

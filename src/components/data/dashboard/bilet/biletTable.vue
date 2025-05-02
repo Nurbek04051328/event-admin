@@ -6,7 +6,7 @@
           <tr>
             <th scope="col" class="th-first">№</th>
             <th scope="col" class="th">QR код</th>
-            <th scope="col" class="th">Номер билета</th>
+            <th scope="col" class="th text-center">Номер билета</th>
             <th scope="col" class="th">Покупатель</th>
             <th scope="col" class="th">Мероприятие</th>
             <th scope="col" class="th">Организатор</th>
@@ -36,10 +36,25 @@
                 </div>
               </div>
             </td>
-            <td class="td">{{ item?.ticketNum}}</td>
-            <td class="td">{{ item?.user?.lname }} {{ item?.user?.name }}</td>
-            <td class="td">{{ item?.event?.title }}</td>
-            <td class="td">{{ item?.event?.organizer?.lname }} {{ item?.event?.organizer?.name }}</td>
+            <td class="td text-center">{{ item?.ticketNum}}</td>
+            <td 
+              class="td cursor-pointer"
+              @click="$router.push({ name: 'user-wallet', params: { id: item?.user?._id } })"
+            >
+              {{ item?.user?.lname }} {{ item?.user?.name }}
+            </td>
+            <td 
+              class="td cursor-pointer"
+              @click="$router.push({ name: 'eventLogger', params: { id: item?.event?._id } })"
+            >
+              {{ item?.event?.title }}
+            </td>
+            <td 
+              class="td cursor-pointer"
+              @click="$router.push({ name: 'organizer-wallet', params: { id: item?.event?.organizer?._id } })"
+            >
+              {{ item?.event?.organizer?.lname }} {{ item?.event?.organizer?.name }}
+            </td>
             <td class="td">{{ item?.entryFee == 0? 'Бесплатно' : `${item?.entryFee.toLocaleString()} сум` }} </td>
   
             <td class="td">

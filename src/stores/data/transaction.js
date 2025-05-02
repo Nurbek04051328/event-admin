@@ -14,6 +14,8 @@ export const transactionStore = defineStore('transactionStore', () => {
   
   const getTransactions = async (params) => {
     const { data } = await api.get(base_url, {params})
+    console.log("data", data);
+    
     transactions.value = data?.wallet
     transactionsCount.value = data?.count
     deposit.value = data?.deposit

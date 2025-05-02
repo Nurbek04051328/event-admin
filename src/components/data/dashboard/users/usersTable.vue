@@ -6,13 +6,11 @@
           <tr>
             <th scope="col" class="th-first">№</th>
             <th scope="col" class="th">Ф.И.О</th>
-            <th scope="col" class="th">Контакт</th>
-            <th scope="col" class="th">Мероприятие</th>
-            <th scope="col" class="th">Билеты</th>
-            <th scope="col" class="th">Кол-во Собщение</th>
-            <th scope="col" class="th">Статус</th>
-            <th scope="col" class="th">Последный вход</th>
-            <th scope="col" class="th">Время регистрации</th>
+            <th scope="col" class="th text-center">Мероприятие</th>
+            <th scope="col" class="th text-center">Билеты</th>
+            <th scope="col" class="th text-center">Кол-во Собщение</th>
+            <th scope="col" class="th text-center">Статус</th>
+            <th scope="col" class="th text-center">Время регистрации</th>
           </tr>
         </thead>
         <tbody class="divide-y divide-gray-200 bg-white">
@@ -27,13 +25,10 @@
               {{ (page - 1) * limit + index + 1 }}
             </td>
             <td class="whitespace-nowrap py-5 pl-4 pr-3 text-sm sm:pl-0">
-              <div class="flex items-center">
+              <div class="flex flex-col">
                 <div class="font-medium text-gray-900">{{ person.lname }} {{ person.name }}</div>
+                <div class="mt-1 text-[13px] text-gray-500">{{ person.phone }}</div>
               </div>
-            </td>
-            <td class="whitespace-nowrap px-3 py-5 text-sm text-gray-500">
-              <div class="text-gray-900">{{ person.login }}</div>
-              <div class="mt-1 text-gray-500">{{ person.phone }}</div>
             </td>
             <td class="whitespace-nowrap px-3 py-5 text-sm text-gray-500 text-center">
               {{ person?.events }}
@@ -45,16 +40,18 @@
             <td class="whitespace-nowrap px-3 py-5 text-sm text-gray-500 text-center">
               {{ person?.messages }}
             </td>
-            <td class="whitespace-nowrap px-3 py-5 text-sm text-gray-500">
-              <span :class="userStatus[person.status]?.class">{{
-                userStatus[person.status].title
-              }}</span>
+            <td class="td text-center">
+              <span class="primary-tag" v-if="person.status == 'limited'"><ExclamationTriangleIcon class="size-4" /></span>
+              <span class="danger-tag" v-if="person.status == 'deleted'"><XMarkIcon class="size-4" /></span>
+              <span class="success-tag" v-if="person.status == 'active'"><CheckIcon class="size-4" /></span>
+              <span class="warning-tag" v-if="person.status == 'not active'"><ClockIcon class="size-4" /></span>
             </td>
-            <td class="relative whitespace-nowrap py-5 pl-3 pr-4 text-sm sm:pr-0 text-center">
-              {{ person.lastVisit ? convertDateShort(person.lastVisit, 'full') : '-' }}
-            </td>
-            <td class="relative whitespace-nowrap py-5 pl-3 pr-4 text-sm font-medium sm:pr-0">
-              {{ convertDateShort(person.createdAt, 'full') }}
+            <td class="td text-center">
+              <div>
+                <div class="font-medium text-black">{{ convertDateShort(person.createdAt, 'full') }}</div>
+                <div class="mt-1 text-[13px] text-gray-500">{{ person.lastVisit ? convertDateShort(person.lastVisit, 'full') : '-' }}</div>
+              </div>
+              
             </td>
           </tr>
         </tbody>
@@ -155,9 +152,11 @@ defineProps(['page', 'limit'])
 import { convertDateShort } from '@/helpers/func'
 const url = import.meta.env.VITE_URL
 import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/vue'
-import { PhoneIcon, EllipsisHorizontalIcon } from '@heroicons/vue/24/outline'
 import { usersStore } from '@/stores/data/users'
-import { userStatus } from '@/helpers/vars'
+import { PhoneIcon, EllipsisHorizontalIcon, CheckIcon, ExclamationTriangleIcon, ClockIcon, XMarkIcon } from '@heroicons/vue/24/outline'
 const store = usersStore()
+
+
+
 </script>
 <style lang=""></style>

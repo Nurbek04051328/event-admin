@@ -15,7 +15,6 @@ export const workerStore = defineStore('workerStore', () => {
   const getWorkers = async (params) => {
     const { data } = await api.get(base_url, {params})
     console.log("workers", data);
-    
     workers.value = data?.employees
     workersCount.value = data?.count
   }

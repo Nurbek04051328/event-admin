@@ -10,7 +10,6 @@
             <!-- <th scope="col" class="th">{{ $t('event.table.subcategory') }}</th> -->
             <th scope="col" class="th">Цена</th>
             <th scope="col" class="th">{{ $t('event.table.organizator') }}</th>
-
             <th scope="col" class="th">{{ $t('event.table.status') }}</th>
             <th scope="col" class="th">{{ $t('event.table.CreatedAt') }}</th>
           </tr>
@@ -41,7 +40,10 @@
               <div>{{ item?.entryFee?.toLocaleString() }} сум</div>
               <div></div>
             </td>
-            <td class="whitespace-nowrap px-3 py-5 text-sm text-gray-500">
+            <td 
+              class="whitespace-nowrap px-3 py-5 text-sm text-gray-500" 
+              @click.stop="$router.push({ name: 'organizer-wallet', params: { id: item?.organizer?._id } })"
+            >
               {{ item.organizer?.lname }} {{ item?.organizer?.name }}
             </td>
 

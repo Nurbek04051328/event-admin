@@ -1,3 +1,4 @@
+
 // Worker roles
 export const roles = [
   {
@@ -189,22 +190,28 @@ export const notifType = [
   }
 ]
 
+
+// Users Status
 export const userStatus = {
   active: {
     title: 'Активный',
-    class: 'success-tag'
+    class: 'success-tag',
+    icon: 'CheckIcon'
   },
   limited: {
     title: 'Ограничен',
-    class: 'primary-tag'
+    class: 'primary-tag',
+    icon: 'ExclamationCircleIcon'
   },
   'not active': {
     title: 'Не активирован',
-    class: 'warning-tag'
+    class: 'warning-tag',
+    icon:'ClockIcon'
   },
   deleted: {
     title: 'Удален/Заблокирован',
-    class: 'danger-tag'
+    class: 'danger-tag',
+    icon: 'XCircleIcon'
   }
 }
 

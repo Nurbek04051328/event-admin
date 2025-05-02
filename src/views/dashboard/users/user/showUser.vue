@@ -1,5 +1,5 @@
 <template>
-  <headPart backLink="users">
+  <headPart>
     <div class="flex space-x-2 overflow-auto">
       <button 
         @click="ChangeId()"

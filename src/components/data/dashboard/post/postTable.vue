@@ -4,8 +4,9 @@
       <div v-for="post of posts.data" :key="post._id" class="bg-white rounded-[16px] p-2 space-y-2">
         <div class="relative">
           <div
+          @click="changeStatus(post._id)"
             :class="[
-              'absolute z-10  left-2 top-2 text-white px-2 py-1 rounded-md',
+              'absolute z-10 cursor-pointer left-2 top-2 text-white px-2 py-1 rounded-md',
               postStatus.find((p) => p._id == post.status)?.class
             ]"
           >
@@ -13,7 +14,7 @@
           </div>
           <button
             class="edit-btn absolute right-2 top-2 z-10 size-8"
-            @click="changeStatus(post._id)"
+            @click="$router.push({ name: 'postEdit', params: { id: post._id } })"
           >
             <PencilIcon class="size-4" />
           </button>
@@ -28,25 +29,26 @@
             </swiper-slide>
           </swiper>
         </div>
-
-        <div class="flex items-center gap-1">
-          <UserIcon class="size-4 text-gray-500" />
-          <div class="font-semibold">{{ post.user?.lname }} {{ post.user?.name }}</div>
-        </div>
-        <div class="flex items-center justify-between">
+        <div class="cursor-pointer" @click="$router.push({ name: 'post-comments', params: { id: post._id } })">
           <div class="flex items-center gap-1">
-            <CalendarIcon class="size-4 text-gray-500" />
-            <div class="font-semibold">{{ moment(post.createdAt).format('DD.MM.YYYY HH:mm') }}</div>
+            <UserIcon class="size-4 text-gray-500" />
+            <div class="font-semibold">{{ post.user?.lname }} {{ post.user?.name }}</div>
           </div>
-          <div class="flex items-center gap-1">
-            <EyeIcon class="size-4 text-gray-500" />
-            <div class="font-semibold">{{ post.sequence }}</div>
+          <div class="flex items-center justify-between pb-2">
+            <div class="flex items-center gap-1">
+              <CalendarIcon class="size-4 text-gray-500" />
+              <div class="font-semibold">{{ moment(post.createdAt).format('DD.MM.YYYY HH:mm') }}</div>
+            </div>
+            <div class="flex items-center gap-1">
+              <EyeIcon class="size-4 text-gray-500" />
+              <div class="font-semibold">{{ post.sequence }}</div>
+            </div>
           </div>
         </div>
-        <div class="">
+        <!-- <div class="">
           <div class="text-sm">Описание</div>
           <div class="font-semibold description-text">{{ post.comment }}</div>
-        </div>
+        </div> -->
       </div>
     </div>
   </div>

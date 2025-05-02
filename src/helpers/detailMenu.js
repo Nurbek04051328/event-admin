@@ -1,11 +1,13 @@
 export const detailMenu = [
+  // Organizer
   {
     path: 'organizer/:id',
     name: 'show-organizer',
     component: () => import('@/views/dashboard/users/organizer/showOrganizer.vue'),
     meta: {
       title: 'Организатор',
-      active: 'organizers'
+      active: 'organizers',
+      back: true
     },
     children: [
       {
@@ -34,13 +36,17 @@ export const detailMenu = [
       }
     ]
   },
+
+
+  //  Events
   {
     path: 'event/:id',
     name: 'eventDetail',
     component: () => import('@/views/dashboard/event/eventDetail.vue'),
     meta: {
       title: 'Страница мероприятие',
-      active: 'event'
+      active: 'event',
+      back: true
     },
     children: [
       {
@@ -80,6 +86,8 @@ export const detailMenu = [
       back: true
     }
   },
+
+  // Workers
   {
     path: 'workers/:id',
     name: 'workerDetail',
@@ -134,13 +142,16 @@ export const detailMenu = [
       active: 'workers'
     }
   },
+
+  // Users
   {
     path: 'user/:id',
     name: 'user-detail',
     component: () => import('@/views/dashboard/users/user/showUser.vue'),
     meta: {
       title: 'Пользователи',
-      active: 'users'
+      active: 'users',
+      back: true
     },
     children: [
       {
@@ -169,6 +180,8 @@ export const detailMenu = [
       }
     ]
   },
+
+  // News
   {
     path: 'news/add',
     name: 'newsAdd',
@@ -186,26 +199,95 @@ export const detailMenu = [
       title: 'Редактировать новости',
       active: 'news'
     }
-  }
+  },
+  {
+    path: 'news/view/:id',
+    name: 'newsView',
+    component: () => import('@/components/data/dashboard/news/newsViewPage.vue'),
+    meta: {
+      title: 'Редактировать новости',
+      active: 'news'
+    },
+    children: [
+      {
+        path: 'ru',
+        name: 'ru',
+        component: () => import('@/components/data/dashboard/news/newsViewsLangPage.vue'),
+        meta: {
+          active: 'posts'
+        }
+      },
+      {
+        path: 'en',
+        name: 'en',
+        component: () => import('@/components/data/dashboard/news/newsViewsLangPage.vue'),
+        meta: {
+          active: 'posts'
+        }
+      },
+      {
+        path: 'uz',
+        name: 'uz',
+        component: () => import('@/components/data/dashboard/news/newsViewsLangPage.vue'),
+        meta: {
+          active: 'posts'
+        }
+      }
+    ]
+  },
 
-  // {
-  //   path: 'message/:id',
-  //   name: 'user-detail',
-  //   component: () => import('@/views/dashboard/users/user/showUser.vue'),
-  //   meta: {
-  //     title: 'Пользователи',
-  //   },
-  //   children: [
-  //     {
-  //       path: 'tickets',
-  //       name: 'user-tickets',
-  //       component: () => import('@/components/data/dashboard/organizer/organizerTickets.vue')
-  //     },
-  //     {
-  //       path: 'logger',
-  //       name: 'user-logger',
-  //       component: () => import('@/components/data/dashboard/logger/userLogger.vue')
-  //     }
-  //   ]
-  // }
+  // Post
+  {
+    path: 'post/add',
+    name: 'postAdd',
+    component: () => import('@/components/data/dashboard/post/postAddPage.vue'),
+    meta: {
+      title: 'Добавить пост',
+      active: 'posts'
+    }
+  },
+  {
+    path: 'post/edit/:id',
+    name: 'postEdit',
+    component: () => import('@/components/data/dashboard/post/postEditPage.vue'),
+    meta: {
+      title: 'Редактировать пост',
+      active: 'posts'
+    }
+  },
+  {
+    path: 'post/view/:id',
+    name: 'postView',
+    component: () => import('@/components/data/dashboard/post/postViewPage.vue'),
+    meta: {
+      title: 'Пост',
+      active: 'posts'
+    },
+    children: [
+      {
+        path: 'comments',
+        name: 'post-comments',
+        component: () => import('@/components/data/dashboard/post/postCommentPage.vue'),
+        meta: {
+          active: 'posts'
+        }
+      },
+      {
+        path: 'likes',
+        name: 'post-likes',
+        component: () => import('@/components/data/dashboard/post/postLikesPage.vue'),
+        meta: {
+          active: 'posts'
+        }
+      },
+      {
+        path: 'views',
+        name: 'post-views',
+        component: () => import('@/components/data/dashboard/post/postViewsPage.vue'),
+        meta: {
+          active: 'posts'
+        }
+      }
+    ]
+  },
 ]

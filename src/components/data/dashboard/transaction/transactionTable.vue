@@ -16,12 +16,18 @@
           <tr
             v-for="(item, itemIdx) in store.transactions"
             :key="item._id"
+            class="cursor-pointer hover:bg-gray-100"
             :class="itemIdx % 2 === 0 ? undefined : 'bg-gray-50'"
           >
             <td class="td-first md-max:text-[13px]">
               {{ (page - 1) * limit + itemIdx + 1 }}
             </td>
-            <td class="td md-max:text-[13px]">{{ item?.user?.lname }} {{ item?.user?.name }}</td>
+            <td 
+              @click="navigateToPage(item.user)"
+              class="td md-max:text-[13px]"
+            >
+              {{ item?.user?.lname }} {{ item?.user?.name }}
+            </td>
             <td class="td md-max:text-[13px] font-bold">{{ item?.amount?.toLocaleString() }} сум</td>
             <td class="">
               <span  :class="walletActions.find((a) => a.mode == item?.type)?.class"> {{ walletActions.find((a) => a.mode == item?.type)?.label }}</span>
@@ -49,7 +55,17 @@ import { walletActions } from '@/helpers/vars'
 import { transactionStore } from '@/stores/data/transaction'
 
 const store = transactionStore()
+import { useRouter } from 'vue-router'
+const router = useRouter()
 
+
+const navigateToPage = (user) => {
+  if (user.role === 'organizer') {
+    router.push({ name: 'organizer-wallet', params: { id: user._id } })
+  } else if (user.role === 'user') {
+    router.push({ name: 'user-wallet', params: { id: user._id } })
+  }
+}
 
 </script>
 <style lang=""></style>

@@ -1,7 +1,7 @@
 <template>
   <div class="h-screen flex flex-col overflow-hidden">
-    <headPart :count="store.postCount">
-      <!-- <PostSearch /> -->
+    <headPart :count="store.posts.count">
+      <PostSearch />
     </headPart>
     <div class="p-4 pb-0 w-full overflow-auto flex-1">
       <PostTable :page="page" :limit="limit" />
@@ -24,7 +24,7 @@
 </template>
 <script setup>
 import PostTable from '@/components/data/dashboard/post/postTable.vue'
-// import PostSearch from '@/components/data/dashboard/post/postSearch.vue'
+import PostSearch from '@/components/data/dashboard/post/postSearch.vue'
 import paginate from 'vuejs-paginate-next'
 import { onMounted, ref } from 'vue'
 

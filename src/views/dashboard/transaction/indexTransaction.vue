@@ -5,7 +5,7 @@
     >
       <TransactionSearch/>
     </headPart>
-    <div class="p-4 pb-0 w-full grid grid-cols-12 gap-5 overflow-hidden flex-1">
+    <div class="p-4 pb-0 w-full grid grid-cols-12 gap-4 overflow-hidden">
       <TransactionStatistic class="col-span-6"/>
       <div class="col-span-6 overflow-auto flex flex-col flex-1">
         

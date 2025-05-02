@@ -119,8 +119,8 @@
           
         </div>
   
-        <div class="mt-7 mb-2 text-[19px]  text-[#483D5B] font-semibold">Доступы</div>
-        <div class="flex w-full xm:block">
+        <div class="mt-7 mb-2 text-[19px]  text-[#483D5B] font-semibold">Доступы:</div>
+        <div class="flex w-full xm:block" >
           <div class="space-y-4 mt-2 w-full mr-3">
             <div class="text-[#645A77] text-[17px] font-semibold">
               Организаторы:
@@ -183,6 +183,54 @@
             </div>
           </div>
         </div>
+        <div class="flex w-full xm:block" >
+          <div class="space-y-4 mt-2 w-full mr-3">
+            <div class="text-[#645A77] text-[17px] font-semibold">
+              Новости:
+            </div>
+            <div class="text-sm space-y-2">
+              <label class="flex items-center space-x-2 cursor-pointer">
+                <input class="mr-1 text-[#645A77] accent-[#9E55EC]" value="show" false-value="hide" type="checkbox" v-model="news.show" :disabled="isContent"/>
+                <span class="hover:text-[#9E55EC] text-[16px] font-normal text-[#645A77]">Просмотр</span>
+              </label>
+              <label class="flex items-center space-x-2 cursor-pointer">
+                <input class="mr-1 accent-[#9E55EC]" value="status" false-value="hide" type="checkbox" v-model="news.status" :disabled="isContent"/>
+                <span class="hover:text-[#9E55EC] text-[16px] font-normal text-[#645A77]">Менять статус</span>
+              </label>
+              <label class="flex items-center space-x-2 cursor-pointer">
+                <input class="mr-1 accent-[#9E55EC]" value="metric" false-value="hide" type="checkbox" v-model="news.edit" :disabled="isContent"/>
+                <span class="hover:text-[#9E55EC] text-[16px] font-normal text-[#645A77]">Изменить данные</span>
+              </label>
+              <label class="flex items-center space-x-2 cursor-pointer">
+                <input class="mr-1 accent-[#9E55EC]" value="chat" false-value="hide" type="checkbox" v-model="news.create" :disabled="isContent"/>
+                <span class="hover:text-[#9E55EC] text-[16px] font-normal text-[#645A77]">Добавить</span>
+              </label>
+            </div>
+          </div>
+          <div class="space-y-4 mt-2 w-full ml-3">
+            <div class="text-[#645A77] text-[17px] font-semibold">
+              Посты:
+            </div>
+            <div class="text-sm space-y-2">
+              <label class="flex items-center space-x-2 cursor-pointer">
+                <input class="mr-1 accent-[#9E55EC]" value="show" type="checkbox" v-model="post.show" :disabled="isContent"/>
+                <span class="hover:text-[#9E55EC] text-[16px] font-normal text-[#645A77]">Просмотр</span>
+              </label>
+              <label class="flex items-center space-x-2 cursor-pointer">
+                <input class="mr-1 accent-[#9E55EC]" value="status" type="checkbox" v-model="post.status" :disabled="isContent"/>
+                <span class="hover:text-[#9E55EC] text-[16px] font-normal text-[#645A77]">Менять статус</span>
+              </label>
+              <label class="flex items-center space-x-2 cursor-pointer">
+                <input class="mr-1 accent-[#9E55EC]" value="metric" type="checkbox" v-model="post.edit" :disabled="isContent"/>
+                <span class="hover:text-[#9E55EC] text-[16px] font-normal text-[#645A77]">Изменить данные</span>
+              </label>
+              <label class="flex items-center space-x-2 cursor-pointer">
+                <input class="mr-1 accent-[#9E55EC]" value="chat" type="checkbox" v-model="post.create" :disabled="isContent"/>
+                <span class="hover:text-[#9E55EC] text-[16px] font-normal text-[#645A77]">Добавить </span>
+              </label>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -206,7 +254,10 @@ import { useRouter } from 'vue-router'
 const router = useRouter()
 
 const isContent = ref(false)
+const isModerator = ref(false)
 const changeRole = async (role) => {
+  if (role == 'content_manager') isContent.value = true
+  else isContent.value = false
   if (role == 'content_manager') isContent.value = true
   else isContent.value = false
 }
@@ -242,6 +293,22 @@ const event = ref({
   show: false,
   status: false
 })
+const news = ref({
+  show: false,
+  status: false,
+  edit: false,
+  create: false,
+})
+const post = ref({
+  show: false,
+  status: false,
+  edit: false,
+  create: false,
+})
+
+
+
+
 
 const formatAccessData = (organizer) => {
   return Object.keys(organizer).filter((key) => organizer[key]);

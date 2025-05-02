@@ -45,6 +45,15 @@ export const newsStore = defineStore('newsStore', () => {
     return await api.get(`${base_url}/${id}/${language}`)
   }
 
+  const getViewNews = async (id, language) => {
+    try {
+      let { data } =  await api.get(`${base_url}/news-info/${id}/${language}`)
+      return data
+    } catch (error) {
+      notification.setNotif(true, error?.response?.data?.message, 'error')
+    }
+  }
+
   
   const changeStatus = async (id, status) => {
     let {data} = await api.get(`${base_url}/status/${id}/${status}`)
@@ -67,6 +76,7 @@ export const newsStore = defineStore('newsStore', () => {
     removeNews,
     saveNews,
     getOneNews,
-    changeStatus
+    changeStatus,
+    getViewNews
   }
 })
