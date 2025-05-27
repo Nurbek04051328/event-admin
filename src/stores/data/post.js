@@ -44,7 +44,7 @@ export const postStore = defineStore('postStore', () => {
   }
 
   const savePost = async (post) => {
-    console.log(post);
+    console.log("postput",post);
     
     const { data } = await api.put(`api${base_url}`, post)
     posts.data = posts.data.map((pay) => {
@@ -75,7 +75,7 @@ export const postStore = defineStore('postStore', () => {
 
   const getPost = async (id) => {
     try {
-      let { data } = await api.get(`${base_url}/${id}`)
+      let { data } = await api.get(`api${base_url}/${id}`)
       console.log("storkega keldi",data)
       return data
     } catch (error) {

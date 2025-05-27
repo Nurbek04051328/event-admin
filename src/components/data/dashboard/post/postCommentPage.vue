@@ -1,8 +1,33 @@
 <template>
-  <div v-if="store.comments.data?.length > 0" class="flex flex-col overflow-hidden">
-    <div class="w-full overflow-y-auto flex-1 text-[13px]">
-      <div v-for="comment of store.comments.data" :key="comment._id" class="p-2">
-        <span class="font-bold text-[#645A77]"> {{ comment?.author?.lname }} {{ comment?.author?.name }} </span>
+  <div v-if="store.comments.data?.length > 0" class="flex flex-col overflow-hidden w-full">
+    <div class="w-full overflow-y-auto flex-1 text-[13px] px-4 py-2">
+      <div v-for="comment of store.comments.data" :key="comment._id" class="p-2 w-full">
+        <div class="flex items-center gap-2 mb-2 w-full">
+          <img
+            v-if="comment?.cover?.length > 0"
+            :src="`${url}/comment?.cover[0]`"
+            class="w-8 h-8 rounded-full object-cover"
+            alt="avatar"
+          />
+          <img
+            v-else
+            src="@/assets/images/not-user.png"
+            class="w-8 h-8 rounded-full object-cover"
+            alt="avatar"
+          />
+          <div>
+            <div class=" flex justify-between "> 
+              <div class="font-bold text-[#2e2d30]">
+                {{ comment?.author?.lname }} {{ comment?.author?.name }}
+              </div>
+              <div class="ml-4">
+                {{ convertDateShort(comment?.createdAt) }}
+              </div>
+            </div>
+            <div class="font-bold text-[#847997]"> <pre>{{ comment?.comment }}</pre> </div>
+          </div>
+
+        </div>
         <!-- купил
         <span 
           class="mr-2"
@@ -50,6 +75,7 @@
 import { ref, onMounted } from 'vue'
 import { useRoute } from 'vue-router'
 import paginate from 'vuejs-paginate-next'
+const url = import.meta.env.VITE_URL
 const route = useRoute()
 const id = ref('')
 const limit = ref(30)

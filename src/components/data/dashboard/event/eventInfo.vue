@@ -60,13 +60,13 @@
             ></iframe>
           </div>
         </div>
-        <div class="border-b-[1px] pb-2">
+        <div v-if="event?.locationDesc" class="border-b-[1px] pb-2">
           <div class="text-xs text-gray-500 2xl:text-[12px]">Описание локации</div>
           <div class="text-base font-medium text-gray-800">
             {{ event?.locationDesc }}
           </div>
         </div>
-        <div class="border-b-[1px] pb-2">
+        <div v-if="event?.uniqueEventSkill" class="border-b-[1px] pb-2">
           <div class="text-xs text-gray-500 2xl:text-[12px]">Уникальные навыки у организатора</div>
           <div class="text-base font-medium text-gray-800">
             {{ event?.uniqueEventSkill }}
@@ -129,7 +129,6 @@
           </div>
 
           <div class="border-b-[1px] pb-2">
-            <pre>{{ event?.eventDates.length }}</pre>
             <div class="text-xs text-gray-500 2xl:text-[12px] mb-2">Даты</div>
             <swiper
               v-if="event?.eventDates?.length > 0"
@@ -211,7 +210,7 @@
                   </span>
                 </div>
               </div>
-              <div class="flex items-center justify-between">
+              <div v-if="event?.activity" class="flex items-center justify-between">
                 <div>Необходимый уровень активности</div>
                 <div class="flex flex-wrap gap-2">
                   <span
@@ -221,7 +220,7 @@
                   </span>
                 </div>
               </div>
-              <div class="flex items-center justify-between">
+              <div v-if="event?.skill" class="flex items-center justify-between">
                 <div>Необходимый уровень навыков</div>
                 <div class="flex flex-wrap gap-2">
                   <span

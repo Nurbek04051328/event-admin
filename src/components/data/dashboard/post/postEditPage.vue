@@ -114,9 +114,12 @@ const v$ = useVuelidate(rules, data)
 const send = async () => {
   v$.value.$touch()
   if (!v$.value.$invalid) {
-    console.log("ketayotgan save daat", data.value );
+    const filtered = Object.fromEntries(
+      Object.entries(data.value).filter(([_, v]) => v !== '')
+    )
+    console.log("ketayotgan save daat", filtered );
     const payload = { ...data.value }
-    await store.savePost(payload)
+    await store.savePost(filtered)
     router.push({ name: 'posts' })
     clear()
   } else {

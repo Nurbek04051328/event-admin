@@ -17,7 +17,7 @@
 
       <ComboboxOptions
         v-if="filteredPeople.length > 0"
-        class="absolute z-10 mt-1 max-h-60 w-full overflow-auto bg-white py-1 text-base shadow-lg focus:outline-none sm:text-sm ring-0 border-0 outline-none"
+        class="absolute z-[99] mt-1 max-h-60 w-full overflow-auto bg-white py-1 text-base shadow-lg focus:outline-none sm:text-sm ring-0 border-0 outline-none"
       >
         <ComboboxOption
           v-for="person in filteredPeople"

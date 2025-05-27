@@ -14,11 +14,12 @@
       option_title="lname name"
       placeholder="Выберите организер"
     /> -->
-    <defaultSelect
+    <filterSelect
       v-model="search.status"
       name="status"
       :options="statuses || []"
       option_title="value"
+      :class="['w-full z-[99]'] "
       placeholder="Выберите статус"
     />
     <button class="bg-[#FFECD9] text-[#FF7E00] hover:bg-[#FF7E00] hover:text-white rounded-lg w-auto p-2" @click="clear">

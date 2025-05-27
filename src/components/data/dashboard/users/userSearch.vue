@@ -4,11 +4,12 @@
       <default-input v-model="search.search" placeholder="Поиск по имени, email" />
     </div>
     <div>
-      <DefaultSelect
+      <filterSelect
         v-model="search.status"
-        placeholder="Статус"
         :options="statusList"
         option_title="title"
+        :class="['w-full z-[100]'] "
+        placeholder="Выберите статус"
         @change="findMe"
       />
     </div>
@@ -30,7 +31,6 @@
 import { MagnifyingGlassIcon, XMarkIcon } from '@heroicons/vue/20/solid'
 import { computed } from 'vue'
 
-import DefaultSelect from '@/components/default/defaultSelect.vue'
 import { userStatus } from '@/helpers/vars'
 
 const search = defineModel()
@@ -47,7 +47,9 @@ const findMe = async () => {
 }
 
 const clear = () => {
-  search.value = {}
+  search.value = {
+    status: '',
+  }
   emit('searching')
 }
 </script>

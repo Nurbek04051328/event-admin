@@ -3,11 +3,13 @@
 
     <VueDatePicker v-model="date" placeholder="Выберите месяц" range :multi-calendars="{ solo: true }" class="w-full placeholder:text-black-500 peer" />
 
-    <default-select
+    <filterSelect
       v-model="search.type"
-      option_title="title"
-      placeholder="Выберите транзакция"
+      name="type"
       :options="walletActions"
+      option_title="title"
+      :class="['w-full z-[99]'] "
+      placeholder="Выберите транзакция"
     />
     <button class="bg-[#FFECD9] text-[#FF7E00] hover:bg-[#FF7E00] hover:text-white rounded-lg w-auto p-2" @click="clear">
       <XMarkIcon class="size-5" />

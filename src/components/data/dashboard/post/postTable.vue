@@ -21,10 +21,10 @@
           <swiper
             v-if="post?.posts?.length"
             :slides-per-view="1"
-            :loop="true"
+            :loop="post.posts.length > 1"
             class="rounded-[12px] overflow-hidden object-cover aspect-square"
           >
-            <swiper-slide v-for="cover of post.posts" :key="cover">
+            <swiper-slide v-for="cover of post?.posts" :key="cover">
               <img :src="`${url}/${cover?.resizedPath}`" alt="" class="w-full h-80 object-cover" />
             </swiper-slide>
           </swiper>

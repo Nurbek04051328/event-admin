@@ -1,8 +1,10 @@
 <template>
-  <div v-if="store.viewsHistory.data?.length > 0" class="flex flex-col overflow-hidden">
-    <div class="w-full overflow-y-auto flex-1 text-[13px]">
-      <div v-for="history of store.viewsHistory.data" :key="like._id" class="p-2">
-        {{ history }}
+  <div v-if="store.viewsHistory?.data?.length > 0" class="flex flex-col overflow-hidden">
+    <div class="w-full overflow-y-auto flex-1 text-[13px] px-4 py-2">
+      <div v-for="history of store.viewsHistory?.data" :key="like?._id" class="p-2">
+        <span class="font-bold text-[#2e2d30] mr-2"> {{ history?.user?.lname }} {{ history?.user?.name }} </span>
+        <span class="font-bold text-[#645A77] mr-2"> посмотрел/а пост </span>
+        <span class="font-bold text-[#645A77] mr-2">- {{ convertDateShort(history?.createdAt, 'full') }} </span>
       </div>
     </div>
     <div class="pb-2">

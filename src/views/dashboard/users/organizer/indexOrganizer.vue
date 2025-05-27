@@ -46,10 +46,12 @@ const clickCallback = async (value) => {
 }
 
 const getData = async () => {
-  console.log("search.value", search.value);
+  const filtered = Object.fromEntries(
+    Object.entries(search.value).filter(([_, v]) => v !== '')
+  )
   
-  router.push({ name: route.name, query: { ...search.value } })
-  await store.getorganizers({ limit: limit.value, page: page.value, ...search.value })
+  router.push({ name: route.name, query: { ...filtered } })
+  await store.getorganizers({ limit: limit.value, page: page.value, ...filtered })
 }
 
 onMounted(async () => {

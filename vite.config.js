@@ -9,13 +9,13 @@ export default defineConfig({
     port: 4140,
     proxy: {
       '/api': {
-        target: 'https://backend.eventum.uz',
+        target: 'https://app.hamkasb.uz',
         changeOrigin: true,
         secure: true, // Certbot sertifikati borligi uchun true qilamiz
         rewrite: (path) => path.replace(/^\/api/, '')
       },
       '/socket.io': {
-        target: 'https://backend.eventum.uz',
+        target: 'https://app.hamkasb.uz',
         ws: true,
         changeOrigin: true,
         secure: true // WebSocket ham HTTPS orqali ishlaydi

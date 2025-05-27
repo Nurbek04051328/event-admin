@@ -43,8 +43,12 @@ const clickCallback = async (value) => {
 }
 
 const getData = async () => {
-  router.push({ name: 'users', query: { ...search.value } })
-  await store.getUsers({ limit: limit.value, page: page.value, ...search.value })
+  const filtered = Object.fromEntries(
+    Object.entries(search.value).filter(([_, v]) => v !== '')
+  )
+  
+  router.push({ name: 'users', query: { ...filtered } })
+  await store.getUsers({ limit: limit.value, page: page.value, ...filtered })
 }
 
 onMounted(async () => {

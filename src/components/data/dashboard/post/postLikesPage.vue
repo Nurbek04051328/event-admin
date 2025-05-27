@@ -1,32 +1,10 @@
 <template>
   <div v-if="store.likes.data?.length > 0" class="flex flex-col overflow-hidden">
-    <div class="w-full overflow-y-auto flex-1 text-[13px]">
+    <div class="w-full overflow-y-auto flex-1 text-[13px] px-4 py-2">
       <div v-for="like of store.likes.data" :key="like._id" class="p-2">
-        <span class="font-bold text-[#645A77]"> {{ like?.author?.lname }} {{ like?.author?.name }} </span>
-        <!-- купил
-        <span 
-          class="mr-2"
-          :class="ticket.status == 0 ? 'bg-[#FFECD9] text-[#FF7E00] rounded-lg px-2':
-            ticket.status == 1 ? 'bg-[#DCF7DD] text-[#119A21] rounded-lg px-2': 
-            ticket.status == 2 ? 'bg-[#FFE6E6] text-[#FF5558] rounded-lg px-2': 'bg-[#F5F1FB] text-[#9E55EC] rounded-lg px-2'
-            "
-        >
-          {{ ticket.status == 0 ? 'Ожидание транзакции' : '' }}
-          {{ ticket.status == 1 ? 'Успешно приобретен' : '' }}
-          {{ ticket.status == 2 ? 'Возврат/Отменен' : '' }}
-        </span> на
-        <span class="font-bold text-[#9E55EC]">
-          {{ ticket.event?.title }}
-        </span>
-        <span v-if="ticket.entryFee == 0" class="font-bold"> бесплатно </span>
-        <span v-if="ticket.entryFee > 0" class="font-bold"
-          >по сумме {{ ticket.entryFee }} сум
-        </span>
-
-        в
-        <span class="font-bold">
-          {{ convertDateShort(ticket.updatedAt, 'full') }}
-        </span> -->
+        <span class="font-bold text-[#2e2d30] mr-2"> {{ like?.user?.lname }} {{ like?.user?.name }} </span>
+        <span class="font-bold text-[#645A77] mr-2"> поставил лайк </span>
+        <span class="font-bold text-[#645A77] mr-2">- {{ convertDateShort(like?.createdAt, 'full') }} </span>
       </div>
     </div>
     <div class="pb-2">
