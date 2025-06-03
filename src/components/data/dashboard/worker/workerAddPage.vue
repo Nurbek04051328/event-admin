@@ -214,7 +214,7 @@
             <div class="text-sm space-y-2">
               <label class="flex items-center space-x-2 cursor-pointer">
                 <input class="mr-1 accent-[#9E55EC]" value="show" type="checkbox" v-model="post.show" :disabled="isContent"/>
-                <span class="hover:text-[#9E55EC] text-[16px] font-normal text-[#645A77]">Просмотр</span>
+              <span class="hover:text-[#9E55EC] text-[16px] font-normal text-[#645A77]">Просмотр</span>
               </label>
               <label class="flex items-center space-x-2 cursor-pointer">
                 <input class="mr-1 accent-[#9E55EC]" value="status" type="checkbox" v-model="post.status" :disabled="isContent"/>

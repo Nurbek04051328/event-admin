@@ -29,22 +29,57 @@
             {{ convertDateShort(item?.createdAt, 'full') }}
           </div>
         </div>
+        <div v-if="item.files?.length > 0" class="mt-2 flex gap-2">
+          <div v-for="(image, index) of item.files" :key="index" class="flex gap-2">
+            <img
+              :src="`${url}/${image.resizedPath}`"
+              alt="comment image"
+              class="object-contain w-[40px] h-[40px] size-full cursor-pointer rounded-md"
+              @click="openFaceBox(image?.outputPath, $event)"
+            />
+          </div>
+        </div>
         <div class="prose prose-sm mt-1 max-w-none text-gray-500" v-html="item?.comment" />
       </div>
     </div>
   </div>
   <div v-else class="text-center mt-5">Комментариев пока нет</div>
+  <VueEasyLightbox
+    :visible="visible"
+    :imgs="[currentImage]"
+    @hide="closeFaceBox"
+  />
 </template>
 <script setup>
-import { onMounted } from 'vue'
+import { onMounted, ref } from 'vue'
 import { convertDateShort } from '@/helpers/func'
 import { StarIcon } from '@heroicons/vue/20/solid'
 import { eventStore } from '@/stores/data/event'
+import VueEasyLightbox from 'vue-easy-lightbox';
 const store = eventStore()
 import { storeToRefs } from 'pinia'
 import { useRoute } from 'vue-router'
 const route = useRoute()
 const { comments } = storeToRefs(store)
+const url = import.meta.env.VITE_URL
+
+
+// Lightbox holati
+const visible = ref(false);
+const currentImage = ref('');
+
+const openFaceBox = (imageUrl, event) => {
+  event.stopPropagation();
+  currentImage.value = `${url}/${imageUrl}`;
+  visible.value = true;
+};
+
+// Lightboxni yopish funksiyasi
+const closeFaceBox = () => {
+  visible.value = false;
+  currentImage.value = '';
+};
+
 
 onMounted(async () => {
   await store.getComments(route.params.id)

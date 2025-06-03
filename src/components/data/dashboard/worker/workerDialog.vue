@@ -230,7 +230,6 @@ const clear = () => {
     name: '',
     lname: '',
     phone: '',
-    // email: '',
     login: '',
     password: '',
     role: '',
@@ -253,6 +252,7 @@ watch(
       if (res.data.role == 'moderator') isManager.value = true
       else isManager.value = false
       console.log(res.data)
+console.log('getdata', res.data);
 
       data.value = {
         ...res.data,

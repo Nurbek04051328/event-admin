@@ -133,19 +133,19 @@
             </div>
             <div class="text-sm space-y-2">
               <label class="flex items-center space-x-2 cursor-pointer">
-                <input class="mr-1 text-[#645A77] accent-[#9E55EC]" value="show" type="checkbox" v-model="organizer.show" />
+                <input class="mr-1 text-[#645A77] accent-[#9E55EC]" value="show" type="checkbox" v-model="organizer.show" :disabled="isContent"/>
                 <span class="hover:text-[#9E55EC] text-[16px] font-normal text-[#645A77]">Просмотр</span>
               </label>
               <label class="flex items-center space-x-2 cursor-pointer">
-                <input class="mr-1 accent-[#9E55EC]" value="status" type="checkbox" v-model="organizer.status" />
+                <input class="mr-1 accent-[#9E55EC]" value="status" type="checkbox" v-model="organizer.status" :disabled="isContent"/>
                 <span class="hover:text-[#9E55EC] text-[16px] font-normal text-[#645A77]">Менять статус</span>
               </label>
               <label class="flex items-center space-x-2 cursor-pointer">
-                <input class="mr-1 accent-[#9E55EC]" value="metric" type="checkbox" v-model="organizer.metric" />
+                <input class="mr-1 accent-[#9E55EC]" value="metric" type="checkbox" v-model="organizer.metric" :disabled="isContent"/>
                 <span class="hover:text-[#9E55EC] text-[16px] font-normal text-[#645A77]">Персональные данные</span>
               </label>
               <label class="flex items-center space-x-2 cursor-pointer">
-                <input class="mr-1 accent-[#9E55EC]" value="chat" type="checkbox" v-model="organizer.chat" />
+                <input class="mr-1 accent-[#9E55EC]" value="chat" type="checkbox" v-model="organizer.chat" :disabled="isContent"/>
                 <span class="hover:text-[#9E55EC] text-[16px] font-normal text-[#645A77]">Чат</span>
               </label>
             </div>
@@ -156,19 +156,19 @@
             </div>
             <div class="text-sm space-y-2">
               <label class="flex items-center space-x-2 cursor-pointer">
-                <input class="mr-1 accent-[#9E55EC]" value="show" type="checkbox" v-model="user.show" />
+                <input class="mr-1 accent-[#9E55EC]" value="show" type="checkbox" v-model="user.show" :disabled="isContent"/>
                 <span class="hover:text-[#9E55EC] text-[16px] font-normal text-[#645A77]">Просмотр</span>
               </label>
               <label class="flex items-center space-x-2 cursor-pointer">
-                <input class="mr-1 accent-[#9E55EC]" value="status" type="checkbox" v-model="user.status" />
+                <input class="mr-1 accent-[#9E55EC]" value="status" type="checkbox" v-model="user.status" :disabled="isContent"/>
                 <span class="hover:text-[#9E55EC] text-[16px] font-normal text-[#645A77]">Менять статус</span>
               </label>
               <label class="flex items-center space-x-2 cursor-pointer">
-                <input class="mr-1 accent-[#9E55EC]" value="metric" type="checkbox" v-model="user.metric" />
+                <input class="mr-1 accent-[#9E55EC]" value="metric" type="checkbox" v-model="user.metric" :disabled="isContent"/>
                 <span class="hover:text-[#9E55EC] text-[16px] font-normal text-[#645A77]">Персональные данные</span>
               </label>
               <label class="flex items-center space-x-2 cursor-pointer">
-                <input class="mr-1 accent-[#9E55EC]" value="chat" type="checkbox" v-model="user.chat" />
+                <input class="mr-1 accent-[#9E55EC]" value="chat" type="checkbox" v-model="user.chat" :disabled="isContent"/>
                 <span class="hover:text-[#9E55EC] text-[16px] font-normal text-[#645A77]">Чат</span>
               </label>
             </div>
@@ -179,12 +179,60 @@
             </div>
             <div class="text-sm space-y-2">
               <label class="flex items-center space-x-2 cursor-pointer">
-                <input class="mr-1 accent-[#9E55EC]" value="show" type="checkbox" v-model="event.show" />
+                <input class="mr-1 accent-[#9E55EC]" value="show" type="checkbox" v-model="event.show" :disabled="isContent"/>
                 <span class="hover:text-[#9E55EC] text-[16px] font-normal text-[#645A77]">Просмотр</span>
               </label>
               <label class="flex items-center space-x-2 cursor-pointer">
-                <input class="mr-1 accent-[#9E55EC]" value="status" type="checkbox" v-model="event.status" />
+                <input class="mr-1 accent-[#9E55EC]" value="status" type="checkbox" v-model="event.status" :disabled="isContent"/>
                 <span class="hover:text-[#9E55EC] text-[16px] font-normal text-[#645A77]">Менять статус</span>
+              </label>
+            </div>
+          </div>
+        </div>
+        <div class="flex w-full xm:block" >
+          <div class="space-y-4 mt-2 w-full mr-3">
+            <div class="text-[#645A77] text-[17px] font-semibold">
+              Новости:
+            </div>
+            <div class="text-sm space-y-2">
+              <label class="flex items-center space-x-2 cursor-pointer">
+                <input class="mr-1 text-[#645A77] accent-[#9E55EC]" value="show" false-value="hide" type="checkbox" v-model="news.show" :disabled="isContent"/>
+                <span class="hover:text-[#9E55EC] text-[16px] font-normal text-[#645A77]">Просмотр</span>
+              </label>
+              <label class="flex items-center space-x-2 cursor-pointer">
+                <input class="mr-1 accent-[#9E55EC]" value="status" false-value="hide" type="checkbox" v-model="news.status" :disabled="isContent"/>
+                <span class="hover:text-[#9E55EC] text-[16px] font-normal text-[#645A77]">Менять статус</span>
+              </label>
+              <label class="flex items-center space-x-2 cursor-pointer">
+                <input class="mr-1 accent-[#9E55EC]" value="metric" false-value="hide" type="checkbox" v-model="news.edit" :disabled="isContent"/>
+                <span class="hover:text-[#9E55EC] text-[16px] font-normal text-[#645A77]">Изменить данные</span>
+              </label>
+              <label class="flex items-center space-x-2 cursor-pointer">
+                <input class="mr-1 accent-[#9E55EC]" value="chat" false-value="hide" type="checkbox" v-model="news.create" :disabled="isContent"/>
+                <span class="hover:text-[#9E55EC] text-[16px] font-normal text-[#645A77]">Добавить</span>
+              </label>
+            </div>
+          </div>
+          <div class="space-y-4 mt-2 w-full ml-3">
+            <div class="text-[#645A77] text-[17px] font-semibold">
+              Посты:
+            </div>
+            <div class="text-sm space-y-2">
+              <label class="flex items-center space-x-2 cursor-pointer">
+                <input class="mr-1 accent-[#9E55EC]" value="show" type="checkbox" v-model="post.show" :disabled="isContent"/>
+                <span class="hover:text-[#9E55EC] text-[16px] font-normal text-[#645A77]">Просмотр</span>
+              </label>
+              <label class="flex items-center space-x-2 cursor-pointer">
+                <input class="mr-1 accent-[#9E55EC]" value="status" type="checkbox" v-model="post.status" :disabled="isContent"/>
+                <span class="hover:text-[#9E55EC] text-[16px] font-normal text-[#645A77]">Менять статус</span>
+              </label>
+              <label class="flex items-center space-x-2 cursor-pointer">
+                <input class="mr-1 accent-[#9E55EC]" value="metric" type="checkbox" v-model="post.edit" :disabled="isContent"/>
+                <span class="hover:text-[#9E55EC] text-[16px] font-normal text-[#645A77]">Изменить данные</span>
+              </label>
+              <label class="flex items-center space-x-2 cursor-pointer">
+                <input class="mr-1 accent-[#9E55EC]" value="chat" type="checkbox" v-model="post.create" :disabled="isContent"/>
+                <span class="hover:text-[#9E55EC] text-[16px] font-normal text-[#645A77]">Добавить </span>
               </label>
             </div>
           </div>
