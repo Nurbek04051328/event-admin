@@ -21,7 +21,6 @@ export const workerStore = defineStore('workerStore', () => {
 
   const addWorker = async (worker, t) => {
     console.log("send worker", worker);
-    
     try {
       const res = await api.post(base_url, worker)
       if (res.status == 201) {
@@ -65,6 +64,12 @@ export const workerStore = defineStore('workerStore', () => {
   const getWorkerUserStat = async (params) => {
     return await api.get(`${base_url}/organizer-statistic`, {params})
   }
+  const getWorkerNewsStat = async (params) => {
+    return await api.get(`${base_url}/news-statistic`, {params})
+  }
+  const getWorkerPostStat = async (params) => {
+    return await api.get(`${base_url}/post-statistic`, {params})
+  }
   const getInfoWorker = async (id) => {
     return await api.get(`${base_url}/info/${id}`)
   }
@@ -83,6 +88,8 @@ export const workerStore = defineStore('workerStore', () => {
     getInfoWorker,
     changeStatusWorker,
     getWorkerEventStat,
-    getWorkerUserStat
+    getWorkerUserStat,
+    getWorkerNewsStat,
+    getWorkerPostStat
   }
 })

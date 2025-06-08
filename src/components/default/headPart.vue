@@ -21,7 +21,7 @@
         </nav> -->
         <div class="flex items-center relative mr-8">
           <h2
-            class="leading-7 text-[#645A77] xm-max:text-[15px]"
+            class="leading-7 text-[#645A77] md:text-[20px]"
             :class="
               route?.meta?.group == 'setting' ? 'text-[16px] font-medium' : 'text-[22px] font-bold'
             "
@@ -50,7 +50,7 @@
           type="button"
           class="bg-[#E9DCFF] text-[#360B64] hover:bg-[#9E55EC] hover:text-white p-1 rounded-lg"
         >
-          <PlusIcon class="size-5 text-white-400" />
+          <PlusIcon class="size-5 text-white-400 md:size-3" />
         </button>
         <button
           v-if="route?.meta?.linkName"

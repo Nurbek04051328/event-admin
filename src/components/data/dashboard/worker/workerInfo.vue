@@ -17,7 +17,7 @@
       <div class="py-1">
         <div class="text-xs text-gray-500 2xl:text-[12px]">Роль</div>
         <div class="text-base font-medium text-gray-800 2xl:text-[14px]">
-          {{ user?.login }}
+          {{ getRoleTitle(user?.role) }}
         </div>
       </div>
       <div class="py-1">
@@ -110,13 +110,39 @@
             </ul>
           </div>
           <div v-if="user?.access?.event.length>0">
-            <div class="text-base font-semibold mb-2">Пользователи:</div>
+            <div class="text-base font-semibold mb-2">Мероприятие:</div>
             <ul class="text-[14px] space-y-1">
               <li v-for="item in accessOptions.event" :key="item.value" class="flex items-center">
                 <component 
                   :is="user?.access?.event.includes(item.value) ? CheckIcon : XMarkIcon" class="h-5 w-5 mr-2" aria-hidden="true" 
                   :class="user?.access?.event.includes(item.value) ? 'text-[#119A21]' : 'text-[#FF5558]'" />
                 <span :class="user?.access?.event.includes(item.value) ? 'text-gray-600 font-medium' : 'text-gray-500'">
+                  {{ item.label }}
+                </span>
+              </li>
+            </ul>
+          </div>
+          <div v-if="user?.access?.news.length>0">
+            <div class="text-base font-semibold mb-2">Новости:</div>
+            <ul class="text-[14px] space-y-1">
+              <li v-for="item in accessOptions.news" :key="item.value" class="flex items-center">
+                <component 
+                  :is="user?.access?.news.includes(item.value) ? CheckIcon : XMarkIcon" class="h-5 w-5 mr-2" aria-hidden="true" 
+                  :class="user?.access?.news.includes(item.value) ? 'text-[#119A21]' : 'text-[#FF5558]'" />
+                <span :class="user?.access?.news.includes(item.value) ? 'text-gray-600 font-medium' : 'text-gray-500'">
+                  {{ item.label }}
+                </span>
+              </li>
+            </ul>
+          </div>
+          <div v-if="user?.access?.post.length>0">
+            <div class="text-base font-semibold mb-2">Посты:</div>
+            <ul class="text-[14px] space-y-1">
+              <li v-for="item in accessOptions.post" :key="item.value" class="flex items-center">
+                <component 
+                  :is="user?.access?.post.includes(item.value) ? CheckIcon : XMarkIcon" class="h-5 w-5 mr-2" aria-hidden="true" 
+                  :class="user?.access?.post.includes(item.value) ? 'text-[#119A21]' : 'text-[#FF5558]'" />
+                <span :class="user?.access?.post.includes(item.value) ? 'text-gray-600 font-medium' : 'text-gray-500'">
                   {{ item.label }}
                 </span>
               </li>
@@ -154,6 +180,28 @@ const accessOptions = {
     { value: 'show', label: 'Просмотр' },
     { value: 'status', label: 'Менять статус' },
   ],
+  news: [
+    { value: 'show', label: 'Просмотр' },
+    { value: 'status', label: 'Менять статус' },
+    { value: 'edit', label: 'Изменить данные' },
+    { value: 'create', label: 'Добавить' },
+  ],
+  post: [
+    { value: 'show', label: 'Просмотр' },
+    { value: 'status', label: 'Менять статус' },
+    { value: 'edit', label: 'Изменить данные' },
+    { value: 'create', label: 'Добавить' },
+  ],
+}
+
+const roles = [
+  { _id: 'moderator', title: 'Модератор' },
+  { _id: 'content_manager', title: 'Контент менеджер' },
+  { _id: 'accountant', title: 'Бухгалтер' }
+]
+const getRoleTitle = (roleId) => {
+  const role = roles.find((r) => r._id === roleId)
+  return role ? role.title : roleId
 }
 
 </script>

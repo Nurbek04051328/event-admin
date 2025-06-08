@@ -6,8 +6,6 @@ export const detailMenu = [
     component: () => import('@/views/dashboard/users/organizer/showOrganizer.vue'),
     meta: {
       title: 'Организатор',
-      active: 'organizers',
-      back: true
     },
     children: [
       {
@@ -151,7 +149,6 @@ export const detailMenu = [
     meta: {
       title: 'Пользователи',
       active: 'users',
-      back: true
     },
     children: [
       {

@@ -30,8 +30,8 @@ const options = computed(() => {
       curve: 'smooth'
     },
     dataLabels: {
-              enabled: false
-            },
+      enabled: false
+    },
     // xaxis: {
     //   categories: stat.value?.map((v, k) => k + 1) || []
     // },
@@ -61,6 +61,17 @@ const getWorkerEventStat = async () => {
   const { data } = await store.getWorkerEventStat({
     _id: id.value
   })
+  // console.log("sasa", data);
+  
+  // const res = await store.getWorkerNewsStat({
+  //   _id: id.value
+  // })
+  // console.log("resNews", res.data);
+  // const res1 = await store.getWorkerPostStat({
+  //   _id: id.value
+  // })
+  // console.log("resPost", res.data);
+  
   series.value = [
     {
       name: 'Подтверждено',

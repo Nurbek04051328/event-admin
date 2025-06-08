@@ -23,7 +23,7 @@
       
       <div class="col-span-8 bg-white/100 rounded-[26px] shadow-sm px-3 flex flex-col space-y-2 h-full overflow-hidden 2xl:col-span-8 2xl:h-[670px] md-max:col-span-6 xm-max:col-span-6">
         <TabList :list="links" />
-        <router-view/>
+        <router-view :role="worker.data?.role"/>
       </div>
     </div>
   </div>
@@ -85,6 +85,8 @@ const links = [
 const getData = async () => {
   if (!id.value) return false
   worker.value = await store.getInfoWorker(id.value)
+  console.log("workerval", worker.value);
+  
 }
 
 

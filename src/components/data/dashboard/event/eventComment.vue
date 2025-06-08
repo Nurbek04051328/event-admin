@@ -25,19 +25,25 @@
               aria-hidden="true"
             />
           </div>
+          
           <div>
             {{ convertDateShort(item?.createdAt, 'full') }}
           </div>
         </div>
-        <div v-if="item.files?.length > 0" class="mt-2 flex gap-2">
-          <div v-for="(image, index) of item.files" :key="index" class="flex gap-2">
-            <img
-              :src="`${url}/${image.resizedPath}`"
-              alt="comment image"
-              class="object-contain w-[40px] h-[40px] size-full cursor-pointer rounded-md"
-              @click="openFaceBox(image?.outputPath, $event)"
-            />
+        <div class="flex justify-between items-center">
+          <div v-if="item.files?.length > 0" class="mt-2 flex gap-2">
+            <div v-for="(image, index) of item.files" :key="index" class="flex gap-2">
+              <img
+                :src="`${url}/${image.resizedPath}`"
+                alt="comment image"
+                class="object-contain w-[40px] h-[40px] size-full cursor-pointer rounded-md"
+                @click="openFaceBox(index, item.files)"
+              />
+            </div>
           </div>
+          <button @click="store.removeComments(item._id)">
+            <TrashIcon class="w-5 mr-2" />
+          </button>
         </div>
         <div class="prose prose-sm mt-1 max-w-none text-gray-500" v-html="item?.comment" />
       </div>
@@ -46,7 +52,8 @@
   <div v-else class="text-center mt-5">Комментариев пока нет</div>
   <VueEasyLightbox
     :visible="visible"
-    :imgs="[currentImage]"
+    :imgs="currentImage"
+    :index="indexImage"
     @hide="closeFaceBox"
   />
 </template>
@@ -54,6 +61,7 @@
 import { onMounted, ref } from 'vue'
 import { convertDateShort } from '@/helpers/func'
 import { StarIcon } from '@heroicons/vue/20/solid'
+import {  TrashIcon } from '@heroicons/vue/24/outline'
 import { eventStore } from '@/stores/data/event'
 import VueEasyLightbox from 'vue-easy-lightbox';
 const store = eventStore()
@@ -66,11 +74,12 @@ const url = import.meta.env.VITE_URL
 
 // Lightbox holati
 const visible = ref(false);
+const indexImage = ref(0);
 const currentImage = ref('');
 
-const openFaceBox = (imageUrl, event) => {
-  event.stopPropagation();
-  currentImage.value = `${url}/${imageUrl}`;
+const openFaceBox = (index, images) => {
+  currentImage.value = images.map(img => `${url}/${img.resizedPath}`);
+  indexImage.value = index
   visible.value = true;
 };
 

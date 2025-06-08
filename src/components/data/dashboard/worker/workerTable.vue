@@ -1,6 +1,6 @@
 <template>
   <div class="flex-1 h-full w-full overflow-auto rounded-[16px]">
-    <div class="inline-block min-w-full align-middle sm:hidden">
+    <div class="inline-block min-w-full align-middle md:hidden">
       <table class="min-w-full divide-y divide-gray-300 bg-white">
         <thead>
           <tr>
@@ -8,9 +8,9 @@
             <th scope="col" class="th w-1/5">Ф.И.О</th>
             <th scope="col" class="th w-1/6 lg:w-1/4" width="90">Номер телефон</th>
             <th scope="col" class="th w-1/6 lg:w-1/4" width="90">Роль</th>
-            <th scope="col" class="th w-1/6 lg:hidden" width="60">Организаторы</th>
+            <!-- <th scope="col" class="th w-1/6 lg:hidden" width="60">Организаторы</th>
             <th scope="col" class="th w-1/6 lg:hidden" width="60">Мероприятие</th>
-            <th scope="col" class="th w-1/6 lg:hidden" width="60">Сообщение</th>
+            <th scope="col" class="th w-1/6 lg:hidden" width="60">Сообщение</th> -->
             <th scope="col" class="th w-1/6 lg:hidden" width="60">Последный вход</th>
             <th scope="col" class="th w-1/5" width="150">Дата рег.</th>
             <th scope="col" class="th-last w-1/6" width="150"></th>
@@ -26,8 +26,8 @@
               {{ item?.lname }} {{ item?.name }}
             </td>
             <td class="td text-gray-500">{{ item?.phone }}</td>
-            <td class="td text-gray-500">{{ item?.role }}</td>
-            <td class="td text-gray-500 lg:hidden">
+            <td class="td text-gray-500">{{ getRoleTitle(item?.role) }}</td>
+            <!-- <td class="td text-gray-500 lg:hidden">
               {{ item?.checkedOrganizers }}
             </td>
             <td class="td text-gray-500 lg:hidden">
@@ -35,7 +35,7 @@
             </td>
             <td class="td text-gray-500 lg:hidden">
               {{ item?.messages }}
-            </td>
+            </td> -->
             <td class="td text-gray-500 lg:hidden">
               {{ item?.lastVisit ? convertDateShort(item?.lastVisit, 'full') : '-' }}
             </td>
@@ -62,12 +62,12 @@
         </tbody>
       </table>
     </div>
-    <div class="hidden sm:block">
-      <ul class="flex-1 grid grid-cols-12 gap-2 xs-max:grid-cols-1 overflow-auto">
+    <div class="hidden md:block">
+      <ul class="flex-1 grid grid-cols-12 gap-2 xs-max:grid-cols-1 overflow-hidden">
         <li
           v-for="item in workers"
           :key="item._id"
-          class="flex flex-col col-span-4 xm:col-span-6 xs-max:col-span-12 divide-y border border-gray-300 divide-gray-200 rounded-lg bg-white text-center shadow mb-3"
+          class="flex flex-col col-span-4 sm:col-span-6 xm:col-span-12 divide-y border border-gray-300 divide-gray-200 rounded-lg bg-white text-center shadow mb-3"
         >
           <div class="flex flex-1 flex-col relative">
             <div class="absolute top-0 right-0 m-1">
@@ -119,7 +119,7 @@
             </h3>
             <dl class="mt-1 flex flex-grow flex-col justify-between">
               <dt class="sr-only">Логин</dt>
-              <dd class="text-sm text-gray-500">{{ item.login }}</dd>
+              <dd class="text-sm text-gray-500">{{ getRoleTitle(item?.role) }}</dd>
               <dt class="sr-only">Статус</dt>
               <dd class="mt-3 space-x-2 mb-1">
                 <span :class="`${item?.status ? 'success-tag' : 'warning-tag'}`">
@@ -127,6 +127,14 @@
                 </span>
               </dd>
             </dl>
+            <div class="flex justify-between items-center px-2 mt-1">
+              <div class="text-xs text-gray-500">Последный вход:</div>
+              <div class="text-xs">{{ item?.lastVisit ? convertDateShort(item?.lastVisit, 'full') : '-' }}</div>
+            </div>
+            <div class="flex justify-between items-center px-2 py-1">
+              <div class="text-xs text-gray-500">Дата рег:</div>
+              <div class="text-xs">{{ convertDateShort(item.createdAt, 'full') }}</div>
+            </div>
           </div>
           <div>
             <div class="-mt-px flex divide-x divide-gray-200">
@@ -156,7 +164,6 @@
 import { ref } from 'vue'
 import { convertDateShort } from '@/helpers/func'
 import { TrashIcon, PencilIcon, PhoneIcon, EllipsisHorizontalIcon } from '@heroicons/vue/24/outline'
-// import { EyeIcon } from '@heroicons/vue/20/solid';
 import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/vue'
 import { useI18n } from 'vue-i18n'
 const { t } = useI18n()
@@ -168,18 +175,23 @@ import { storeToRefs } from 'pinia'
 const store = workerStore()
 const { workers } = storeToRefs(store)
 
-// import { useFullStore } from '@/stores/usefull/modal'
-
-// const usefull = useFullStore()
-// const edit = (id, lang) => {
-//   usefull.setToggle(true, id, lang)
-// }
 
 const _id = ref('')
 const confirmRemove = (id) => {
   _id.value = id
   toggle.value = true
 }
+
+const roles = [
+  { _id: 'moderator', title: 'Модератор' },
+  { _id: 'content_manager', title: 'Контент менеджер' },
+  { _id: 'accountant', title: 'Бухгалтер' }
+]
+const getRoleTitle = (roleId) => {
+  const role = roles.find((r) => r._id === roleId)
+  return role ? role.title : roleId
+}
+
 
 const remove = async (answer) => {
   if (answer) {

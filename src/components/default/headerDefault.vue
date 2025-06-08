@@ -4,14 +4,14 @@
   >
     <button
       type="button"
-      class=" text-gray-700 hidden lg:block"
+      class=" text-gray-700 hidden lg:block mr-2"
       @click="usefull.setSidebarOpen(!usefull.sidebarOpen)"
     >
       <Bars3Icon class="h-6 w-6" aria-hidden="true" />
     </button>
 
-    <div class="flex items-center flex-1 rounded-2xl gap-3 h-[64px]">
-      <div class="relative flex flex-1  rounded-2xl bg-white px-[24px] py-[20px] h-full">
+    <div class="flex items-center flex-1 rounded-2xl gap-3 h-[64px] md:h-[50px]">
+      <div class="relative flex flex-1  rounded-2xl h-full bg-white px-[24px] py-[20px]  md:px-[15px] md:py-[12px]">
         <div class="w-full">
           <MagnifyingGlassIcon
             class="pointer-events-none text-[#9E55EC] absolute inset-y-0  h-full w-5"
@@ -80,9 +80,9 @@
         </Combobox>
       </div>
 
-      <div class="flex items-center gap-x-3 xm:gap-x-0 h-full">
+      <div class="flex items-center gap-x-3 h-full">
         <div 
-          class="flex items-center bg-white rounded-2xl h-full cursor-pointer hover:bg-[#F3EBFC]"
+          class="flex items-center bg-white rounded-2xl h-full cursor-pointer hover:bg-[#F3EBFC] lg:hidden"
           active-class="bg-[#F3EBFC]"
           >
           <router-link
@@ -92,7 +92,7 @@
               <BellIcon class="h-7 w-7 shrink-0 text-[#9E55EC]" aria-hidden="true" />
             </router-link>
         </div>
-        <div class="flex items-center bg-white rounded-2xl h-full cursor-pointer hover:bg-[#F3EBFC]">
+        <div class="flex items-center bg-white rounded-2xl h-full cursor-pointer hover:bg-[#F3EBFC] lg:hidden">
           <router-link
             :to="{ name: 'activationkeys' }"
             class="p-[14px]"
@@ -100,7 +100,7 @@
               <KeyIcon class="h-7 w-7 shrink-0 text-[#9E55EC]" aria-hidden="true" />
             </router-link>
         </div>
-        <div class="flex items-center bg-white rounded-2xl h-full cursor-pointer hover:bg-[#F3EBFC]">
+        <div class="flex items-center bg-white rounded-2xl h-full cursor-pointer hover:bg-[#F3EBFC] lg:hidden">
           <router-link
             :to="{ name: 'logs' }"
             class="p-[14px]"
@@ -108,7 +108,7 @@
               <BookmarkSquareIcon class="h-7 w-7 shrink-0 text-[#9E55EC]" aria-hidden="true" />
             </router-link>
         </div>
-        <div class="flex items-center bg-white rounded-2xl h-full cursor-pointer hover:bg-[#F3EBFC]">
+        <div class="flex items-center bg-white rounded-2xl h-full cursor-pointer hover:bg-[#F3EBFC] lg:hidden">
           <router-link
             :to="{ name: 'messages' }"
             class="p-[14px]"
@@ -116,7 +116,7 @@
               <ChatBubbleLeftIcon class="h-7 w-7 shrink-0 text-[#9E55EC]" aria-hidden="true" />
             </router-link>
         </div>
-        <div class="flex items-center bg-white rounded-2xl h-full cursor-pointer hover:bg-[#F3EBFC]">
+        <div class="flex items-center bg-white rounded-2xl h-full cursor-pointer hover:bg-[#F3EBFC] lg:hidden">
           <router-link
             :to="{ name: 'language' }"
             class="p-[14px]"
@@ -134,19 +134,19 @@
           </option>
         </select> -->
         <!-- Profile dropdown -->
-        <Menu as="div" class="relative flex bg-white  p-[12px] rounded-2xl min-w-[260px] h-full">
+        <Menu as="div" class="relative flex bg-white  p-[12px] rounded-2xl min-w-[260px] h-full md:min-w-[200px] xm:min-w-[50px]">
           <MenuButton class="flex items-center">
             <div class="w-[38px] h-[38px] bg-[#F9F8FC] rounded-full flex items-center justify-center">
               <img
-                class="h-[27px] w-[27px] rounded-full xm:hidden"
+                class="h-[27px] w-[27px] rounded-full"
                 src="../../assets/images/header-user.svg"
                 alt="Profile image"
               />
             </div>
-            <div class="flex items-center">
+            <div class="flex items-center xm:hidden">
               <div class="flex flex-col gap-0 items-start justify-center ml-4 font-medium leading-3" aria-hidden="true">
                 <!-- <div class="text-[#483D5B] text-lg">{{ auth_store.user?.lname }} {{ auth_store.user?.name }}</div> -->
-                <div class="text-[#483D5B] text-base">{{ auth_store.user?.lname }} {{ auth_store.user?.name }}</div>
+                <div class="text-[#483D5B] text-base md:text-sm">{{ auth_store.user?.lname }} {{ auth_store.user?.name }}</div>
                 <div class="text-[#B6A3D0] text-[14px]">{{ auth_store.user?.role }}</div>
               </div>
               <!-- <ChevronDownIcon class="ml-2 h-5 w-5 text-gray-400 xm:hidden" aria-hidden="true" /> -->
@@ -161,8 +161,33 @@
             leave-to-class="transform opacity-0 scale-95"
           >
             <MenuItems
-              class="absolute right-0 top-[50px] z-10 w-[150px]  rounded-md bg-white py-2 shadow-lg  ring-gray-900/5 focus:outline-none"
+              class="absolute right-0 top-[50px] z-10 w-[200px]  rounded-md bg-white py-2 shadow-lg  ring-gray-900/5 focus:outline-none"
             >
+              <MenuItem class="hidden lg:block">
+                <button @click="$router.push({ name: 'type-notification' })" class="block px-3 py-1 text-sm leading-6 text-[#483D5B]">
+                  Уведомление
+                </button>
+              </MenuItem>
+              <MenuItem class="hidden lg:block">
+                <button @click="$router.push({ name: 'activationkeys' })" class="block px-3 py-1 text-sm leading-6 text-[#483D5B]">
+                  Активационные ключи
+                </button>
+              </MenuItem>
+              <MenuItem class="hidden lg:block">
+                <button @click="$router.push({ name: 'logs' })" class="block px-3 py-1 text-sm leading-6 text-[#483D5B]">
+                  Журналы
+                </button>
+              </MenuItem>
+              <MenuItem class="hidden lg:block">
+                <button  @click="$router.push({ name: 'messages' })" class="block px-3 py-1 text-sm leading-6 text-[#483D5B]">
+                  Сообщение
+                </button>
+              </MenuItem>
+              <MenuItem class="hidden lg:block">
+                <button  @click="$router.push({ name: 'language' })" class="block px-3 py-1 text-sm leading-6 text-[#483D5B]">
+                  Настройки
+                </button>
+              </MenuItem>
               <MenuItem>
                 <button @click="logout" class="block px-3 py-1 text-sm leading-6 text-[#483D5B]">
                   {{ $t('header.logout') }}

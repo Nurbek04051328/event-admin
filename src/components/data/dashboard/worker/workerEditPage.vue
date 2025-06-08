@@ -1,6 +1,6 @@
 <template>
   <div class="h-full w-full overflow-auto">
-    <div class="flex items-center justify-between my-6 mx-4">
+    <div class="flex items-center justify-between my-6 mx-4 sm:block">
       <div class="flex items-center">
         <button  
           @click="$router.push({ name: 'workers' })"
@@ -8,22 +8,22 @@
           >
             <ChevronLeftIcon class="size-7" />
         </button>
-        <div as="h3" class="text-[22px] font-bold leading-6 text-[#483D5B]">
+        <div as="h3" class="text-[22px] font-bold leading-6 text-[#483D5B] sm:text-[18px]">
           {{ $t('worker.dialog.edit') }}
         </div>
       </div>
-      <div class="flex gap-2">
-        <div class="flex gap-2 items-center justify-end">
+      <div class="flex gap-2 sm:mt-3 sm:justify-end">
+        <div class="flex gap-2 items-center justify-end sm:gap-0">
           <button 
             type="button" 
-            class="close-btn h-[40px] min-w-[100px] rounded-[16px]" 
+            class="close-btn h-[40px] min-w-[100px] rounded-[16px] sm:min-w-[200px] xm:min-w-[150px]" 
             @click="close"
           >
             {{ $t('worker.dialog.close') }}
           </button>
           <button 
             type="button" 
-            class="send-btn rounded-[16px] h-[40px] min-w-[100px]" 
+            class="send-btn rounded-[16px] h-[40px] min-w-[100px] sm:min-w-[200px] xm:min-w-[150px]" 
             @click="send"
           >
             {{ $t('worker.dialog.save') }}
@@ -32,7 +32,7 @@
       </div>
     </div>
     <div class="grid grid-cols-12">
-      <div class="col-span-8 p-8 mx-4 bg-white rounded-[16px]">
+      <div class="col-span-8 p-8 mx-4 bg-white rounded-[16px] lg:col-span-12">
         <div class="flex w-full xm:block">
           <div class="space-y-2 w-full mr-3">
             <default-input
@@ -43,7 +43,7 @@
               :error="v$.lname.$invalid && v$.lname.$dirty"
             />
           </div>
-          <div class="space-y-2 w-full ml-1">
+          <div class="space-y-2 w-full ml-1 xm:ml-0 xm:mt-3">
             <default-input
               v-model="data.name"
               name="name"
@@ -54,15 +54,7 @@
           </div>
         </div>
         <div class="flex items-center w-full xm:block">
-          <div class="space-y-2 mt-4 w-full mr-3">
-            <phone-maska
-              v-model="data.phone"
-              name="phone"
-              :placeholder="t('worker.dialog.phone')"
-              :customClass="'h-[50px] rounded-[16px] text-[16px] py-[20px] px-[16px]'"
-              :error="v$.phone.$invalid && v$.phone.$dirty"
-            />
-          </div>
+          
           <div class="space-y-2 mt-4 w-full mr-3">
             <default-input
               v-model="data.login"
@@ -81,26 +73,38 @@
               :error="v$.password?.$invalid && v$.password?.$dirty"
             />
           </div>
-          <!-- <div class="space-y-2 mt-4 w-full ml-3">
+        </div>
+        <div class="flex items-center w-full xm:block">
+          <div class="space-y-2 mt-4 w-full mr-3">
+            <phone-maska
+              v-model="data.phone"
+              name="phone"
+              :placeholder="t('worker.dialog.phone')"
+              :customClass="'h-[50px] rounded-[16px] text-[16px] py-[20px] px-[16px]'"
+              :error="v$.phone.$invalid && v$.phone.$dirty"
+            />
+          </div>
+          <div class="space-y-2 mt-4 w-full">
             <default-select
               v-model="data.role"
               name="role"
               :placeholder="t('worker.dialog.role')"
               :options="roles || []"
+              :customClass="'rounded-[16px] text-[16px] py-[13px] px-[16px]'"
               option_title="title"
               :error="v$.role.$invalid && v$.role.$dirty"
               @change="changeRole(data.role)"
             />
-          </div> -->
+          </div>
         </div>
-        <div class="mt-7 text-[19px]  text-[#483D5B] font-semibold">Категории сотрудника</div>
+        <div class="mt-7 text-[19px]  text-[#483D5B] font-semibold sm:text-[15px]">Категории сотрудника</div>
         <div class="flex w-full xm:block">
           <div class="space-y-2 mt-2 w-full mr-3">
             <array-select
               v-model="data.categories"
               name="categories"
-              :placeholder="t('worker.dialog.category')"
               label="Выберите категорию"
+              :placeholder="t('worker.dialog.category')"
               :customClass="'h-[50px] rounded-[16px] text-[16px] py-[20px] px-[16px]'"
               @input="filterSubcat(data.categories)"
               :options="categories || []"
@@ -108,12 +112,12 @@
               :error="v$.categories?.$invalid && v$.categories?.$dirty"
             />
           </div>
-          <div class="space-y-2 mt-2 w-full ml-1">
+          <div class="space-y-2 mt-2 w-full ml-1 xm:ml-0">
             <array-select
               v-model="data.subcategories"
               name="subcategories"
-              :placeholder="t('worker.dialog.subcategory')"
               label="Выберите подкатегорию"
+              :placeholder="t('worker.dialog.subcategory')"
               :customClass="'h-[50px] rounded-[16px] text-[16px] py-[20px] px-[16px]'"
               :options="subcategories || []"
               option_title="title"
@@ -125,114 +129,114 @@
           
         </div>
   
-        <div class="mt-7 mb-2 text-[19px]  text-[#483D5B] font-semibold">Доступы</div>
-        <div class="flex w-full xm:block">
+        <div class="mt-7 mb-2 text-[19px]  text-[#483D5B] font-semibold sm:text-[15px]">Доступы:</div>
+        <div class="flex w-full xm:block" >
           <div class="space-y-4 mt-2 w-full mr-3">
-            <div class="text-[#645A77] text-[17px] font-semibold">
+            <div class="text-[#645A77] text-[17px] font-semibold sm:text-[14px]">
               Организаторы:
             </div>
             <div class="text-sm space-y-2">
               <label class="flex items-center space-x-2 cursor-pointer">
-                <input class="mr-1 text-[#645A77] accent-[#9E55EC]" value="show" type="checkbox" v-model="organizer.show" :disabled="isContent"/>
-                <span class="hover:text-[#9E55EC] text-[16px] font-normal text-[#645A77]">Просмотр</span>
+                <input class="mr-1 text-[#645A77] accent-[#9E55EC]" value="show" false-value="hide" type="checkbox" v-model="organizer.show" :disabled="isRole !== 'moderator'"/>
+                <span class="hover:text-[#9E55EC] text-[16px] font-normal text-[#645A77] sm:text-[13px]">Просмотр</span>
               </label>
               <label class="flex items-center space-x-2 cursor-pointer">
-                <input class="mr-1 accent-[#9E55EC]" value="status" type="checkbox" v-model="organizer.status" :disabled="isContent"/>
-                <span class="hover:text-[#9E55EC] text-[16px] font-normal text-[#645A77]">Менять статус</span>
+                <input class="mr-1 accent-[#9E55EC]" value="status" false-value="hide" type="checkbox" v-model="organizer.status" :disabled="isRole !== 'moderator'"/>
+                <span class="hover:text-[#9E55EC] text-[16px] font-normal text-[#645A77] sm:text-[13px]">Менять статус</span>
               </label>
               <label class="flex items-center space-x-2 cursor-pointer">
-                <input class="mr-1 accent-[#9E55EC]" value="metric" type="checkbox" v-model="organizer.metric" :disabled="isContent"/>
-                <span class="hover:text-[#9E55EC] text-[16px] font-normal text-[#645A77]">Персональные данные</span>
+                <input class="mr-1 accent-[#9E55EC]" value="metric" false-value="hide" type="checkbox" v-model="organizer.metric" :disabled="isRole !== 'moderator'"/>
+                <span class="hover:text-[#9E55EC] text-[16px] font-normal text-[#645A77] sm:text-[13px]">Персональные данные</span>
               </label>
               <label class="flex items-center space-x-2 cursor-pointer">
-                <input class="mr-1 accent-[#9E55EC]" value="chat" type="checkbox" v-model="organizer.chat" :disabled="isContent"/>
-                <span class="hover:text-[#9E55EC] text-[16px] font-normal text-[#645A77]">Чат</span>
+                <input class="mr-1 accent-[#9E55EC]" value="chat" false-value="hide" type="checkbox" v-model="organizer.chat" :disabled="isRole !== 'moderator'"/>
+                <span class="hover:text-[#9E55EC] text-[16px] font-normal text-[#645A77] sm:text-[13px]">Чат</span>
               </label>
             </div>
           </div>
-          <div class="space-y-4 mt-2 w-full ml-3">
-            <div class="text-[#645A77] text-[17px] font-semibold">
+          <div class="space-y-4 mt-2 w-full ml-3 xm:ml-0">
+            <div class="text-[#645A77] text-[17px] font-semibold sm:text-[14px]">
               Пользователи:
             </div>
             <div class="text-sm space-y-2">
               <label class="flex items-center space-x-2 cursor-pointer">
-                <input class="mr-1 accent-[#9E55EC]" value="show" type="checkbox" v-model="user.show" :disabled="isContent"/>
-                <span class="hover:text-[#9E55EC] text-[16px] font-normal text-[#645A77]">Просмотр</span>
+                <input class="mr-1 accent-[#9E55EC]" value="show" type="checkbox" v-model="user.show" :disabled="isRole !== 'moderator'"/>
+                <span class="hover:text-[#9E55EC] text-[16px] font-normal text-[#645A77] sm:text-[13px]">Просмотр</span>
               </label>
               <label class="flex items-center space-x-2 cursor-pointer">
-                <input class="mr-1 accent-[#9E55EC]" value="status" type="checkbox" v-model="user.status" :disabled="isContent"/>
-                <span class="hover:text-[#9E55EC] text-[16px] font-normal text-[#645A77]">Менять статус</span>
+                <input class="mr-1 accent-[#9E55EC]" value="status" type="checkbox" v-model="user.status" :disabled="isRole !== 'moderator'"/>
+                <span class="hover:text-[#9E55EC] text-[16px] font-normal text-[#645A77] sm:text-[13px]">Менять статус</span>
               </label>
               <label class="flex items-center space-x-2 cursor-pointer">
-                <input class="mr-1 accent-[#9E55EC]" value="metric" type="checkbox" v-model="user.metric" :disabled="isContent"/>
-                <span class="hover:text-[#9E55EC] text-[16px] font-normal text-[#645A77]">Персональные данные</span>
+                <input class="mr-1 accent-[#9E55EC]" value="metric" type="checkbox" v-model="user.metric" :disabled="isRole !== 'moderator'"/>
+                <span class="hover:text-[#9E55EC] text-[16px] font-normal text-[#645A77] sm:text-[13px]">Персональные данные</span>
               </label>
               <label class="flex items-center space-x-2 cursor-pointer">
-                <input class="mr-1 accent-[#9E55EC]" value="chat" type="checkbox" v-model="user.chat" :disabled="isContent"/>
-                <span class="hover:text-[#9E55EC] text-[16px] font-normal text-[#645A77]">Чат</span>
+                <input class="mr-1 accent-[#9E55EC]" value="chat" type="checkbox" v-model="user.chat" :disabled="isRole !== 'moderator'"/>
+                <span class="hover:text-[#9E55EC] text-[16px] font-normal text-[#645A77] sm:text-[13px]">Чат</span>
               </label>
             </div>
           </div>
           <div class="space-y-4 mt-2 w-full mr-3">
-            <div class="text-[#645A77] text-[17px] font-semibold">
+            <div class="text-[#645A77] text-[17px] font-semibold sm:text-[14px]">
               Мероприятие:
             </div>
             <div class="text-sm space-y-2">
               <label class="flex items-center space-x-2 cursor-pointer">
-                <input class="mr-1 accent-[#9E55EC]" value="show" type="checkbox" v-model="event.show" :disabled="isContent"/>
-                <span class="hover:text-[#9E55EC] text-[16px] font-normal text-[#645A77]">Просмотр</span>
+                <input class="mr-1 accent-[#9E55EC]" value="show" type="checkbox" v-model="event.show" :disabled="isRole !== 'moderator'"/>
+                <span class="hover:text-[#9E55EC] text-[16px] font-normal text-[#645A77] sm:text-[13px]">Просмотр</span>
               </label>
               <label class="flex items-center space-x-2 cursor-pointer">
-                <input class="mr-1 accent-[#9E55EC]" value="status" type="checkbox" v-model="event.status" :disabled="isContent"/>
-                <span class="hover:text-[#9E55EC] text-[16px] font-normal text-[#645A77]">Менять статус</span>
+                <input class="mr-1 accent-[#9E55EC]" value="status" type="checkbox" v-model="event.status" :disabled="isRole !== 'moderator'" />
+                <span class="hover:text-[#9E55EC] text-[16px] font-normal text-[#645A77] sm:text-[13px]">Менять статус</span>
               </label>
             </div>
           </div>
         </div>
         <div class="flex w-full xm:block" >
           <div class="space-y-4 mt-2 w-full mr-3">
-            <div class="text-[#645A77] text-[17px] font-semibold">
+            <div class="text-[#645A77] text-[17px] font-semibold sm:text-[14px]">
               Новости:
             </div>
             <div class="text-sm space-y-2">
               <label class="flex items-center space-x-2 cursor-pointer">
-                <input class="mr-1 text-[#645A77] accent-[#9E55EC]" value="show" false-value="hide" type="checkbox" v-model="news.show" :disabled="isContent"/>
-                <span class="hover:text-[#9E55EC] text-[16px] font-normal text-[#645A77]">Просмотр</span>
+                <input class="mr-1 text-[#645A77] accent-[#9E55EC]" value="show"  type="checkbox" v-model="news.show" :disabled="isRole !== 'content_manager'"/>
+                <span class="hover:text-[#9E55EC] text-[16px] font-normal text-[#645A77] sm:text-[13px]">Просмотр</span>
               </label>
               <label class="flex items-center space-x-2 cursor-pointer">
-                <input class="mr-1 accent-[#9E55EC]" value="status" false-value="hide" type="checkbox" v-model="news.status" :disabled="isContent"/>
-                <span class="hover:text-[#9E55EC] text-[16px] font-normal text-[#645A77]">Менять статус</span>
+                <input class="mr-1 accent-[#9E55EC]" value="status"  type="checkbox" v-model="news.status" :disabled="isRole !== 'content_manager'"/>
+                <span class="hover:text-[#9E55EC] text-[16px] font-normal text-[#645A77] sm:text-[13px]">Менять статус</span>
               </label>
               <label class="flex items-center space-x-2 cursor-pointer">
-                <input class="mr-1 accent-[#9E55EC]" value="metric" false-value="hide" type="checkbox" v-model="news.edit" :disabled="isContent"/>
-                <span class="hover:text-[#9E55EC] text-[16px] font-normal text-[#645A77]">Изменить данные</span>
+                <input class="mr-1 accent-[#9E55EC]" value="edit"  type="checkbox" v-model="news.edit" :disabled="isRole !== 'content_manager'"/>
+                <span class="hover:text-[#9E55EC] text-[16px] font-normal text-[#645A77] sm:text-[13px]">Изменить данные</span>
               </label>
               <label class="flex items-center space-x-2 cursor-pointer">
-                <input class="mr-1 accent-[#9E55EC]" value="chat" false-value="hide" type="checkbox" v-model="news.create" :disabled="isContent"/>
-                <span class="hover:text-[#9E55EC] text-[16px] font-normal text-[#645A77]">Добавить</span>
+                <input class="mr-1 accent-[#9E55EC]" value="create" type="checkbox" v-model="news.create" :disabled="isRole !== 'content_manager'"/>
+                <span class="hover:text-[#9E55EC] text-[16px] font-normal text-[#645A77] sm:text-[13px]">Добавить</span>
               </label>
             </div>
           </div>
-          <div class="space-y-4 mt-2 w-full ml-3">
-            <div class="text-[#645A77] text-[17px] font-semibold">
+          <div class="space-y-4 mt-2 w-full ml-3 xm:ml-0">
+            <div class="text-[#645A77] text-[17px] font-semibold sm:text-[14px]">
               Посты:
             </div>
             <div class="text-sm space-y-2">
               <label class="flex items-center space-x-2 cursor-pointer">
-                <input class="mr-1 accent-[#9E55EC]" value="show" type="checkbox" v-model="post.show" :disabled="isContent"/>
-                <span class="hover:text-[#9E55EC] text-[16px] font-normal text-[#645A77]">Просмотр</span>
+                <input class="mr-1 accent-[#9E55EC]" value="show" type="checkbox" v-model="post.show" :disabled="isRole !== 'content_manager'"/>
+              <span class="hover:text-[#9E55EC] text-[16px] font-normal text-[#645A77] sm:text-[13px]">Просмотр</span>
               </label>
               <label class="flex items-center space-x-2 cursor-pointer">
-                <input class="mr-1 accent-[#9E55EC]" value="status" type="checkbox" v-model="post.status" :disabled="isContent"/>
-                <span class="hover:text-[#9E55EC] text-[16px] font-normal text-[#645A77]">Менять статус</span>
+                <input class="mr-1 accent-[#9E55EC]" value="status" type="checkbox" v-model="post.status" :disabled="isRole !== 'content_manager'"/>
+                <span class="hover:text-[#9E55EC] text-[16px] font-normal text-[#645A77] sm:text-[13px]">Менять статус</span>
               </label>
               <label class="flex items-center space-x-2 cursor-pointer">
-                <input class="mr-1 accent-[#9E55EC]" value="metric" type="checkbox" v-model="post.edit" :disabled="isContent"/>
-                <span class="hover:text-[#9E55EC] text-[16px] font-normal text-[#645A77]">Изменить данные</span>
+                <input class="mr-1 accent-[#9E55EC]" value="edit" type="checkbox" v-model="post.edit" :disabled="isRole !== 'content_manager'"/>
+                <span class="hover:text-[#9E55EC] text-[16px] font-normal text-[#645A77] sm:text-[13px]">Изменить данные</span>
               </label>
               <label class="flex items-center space-x-2 cursor-pointer">
-                <input class="mr-1 accent-[#9E55EC]" value="chat" type="checkbox" v-model="post.create" :disabled="isContent"/>
-                <span class="hover:text-[#9E55EC] text-[16px] font-normal text-[#645A77]">Добавить </span>
+                <input class="mr-1 accent-[#9E55EC]" value="create" type="checkbox" v-model="post.create" :disabled="isRole !== 'content_manager'"/>
+                <span class="hover:text-[#9E55EC] text-[16px] font-normal text-[#645A77] sm:text-[13px]">Добавить </span>
               </label>
             </div>
           </div>
@@ -261,12 +265,16 @@ const router = useRouter()
 const route = useRoute()
 
 
+const isRole = ref('')
+const changeRole = async (role) => {
+  isRole.value = role
+}
+
 
 const data = ref({
   name: '',
   lname: '',
   phone: '',
-  // email: '',
   login: '',
   password: '',
   role: '',
@@ -293,11 +301,26 @@ const event = ref({
   show: false,
   status: false
 })
+const news = ref({
+  show: false,
+  status: false,
+  edit: false,
+  create: false,
+})
+const post = ref({
+  show: false,
+  status: false,
+  edit: false,
+  create: false,
+})
 
-const formatAccessData = (organizer) => {
-  console.log("organizer", organizer);
+
+
+const formatAccessData = (data) => {
+  console.log("data", data);
+  console.log("data333", Object.keys(data).filter((key) => data[key]));
   
-  return Object.keys(organizer).filter((key) => organizer[key]);
+  return Object.keys(data).filter((key) => data[key]);
 }
 
 
@@ -326,26 +349,49 @@ const rules = computed(() => {
 import { useVuelidate } from '@vuelidate/core'
 const v$ = useVuelidate(rules, data)
 
-
+const roles = [
+  {
+    _id: 'moderator',
+    title: 'Модератор'
+  },
+  {
+    _id: 'content_manager',
+    title: 'Контент менеджер'
+  },
+  {
+    _id: 'accountant',
+    title: 'Бухгалтер'
+  }
+]
 
 const send = async () => {
   v$.value.$touch()
   if (!v$.value.$invalid) {
-    
     const payload = { ...data.value }
-
-    // Agar role `manager` bo'lsa va categories yoki subcategories bo'sh bo'lsa, ularni o'chirib tashlaymiz
-    
-    if (!data.value.subcategories.length) delete payload.subcategories
-    if (!data.value.password) delete payload.password
-    
-    const access = {
-      organizer: formatAccessData(organizer.value),
-      user: formatAccessData(user.value),
-      event: formatAccessData(event.value),
-    };
+    if (data.value.role) {
+      if (!data.value.subcategories.length) delete payload.subcategories
+      if (!data.value.password) delete payload.password
+    }
+    let access = {}
+    if (data.value.role === 'moderator') {
+      access = {
+        organizer: formatAccessData(organizer.value),
+        user: formatAccessData(user.value),
+        event: formatAccessData(event.value),
+      }
+    } else if (data.value.role === 'content_manager') {
+      access = {
+        news: formatAccessData(news.value),
+        post: formatAccessData(post.value),
+      }
+    } else if (data.value.role === 'accountant') {
+      access = {}
+    }
     payload.access = access;
-    console.log("workerketgandata", payload);
+    console.log("workerEditdata", payload);
+    
+
+    console.log();
     
     await store.saveWorker(payload, t)
     router.push({ name: 'workers' })
@@ -368,13 +414,13 @@ const clear = () => {
     name: '',
     lname: '',
     phone: '',
-    // email: '',
     login: '',
     password: '',
     role: '',
     categories: [],
     subcategories: []
   }
+
   // Dostup
   organizer.value ={
     show: false,
@@ -391,6 +437,18 @@ const clear = () => {
   event.value = {
     show: false,
     status: false
+  }
+  news.value = {
+    show: false,
+    status: false,
+    edit: false,
+    create: false,
+  }
+  post.value = {
+    show: false,
+    status: false,
+    edit: false,
+    create: false,
   }
   v$.value.$reset()
 }
@@ -415,12 +473,15 @@ onMounted(async () => {
   await subcategory_store.getSubcategories({ limit: 0, type: true })
   if(route.params.id) {
     const res = await store.getWorker(route.params.id)
+    console.log("workerEditResdata", res.data);
+    
     data.value = {
       ...res.data,
       _id: route.params.id,
-      categories: res.data?.categories || [],
-      subcategories: res.data?.subcategories,
+      categories: Array.isArray(res.data?.categories) ? res.data.categories : [],
+      subcategories: Array.isArray(res.data?.subcategories) ? res.data.subcategories : [],
     }
+    isRole.value = res.data?.role
 
   
     // Access ma'lumotlarini qayta ishlash
@@ -441,6 +502,18 @@ onMounted(async () => {
       event.value = {
         show: res.data.access?.event.includes('show') || false,
         status: res.data.access?.event.includes('status') || false,
+      };
+      news.value = {
+        show: res.data.access?.news.includes('show') || false,
+        status: res.data.access?.news.includes('status') || false,
+        edit: res.data.access?.news.includes('edit') || false,
+        create: res.data.access?.news.includes('create') || false,
+      };
+      post.value = {
+        show: res.data.access?.post.includes('show') || false,
+        status: res.data.access?.post.includes('status') || false,
+        edit: res.data.access?.post.includes('edit') || false,
+        create: res.data.access?.post.includes('create') || false,
       };
     }
   }

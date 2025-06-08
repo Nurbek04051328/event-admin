@@ -7,7 +7,6 @@
     </headPart>
     <div class="p-4 pb-0 w-full overflow-auto flex-1">
       <WorkerTable :page="page" :limit="limit" />
-      <WorkerDialog />
     </div>
     <div class="pl-4 py-2">
       <paginate
@@ -28,7 +27,6 @@
 <script setup>
 // import { storeToRefs } from 'pinia';
 import WorkerTable from '@/components/data/dashboard/worker/workerTable.vue'
-import WorkerDialog from '@/components/data/dashboard/worker/workerDialog.vue'
 import WorkerSearch from '@/components/data/dashboard/worker/workerSearch.vue'
 import paginate from 'vuejs-paginate-next'
 import { onMounted, ref } from 'vue'

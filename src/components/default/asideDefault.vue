@@ -40,7 +40,7 @@
               </div>
             </TransitionChild>
             <div
-              class="flex grow flex-col gap-y-5 overflow-y-auto bg-gray-900 px-6 pb-4 ring-1 ring-white/10"
+              class="flex grow flex-col gap-y-5 overflow-y-auto bg-[#9E55EC] px-6 pb-4"
             >
               <nav class="flex flex-1 flex-col">
                 <div class="flex py-4 gap-4 shrink-0 items-center justify-start text-white">
@@ -59,9 +59,9 @@
                           :to="{ name: item.name }"
                           :class="[
                             item.current
-                              ? 'bg-gray-800 text-white'
-                              : 'text-gray-400 hover:text-white hover:bg-gray-800',
-                            'group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold'
+                              ? 'bg-white text-[#9E55EC]'
+                              : 'text-gray-400 hover:text-[#9E55EC] hover:bg-gray-200',
+                            'group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold text-white'
                           ]"
                         >
                           <component
@@ -81,9 +81,9 @@
                       :to="{ name: 'language' }"
                       :class="[
                         item.name == route.name
-                          ? 'bg-gray-800 text-white'
-                          : 'text-gray-400 hover:text-white hover:bg-gray-800',
-                        'group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold'
+                          ? 'bg-white text-[#9E55EC]'
+                          : 'text-gray-400 hover:text-[#9E55EC] hover:bg-gray-200',
+                        'group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold text-white'
                       ]"
                     >
                       <Cog6ToothIcon class="h-6 w-6 shrink-0" aria-hidden="true" />

@@ -23,9 +23,20 @@ export const eventStore = defineStore('eventStore', () => {
   }
 
   const getComments = async (id) => {
-    const { data } = await api.get(`${base_url}/rating-info/${id}`)
-
+    const { data } = await api.get(`${base_url}/rating-info/${id}`, 
+      {
+        params: { status: 'active' }
+      }
+  )
+    console.log("commentdata", data);
+    
     comments.value = data || []
+  }
+
+  const removeComments = async (id) => {
+    await api.delete(`${base_url}/remove-rating/${id}`)
+    comments.value = comments.value.filter((item) => item._id !== id)
+    notification.setNotif(true, 'Удалено', 'info')
   }
 
   const changeStatus = async (payload, t) => {
@@ -92,6 +103,7 @@ export const eventStore = defineStore('eventStore', () => {
     changeStatus,
     getNewSocket,
     getUpdateSocket,
-    getComments
+    getComments,
+    removeComments
   }
 })
