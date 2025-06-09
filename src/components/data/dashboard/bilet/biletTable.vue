@@ -28,10 +28,11 @@
               <div class="flex items-center">
                 <div class="h-11 w-11 flex-shrink-0">
                   <img
-                    class="h-11 w-11 rounded-md"
+                    class="h-11 w-11 rounded-md cursor-pointer"
                     v-if="item?.qrCode"
                     :src="`${url}/${item?.qrCode}`"
-                    alt=""
+                    alt="qr-code-image"
+                    @click="openLightbox(item?.qrCode)"
                   />
                 </div>
               </div>
@@ -69,12 +70,36 @@
       </table>
     </div>
   </div>
+  <VueEasyLightbox
+    :visible="visible"
+    :imgs="[currentImage]"
+    @hide="closeLightbox"
+  />
 </template>
 <script setup>
-import { convertDateShort } from '@/helpers/func'
 defineProps(['page', 'limit'])
+import { ref } from 'vue';
+import { convertDateShort } from '@/helpers/func'
 const url = import.meta.env.VITE_URL
 import { biletStore } from '@/stores/data/bilet'
 const store = biletStore()
+import VueEasyLightbox from 'vue-easy-lightbox';
+
+// Lightbox holati
+const visible = ref(false);
+const currentImage = ref('');
+
+// Lightboxni ochish funksiyasi
+const openLightbox = (imageUrl) => {
+  currentImage.value = `${url}/${imageUrl}`;
+  visible.value = true;
+};
+
+// Lightboxni yopish funksiyasi
+const closeLightbox = () => {
+  visible.value = false;
+  currentImage.value = '';
+};
+
 </script>
 <style lang=""></style>

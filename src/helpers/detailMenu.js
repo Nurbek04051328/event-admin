@@ -44,7 +44,6 @@ export const detailMenu = [
     meta: {
       title: 'Страница мероприятие',
       active: 'event',
-      back: true
     },
     children: [
       {
