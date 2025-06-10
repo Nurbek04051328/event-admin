@@ -67,7 +67,7 @@ export const notificationStore = defineStore('notificationStore', () => {
   const getBoughtNotif = async (params) => {
     try {
       const { data } = await api.get('/api/notification/user-notifs', { params })
-      console.log(data)
+      console.log("bought",data)
       boughtNotif.data = [...data.notifs]
       boughtNotif.count = data.count
     } catch (error) {
@@ -75,6 +75,14 @@ export const notificationStore = defineStore('notificationStore', () => {
     }
   }
 
+  const changeBoughtNotifStatus = async (payload) => {
+    try {
+      const { data } = await api.post('/api/notification/user-notifs/status', payload)
+      console.log("kelgandatasttsus",data)
+    } catch (error) {
+      notification.setNotif(true, error?.response?.data?.message, 'danger')
+    }
+  }
   const sendNotification = async (payload) => {
     try {
       const { data } = await api.post('/api/notification/buy-notif-package', payload)
@@ -96,6 +104,7 @@ export const notificationStore = defineStore('notificationStore', () => {
     removeNotification,
     saveNotification,
     getNotification,
-    changeStatus
+    changeStatus,
+    changeBoughtNotifStatus
   }
 })

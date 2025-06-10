@@ -12,7 +12,6 @@ export const notifpackageStore = defineStore('notifpackageStore', () => {
 
   const getNotifpackages = async (params) => {
     const { data } = await api.get(base_url, { params })
-    console.log('dadada', data)
 
     notifpackages.value = data?.packages
     notifpackageCount.value = data?.count

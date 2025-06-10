@@ -5,7 +5,7 @@
         <router-link
           :to="{ name: 'type-notification' }"
           :class="{
-            'text-gray-800 underline underline-offset-2': route.name == 'type-notification'
+            'text-purple-500 underline underline-offset-2': route.name == 'type-notification'
           }"
         >
           Тип уведомление
@@ -13,7 +13,7 @@
         <router-link
           :to="{ name: 'package-notification' }"
           :class="{
-            'text-gray-800 underline underline-offset-2': route.name == 'package-notification'
+            'text-purple-500 underline underline-offset-2': route.name == 'package-notification'
           }"
         >
           Пакеты уведомлении
@@ -21,7 +21,7 @@
         <router-link
           :to="{ name: 'bought-notification' }"
           :class="{
-            'text-gray-800 underline underline-offset-2': route.name == 'bought-notification'
+            'text-purple-500 underline underline-offset-2': route.name == 'bought-notification'
           }"
         >
           Куплено
