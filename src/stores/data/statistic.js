@@ -1,17 +1,26 @@
 import { ref } from 'vue'
 import { defineStore } from 'pinia'
 // import { useNotification } from '../usefull/notification'
+import { useLoadingStore } from '@/stores/usefull/loading'
 import api from '@/helpers/api'
 
 const base_url = '/statistic/all-counts'
 
 export const statisticStore = defineStore('statisticStore', () => {
   const statistic_counts = ref({})
+  const loadingStore = useLoadingStore()
 
   const getStatistics = async (params) => {
-    const { data } = await api.get(base_url, { params })
-    console.log(data)
-    statistic_counts.value = { ...data }
+    try {
+      loadingStore.start()
+      const { data } = await api.get(base_url, { params })
+      statistic_counts.value = { ...data }
+      
+    } catch (error) {
+      console.error('Statistika olishda xatolik:', error)
+    } finally {
+      loadingStore.stop()
+    }
   }
 
   const ticketStatistic = async (params) => {

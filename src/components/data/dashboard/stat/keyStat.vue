@@ -1,5 +1,5 @@
 <template>
-  <div class="px-[25px] py-[18px] rounded-[13px] shadow-sm bg-white h-full">
+  <div v-if="series.length" class="px-[25px] py-[18px] rounded-[13px] shadow-sm bg-white h-full">
     <div class="flex justify-between h-full">
       <div class="text-[#817295] text-[18px] mt-[10px] w-[55%] space-y-2">
         <router-link
@@ -38,13 +38,12 @@
   </div>
 </template>
 <script setup>
-import { computed, watchEffect, defineProps } from 'vue'
+import { computed, defineProps } from 'vue'
 const props = defineProps(['count'])
 // Icon import
 import { KeyIcon } from '@heroicons/vue/24/outline'
 import ApexCharts from 'apexcharts'
 
-const series = computed(() => [props?.count?.activated || 0, props?.count?.notActivated || 0])
 
 const list = computed(() => [
   {
@@ -56,16 +55,17 @@ const list = computed(() => [
   },
   {
     class: '#6b7280',
-     bg: 'bg-gray-500',
+    bg: 'bg-gray-500',
     title: 'Не активированные',
     value: props.count?.notActivated || 0,
     status: 'not active'
   }
 ])
 
+const series = computed(() => [props?.count?.activated || 0, props?.count?.notActivated || 0])
 const options = computed(() => ({
   chart: {
-    // id: 'vuechart-keys',
+    id: `vuechart-keys-${Math.random().toString(36).substring(2, 8)}`,
     type: 'pie',
     height: 300
   },
@@ -79,9 +79,5 @@ const options = computed(() => ({
   }
 }))
 
-watchEffect(() => {
-  if (series.value.every((val) => val !== undefined)) {
-    ApexCharts.exec('vuechart-keys', 'updateSeries', series.value)
-  }
-})
+
 </script>

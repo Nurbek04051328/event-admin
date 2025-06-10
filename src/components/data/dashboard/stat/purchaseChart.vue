@@ -1,5 +1,5 @@
 <template>
-  <div class="p-[16px] rounded-[26px] shadow-sm bg-white">
+  <div v-if="series.length" class="p-[16px] rounded-[26px] shadow-sm bg-white">
     <h3 class="text-[18px] font-bold leading-6 text-[#483D5B] w-full">
       Статистика по (Покупка/Возврат)
     </h3>
@@ -15,7 +15,7 @@ const store = statisticStore()
 const options = computed(() => {
   return {
     chart: {
-      id: 'vuechart-deposit',
+      id: `vuechart-purchase-${Math.random().toString(36).substring(2, 8)}`,
       type: 'area',
       height: 300
       // stacked: true,

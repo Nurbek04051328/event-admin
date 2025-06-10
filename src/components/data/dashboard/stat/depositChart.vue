@@ -1,5 +1,5 @@
 <template>
-  <div class="p-[16px] rounded-[26px] shadow-sm bg-white">
+  <div v-if="series.length" class="p-[16px] rounded-[26px] shadow-sm bg-white">
     <h3 class="text-[18px] font-bold leading-6 text-[#483D5B] w-full">
       Статистика по (Пополнение/Вывод)
     </h3>
@@ -14,7 +14,7 @@ const store = statisticStore()
 const options = computed(() => {
   return {
     chart: {
-      id: 'vuechart-deposit',
+      id: `vuechart-deposit-${Math.random().toString(36).substring(2, 8)}`,
       type: 'area'
     },
     stroke: {
@@ -47,6 +47,8 @@ const series = ref([])
 
 const getData = async () => {
   const { data } = await store.allDeposit()
+  console.log("deposit", data);
+  
   series.value = [
     {
       name: 'Пополнение',
