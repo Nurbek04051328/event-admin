@@ -27,7 +27,7 @@
             leave-to="opacity-0 translate-y-4  sm:scale-95"
             >
               <DialogPanel
-                class="relative transform overflow-hidden rounded-lg bg-white px-4 pb-4 pt-5 text-left shadow-xl transition-all sm:my-8 w-[30%] lg:w-[50%] xm:w-[100%]"
+                class="relative transform overflow-hidden rounded-lg bg-white px-4 pb-4 pt-5 text-left shadow-xl transition-all sm:my-8 w-[20%] lg:w-[50%] xm:w-[100%]"
               >
                 <div class="absolute right-0 top-0 hidden pr-4 pt-4 sm:block">
                   <button
@@ -55,6 +55,7 @@
                   <default-textarea
                     v-if="data.status === 'denied'"
                     v-model="data.desc"
+                    :rows="6"
                     name="description"
                     label="Описание причин"
                   />
