@@ -1,6 +1,10 @@
 <template>
   <div class="h-screen flex flex-col overflow-hidden">
-    <headPart :count="store.notificationCount">
+    <headPart 
+      :count="route.name == 'type-notification' ? store.notificationCount : 
+      route.name == 'package-notification' ? notifPackage_store.notifpackageCount :
+      route.name == 'bought-notification' ? store.boughtNotif.count :
+      0">
       <div class="space-x-4">
         <router-link
           :to="{ name: 'type-notification' }"
@@ -35,6 +39,8 @@
 import { notificationStore } from '@/stores/data/notification'
 const store = notificationStore()
 
+import { notifpackageStore } from '@/stores/data/notifPackage'
+const notifPackage_store = notifpackageStore()
 import { useRoute } from 'vue-router'
 const route = useRoute()
 </script>

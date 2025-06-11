@@ -35,15 +35,18 @@
             <td class="td">
               <button
                 @click="openStatusModal(item?._id)"
-                :class="
-                  item?.status == 'approve'
-                    ? 'bg-[#DCF7DD] text-[#119A21] rounded-lg px-3 py-1 w-[80px]':
-                  item?.status == 'checking'
+                :title="item?.status === 'denied' ? item?.desc : ''"
+                :class="item?.status == 'approve'
+                  ? 'bg-[#DCF7DD] text-[#119A21] rounded-lg px-3 py-1 w-[80px]'
+                  : item?.status == 'checking'
                     ? 'bg-[#FFECD9] text-[#FF7E00] rounded-lg px-3 py-1 w-[100px]'
-                    : 'bg-[#FFE6E6] text-[#FF5558] rounded-lg px-3 py-1 w-[80px]'
-                "
+                    : 'bg-[#FFE6E6] text-[#FF5558] rounded-lg px-3 py-1 w-[80px]'"
               >
-                {{ item?.status == 'approve' ? 'Актив' : item?.status == 'checking' ? 'В ожидание' : 'Не актив' }}
+                {{ item?.status == 'approve'
+                  ? 'Актив'
+                  : item?.status == 'checking'
+                    ? 'В ожидание'
+                    : 'Не актив' }}
               </button>
             </td>
             <td class="td md-max:text-[13px]">

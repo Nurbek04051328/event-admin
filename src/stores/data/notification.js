@@ -77,8 +77,20 @@ export const notificationStore = defineStore('notificationStore', () => {
 
   const changeBoughtNotifStatus = async (payload) => {
     try {
-      const { data } = await api.post('/api/notification/user-notifs/status', payload)
+      console.log("payload", payload);
+      
+      const { data } = await api.post('/api/notification/status', payload)
       console.log("kelgandatasttsus",data)
+      if (data) {
+        boughtNotif.data = boughtNotif.data.map((notif) => {
+          if (notif._id == data._id)
+            return {
+              ...notif,
+              status: data.status
+            }
+          return notif
+        })
+      }
     } catch (error) {
       notification.setNotif(true, error?.response?.data?.message, 'danger')
     }
