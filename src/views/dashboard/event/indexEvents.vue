@@ -3,6 +3,7 @@
     <headPart
     :count="store.eventsCount"
     >
+      <EventSearch/>
     </headPart>
     <div class="p-4 pb-0 w-full overflow-auto flex-1">
       <EventTable :page="page" :limit="limit" />
@@ -27,6 +28,7 @@
 import { ref, onMounted } from 'vue'
 import paginate from 'vuejs-paginate-next'
 import EventTable from '@/components/data/dashboard/event/eventTable.vue'
+import EventSearch from '@/components/data/dashboard/event/eventSearch.vue'
 import { eventStore } from '@/stores/data/event'
 const store = eventStore()
 

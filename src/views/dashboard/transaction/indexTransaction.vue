@@ -42,6 +42,8 @@ import { onMounted, ref } from 'vue'
 import { transactionStore } from '@/stores/data/transaction'
 const store = transactionStore()
 
+import { usersStore } from '@/stores/data/users'
+const users_store = usersStore()
 
 // Pagination
 const page = ref(1)
@@ -56,6 +58,7 @@ const getData = async () => {
   console.log("page", page.value);
   
   await store.getTransactions({ limit: limit.value, page: page.value })
+  await users_store.getUsers({ limit: 0, type:"all"})
 }
 
 onMounted(async () => {

@@ -7,6 +7,7 @@
       :option_title="[`name`, `lname`]"
       :class="['w-full z-[99]'] "
       placeholder="Выберите пользовател"
+      @change="findMe"
     />
     <filterSelect
       v-model="search.event"
@@ -15,6 +16,7 @@
       option_title="title"
       :class="['w-full z-[99]'] "
       placeholder="Выберите мероприятия"
+      @change="findMe"
     />
     <filterSelect
       v-model="search.status"
@@ -23,6 +25,7 @@
       option_title="title"
       :class="['w-full z-[99]'] "
       placeholder="Выберите статус"
+      @change="findMe"
     />
     <button class="bg-[#FFECD9] text-[#FF7E00] hover:bg-[#FF7E00] hover:text-white rounded-lg w-auto p-2" @click="clear">
       <XMarkIcon class="size-5" />
@@ -74,7 +77,7 @@ const clear = async() => {
 
 
 onMounted(async () => {
-  await user__store.getUsers()
+  await user__store.getUsers({ limit: 0, type:"all"})
   await event__store.getEvents()
 })
 </script>

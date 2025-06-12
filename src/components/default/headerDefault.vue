@@ -10,8 +10,8 @@
       <Bars3Icon class="h-6 w-6" aria-hidden="true" />
     </button>
 
-    <div class="flex items-center flex-1 rounded-2xl gap-3 h-[64px] md:h-[50px]">
-      <div class="relative flex flex-1  rounded-2xl h-full bg-white px-[24px] py-[20px]  md:px-[15px] md:py-[12px]">
+    <div class="flex items-center flex-1 rounded-2xl gap-3 h-[60px] md:h-[50px]">
+      <div class="relative flex flex-1  rounded-2xl h-full bg-white px-[24px] py-[16px]  md:px-[15px] md:py-[12px]">
         <div class="w-full">
           <MagnifyingGlassIcon
             class="pointer-events-none text-[#9E55EC] absolute inset-y-0  h-full w-5"
@@ -82,44 +82,72 @@
 
       <div class="flex items-center gap-x-3 h-full">
         <div 
-          class="flex items-center bg-white rounded-2xl h-full cursor-pointer hover:bg-[#F3EBFC] lg:hidden"
-          active-class="bg-[#F3EBFC]"
+          class="flex items-center justify-center h-full bg-white rounded-2xl cursor-pointer hover:bg-[#F3EBFC] lg:hidden"
           >
           <router-link
             :to="{ name: 'type-notification' }"
-            class="p-[14px]"
-            >
-              <BellIcon class="h-7 w-7 shrink-0 text-[#9E55EC]" aria-hidden="true" />
-            </router-link>
+            class="p-[14px] w-full h-full"
+            :class="
+              route.name == 'type-notification' ? 'bg-[#F3EBFC] rounded-2xl' : 
+              route.name == 'package-notification' ? 'bg-[#F3EBFC] rounded-2xl' :
+              route.name == 'bought-notification' ? 'bg-[#F3EBFC] rounded-2xl' :
+              ''
+            "
+          >
+            <BellIcon class="h-7 w-7 shrink-0 text-[#9E55EC]" aria-hidden="true" />
+          </router-link>
         </div>
-        <div class="flex items-center bg-white rounded-2xl h-full cursor-pointer hover:bg-[#F3EBFC] lg:hidden">
+        <div class="flex items-center justify-center h-full bg-white rounded-2xl cursor-pointer hover:bg-[#F3EBFC] lg:hidden">
           <router-link
             :to="{ name: 'activationkeys' }"
-            class="p-[14px]"
-            >
-              <KeyIcon class="h-7 w-7 shrink-0 text-[#9E55EC]" aria-hidden="true" />
-            </router-link>
+            class="p-[14px] w-full h-full"
+            :class="
+              route.name == 'activationkeys' ? 'bg-[#F3EBFC] rounded-2xl' : ''
+            "
+          >
+            <KeyIcon class="h-7 w-7 shrink-0 text-[#9E55EC]" aria-hidden="true" />
+          </router-link>
         </div>
-        <div class="flex items-center bg-white rounded-2xl h-full cursor-pointer hover:bg-[#F3EBFC] lg:hidden">
+        <div class="flex items-center justify-center h-full bg-white rounded-2xl cursor-pointer hover:bg-[#F3EBFC] lg:hidden">
           <router-link
             :to="{ name: 'logs' }"
-            class="p-[14px]"
-            >
-              <BookmarkSquareIcon class="h-7 w-7 shrink-0 text-[#9E55EC]" aria-hidden="true" />
-            </router-link>
+            class="p-[14px] w-full h-full"
+            :class="
+              route.name == 'logs' ? 'bg-[#F3EBFC] rounded-2xl' : ''
+            "
+          >
+            <BookmarkSquareIcon class="h-7 w-7 shrink-0 text-[#9E55EC]" aria-hidden="true" />
+          </router-link>
         </div>
-        <div class="flex items-center bg-white rounded-2xl h-full cursor-pointer hover:bg-[#F3EBFC] lg:hidden">
+        <div class="flex items-center justify-center h-full bg-white rounded-2xl cursor-pointer hover:bg-[#F3EBFC] lg:hidden">
           <router-link
             :to="{ name: 'messages' }"
-            class="p-[14px]"
-            >
-              <ChatBubbleLeftIcon class="h-7 w-7 shrink-0 text-[#9E55EC]" aria-hidden="true" />
-            </router-link>
+            class="p-[14px] w-full h-full"
+            :class="
+              route.name == 'messages' ? 'bg-[#F3EBFC] rounded-2xl' : ''
+            "
+          >
+            <ChatBubbleLeftIcon class="h-7 w-7 shrink-0 text-[#9E55EC]" aria-hidden="true" />
+          </router-link>
         </div>
-        <div class="flex items-center bg-white rounded-2xl h-full cursor-pointer hover:bg-[#F3EBFC] lg:hidden">
+        <div class="flex items-center justify-center h-full bg-white rounded-2xl cursor-pointer hover:bg-[#F3EBFC] lg:hidden">
           <router-link
             :to="{ name: 'language' }"
-            class="p-[14px]"
+            class="p-[14px] w-full h-full"
+            :class="
+              route.name == 'language' ? 'bg-[#F3EBFC] rounded-2xl' : 
+              route.name == 'category' ? 'bg-[#F3EBFC] rounded-2xl' :
+              route.name == 'subcategory' ? 'bg-[#F3EBFC] rounded-2xl' :
+              route.name == '2xsubcategory' ? 'bg-[#F3EBFC] rounded-2xl' :
+              route.name == 'atributCategory' ? 'bg-[#F3EBFC] rounded-2xl' :
+              route.name == 'atribut' ? 'bg-[#F3EBFC] rounded-2xl' :
+              route.name == 'social' ? 'bg-[#F3EBFC] rounded-2xl' :
+              route.name == 'page' ? 'bg-[#F3EBFC] rounded-2xl' :
+              route.name == 'tax' ? 'bg-[#F3EBFC] rounded-2xl' :
+              route.name == 'refound' ? 'bg-[#F3EBFC] rounded-2xl' :
+              route.name == 'regions' ? 'bg-[#F3EBFC] rounded-2xl' :
+              ''
+            "
             >
               <Cog6ToothIcon class="h-7 w-7 shrink-0 text-[#9E55EC]" aria-hidden="true" />
             </router-link>

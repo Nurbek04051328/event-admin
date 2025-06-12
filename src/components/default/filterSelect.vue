@@ -65,14 +65,20 @@ import {
 
 
 function getPersonTitle(person) {
+  return optionFields.value
+    .map(field => person?.[field])
+    .filter(Boolean)
+    .join(' ')
+}
+
+const optionFields = computed(() => {
   if (Array.isArray(props.option_title)) {
     return props.option_title
-      .map(field => person[field])
-      .filter(Boolean)
-      .join(' ')
+  } else if (typeof props.option_title === 'string') {
+    return props.option_title.split(' ')
   }
-  return person[props.option_title]
-}
+  return []
+})
 
 
 const props = defineProps({
@@ -118,13 +124,16 @@ const emit = defineEmits(['update:modelValue'])
 
 // Computed array of filtered options based on the search query
 const filteredPeople = computed(() => {
-  return query.value === ''
-    ? props.options
-    : props.options.filter((person) =>
-        person[props.option_title].toLowerCase().includes(query.value.toLowerCase())
-      )
-})
+  if (query.value === '') return props.options
 
+  return props.options.filter(person => {
+    const title = optionFields.value
+      .map(field => String(person?.[field] || '').toLowerCase())
+      .join(' ')
+
+    return title.includes(query.value.toLowerCase())
+  })
+})
 // Function to get the title of a person by their ID (for display purposes)
 function getPersonTitleById(id) {
   const person = props.options.find((p) => p._id === id)
@@ -136,8 +145,11 @@ function onInput(event) {
   query.value = event.target.value
 }
 
+
+
 // Watch for changes to selectedPerson and emit only the ID
 watch(selectedPerson, (newValue) => {
   emit('update:modelValue', newValue)
+  emit('change', newValue)
 })
 </script>

@@ -19,6 +19,7 @@
         ]"
         :min="min"
         :disabled="disabled"
+        @keyup.enter="$emit('enter')"
       />
     </div>
   </div>
@@ -29,5 +30,6 @@
 <script setup>
 const model = defineModel()
 defineProps(['label', 'placeholder', 'min', 'name', 'enter', 'error', 'disabled', 'suffix', 'type', 'customClass'])
+defineEmits(['enter'])
 </script>
 <style lang=""></style>

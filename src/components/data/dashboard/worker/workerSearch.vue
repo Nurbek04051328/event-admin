@@ -1,6 +1,6 @@
 <template>
   <div>
-    <!-- 📱 Mobile: Only button visible -->
+    <!-- Mobile button  -->
     <div class="hidden items-center md:flex">
       <button
         class="bg-[#DCF7DD] text-[#119A21] hover:bg-[#119A21] hover:text-white rounded-lg p-2 w-auto"
@@ -10,13 +10,18 @@
       </button>
     </div>
 
-    <!-- 💻 Desktop: Inputs and buttons -->
+    <!--Desktop: Inputs and buttons -->
     <div class="space-x-2 flex items-center md:hidden">
-      <default-input v-model="search" placeholder="Поиск по имени" />
+      <default-input 
+        v-model="search" 
+        placeholder="Поиск по имени" 
+        @enter="findMe"
+      />
       <phone-maska
         v-model="phone"
         name="phone"
         placeholder="Введите номер телефона"
+        @enter="findMe"
       />
       <button
         class="bg-[#FFECD9] text-[#FF7E00] hover:bg-[#FF7E00] hover:text-white rounded-lg w-auto p-2"
@@ -32,7 +37,7 @@
       </button>
     </div>
 
-    <!-- 📲 Mobile Filter Modal -->
+    <!--Mobile Filter Modal -->
     <transition name="fade">
       <div
         v-if="showFilter"
@@ -92,6 +97,7 @@ const findMe = async () => {
 const clear = () => {
   search.value = ''
   phone.value = ''
+  findMe()
 }
 const clearModal = () => {
   showFilter.value = false

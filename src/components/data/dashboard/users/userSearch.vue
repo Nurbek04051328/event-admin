@@ -1,7 +1,11 @@
 <template>
   <div class="space-x-2 flex items-center">
     <div class="w-[300px]">
-      <default-input v-model="search.search" placeholder="Поиск по имени, email" />
+      <default-input 
+        v-model="search.search" 
+        placeholder="Поиск по имени" 
+        @enter="findMe"
+      />
     </div>
     <div>
       <filterSelect

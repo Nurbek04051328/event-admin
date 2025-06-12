@@ -1,6 +1,10 @@
 <template>
   <div class="space-x-2 flex items-center">
-    <default-input v-model="title" placeholder="Поиск по названию" />
+    <default-input 
+      v-model="title" 
+      placeholder="Поиск по названию" 
+      @enter="findMe"
+    />
     <button class="bg-[#FFECD9] text-[#FF7E00] hover:bg-[#FF7E00] hover:text-white rounded-lg w-auto p-2" @click="clear">
       <XMarkIcon class="size-5" />
     </button>
