@@ -1,7 +1,7 @@
 <template>
   <div class="px-[25px] py-[18px] rounded-[13px] shadow-sm bg-white space-y-4">
     <div  class="flex justify-between items-center">
-      <div class="text-[#817295] text-[18px] w-[55%] space-y-2">
+      <div class="text-[#817295] text-[18px] w-full space-y-2">
         <router-link
           :to="{ name }"
           class="block text-[#483D5B] font-bold text-[20px] relative cursor-pointer"
@@ -31,14 +31,14 @@
           </router-link>
         </div>
       </div>
-      <apexchart  
+      <!-- <apexchart  
         v-if="series.length" 
         width="200" 
         height="300" 
         type="pie" 
         :options="options" 
         :series="series"
-      />
+      /> -->
     </div>
   </div>
 </template>
@@ -47,10 +47,10 @@ import { computed, defineProps } from 'vue'
 const props = defineProps(['count', 'title', 'name'])
 // Icon import
 import { UserGroupIcon } from '@heroicons/vue/24/outline'
-import ApexCharts from 'apexcharts'
+// import ApexCharts from 'apexcharts'
 
-const chartId = `chart-${props.name}-` + Math.random().toString(36).substring(2, 7)
-// const series = computed(() => [props?.count?.activated || 0, props?.count?.notActivated || 0])
+// const chartId = `chart-${props.name}-` + Math.random().toString(36).substring(2, 7)
+
 
 const list = computed(() => [
   {
@@ -83,21 +83,21 @@ const list = computed(() => [
   }
 ])
 
-const series = computed(() => list.value.map((t) => t.value) || [])
-const options = computed(() => ({
-  chart: {
-    id: chartId,
-    type: 'pie',
-    height: 300
-  },
-  labels: list.value.map((t) => t.title) || [],
-  legend: {
-    show: false
-  },
-  colors: list.value.map((t) => t.class) || [],
-  dataLabels: {
-    enabled: true
-  }
-}))
+// const series = computed(() => list.value.map((t) => t.value) || [])
+// const options = computed(() => ({
+//   chart: {
+//     id: chartId,
+//     type: 'pie',
+//     height: 300
+//   },
+//   labels: list.value.map((t) => t.title) || [],
+//   legend: {
+//     show: false
+//   },
+//   colors: list.value.map((t) => t.class) || [],
+//   dataLabels: {
+//     enabled: true
+//   }
+// }))
 
 </script>

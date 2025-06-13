@@ -23,10 +23,14 @@
   </div>
 </template>
 <script setup>
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
 import { MagnifyingGlassIcon, XMarkIcon } from '@heroicons/vue/20/solid'
 import { eventStore } from '@/stores/data/event'
 const store = eventStore()
+import { useRoute } from 'vue-router'
+const route = useRoute()
+
+
 
 const search = ref({
   title: '',
@@ -134,5 +138,15 @@ const clear = () => {
   search.value = { title: '',queryType: '' }
   findMe()
 }
+
+
+onMounted(() => {
+  const queryType = route.query.queryType
+  if (queryType && eventTypes.some(ev => ev._id === queryType)) {
+    search.value.queryType = queryType
+    findMe()
+  }
+})
+
 </script>
 <style lang=""></style>

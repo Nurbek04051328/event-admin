@@ -22,8 +22,9 @@
       <div
         v-for="(val, key, index) of filteredItems"
         :key="key"
-        class="col-span-4 flex justify-between items-center py-2 border-gray-200"
+        class="col-span-4 flex justify-between items-center py-2 border-gray-200 cursor-pointer"
         :class="{ 'border-b': index < Object.entries(filteredItems).length - 3 }"
+        @click="$router.push({ name: 'event', query: { queryType: key } })"
       >
         <!-- {{ key }} -->
         <div

@@ -14,6 +14,8 @@ export const statisticStore = defineStore('statisticStore', () => {
     try {
       loadingStore.start()
       const { data } = await api.get(base_url, { params })
+      console.log("data", data);
+      
       statistic_counts.value = { ...data }
       
     } catch (error) {
