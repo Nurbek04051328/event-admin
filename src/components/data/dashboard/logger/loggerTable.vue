@@ -19,37 +19,78 @@
           <td class="td-first">
             {{ (page - 1) * limit + itemIdx + 1 }}
           </td>
-          <td class="td" width="800">{{ removeQueryParams(item?.url) }}</td>
-          <td class="td">
-            <div>
-
+          <td class="td" width="800">
+            <div v-if="isImageUrl(item.url)">
+              <a :href="item.url" target="_blank" class="text-blue-600 underline">{{ removeQueryParams(item.url) }}</a>
             </div>
-            {{ item?.method }}
-              <Menu as="div" class="relative flex">
-                  <MenuButton class="flex items-center mx:m-0">
-                    <div class="flex items-center lg:items-center">
-                      <!-- <pre>{{ item }}</pre> -->
-                    </div>
-                  </MenuButton>
-                  <transition
-                    enter-active-class="transition ease-out duration-100"
-                    enter-from-class="transform opacity-0 scale-95"
-                    enter-to-class="transform opacity-100 scale-100"
-                    leave-active-class="transition ease-in duration-75"
-                    leave-from-class="transform opacity-100 scale-100"
-                    leave-to-class="transform opacity-0 scale-95"
+            <div v-else>
+              {{ removeQueryParams(item.url) }}
+            </div>
+          </td>
+          <td class="td">
+            <div class="flex items-center gap-2">
+              <span
+                :class="{
+                  'text-green-600 font-semibold': item.method === 'POST',
+                  'text-blue-600 font-semibold': item.method === 'GET',
+                  'text-yellow-600 font-semibold': item.method === 'PUT',
+                  'text-red-600 font-semibold': item.method === 'DELETE',
+                  'text-gray-600': !['GET', 'POST', 'PUT', 'DELETE'].includes(item.method)
+                }"
+              >
+                {{ item.method }}
+              </span>
+
+              <!-- Hoverable info menu -->
+              <Menu as="div" class="relative">
+                <MenuButton class="text-gray-500 hover:text-black text-sm underline">
+                  Детали
+                </MenuButton>
+
+                <transition
+                  enter-active-class="transition ease-out duration-100"
+                  enter-from-class="transform opacity-0 scale-95"
+                  enter-to-class="transform opacity-100 scale-100"
+                  leave-active-class="transition ease-in duration-75"
+                  leave-from-class="transform opacity-100 scale-100"
+                  leave-to-class="transform opacity-0 scale-95"
+                >
+                  <MenuItems
+                    class="absolute z-50 right-0 mt-2 w-[320px] rounded-md bg-white p-3 shadow-lg ring-1 ring-gray-900/5 focus:outline-none text-left"
                   >
-                    <MenuItems
-                      class="absolute right-0 rounded-md bg-white p-2 shadow-lg  ring-gray-900/5 focus:outline-none"
-                    >
-                      <MenuItem>
-                        <div >
-                          {{ item?.user?.name }}
-                        </div>
-                      </MenuItem>
-                    </MenuItems>
-                  </transition>
+                    <!-- User info -->
+                    <MenuItem v-if="item?.user">
+                      <div class="text-sm text-black mb-2">
+                        👤 <strong>{{ item.user.lname }} {{ item.user.name }}</strong>
+                      </div>
+                    </MenuItem>
+
+                    <!-- POST body -->
+                    <MenuItem v-if="item.method === 'POST' && item.body">
+                      <div class="text-xs text-gray-600 whitespace-pre-wrap break-words">
+                        <strong>POST Body:</strong>
+                        <pre>{{ JSON.stringify(item.body, null, 2) }}</pre>
+                      </div>
+                    </MenuItem>
+
+                    <!-- GET query -->
+                    <MenuItem v-if="item.method === 'GET' && item.query">
+                      <div class="text-xs text-gray-600 whitespace-pre-wrap break-words">
+                        <strong>Query:</strong>
+                        <pre>{{ JSON.stringify(item.query, null, 2) }}</pre>
+                      </div>
+                    </MenuItem>
+
+                    <!-- Timestamp -->
+                    <MenuItem>
+                      <div class="text-xs text-gray-500 mt-2">
+                        🕒 {{ convertDateShort(item.timestamp, 'full') }}
+                      </div>
+                    </MenuItem>
+                  </MenuItems>
+                </transition>
               </Menu>
+            </div>
           </td>
           <td class="td">{{ item?.user?.lname}} {{ item?.user?.name}}</td>
           <td class="td-last">{{ convertDateShort(item?.createdAt, 'full') }}</td>
@@ -61,6 +102,7 @@
 <script setup>
 import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/vue'
 import { convertDateShort } from '@/helpers/func'
+const url = import.meta.env.VITE_URL
 defineProps(['page', 'limit'])
 import { loggerStore } from '@/stores/user/logger'
 const store = loggerStore()
@@ -68,7 +110,9 @@ const store = loggerStore()
 function removeQueryParams(url) {
   return url.split('?')[0];
 }
-
+function isImageUrl(url) {
+  return /\.(webp|png|jpg|jpeg|gif|svg)$/.test(url);
+}
 
 
 

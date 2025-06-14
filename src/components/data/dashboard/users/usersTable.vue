@@ -41,15 +41,15 @@
               {{ person?.messages }}
             </td>
             <td class="td text-center">
-              <span class="primary-tag" v-if="person.status == 'limited'"><ExclamationTriangleIcon class="size-4" /></span>
-              <span class="danger-tag" v-if="person.status == 'deleted'"><XMarkIcon class="size-4" /></span>
-              <span class="success-tag" v-if="person.status == 'active'"><CheckIcon class="size-4" /></span>
-              <span class="warning-tag" v-if="person.status == 'not active'"><ClockIcon class="size-4" /></span>
+              <span class="primary-tag" v-if="person?.status == 'limited'"><ExclamationTriangleIcon class="size-4" /></span>
+              <span class="danger-tag" v-if="person?.status == 'deleted'"><XMarkIcon class="size-4" /></span>
+              <span class="success-tag" v-if="person?.status == 'active'"><CheckIcon class="size-4" /></span>
+              <span class="warning-tag" v-if="person?.status == 'not active'"><ClockIcon class="size-4" /></span>
             </td>
             <td class="td text-center">
               <div>
-                <div class="font-medium text-black">{{ convertDateShort(person.createdAt, 'full') }}</div>
-                <div class="mt-1 text-[13px] text-gray-500">{{ person.lastVisit ? convertDateShort(person.lastVisit, 'full') : '-' }}</div>
+                <div class="font-medium text-black">{{ convertDateShort(person?.createdAt, 'full') }}</div>
+                <div class="mt-1 text-[13px] text-gray-500">{{ person.lastVisit ? convertDateShort(person?.lastVisit, 'full') : '-' }}</div>
               </div>
               
             </td>
@@ -84,7 +84,7 @@
                     <MenuItem>
                       <button
                         class="block px-3 py-1 text-sm leading-6 text-gray-900"
-                        @click="$router.push({ name: 'user-logger', params: { id: item._id } })"
+                        @click="$router.push({ name: 'user-logger', params: { id: item?._id } })"
                       >
                         Просмотр
                       </button>

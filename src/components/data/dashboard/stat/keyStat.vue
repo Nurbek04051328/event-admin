@@ -31,9 +31,6 @@
           </router-link>
         </div>
       </div>
-      <!-- <div class="flex items-center">
-        <apexchart width="200" type="pie" :options="options" :series="series"></apexchart>
-      </div> -->
     </div>
   </div>
 </template>
@@ -42,7 +39,6 @@ import { computed, defineProps } from 'vue'
 const props = defineProps(['count'])
 // Icon import
 import { KeyIcon } from '@heroicons/vue/24/outline'
-// import ApexCharts from 'apexcharts'
 
 
 const list = computed(() => [
@@ -62,22 +58,6 @@ const list = computed(() => [
   }
 ])
 
-// const series = computed(() => [props?.count?.activated || 0, props?.count?.notActivated || 0])
-// const options = computed(() => ({
-//   chart: {
-//     id: `vuechart-keys-${Math.random().toString(36).substring(2, 8)}`,
-//     type: 'pie',
-//     height: 300
-//   },
-//   labels: list.value.map((t) => t.title) || [],
-//   legend: {
-//     show: false
-//   },
-//   colors: list.value.map((t) => t.class) || [],
-//   dataLabels: {
-//     enabled: true
-//   }
-// }))
 
 
 </script>

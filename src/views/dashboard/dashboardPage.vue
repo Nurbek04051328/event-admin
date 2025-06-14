@@ -5,12 +5,12 @@
 </template>
 <script setup>
 import mainStats from '@/components/data/dashboard/mainStats.vue'
-import { onMounted } from 'vue'
-import { statisticStore } from '@/stores/data/statistic'
-const statistic_store = statisticStore()
+// import { onMounted } from 'vue'
+// import { statisticStore } from '@/stores/data/statistic'
+// const statistic_store = statisticStore()
 
-onMounted(async () => {
-  await statistic_store.getStatistics()
-  // await statistic_store.allDeposit()
-})
+// onMounted(async () => {
+//   await statistic_store.getStatistics()
+//   await statistic_store.allDeposit()
+// })
 </script>

@@ -31,14 +31,6 @@
           </router-link>
         </div>
       </div>
-      <!-- <apexchart  
-        v-if="series.length" 
-        width="200" 
-        height="300" 
-        type="pie" 
-        :options="options" 
-        :series="series"
-      /> -->
     </div>
   </div>
 </template>
@@ -47,9 +39,7 @@ import { computed, defineProps } from 'vue'
 const props = defineProps(['count', 'title', 'name'])
 // Icon import
 import { UserGroupIcon } from '@heroicons/vue/24/outline'
-// import ApexCharts from 'apexcharts'
 
-// const chartId = `chart-${props.name}-` + Math.random().toString(36).substring(2, 7)
 
 
 const list = computed(() => [
@@ -83,21 +73,5 @@ const list = computed(() => [
   }
 ])
 
-// const series = computed(() => list.value.map((t) => t.value) || [])
-// const options = computed(() => ({
-//   chart: {
-//     id: chartId,
-//     type: 'pie',
-//     height: 300
-//   },
-//   labels: list.value.map((t) => t.title) || [],
-//   legend: {
-//     show: false
-//   },
-//   colors: list.value.map((t) => t.class) || [],
-//   dataLabels: {
-//     enabled: true
-//   }
-// }))
 
 </script>

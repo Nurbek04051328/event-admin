@@ -1,5 +1,5 @@
 <template>
-  <div v-if="series.length" class="p-[16px] rounded-[26px] shadow-sm bg-white">
+  <div v-show="series[0].data.length || series[1].data.length" class="p-[16px] rounded-[26px] shadow-sm bg-white">
     <h3 class="text-[18px] font-bold leading-6 text-[#483D5B] w-full">
       Статистика по (Покупка/Возврат)
     </h3>
@@ -7,9 +7,12 @@
   </div>
 </template>
 <script setup>
+import { storeToRefs } from 'pinia'
 import { statisticStore } from '@/stores/data/statistic'
 import { computed, onMounted, ref } from 'vue'
 const store = statisticStore()
+// const { purchases } = storeToRefs(store)
+const props = defineProps(['purchases'])
 
 
 const options = computed(() => {
@@ -38,24 +41,17 @@ const options = computed(() => {
     }
   }
 })
-const series = ref([])
 
-const getData = async () => {
-  const { data } = await store.allDeposit()
-  series.value = [
-    {
+
+const series = computed(() => [
+  {
       name: 'Покупка',
-      data: data?.purchase || []
+      data: props?.purchases?.purchase || []
     },
     {
       name: 'Возврат',
-      data: data?.refound || []
+      data: props?.purchases?.refound || []
     }
-  ]
-}
-
-onMounted(() => {
-  getData()
-})
+])
 </script>
 <style lang=""></style>

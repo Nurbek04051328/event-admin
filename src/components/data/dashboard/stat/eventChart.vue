@@ -6,8 +6,11 @@
 </template>
 <script setup>
   import { computed, onMounted, ref } from 'vue'
-  import { statisticStore } from '@/stores/data/statistic'
-  const store = statisticStore()
+  // import { statisticStore } from '@/stores/data/statistic'
+  // const store = statisticStore()
+  const props = defineProps(['eventChart'])
+
+
 
   const stat = ref({
     labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
@@ -28,7 +31,7 @@
         height: 400,
       },
       xaxis: {
-        categories: stat.value.denied?.map((v, k) => k + 1)
+        categories: props?.eventChart?.denied?.map((v, k) => k + 1)
       },
       colors: ['#9E55EC', '#FFCE20', '#05CD99', '#FF5558' ],
       legend: {
@@ -37,34 +40,58 @@
       }
     }
   })
-  const series = ref([])
-
-  const getData = async () => {
-    const { data } = await store.ticketStatistic()
-    stat.value = { ...data }
-    let days = data?.denied?.map((v, k) => k + 1)
-    options.value.xaxis = {
-      categories: [...days]
-    }
-    series.value.push({
+  
+  
+  const series = computed(() => [
+    {
       name: 'Использовано',
-      data: stat.value.used || []
-    })
-    series.value.push({
-      name: 'В процессе',
-      data: stat.value.pending || []
-    })
-    series.value.push({
-      name: 'Куплено',
-      data: stat.value.purchase || []
-    })
-    series.value.push({
-      name: 'Отказано',
-      data: stat.value.denied || []
-    })
+    data: props.eventChart?.used || []
+  },
+  {
+    name: 'В процессе',
+    data: props.eventChart?.pending || []
+  },
+  {
+    name: 'Куплено',
+      data: props.eventChart?.purchase || []
+  },
+  {
+    name: 'Отказано',
+    data: props.eventChart?.denied || []
   }
+])
 
-  onMounted(() => {
-    getData()
-  })
+
+
+
+// const series = ref([])
+
+// const getData = async () => {
+//   // const { data } = await store.ticketStatistic()
+//   // console.log("data", data)
+//   stat.value = { ...data }
+//   let days = data?.denied?.map((v, k) => k + 1)
+//   options.value.xaxis = {
+//     categories: [...days]
+//   }
+//   series.value.push({
+//     name: 'Использовано',
+//     data: stat.value.used || []
+//   })
+//   series.value.push({
+//     name: 'В процессе',
+//     data: stat.value.pending || []
+//   })
+//   series.value.push({
+//     name: 'Куплено',
+//     data: stat.value.purchase || []
+//   })
+//   series.value.push({
+//     name: 'Отказано',
+//     data: stat.value.denied || []
+//   })
+// }
+  // onMounted(() => {
+    //   getData()
+  // })
 </script>

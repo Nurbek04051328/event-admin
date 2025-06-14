@@ -1,5 +1,5 @@
 <template>
-  <div v-if="series.length" class="p-[16px] rounded-[26px] shadow-sm bg-white">
+  <div v-show="series[0].data.length || series[1].data.length" class="p-[16px] rounded-[26px] shadow-sm bg-white">
     <h3 class="text-[18px] font-bold leading-6 text-[#483D5B] w-full">
       Статистика по (Пополнение/Вывод)
     </h3>
@@ -7,9 +7,13 @@
   </div>
 </template>
 <script setup>
+import { storeToRefs } from 'pinia'
 import { statisticStore } from '@/stores/data/statistic'
-import { computed, onMounted, ref } from 'vue'
+import { computed, watch, onMounted, ref } from 'vue'
 const store = statisticStore()
+// const { deposits } = storeToRefs(store)
+
+const props = defineProps(['deposits'])
 
 const options = computed(() => {
   return {
@@ -43,26 +47,17 @@ const options = computed(() => {
     }
   }
 })
-const series = ref([])
+const series = computed(() => [
+  {
+    name: 'Пополнение',
+    data: props?.deposits?.deposit || []
+  },
+  {
+    name: 'Вывод',
+    data: props?.deposits?.withdrawal || []
+  }
+])
 
-const getData = async () => {
-  const { data } = await store.allDeposit()
-  console.log("deposit", data);
-  
-  series.value = [
-    {
-      name: 'Пополнение',
-      data: data?.deposit || []
-    },
-    {
-      name: 'Вывод',
-      data: data?.withdrawal || []
-    }
-  ]
-}
 
-onMounted(() => {
-  getData()
-})
 </script>
 <style lang=""></style>

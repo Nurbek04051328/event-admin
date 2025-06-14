@@ -1,4 +1,4 @@
-import { ref } from 'vue'
+import { ref, reactive } from 'vue'
 import { defineStore } from 'pinia'
 // import { useNotification } from '../usefull/notification'
 import { useLoadingStore } from '@/stores/usefull/loading'
@@ -9,33 +9,78 @@ const base_url = '/statistic/all-counts'
 export const statisticStore = defineStore('statisticStore', () => {
   const statistic_counts = ref({})
   const loadingStore = useLoadingStore()
+  const purchases = reactive({
+    purchase: [],
+    refound: []
+  })
+
+  const deposits = reactive({
+    deposit: [],
+    withdrawal: []
+  })
+
+  const eventChart = reactive({
+    denied: [],
+    pending: [],
+    purchase: [],
+    used: [],
+  })
+  const profComissionChart = reactive({
+    commission: [],
+    income: [],
+    totalCommission: 0,
+    totalIncome: 0,
+  })
 
   const getStatistics = async (params) => {
-    try {
+
       loadingStore.start()
       const { data } = await api.get(base_url, { params })
-      console.log("data", data);
+      console.log("getStatistics", data);
       
       statistic_counts.value = { ...data }
-      
-    } catch (error) {
-      console.error('Statistika olishda xatolik:', error)
-    } finally {
       loadingStore.stop()
-    }
+      
   }
 
   const ticketStatistic = async (params) => {
-    return await api.get('/statistic/ticket-statistic', { params })
+    try {
+      // loadingStore.start()
+      const { data } = await api.get('/statistic/ticket-statistic', { params })
+      console.log("ticketStatistic", data);
+      eventChart.denied = data.denied || []
+      eventChart.pending = data.pending || []
+      eventChart.purchase = data.purchase || []
+      eventChart.used = data.used || []
+    }catch (error) {
+    console.error('Statistika olishda xatolik:', error)
+  } finally {
+      // loadingStore.stop()
+    }
   }
   const profitStatistic = async (params) => {
-    return await api.get('/statistic/profit-statistic', { params })
+    const { data } = await api.get('/statistic/profit-statistic', { params })
+    console.log("profitStatistic", data);
+    profComissionChart.commission = data.commission || []
+    profComissionChart.income = data.income || []
+    profComissionChart.totalCommission = data.totalCommission || 0
+    profComissionChart.totalIncome = data.totalIncome || 0
   }
   const userStatistic = async (params) => {
     return await api.get('/statistic/user-statistic', { params })
   }
   const allDeposit = async (params) => {
-    return await api.get('/statistic/wallet-statistic', { params })
+  
+      loadingStore.start()
+      const {data} =  await api.get('/statistic/wallet-statistic', { params })
+      console.log("allDeposit", data);
+      purchases.purchase = data.purchase || []
+      purchases.refound = data.refound || []
+
+      deposits.deposit = data.deposit || []
+      deposits.withdrawal = data.withdrawal || []
+      loadingStore.stop()
+    
   }
 
   return {
@@ -44,6 +89,10 @@ export const statisticStore = defineStore('statisticStore', () => {
     ticketStatistic,
     profitStatistic,
     userStatistic,
-    allDeposit
+    allDeposit,
+    purchases,
+    deposits,
+    eventChart,
+    profComissionChart
   }
 })

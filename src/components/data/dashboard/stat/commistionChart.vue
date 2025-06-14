@@ -5,9 +5,11 @@
   </div>
 </template>
 <script setup>
-import { statisticStore } from '@/stores/data/statistic'
 import { computed, onMounted, ref } from 'vue'
-const store = statisticStore()
+// import { statisticStore } from '@/stores/data/statistic'
+// const store = statisticStore()
+
+const props = defineProps(['comissionChart'])
 
 const stat = ref({
   denied: [],
@@ -43,7 +45,7 @@ const options = computed(() => {
       }
     },
     xaxis: {
-      categories: stat.value.denied?.map((v, k) => k + 1) || []
+      categories: props.comissionChart?.map((v, k) => k + 1) || []
     },
     yaxis: {
       labels: {
@@ -59,28 +61,38 @@ const options = computed(() => {
     }
   }
 })
-const series = ref([])
 
-const getData = async () => {
-  const { data } = await store.profitStatistic()
-  stat.value = { ...data }
-
-  let days = data?.income?.map((v, k) => k + 1) || []
-  options.value.xaxis = {
-    categories: [...days]
-  }
-
-  series.value.push({
+const series = computed(() => [
+  {
     name: 'Комиссия',
     group: 'profit',
-    data: stat.value.commission
-    || []
-  })
+    data: props.comissionChart || []
+  },
+])
 
-}
 
-onMounted(() => {
-  getData()
-})
+// const series = ref([])
+
+// const getData = async () => {
+//   const { data } = await store.profitStatistic()
+//   stat.value = { ...data }
+
+//   let days = data?.income?.map((v, k) => k + 1) || []
+//   options.value.xaxis = {
+//     categories: [...days]
+//   }
+
+//   series.value.push({
+//     name: 'Комиссия',
+//     group: 'profit',
+//     data: stat.value.commission
+//     || []
+//   })
+
+// }
+
+// onMounted(() => {
+//   getData()
+// })
 </script>
 <style lang=""></style>

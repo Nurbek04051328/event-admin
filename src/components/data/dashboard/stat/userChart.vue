@@ -5,8 +5,8 @@
   </div>
 </template>
 <script setup>
-import { statisticStore } from '@/stores/data/statistic'
 import { computed, onMounted, ref } from 'vue'
+import { statisticStore } from '@/stores/data/statistic'
 const store = statisticStore()
 
 const stat = ref([])

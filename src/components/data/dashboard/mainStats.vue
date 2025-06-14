@@ -7,10 +7,10 @@
         <allStat :count="statistic_counts" />
       </div>
       <div class="overflow-hidden col-span-6 lg:col-span-12">
-        <DepositStat />
+        <DepositStat  :deposits="deposits"/>
       </div>
       <div class="overflow-hidden col-span-6 lg:col-span-12">
-        <PurchaseStat />
+        <PurchaseStat :purchases="purchases"/>
       </div>
       <div class="overflow-hidden col-span-4 md-max:col-span-12">
         <UserStat
@@ -31,22 +31,22 @@
       <div class="overflow-hidden col-span-4 md-max:col-span-12">
         <KeyStat :count="statistic_counts.activationKeys" />
       </div>
-      <div class="overflow-hidden col-span-12 lg:col-span-12">
+      <div v-if="ready" class="overflow-hidden col-span-12 lg:col-span-12">
         <EventStat :e="statistic_counts?.event" />
       </div>
-      <div class="overflow-hidden col-span-12 lg:col-span-12">
-        <EventChart />
+      <div v-if="ready" class="overflow-hidden col-span-12 lg:col-span-12">
+        <EventChart :eventChart="eventChart" />
       </div>
-      <div class="overflow-hidden col-span-6 lg:col-span-12">
-        <ProfitChart />
+      <div v-if="ready" class="overflow-hidden col-span-6 lg:col-span-12">
+        <ProfitChart :profitChart="profComissionChart?.income"/>
       </div>
-      <div class="overflow-hidden col-span-6 lg:col-span-12">
-        <CommistionChart />
+      <div v-if="ready" class="overflow-hidden col-span-6 lg:col-span-12">
+        <CommistionChart :comissionChart="profComissionChart?.commission" />
       </div>
-      <div class="overflow-hidden col-span-6 lg:col-span-12">
+      <div v-if="ready" class="overflow-hidden col-span-6 lg:col-span-12">
         <UserChart />
       </div>
-      <div class="overflow-hidden col-span-6 lg:col-span-12">
+      <div v-if="ready" class="overflow-hidden col-span-6 lg:col-span-12">
         <OrganizerChart />
       </div>
     </div>
@@ -77,5 +77,25 @@
   const store = statisticStore()
   const loadingStore = useLoadingStore()
   const { statistic_counts } = storeToRefs(store)
+  const { deposits } = storeToRefs(store)
+  const { purchases } = storeToRefs(store)
+  const { eventChart } = storeToRefs(store)
+  const { profComissionChart } = storeToRefs(store)
+
+  import { onMounted, ref } from 'vue'
+const ready = ref(false)
+// import { statisticStore } from '@/stores/data/statistic'
+// const statistic_store = statisticStore()
+
+onMounted(async () => {
+  await Promise.all([
+    store.getStatistics(),
+    store.allDeposit(),
+    store.ticketStatistic(),
+    store.profitStatistic()
+  ])
+  ready.value = true
+})
+
 </script>
 <style lang="scss" scoped></style>

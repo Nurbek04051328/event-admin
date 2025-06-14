@@ -27,6 +27,7 @@
 </template>
 <script setup>
 import { onMounted, ref } from 'vue'
+import paginate from 'vuejs-paginate-next'
 import socialTable from '@/components/settings/social/socialTable.vue'
 import socialDialog from '@/components/settings/social/socialDialog.vue'
 import { socialStore } from '@/stores/data/social'

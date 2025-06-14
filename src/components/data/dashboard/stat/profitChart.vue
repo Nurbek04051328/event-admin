@@ -7,8 +7,10 @@
 <script setup>
 
   import { computed, onMounted, ref } from 'vue'
-  import { statisticStore } from '@/stores/data/statistic'
-  const store = statisticStore()
+  // import { statisticStore } from '@/stores/data/statistic'
+  // const store = statisticStore()
+
+  const props = defineProps(['profitChart'])
 
   const stat = ref({
     labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
@@ -42,7 +44,7 @@
         }
       },
       xaxis: {
-        categories: stat.value?.income?.map((v, k) => k + 1) || []
+        categories: props.profitChart?.map((v, k) => k + 1) || []
       },
       yaxis: {
         labels: {
@@ -58,23 +60,35 @@
       }
     }
   })
-  const series = ref([])
 
-  const getData = async () => {
-    const { data } = await store.profitStatistic()
-    stat.value = { ...data }
-    let days = data?.income?.map((v, k) => k + 1) || []
-    options.value.xaxis = {
-      categories: [...days]
-    }
-    series.value.push({
+  const series = computed(() => [
+    {
       name: 'Поступление',
       group: 'profit',
-      data: stat.value?.income || []
-    })
-  }
+      data: props.profitChart || []
+    },
+  ])
 
-  onMounted(() => {
-    getData()
-  })
+
+  // const series = ref([])
+
+  // const getData = async () => {
+  //   const { data } = await store.profitStatistic()
+  //   console.log("dataprofit", data);
+    
+  //   stat.value = { ...data }
+  //   let days = data?.income?.map((v, k) => k + 1) || []
+  //   options.value.xaxis = {
+  //     categories: [...days]
+  //   }
+  //   series.value.push({
+  //     name: 'Поступление',
+  //     group: 'profit',
+  //     data: stat.value?.income || []
+  //   })
+  // }
+
+  // onMounted(() => {
+  //   getData()
+  // })
 </script>

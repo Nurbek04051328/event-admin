@@ -1,5 +1,5 @@
 <template>
-  <div class="grid grid-cols-5  bg-white/100 rounded-[26px] shadow-sm p-4 md-max:grid-cols-2 md-max:p-2 mb-2">
+  <div class="grid grid-cols-4  bg-white/100 rounded-[26px] shadow-sm p-4 md-max:grid-cols-2 md-max:p-2 mb-2">
     <!-- <pre>{{ org.statistic }}</pre> -->
     <div
       v-for="(stat, statIdx) in stats"
@@ -41,7 +41,7 @@ const stats = computed(() => {
 
   return [
     { name: 'Кол. мероприятия', value: props.org?.statistic?.eventCount },
-    { name: 'Генерированные', value: props.org?.statistic?.generatedTickets },
+    // { name: 'Генерированные', value: props.org?.statistic?.generatedTickets },
     {
       name: 'Купленные билеты',
       value: allTickerPurchasesCount.split(' ').at(0) || 0,
