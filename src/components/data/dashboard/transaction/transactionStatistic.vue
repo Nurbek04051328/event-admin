@@ -80,14 +80,14 @@ import { transactionStore } from '@/stores/data/transaction'
 const store = transactionStore()
 import { statisticStore } from '@/stores/data/statistic'
 const stat_store = statisticStore()
-
+const props = defineProps(['transactionChart'])
 let date = ref('')
 
 
 const options = computed(() => {
   return {
     chart: {
-      id: 'vuechart-deposit',
+      id: `vuechart-transaction-${Math.random().toString(36).substring(2, 8)}`,
       type: 'area',
       height: 200,
       width: 500
@@ -131,27 +131,41 @@ const options = computed(() => {
     }
   }
 })
-const series = ref([])
 
-const getData = async (params) => {
-  const { data } = await stat_store.allDeposit(params)
-  series.value = [
-    {
-      name: 'Пополнение',
-      data: data?.deposit || []
-    },
-    {
-      name: 'Вывод',
-      data: data?.withdrawal || []
-    }
-  ]
-}
+const series = computed(() => [
+  {
+    name: 'Пополнение',
+    data: props?.transactionChart?.deposit || []
+  },
+  {
+    name: 'Вывод',
+    data: props?.transactionChart?.withdrawal || []
+  }
+])
 
-watch(date, (newDate) => {
-  getData(newDate)
-})
 
-onMounted(() => {
-  getData()
-})
+// const series = ref([])
+
+// const getData = async (params) => {
+//   const { data } = await stat_store.allDeposit(params)
+//   series.value = [
+//     {
+//       name: 'Пополнение',
+//       data: data?.deposit || []
+//     },
+//     {
+//       name: 'Вывод',
+//       data: data?.withdrawal || []
+//     }
+//   ]
+// }
+
+
+// watch(date, (newDate) => {
+//   getData(newDate)
+// })
+
+// onMounted(() => {
+//   getData()
+// })
 </script>

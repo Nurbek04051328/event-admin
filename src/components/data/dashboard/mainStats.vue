@@ -54,6 +54,7 @@
 </template>
 <script setup>
 // Paketlar import
+  import { onMounted, ref } from 'vue'
   import { storeToRefs } from 'pinia'
 
   // Componenta import
@@ -76,26 +77,21 @@
   import { statisticStore } from '@/stores/data/statistic'
   const store = statisticStore()
   const loadingStore = useLoadingStore()
-  const { statistic_counts } = storeToRefs(store)
-  const { deposits } = storeToRefs(store)
-  const { purchases } = storeToRefs(store)
-  const { eventChart } = storeToRefs(store)
-  const { profComissionChart } = storeToRefs(store)
+  const { statistic_counts, deposits, purchases, eventChart, profComissionChart } = storeToRefs(store)
 
-  import { onMounted, ref } from 'vue'
-const ready = ref(false)
+  const ready = ref(false)
 // import { statisticStore } from '@/stores/data/statistic'
 // const statistic_store = statisticStore()
 
-onMounted(async () => {
-  await Promise.all([
-    store.getStatistics(),
-    store.allDeposit(),
-    store.ticketStatistic(),
-    store.profitStatistic()
-  ])
-  ready.value = true
-})
+  onMounted(async () => {
+    await Promise.all([
+      store.getStatistics(),
+      store.allDeposit(),
+      store.ticketStatistic(),
+      store.profitStatistic()
+    ])
+    ready.value = true
+  })
 
 </script>
 <style lang="scss" scoped></style>

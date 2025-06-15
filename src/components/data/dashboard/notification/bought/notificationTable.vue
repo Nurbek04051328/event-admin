@@ -17,12 +17,15 @@
           <tr
             v-for="(item, itemIdx) in store.boughtNotif.data"
             :key="item?._id"
+            class="hover:bg-gray-100"
             :class="itemIdx % 2 === 0 ? undefined : 'bg-gray-50'"
           >
             <td class="td-first md-max:text-[13px]">
               {{ itemIdx + 1 }}
             </td>
-            <td class="td md-max:text-[13px]">
+            <td class="td md-max:text-[13px] cursor-pointer"
+              @click="$router.push({ name: 'notifUserBought', params: { id: item?._id } })"
+            >
               {{ item.title }}
             </td>
             <td class="td md-max:text-[13px] font-bold">

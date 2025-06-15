@@ -6,7 +6,7 @@
       <TransactionSearch/>
     </headPart>
     <div class="p-4 pb-0 w-full grid grid-cols-12 gap-4 overflow-hidden">
-      <TransactionStatistic class="col-span-6"/>
+      <TransactionStatistic class="col-span-6"  :transactionChart="stat_store.deposits"/>
       <div class="col-span-6 overflow-auto flex flex-col flex-1">
         
         <TransactionTable
@@ -41,6 +41,8 @@ import { onMounted, ref } from 'vue'
 
 import { transactionStore } from '@/stores/data/transaction'
 const store = transactionStore()
+import { statisticStore } from '@/stores/data/statistic'
+const stat_store = statisticStore()
 
 import { usersStore } from '@/stores/data/users'
 const users_store = usersStore()
@@ -59,6 +61,7 @@ const getData = async () => {
   
   await store.getTransactions({ limit: limit.value, page: page.value })
   await users_store.getUsers({ limit: 0, type:"all"})
+  await stat_store.allDeposit()
 }
 
 onMounted(async () => {

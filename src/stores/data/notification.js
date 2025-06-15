@@ -63,6 +63,10 @@ export const notificationStore = defineStore('notificationStore', () => {
     data: [],
     count: 0
   })
+  const boughtUsersNotif = reactive({
+    data: [],
+    count: 0
+  })
 
   const getBoughtNotif = async (params) => {
     try {
@@ -103,11 +107,22 @@ export const notificationStore = defineStore('notificationStore', () => {
       notification.setNotif(true, error?.response?.data?.message, 'danger')
     }
   }
+  const getBoughtUsersNotif = async ( params) => {
+    try {
+      const { data } = await api.get('/api/notification/sended-to-user-notifs', { params })
+      console.log("boughtUserrrr",data)
+      boughtUsersNotif.data = [...data.notifs]
+      boughtUsersNotif.count = data.count
+    } catch (error) {
+      notification.setNotif(true, error?.response?.data?.message, 'error')
+    }
+  }
 
   return {
     boughtNotif,
     getBoughtNotif,
     sendNotification,
+    boughtUsersNotif,
 
     notifications,
     notificationCount,
@@ -117,6 +132,8 @@ export const notificationStore = defineStore('notificationStore', () => {
     saveNotification,
     getNotification,
     changeStatus,
-    changeBoughtNotifStatus
+    changeBoughtNotifStatus,
+    getBoughtUsersNotif,
+    
   }
 })

@@ -286,4 +286,14 @@ export const detailMenu = [
       }
     ]
   },
+  // NotifBoughtUser
+  {
+    path: 'notification/bought/:id',
+    name: 'notifUserBought',
+    component: () => import('@/components/data/dashboard/notification/bought/detail/notifUserBoughtDetail.vue'),
+    meta: {
+      title: 'Купленные пакеты/Пользователи',
+      active: 'notification'
+    }
+  },
 ]
