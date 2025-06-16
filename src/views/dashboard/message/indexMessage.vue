@@ -46,7 +46,7 @@
           </div>
         </div>
       </div>
-      <div class="border-t-2 z-[99] p-4 flex flex-col justify-end" v-if="route.params.id">
+      <div class="border-t-2 z-40 p-4 flex flex-col justify-end" v-if="route.params.id">
         <div class="relative rounded-md w-full overflow-hidden">
           <textarea
             type="textarea"

@@ -124,7 +124,8 @@
             :to="{ name: 'messages' }"
             class="p-[14px] w-full h-full"
             :class="
-              route.name == 'messages' ? 'bg-[#F3EBFC] rounded-2xl' : ''
+              route.name == 'messages' ? 'bg-[#F3EBFC] rounded-2xl' : 
+              route.name == 'showChat' ? 'bg-[#F3EBFC] rounded-2xl' : ''
             "
           >
             <ChatBubbleLeftIcon class="h-7 w-7 shrink-0 text-[#9E55EC]" aria-hidden="true" />

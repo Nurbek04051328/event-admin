@@ -33,7 +33,7 @@
           <div class="min-w-0 flex-auto relative">
             <p class="text-sm font-semibold leading-6 text-gray-900">
               <router-link :to="{ name: 'showChat', params: { id: person._id } }" class="cursor-pointer">
-                <span class="absolute inset-x-0 -top-px bottom-0" />
+                <span class="absolute inset-x-0 bottom-0" />
                 {{ person?.userName }}
               </router-link>
             </p>
@@ -42,7 +42,7 @@
                 v-if="auth_store.user.id== person?.lastMessage?.sender?._id"
                 class="text-sm mr-1">Вы:</p>
               <p 
-                class="mt-1 flex text-xs leading-5 text-gray-500"
+                class="flex text-xs leading-5 text-gray-500"
                 v-if="person?.lastMessage?.text" 
                 v-html="person?.lastMessage?.text?.replace(/\n/g, '<br>').slice(0,30)"
               ></p>
