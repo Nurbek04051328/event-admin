@@ -46,7 +46,7 @@
 </template>
 
 <script setup>
-// Vue core imports
+
 import { 
   ref, 
   onMounted, 
@@ -56,28 +56,28 @@ import {
   computed 
 } from 'vue'
 
-// Vue Router
+
 import { useRoute } from 'vue-router'
 
-// Pinia imports
+
 import { storeToRefs } from 'pinia'
 import { messageStore } from '@/stores/data/message'
 import { authStore } from '@/stores/user/auth'
 
-// Components
+
 import ChatItem from '@/components/data/dashboard/message/chatItem.vue'
 
 
 
-// Store initialization
+
 const store = messageStore()
 const auth_store = authStore()
 const route = useRoute()
 
-// Store refs
+
 const { chatMessages, selectChatRoom } = storeToRefs(store)
 
-// Component refs
+
 const scrollToBottom = ref(null)
 const limit = ref(20)
 const page = ref(1)
@@ -86,15 +86,16 @@ const isFetching = ref(false)
 const isInitialLoad = ref(true)
 const isLoading = ref(false)
 const allMessages = ref([])
+const isUserNearBottom = ref(true)
 
-// Computed property for merged messages
+// Xabarlarni birlashtirib yuborishim uchun ya'ni scrol bolganda ham eskisini yoniga qo'shib boradi
 const mergedMessages = computed(() => {
   return allMessages.value.slice().sort((a, b) => {
     return new Date(a.createdAt) - new Date(b.createdAt)
   })
 })
 
-// Scroll to bottom function with proper timing
+// Pastga scroll qilish funksiyasi (tegishli vaqtdagina ishlaydi yani boshida )
 const scrollToDown = (behavior = 'smooth') => {
   if (!scrollToBottom.value?.lastElementChild) return
   
@@ -108,37 +109,33 @@ const scrollToDown = (behavior = 'smooth') => {
   }, 100)
 }
 
-// Merge new messages with existing ones
+//  Yangi xabarlar kelishi bilan birlashtirib quyish uchun eskisiga
 const mergeMessages = (newMessages) => {
   const messageMap = new Map()
   
-  // Add existing messages to map
+  // Mavjud xabarlarni map ichiga qo‘shish
   allMessages.value.forEach(msg => {
     messageMap.set(msg._id, msg)
   })
   
-  // Add or update new messages
+  // Yangi xabarlarni qo'shish yoki o'zgartirish uchun
   newMessages.forEach(msg => {
     if (!messageMap.has(msg._id)) {
       messageMap.set(msg._id, msg)
     }
   })
   
-  // Convert map back to array
+  // Har ehtimolga qarshi mapni yana qaytadan massivga aylantiramiz, xatolik chiqmasligi uchun
   allMessages.value = Array.from(messageMap.values())
 }
 
-// Enhanced getData function with proper scroll position handling
 const getData = async (changePage = false, isScrollingDownwards = false) => {
   if (isFetching.value) return
-  
   isFetching.value = true
   isLoading.value = true
 
   try {
     if (changePage) {
-      console.log("changepage", changePage, isScrollingDownwards);
-      
       if (isScrollingDownwards && page.value > 1) {
         page.value -= 1
       } else if (!isScrollingDownwards) {
@@ -147,14 +144,11 @@ const getData = async (changePage = false, isScrollingDownwards = false) => {
       }
     }
 
-    console.log(page.value, limit.value);
-    
     const response = await store.getChatMessages(route.params.id, { 
       limit: limit.value, 
       page: page.value 
     })
 
-    // Merge new messages with existing ones
     if (response?.data) {
       if (isInitialLoad.value) {
         allMessages.value = response.data
@@ -163,20 +157,25 @@ const getData = async (changePage = false, isScrollingDownwards = false) => {
       }
     }
 
-    // Wait for DOM update
     await nextTick()
 
-    // Handle scroll position after data load
+    // Endi scroll faqat kerak bo‘lsa ishlaydi yani boshida faqat
     if (isInitialLoad.value) {
       isInitialLoad.value = false
+      scrollToDown('auto')
+    } else if (!changePage && isUserNearBottom.value) {
       scrollToDown('smooth')
-    } else if (changePage && !isScrollingDownwards && scrollToBottom.value) {
+    }
+
+    // Agar changePage && scroll up bo‘lsa: eski joyni tiklaymiz
+    if (changePage && !isScrollingDownwards && scrollToBottom.value) {
       const newScrollHeight = scrollToBottom.value.scrollHeight || 0
       const scrollPosition = newScrollHeight - previousScrollHeight.value
       if (scrollPosition > 0) {
         scrollToBottom.value.scrollTop = scrollPosition
       }
     }
+
   } catch (error) {
     console.error('Error fetching messages:', error)
   } finally {
@@ -185,40 +184,44 @@ const getData = async (changePage = false, isScrollingDownwards = false) => {
   }
 }
 
-// Enhanced scroll handler with debouncing
+
+// Scroll harakatini yaxshilangan usulda boshqarish (debounce bilan)
 let scrollTimeout = null
 const handleScroll = () => {
-  if (scrollTimeout || isFetching.value) return
+  const container = scrollToBottom.value
+  if (!container) return
+
+  // Foydalanuvchi pastda yoki yuqorida turganini aniqlash
+  isUserNearBottom.value = container.scrollTop + container.clientHeight >= container.scrollHeight - 60
+  console.log("isUserNearBottom.value", isUserNearBottom.value);
   
+
+  const isAtTop = container.scrollTop <= 10
+  if (scrollTimeout || isFetching.value) return
+
   scrollTimeout = setTimeout(async () => {
-    const container = scrollToBottom.value
-    if (!container) return
-
-    const isAtTop = container.scrollTop <= 10
-    const isNearBottom = container.scrollTop + container.clientHeight >= container.scrollHeight - 20
-
     if (isAtTop) {
       await getData(true, false)
-    } else if (isNearBottom && page.value > 1) {
-      await getData(true, true)
     }
-    
     scrollTimeout = null
   }, 200)
 }
 
-// Watch for new messages to be added
+
+// Yangi xabarlar qo‘shilganini kuzatish
 watch(() => chatMessages.value?.data, (newMessages) => {
   if (newMessages && newMessages.length > 0) {
     mergeMessages(newMessages)
+
     if (isInitialLoad.value) {
       scrollToDown('auto')
+    } else if (isUserNearBottom.value) {
+      scrollToDown('smooth')
     }
-    scrollToDown('smooth')
   }
 }, { deep: true })
 
-// Watch for route changes
+// Route o'zgarganizini kuzatib turish
 watch(() => route.params.id, async (newId, oldId) => {
   if (newId === oldId) return
   
@@ -231,21 +234,21 @@ watch(() => route.params.id, async (newId, oldId) => {
   await getData()
 }, { immediate: true })
 
-// Helper function for avatar colors
+// Avatar orqasidagi ranglarni aniqlash uchun funsiya
 const randomColor = (name) => {
   const colors = ['#FF5733', '#33FF57', '#3357FF', '#FFC300', '#C70039', '#581845', '#2ECC71']
   const index = name?.charCodeAt(0) % colors?.length
   return colors[index]
 }
 
-// Clean up on unmount
+
 onUnmounted(() => {
   if (scrollTimeout) {
     clearTimeout(scrollTimeout)
   }
 })
 
-// Initial load
+
 onMounted(async () => {
   await getData()
 })

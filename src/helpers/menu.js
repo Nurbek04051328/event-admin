@@ -210,7 +210,8 @@ export const links = [
         name: 'bought-notification',
         component: () => import('@/views/dashboard/notifications/boughtNotif.vue'),
         meta: {
-          title: 'Купленные пакеты'
+          title: 'Купленные пакеты',
+          toggle: false,
         }
       }
     ]

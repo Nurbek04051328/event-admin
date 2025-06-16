@@ -29,7 +29,6 @@
               </div>
             </td>
             <td class="td text-center">
-              <span class="primary-tag" v-if="person?.sendStatus == 'limited'"><ExclamationTriangleIcon class="size-4" /></span>
               <span class="danger-tag" v-if="person?.sendStatus == 2">Ошибка</span>
               <span class="success-tag" v-if="person?.sendStatus == 1">Отправлено</span>
               <span class="warning-tag" v-if="person?.sendStatus == 0">Не отправлено</span>
@@ -49,103 +48,14 @@
         </tbody>
       </table>
     </div>
-    <!-- <div class="hidden sm:block">
-      <ul class="flex-1 grid grid-cols-12 gap-2 xs-max:grid-cols-1 overflow-auto">
-        <li
-          v-for="item in store.user.data"
-          :key="item._id"
-          class="flex flex-col col-span-4 xm:col-span-6 xs-max:col-span-12 divide-y border border-gray-300 divide-gray-200 rounded-lg bg-white text-center shadow mb-3"
-        >
-          <div class="flex flex-1 flex-col relative">
-            <div class="absolute top-0 right-0 m-1">
-              <Menu as="div" class="relative m-r-0">
-                <MenuButton class="-m-1.5 flex items-center p-1.5 mx:m-0">
-                  <EllipsisHorizontalIcon class="h-6 w-6 text-gray-400" aria-hidden="true" />
-                </MenuButton>
-                <transition
-                  enter-active-class="transition ease-out duration-100"
-                  enter-from-class="transform opacity-0 scale-95"
-                  enter-to-class="transform opacity-100 scale-100"
-                  leave-active-class="transition ease-in duration-75"
-                  leave-from-class="transform opacity-100 scale-100"
-                  leave-to-class="transform opacity-0 scale-95"
-                >
-                  <MenuItems
-                    class="absolute right-0 z-10 mt-2.5 w-[150px] origin-top-right rounded-md bg-white py-2 shadow-lg ring-1 ring-gray-900/5 focus:outline-none"
-                  >
-                    <MenuItem>
-                      <button
-                        class="block px-3 py-1 text-sm leading-6 text-gray-900"
-                        @click="$router.push({ name: 'user-logger', params: { id: item?._id } })"
-                      >
-                        Просмотр
-                      </button>
-                    </MenuItem>
-                  </MenuItems>
-                </transition>
-              </Menu>
-            </div>
-            <div class="mt-2">
-              <img
-                class="mx-auto h-[100px] w-[100px] flex-shrink-0 rounded-full"
-                v-if="item.cover?.length > 0 || item.face?.at(0)?.length > 0"
-                :src="`${url}/${item.cover?.at(0) || item.face?.at(0)}`"
-                alt=""
-              />
-              <img
-                v-else
-                class="mx-auto h-[100px] w-[100px] rounded-full"
-                src="@/assets/logo/logo.png"
-                alt=""
-              />
-            </div>
-            <h3 class="mt-6 text-sm font-medium text-gray-900">
-              {{ item?.lname }} {{ item?.name }}
-            </h3>
-            <dl class="mt-1 flex flex-grow flex-col justify-between">
-              <dt class="sr-only">Логин</dt>
-              <dd class="text-sm text-gray-500">{{ item.login }}</dd>
-              <dt class="sr-only">Статус</dt>
-              <dd class="mt-3 space-x-2 mb-1">
-                <span :class="`${item?.status ? 'success-tag' : 'warning-tag'}`">
-                  {{
-                    item?.status == 'active'
-                      ? 'Активный'
-                      : item?.status == 'not active'
-                        ? 'Не активный'
-                        : item?.status == 'limited'
-                          ? 'Ограничен'
-                          : 'Удален/Заблокирован'
-                  }}
-                </span>
-              </dd>
-            </dl>
-          </div>
-          <div>
-            <div class="-mt-px flex divide-x divide-gray-200">
-              <div class="-ml-px flex w-0 flex-1">
-                <a
-                  :href="`tel:${item?.phone}`"
-                  class="relative inline-flex w-0 flex-1 items-center justify-center gap-x-3 rounded-br-lg border border-transparent py-4 text-sm font-semibold text-gray-900"
-                >
-                  <PhoneIcon class="h-5 w-5 text-gray-400" aria-hidden="true" />
-                  {{ item?.phone }}
-                </a>
-              </div>
-            </div>
-          </div>
-        </li>
-      </ul>
-    </div> -->
   </div>
 </template>
 <script setup>
 defineProps(['page', 'limit'])
 import { convertDateShort } from '@/helpers/func'
 const url = import.meta.env.VITE_URL
-import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/vue'
 
-import { PhoneIcon, EllipsisHorizontalIcon, CheckIcon, ExclamationTriangleIcon, EyeIcon, EyeSlashIcon, ClockIcon, XMarkIcon } from '@heroicons/vue/24/outline'
+import { EyeIcon, EyeSlashIcon } from '@heroicons/vue/24/outline'
 
 import { notificationStore } from '@/stores/data/notification'
 const store = notificationStore()

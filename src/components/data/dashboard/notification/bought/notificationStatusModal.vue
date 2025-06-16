@@ -63,7 +63,25 @@
             
                 <div class="mt-6 flex flex-row gap-2">
                   <button type="button" class="close-btn" @click="close">Отменить</button>
-                  <button type="button" class="send-btn" @click="send">Сохранить</button>
+                  <button type="button" class="send-btn flex items-center gap-2" @click="send" :disabled="loading">
+                    <svg
+                      v-if="loading"
+                      class="animate-spin h-5 w-5 text-white"
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                    >
+                      <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4" />
+                      <path
+                        class="opacity-75"
+                        fill="currentColor"
+                        d="M4 12a8 8 0 018-8v4l3-3-3-3v4a8 8 0 00-8 8z"
+                      />
+                    </svg>
+                    <span>
+                      {{ loading ? 'Сохранение...' : 'Сохранить' }}
+                    </span>
+                  </button>
                 </div>
               </DialogPanel>
           </TransitionChild>
@@ -90,6 +108,8 @@ const props = defineProps({
 const emit = defineEmits(['close', 'saved'])
 
 const store = notificationStore()
+const loading = ref(false)
+
 
 const data = ref({
   status: '',
@@ -111,9 +131,16 @@ const v$ = useVuelidate(rules, data)
 const send = async () => {
   v$.value.$touch()
   if (!v$.value.$invalid) {
-    await store.changeBoughtNotifStatus({ ...data.value, _id: props.id })
-    emit('saved')
-    close()
+    loading.value = true
+    try {
+      await store.changeBoughtNotifStatus({ ...data.value, _id: props.id })
+      emit('saved')
+      close()
+    } catch (e) {
+      console.error(e)
+    } finally {
+      loading.value = false
+    }
   }
 }
 

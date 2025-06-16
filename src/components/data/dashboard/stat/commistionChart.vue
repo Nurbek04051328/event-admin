@@ -76,29 +76,5 @@ const series = computed(() => [
   },
 ])
 
-
-// const series = ref([])
-
-// const getData = async () => {
-//   const { data } = await store.profitStatistic()
-//   stat.value = { ...data }
-
-//   let days = data?.income?.map((v, k) => k + 1) || []
-//   options.value.xaxis = {
-//     categories: [...days]
-//   }
-
-//   series.value.push({
-//     name: 'Комиссия',
-//     group: 'profit',
-//     data: stat.value.commission
-//     || []
-//   })
-
-// }
-
-// onMounted(() => {
-//   getData()
-// })
 </script>
 <style lang=""></style>
