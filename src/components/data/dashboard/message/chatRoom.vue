@@ -31,23 +31,23 @@
             <img src="@/assets/images/header-user.svg" alt="">
           </div>
           <div class="min-w-0 flex-auto relative">
-            <p class="text-sm font-semibold leading-6 text-gray-900">
-              <router-link :to="{ name: 'showChat', params: { id: person._id } }" class="cursor-pointer">
-                <span class="absolute inset-x-0 bottom-0" />
+            <router-link :to="{ name: 'showChat', params: { id: person._id } }" class="cursor-pointer">
+              <p class="text-sm font-semibold leading-6 text-gray-900">
+                <!-- <span class="absolute inset-x-0 bottom-0" /> -->
                 {{ person?.userName }}
-              </router-link>
-            </p>
-            <div class="flex items-center h-4 overflow-hidden">
-              <p
+              </p>
+              <div class="flex items-center h-4 overflow-hidden">
+                <p
                 v-if="auth_store.user.id== person?.lastMessage?.sender?._id"
                 class="text-sm mr-1">Вы:</p>
-              <p 
+                <p 
                 class="flex text-xs leading-5 text-gray-500"
                 v-if="person?.lastMessage?.text" 
                 v-html="person?.lastMessage?.text?.replace(/\n/g, '<br>').slice(0,30)"
-              ></p>
-              
-            </div>
+                ></p>
+                
+              </div>
+            </router-link>
           </div>
         </div>
         <div class="flex items-center gap-x-4">

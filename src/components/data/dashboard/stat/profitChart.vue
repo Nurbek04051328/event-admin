@@ -1,5 +1,5 @@
 <template>
-  <div>{{ props.profitChart }}</div>
+  <!-- <div>{{ props.profitChart }}</div> -->
   <div ref="targetProfitRef">
     <div v-if="isIntersecting && series.length" class="p-[16px]  rounded-[26px] shadow-sm bg-white">
       <h3 class="text-[18px] font-bold leading-6 text-[#483D5B] w-full">Статистика по продажам</h3>

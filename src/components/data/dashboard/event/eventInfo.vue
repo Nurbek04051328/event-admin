@@ -287,7 +287,7 @@
               </div>
             </div>
           </div>
-          <div class="border-b-[1px] pb-2">
+          <div class="border-b-[1px] pb-2" v-if="event?.provideAttributes.length > 0">
             <div class="text-xs text-gray-500 2xl:text-[12px]">Опции</div>
             <!-- <pre>{{ event }}</pre> -->
             <div class="text-sm font-medium text-gray-800 mt-1 space-y-2">
@@ -308,7 +308,7 @@
               </div>
             </div>
           </div>
-          <div class="border-b-[1px] pb-2">
+          <div class="border-b-[1px] pb-2" v-if="event?.provide.length>0">
             <div class="text-xs text-gray-500 2xl:text-[12px]">Вождение</div>
             <!-- <pre>{{ event }}</pre> -->
             <div class="text-sm font-medium text-gray-800 mt-1 space-y-2">
