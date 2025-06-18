@@ -9,6 +9,7 @@ const base_url = '/statistic/all-counts'
 export const statisticStore = defineStore('statisticStore', () => {
   const statistic_counts = ref({})
   const loadingStore = useLoadingStore()
+  
   const purchases = reactive({
     purchase: [],
     refound: []

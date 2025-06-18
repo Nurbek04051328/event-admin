@@ -67,26 +67,145 @@ export const links = [
   {
     path: 'transaction',
     name: 'transaction',
-    component: () => import('@/views/dashboard/transaction/indexTransaction.vue'),
+    component: () => import('@/views/dashboard/transaction/indexTransMenu.vue'),
+    redirect: { name: 'transaction-list' },
     meta: {
-      title: 'Транзакция',
+      title: 'Финансы',
       icon: BanknotesIcon,
       toggle: false,
       group: 'main'
-    }
+    },
+    children: [
+      {
+        path: '',
+        name: 'transaction-list',
+        component: () => import('@/views/dashboard/transaction/indexTransaction.vue'),
+        meta: {
+          title: 'Транзакция',
+          toggle: false,
+          group: 'middle',
+          active: 'transaction'
+        }
+      },
+      {
+        path: 'ticketpaskage',
+        name: 'ticketpaskage',
+        component: () => import('@/views/dashboard/tarif/indexTarif.vue'),
+        meta: {
+          title: 'Тарифы',
+          toggle: true,
+          group: 'middle',
+          active: 'transaction'
+        }
+      },
+      {
+        path: 'notification',
+        name: 'notification',
+        component: () => import('@/views/dashboard/notifications/indexNotification.vue'),
+        meta: {
+          title: 'Уведомление',
+          icon: BellIcon,
+          toggle: true,
+          active: 'transaction',
+          group: 'middle',
+        },
+        children: [
+          {
+            path: '',
+            name: 'type-notification',
+            component: () => import('@/views/dashboard/notifications/typeNotification.vue'),
+            meta: {
+              title: 'Тип уведомление',
+              group: 'middle',
+            }
+          },
+          {
+            path: 'packages',
+            name: 'package-notification',
+            component: () => import('@/views/dashboard/notifications/notificationPackages.vue'),
+            meta: {
+              title: 'Пакет уведомление',
+              group: 'middle',
+            }
+          },
+          {
+            path: 'bought',
+            name: 'bought-notification',
+            component: () => import('@/views/dashboard/notifications/boughtNotif.vue'),
+            meta: {
+              title: 'Купленные пакеты',
+              toggle: false,
+              group: 'middle',
+            }
+          }
+        ]
+      },
+      {
+        path: 'tax',
+        name: 'tax',
+        component: () => import('@/views/dashboard/settings/indexNalog.vue'),
+        meta: {
+          title: 'Налог',
+          toggle: true,
+          group: 'middle',
+          toggleTitle: 'Новый налог',
+          active: 'transaction'
+        }
+      },
+      {
+        path: 'refound',
+        name: 'refound',
+        component: () => import('@/views/dashboard/settings/indexRefound.vue'),
+        meta: {
+          title: 'Политика возврата',
+          toggle: true,
+          group: 'middle',
+          toggleTitle: 'Новый',
+          active: 'transaction'
+        }
+      },
+      {
+        path: 'sales',
+        name: 'sales',
+        component: () => import('@/views/dashboard/transaction/indexSalexTicket.vue'),
+        meta: {
+          title: 'Продажи',
+          toggle: false,
+          group: 'middle',
+          active: 'transaction'
+        }
+      },
+      // {
+      //   path: 'packages',
+      //   name: 'package-notification',
+      //   component: () => import('@/views/dashboard/notifications/notificationPackages.vue'),
+      //   meta: {
+      //     title: 'Пакет уведомление'
+      //   }
+      // },
+      // {
+      //   path: 'bought',
+      //   name: 'bought-notification',
+      //   component: () => import('@/views/dashboard/notifications/boughtNotif.vue'),
+      //   meta: {
+      //     title: 'Купленные пакеты',
+      //     toggle: false,
+      //   }
+      // }
+    ]
   },
-  {
-    path: 'ticket-paskage',
-    name: 'ticketpaskage',
-    component: () => import('@/views/dashboard/tarif/indexTarif.vue'),
-    meta: {
-      icon: SwatchIcon,
-      title: 'Тарифы',
-      toggle: true,
-      group: 'main',
-      toggleTitle: 'Добавить тариф'
-    }
-  },
+  // {
+  //   path: 'ticket-paskage',
+  //   name: 'ticketpaskage',
+  //   component: () => import('@/views/dashboard/tarif/indexTarif.vue'),
+  //   meta: {
+  //     icon: SwatchIcon,
+  //     title: 'Тарифы',
+  //     toggle: true,
+  //     group: 'main',
+  //     toggleTitle: 'Добавить тариф'
+  //   }
+  // },
   {
     path: 'ticket',
     name: 'ticket',
@@ -178,44 +297,44 @@ export const links = [
       }
     ]
   },
-  {
-    path: 'notification',
-    name: 'notification',
-    component: () => import('@/views/dashboard/notifications/indexNotification.vue'),
-    meta: {
-      title: 'Уведомление',
-      icon: BellIcon,
-      toggle: true,
-      group: 'header'
-    },
-    children: [
-      {
-        path: '',
-        name: 'type-notification',
-        component: () => import('@/views/dashboard/notifications/typeNotification.vue'),
-        meta: {
-          title: 'Тип уведомление'
-        }
-      },
-      {
-        path: 'packages',
-        name: 'package-notification',
-        component: () => import('@/views/dashboard/notifications/notificationPackages.vue'),
-        meta: {
-          title: 'Пакет уведомление'
-        }
-      },
-      {
-        path: 'bought',
-        name: 'bought-notification',
-        component: () => import('@/views/dashboard/notifications/boughtNotif.vue'),
-        meta: {
-          title: 'Купленные пакеты',
-          toggle: false,
-        }
-      }
-    ]
-  },
+  // {
+  //   path: 'notification',
+  //   name: 'notification',
+  //   component: () => import('@/views/dashboard/notifications/indexNotification.vue'),
+  //   meta: {
+  //     title: 'Уведомление',
+  //     icon: BellIcon,
+  //     toggle: true,
+  //     group: 'header'
+  //   },
+  //   children: [
+  //     {
+  //       path: '',
+  //       name: 'type-notification',
+  //       component: () => import('@/views/dashboard/notifications/typeNotification.vue'),
+  //       meta: {
+  //         title: 'Тип уведомление'
+  //       }
+  //     },
+  //     {
+  //       path: 'packages',
+  //       name: 'package-notification',
+  //       component: () => import('@/views/dashboard/notifications/notificationPackages.vue'),
+  //       meta: {
+  //         title: 'Пакет уведомление'
+  //       }
+  //     },
+  //     {
+  //       path: 'bought',
+  //       name: 'bought-notification',
+  //       component: () => import('@/views/dashboard/notifications/boughtNotif.vue'),
+  //       meta: {
+  //         title: 'Купленные пакеты',
+  //         toggle: false,
+  //       }
+  //     }
+  //   ]
+  // },
   {
     path: 'logs',
     name: 'logs',

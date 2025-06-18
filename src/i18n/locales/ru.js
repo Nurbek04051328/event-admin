@@ -16,7 +16,7 @@ const ruLang = {
     eventDetail: 'Детали мероприятия',
     messages: 'Чат',
     logs: 'Журналы',
-    transaction: 'Транзакция',
+    transaction: 'Финансы',
     ads: 'Рекламы',
     notification: 'Уведомление',
     newsCategory: 'Категория новостей',

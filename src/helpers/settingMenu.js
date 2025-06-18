@@ -51,28 +51,28 @@ export const settingMenu = [
       toggleTitle: 'Yangi Sahifa'
     }
   },
-  {
-    path: 'tax',
-    name: 'tax',
-    component: () => import('@/views/dashboard/settings/indexNalog.vue'),
-    meta: {
-      title: 'Настройки/Налог',
-      toggle: true,
-      group: 'setting',
-      toggleTitle: 'Новый налог'
-    }
-  },
-  {
-    path: 'refound',
-    name: 'refound',
-    component: () => import('@/views/dashboard/settings/indexRefound.vue'),
-    meta: {
-      title: 'Настройки/Политика возврата',
-      toggle: true,
-      group: 'setting',
-      toggleTitle: 'Новый'
-    }
-  },
+  // {
+  //   path: 'tax',
+  //   name: 'tax',
+  //   component: () => import('@/views/dashboard/settings/indexNalog.vue'),
+  //   meta: {
+  //     title: 'Настройки/Налог',
+  //     toggle: true,
+  //     group: 'setting',
+  //     toggleTitle: 'Новый налог'
+  //   }
+  // },
+  // {
+  //   path: 'refound',
+  //   name: 'refound',
+  //   component: () => import('@/views/dashboard/settings/indexRefound.vue'),
+  //   meta: {
+  //     title: 'Настройки/Политика возврата',
+  //     toggle: true,
+  //     group: 'setting',
+  //     toggleTitle: 'Новый'
+  //   }
+  // },
   {
     path: 'regions',
     name: 'regions',

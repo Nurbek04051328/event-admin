@@ -6,12 +6,12 @@
       <div class="col-span-12">
         <allStat :count="statistic_counts" />
       </div>
-      <div class="overflow-hidden col-span-6 lg:col-span-12">
+      <!-- <div class="overflow-hidden col-span-6 lg:col-span-12">
         <DepositStat  :deposits="deposits"/>
-      </div>
-      <div class="overflow-hidden col-span-6 lg:col-span-12">
+      </div> -->
+      <!-- <div class="overflow-hidden col-span-6 lg:col-span-12">
         <PurchaseStat :purchases="purchases"/>
-      </div>
+      </div> -->
       <div class="overflow-hidden col-span-4 md-max:col-span-12">
         <UserStat
           
@@ -37,12 +37,12 @@
       <div v-if="ready" class="overflow-hidden col-span-12 lg:col-span-12">
         <EventChart :eventChart="eventChart" />
       </div>
-      <div v-if="ready" class="overflow-hidden col-span-6 lg:col-span-12">
+      <!-- <div v-if="ready" class="overflow-hidden col-span-6 lg:col-span-12">
         <ProfitChart :profitChart="profComissionChart?.income"/>
       </div>
       <div v-if="ready" class="overflow-hidden col-span-6 lg:col-span-12">
         <CommistionChart :comissionChart="profComissionChart?.commission" />
-      </div>
+      </div> -->
       <div v-if="ready" class="overflow-hidden col-span-6 lg:col-span-12">
         <UserChart />
       </div>
@@ -63,13 +63,13 @@
   // import OrganizerStat from './stat/organizerStat.vue'
   import EventStat from './stat/eventStat.vue'
   import EventChart from './stat/eventChart.vue'
-  import ProfitChart from './stat/profitChart.vue'
-  import CommistionChart from './stat/commistionChart.vue'
   import UserChart from './stat/userChart.vue'
   import OrganizerChart from './stat/organizerChart.vue'
   import UserStat from './stat/userStat.vue'
-  import DepositStat from './stat/depositChart.vue'
-  import PurchaseStat from './stat/purchaseChart.vue'
+  // import ProfitChart from './stat/profitChart.vue'
+  // import CommistionChart from './stat/commistionChart.vue'
+  // import DepositStat from './stat/depositChart.vue'
+  // import PurchaseStat from './stat/purchaseChart.vue'
   import LoadingSpinner from '@/components/default/loadingSpinner.vue'
 
   // Store import
@@ -77,7 +77,7 @@
   import { statisticStore } from '@/stores/data/statistic'
   const store = statisticStore()
   const loadingStore = useLoadingStore()
-  const { statistic_counts, deposits, purchases, eventChart, profComissionChart } = storeToRefs(store)
+  const { statistic_counts, purchases, eventChart } = storeToRefs(store)
 
   const ready = ref(false)
 // import { statisticStore } from '@/stores/data/statistic'
@@ -86,9 +86,9 @@
   onMounted(async () => {
     await Promise.all([
       store.getStatistics(),
-      store.allDeposit(),
       store.ticketStatistic(),
-      store.profitStatistic()
+      // store.allDeposit(),
+      // store.profitStatistic()
     ])
     ready.value = true
   })

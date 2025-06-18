@@ -81,7 +81,7 @@
       </div>
 
       <div class="flex items-center gap-x-3 h-full">
-        <div 
+        <!-- <div 
           class="flex items-center justify-center h-full bg-white rounded-2xl cursor-pointer hover:bg-[#F3EBFC] lg:hidden"
           >
           <router-link
@@ -96,7 +96,7 @@
           >
             <BellIcon class="h-7 w-7 shrink-0 text-[#9E55EC]" aria-hidden="true" />
           </router-link>
-        </div>
+        </div> -->
         <div class="flex items-center justify-center h-full bg-white rounded-2xl cursor-pointer hover:bg-[#F3EBFC] lg:hidden">
           <router-link
             :to="{ name: 'activationkeys' }"
@@ -144,8 +144,6 @@
               route.name == 'atribut' ? 'bg-[#F3EBFC] rounded-2xl' :
               route.name == 'social' ? 'bg-[#F3EBFC] rounded-2xl' :
               route.name == 'page' ? 'bg-[#F3EBFC] rounded-2xl' :
-              route.name == 'tax' ? 'bg-[#F3EBFC] rounded-2xl' :
-              route.name == 'refound' ? 'bg-[#F3EBFC] rounded-2xl' :
               route.name == 'regions' ? 'bg-[#F3EBFC] rounded-2xl' :
               ''
             "

@@ -23,7 +23,9 @@
           <h2
             class="leading-7 text-[#645A77] md:text-[20px]"
             :class="
-              route?.meta?.group == 'setting' ? 'text-[16px] font-medium' : 'text-[22px] font-bold'
+              route?.meta?.group == 'setting' ? 'text-[16px] font-medium' :
+              route?.meta?.group == 'middle' ? 'text-[18px] font-medium' :
+              'text-[22px] font-bold'
             "
           >
             {{ title || route.meta?.title || '' }}
