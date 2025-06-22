@@ -24,8 +24,10 @@
 
 
   onMounted(async () => {
-    await store.allDeposit()
-    await store.profitStatistic()
+    await Promise.all([
+      await store.allDeposit(),
+      await store.profitStatistic()
+    ])
   })
 </script>
 <style lang=""></style>

@@ -22,8 +22,8 @@ export default {
       },
       screens: {
         xs: { max: '320px' }, // 320px yoki undan kichik
-        xm: { max: '500px' }, // 375px – 425px oralig'i
-        sm: { max: '640px' }, // 425px – 640px oralig'i
+        xm: { max: '500px' }, // 375px – 500px oralig'i
+        sm: { max: '640px' }, // 500px – 640px oralig'i
         md: { max: '768px' }, // 640px – 768px oralig'i
         lg: { max: '1024px' }, // 768px – 1024px oralig'i
         xl: { max: '1280px' }, // 1024px – 1280px oralig'i

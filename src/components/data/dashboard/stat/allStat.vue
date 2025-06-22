@@ -1,6 +1,6 @@
 <template>
   <!-- <h3 class="text-base font-semibold leading-6 w-full">{{ $t('home.title') }}</h3> -->
-  <div class="mt-2 grid grid-cols-4 gap-3 sm:grid-cols-3 xs-max:grid-cols-2">
+  <div class="mt-2 grid grid-cols-4 gap-3 md:grid-cols-2 xm:grid-cols-1">
     <blackStat
       title="Сотрудники"
       :icon="UsersIcon"

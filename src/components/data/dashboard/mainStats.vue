@@ -12,7 +12,7 @@
       <!-- <div class="overflow-hidden col-span-6 lg:col-span-12">
         <PurchaseStat :purchases="purchases"/>
       </div> -->
-      <div class="overflow-hidden col-span-4 md-max:col-span-12">
+      <div class="overflow-hidden col-span-4 md:col-span-6 xm:col-span-12">
         <UserStat
           
           :count="store.statistic_counts?.user || {}"
@@ -20,7 +20,7 @@
           title="Пользователи"
         />
       </div>
-      <div class="overflow-hidden col-span-4 md-max:col-span-12">
+      <div class="overflow-hidden col-span-4 md:col-span-6 xm:col-span-12">
         <UserStat
           
           :count="store.statistic_counts?.organizer || {}"
@@ -28,13 +28,13 @@
           title="Организаторы"
         />
       </div>
-      <div class="overflow-hidden col-span-4 md-max:col-span-12">
+      <div class="overflow-hidden col-span-4 md:col-span-12">
         <KeyStat :count="statistic_counts.activationKeys" />
       </div>
-      <div v-if="ready" class="overflow-hidden col-span-12 lg:col-span-12">
+      <div class="overflow-hidden col-span-12 lg:col-span-12">
         <EventStat :e="statistic_counts?.event" />
       </div>
-      <div v-if="ready" class="overflow-hidden col-span-12 lg:col-span-12">
+      <div class="overflow-hidden col-span-12 lg:col-span-12">
         <EventChart :eventChart="eventChart" />
       </div>
       <!-- <div v-if="ready" class="overflow-hidden col-span-6 lg:col-span-12">
@@ -43,10 +43,10 @@
       <div v-if="ready" class="overflow-hidden col-span-6 lg:col-span-12">
         <CommistionChart :comissionChart="profComissionChart?.commission" />
       </div> -->
-      <div v-if="ready" class="overflow-hidden col-span-6 lg:col-span-12">
+      <div class="overflow-hidden col-span-6 lg:col-span-12">
         <UserChart />
       </div>
-      <div v-if="ready" class="overflow-hidden col-span-6 lg:col-span-12">
+      <div class="overflow-hidden col-span-6 lg:col-span-12">
         <OrganizerChart />
       </div>
     </div>
@@ -54,7 +54,7 @@
 </template>
 <script setup>
 // Paketlar import
-  import { onMounted, ref } from 'vue'
+  import { onMounted } from 'vue'
   import { storeToRefs } from 'pinia'
 
   // Componenta import
@@ -77,9 +77,8 @@
   import { statisticStore } from '@/stores/data/statistic'
   const store = statisticStore()
   const loadingStore = useLoadingStore()
-  const { statistic_counts, purchases, eventChart } = storeToRefs(store)
+  const { statistic_counts, eventChart } = storeToRefs(store)
 
-  const ready = ref(false)
 // import { statisticStore } from '@/stores/data/statistic'
 // const statistic_store = statisticStore()
 
@@ -90,7 +89,6 @@
       // store.allDeposit(),
       // store.profitStatistic()
     ])
-    ready.value = true
   })
 
 </script>

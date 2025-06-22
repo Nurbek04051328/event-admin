@@ -21,10 +21,10 @@
           </td>
           <td class="td" width="800">
             <div v-if="isImageUrl(item.url)">
-              <a :href="item.url" target="_blank" class="text-blue-600 underline">{{ removeQueryParams(item.url) }}</a>
+              <a :href="`${url}${item.url}`" target="_blank" class="text-blue-600 underline">{{ removeQueryParams(item.url) }}</a>
             </div>
             <div v-else>
-              {{ removeQueryParams(item.url) }}
+              {{ convertUrlToText(item) }}
             </div>
           </td>
           <td class="td">
@@ -116,58 +116,50 @@ function isImageUrl(url) {
 
 
 
-// const methodClass = {
-//   GET: 'text-blue-700',
-//   POST: 'text-green-700',
-//   PATCH: 'text-amber-700',
-//   DELETE: 'text-red-700',
-//   PUT: 'text-yellow-700',
-// }
+const methodClass = {
+  GET: 'text-blue-700',
+  POST: 'text-green-700',
+  PATCH: 'text-amber-700',
+  DELETE: 'text-red-700',
+  PUT: 'text-yellow-700',
+}
 
-// const linkTitles = {
-//   GET: {
-//     '/api/logger': 'Logger sahifasiga kirdi',
-//     '/api/student/upload': 'Fayl yukladi',
-//     '/api/user/show': 'Foydalanuvchi sahifasini ko`rdi',
-//     '/api/student/show': 'Abiturient arizasini ko`rdi',
-//     '/api/statistics/usergroup': 'Guruh statistikasini',
-//     '/api/user/get-users': 'Foydalanuvchilar sahifasini ko`rdi',
-//     '/api/education-view': 'Ta`lum turi sahifasida bo`ldi',
-//     '/api/report': 'Shartnomalar sahifasida bo`ldi',
-//     '/api/student': 'Abiturientlar sahifasida bo`ldi',
-//     '/api/statistics/studentstatus': 'Arizalar holati bo`yicha statistikani ko`rdi',
-//     '/api/voucher/all': 'Voucher sahifasida bo`ldi',
-//     '/api/offExam': 'Imtihonlar sahifasida bo`ldi',
-//     '/api/voucher/check': 'Voucherni tekshirildi',
-//     '/api/voucher/generate': 'Voucher generatsiya qildi',
-//     '/api/message/all': 'SMSlar sahifasida bo`ldi',
-//     '/api/statistics/report': 'Shartnomalar statistikasi sahifasida bo`ldi',
-//     '/api/statistics/daily': 'Kunlik statistika sahifada bo`ldi',
-//   },
-//   POST: {
-//     '/api/report/generate': 'Shartnoma generatsiya qildi',
-//     '/api/student': 'Yangi hujjat qo`shdi',
-//   },
-//   PUT: {
-//     '/api/student': 'Abiturient ma`lumot o`zgartirdi',
-//   },
-//   PATCH: {
-//     '/api/student/': 'Hujjat holatini o`zgartirdi',
-//   },
-// }
+const linkTitles = {
+  GET: {
+    '/logger/logs': 'Перешёл на страницу журнала',
+    '/auth/verify': 'Прошёл проверку',
+    '/api/user-ticket': 'Перешёл на страницу список билетов',
+    '/api/organizer-event': 'Перешёл на страницу список мероприятий',
+    '/api/post': 'Перешёл на страницу список постов',
+    '/api/followings': 'Перешёл на страницу список подписчиков и подписок пользователя',
+    '/api/user/user-info': 'Перешёл на страницу получить информацию о пользователе',
+    '/api/user-event/all-events': 'Перешёл на страницу список мероприятий',
+    '/api/user-event/top-events': 'Перешёл на страницу топ мероприятий',
+    '/api/default/all-categories': 'Перешёл на страницу категорий',
+  },
+  POST: {
+    '/api/report/generate': 'Shartnoma generatsiya qildi',
+    '/api/student': 'Yangi hujjat qo`shdi',
+  },
+  PUT: {
+    '/api/student': 'Abiturient ma`lumot o`zgartirdi',
+  },
+  PATCH: {
+    '/api/student/': 'Hujjat holatini o`zgartirdi',
+  },
+}
 
-// const convertUrlToText = (obj) => {
-//   for (let key in linkTitles[obj.method]) {
-//     if (obj.url.startsWith(key)) {
-//       if (key == '/api/student/show')
-//         return `${obj?.student?.secondName} ${obj?.student?.name} ${obj?.student?.thirdName} arizasini ko'rdi`
-//       if (key == '/api/student/' && obj.method == 'PATCH')
-//         return `Hujjat holatini "${studentStatus[obj?.body?.status]?.title}"ga o'zgartirdi`
-
-//       return linkTitles[obj.method][key]
-//     }
-//   }
-// }
+const convertUrlToText = (obj) => {
+  obj.url = obj.url.split('?')[0]
+  for (let key in linkTitles[obj.method]) {
+    if (obj.url.startsWith(key)) {
+      return linkTitles[obj.method][key]
+    }
+    else {
+      return obj.url
+    }
+  }
+}
 
 
 </script>

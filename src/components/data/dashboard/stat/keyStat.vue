@@ -4,15 +4,15 @@
       <div class="text-[#817295] text-[18px] mt-[10px] w-full space-y-2">
         <router-link
           :to="{ name: 'activationkeys' }"
-          class="text-[#483D5B] font-bold text-[20px] relative cursor-pointer"
+          class="text-[#483D5B] font-bold text-[20px] relative cursor-pointer lg:text-[16px]"
         >
           Активационные ключи
         </router-link>
         <div class="flex items-center gap-4">
-          <div class="w-[47px] h-[47px] bg-[#F3EBFC] rounded-full flex justify-center items-center">
-            <component :is="KeyIcon" class="size-7 text-[#892EEB]" aria-hidden="true" />
+          <div class="w-[47px] h-[47px] bg-[#F3EBFC] rounded-full flex justify-center items-center lg:h-[30px] lg:w-[30px]">
+            <component :is="KeyIcon" class="size-7 text-[#892EEB] lg:size-5" aria-hidden="true" />
           </div>
-          <div class="text-[#483D5B] text-[24px] font-bold">
+          <div class="text-[#483D5B] text-[24px] font-bold lg:text-[16px]">
             {{ count?.count || 0 }}
           </div>
         </div>
@@ -24,10 +24,10 @@
             class="py-2 flex items-center justify-between"
           >
             <div class="flex items-center gap-2">
-              <div :class="['w-3 h-3 rounded-full', `${item.bg}`]"></div>
+              <div :class="['w-3 h-3 rounded-full lg:w-2 lg:h-2', `${item.bg}`]"></div>
               <div>{{ item.title }}</div>
             </div>
-            <div class="text-[#483D5B] text-[20px] font-bold">{{ item.value }}</div>
+            <div class="text-[#483D5B] text-[20px] font-bold lg:text-[16px]">{{ item.value }}</div>
           </router-link>
         </div>
       </div>

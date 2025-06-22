@@ -67,6 +67,9 @@
       socket.on("message-viewed", (id) => {
         message_store.viewMessage(id)
       });
+      // socket.on("message-viewed", (id) => {
+      //   message_store.viewMessage(id)
+      // });
     } 
   })
 
