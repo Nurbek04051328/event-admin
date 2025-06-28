@@ -29,6 +29,9 @@ const uz = {
     social: 'Ijtimoiy tarmoqlar',
     page: "Sahifa",
     tax: 'Soliq',
+    refound: 'Qaytarish siyosati',
+    regions: 'Hududlar',
+    answerQuestion: 'Savollarga javoblar'
   },
   home: {
     title: 'Umumiy hisobot',

@@ -7,6 +7,8 @@ import router from '@/router'
 const base_url = '/post'
 
 export const postStore = defineStore('postStore', () => {
+  const notification = useNotification()
+
   const posts = reactive({
     data: [],
     count: 0
@@ -23,8 +25,8 @@ export const postStore = defineStore('postStore', () => {
     data: [],
     count: 0
   })
-  const notification = useNotification()
 
+  
   const getPosts = async (params) => {
     try {
       const { data } = await api.get(base_url, { params })
@@ -36,6 +38,12 @@ export const postStore = defineStore('postStore', () => {
     }
   }
 
+  const getNewSocket = async (obj) => {
+    // let { data } = await api.get(`api${base_url}/get-post-info/${id}`)
+    posts.data = [obj, ...posts.data]
+    notification.setNotif(true, 'Добавлено новое Пост', 'success')
+  }
+
   const addPost = async (n, ) => {
     const { data } = await api.post(`api${base_url}`, n)
     posts.data = [data, ...posts.data]
@@ -44,8 +52,6 @@ export const postStore = defineStore('postStore', () => {
   }
 
   const savePost = async (post) => {
-    console.log("postput",post);
-    
     const { data } = await api.put(`api${base_url}`, post)
     posts.data = posts.data.map((pay) => {
       if (pay._id == data._id) return data
@@ -76,21 +82,22 @@ export const postStore = defineStore('postStore', () => {
   const getPost = async (id) => {
     try {
       let { data } = await api.get(`api${base_url}/${id}`)
-      console.log("storkega keldi",data)
+            console.log('getPost', data);
       return data
     } catch (error) {
       notification.setNotif(true, error?.response?.data?.message, 'error')
     }
   }
+
   const getInfoPost = async (id) => {
     try {
       let { data } = await api.get(`api${base_url}/get-post-info/${id}`)
-      console.log("info",data)
       return data
     } catch (error) {
       notification.setNotif(true, error?.response?.data?.message, 'error')
     }
   }
+
   const getViewPost = async (id, params) => {
     try {
       let { data } = await api.get(`api${base_url}/get-post-views/${id}`,{ params })
@@ -100,6 +107,7 @@ export const postStore = defineStore('postStore', () => {
       notification.setNotif(true, error?.response?.data?.message, 'error')
     }
   }
+
   const getLikePost = async (id, params) => {
     try {
       let { data } = await api.get(`api${base_url}/get-post-likes/${id}`, { params })
@@ -109,10 +117,10 @@ export const postStore = defineStore('postStore', () => {
       notification.setNotif(true, error?.response?.data?.message, 'error')
     }
   }
+
   const getCommentsPosts = async (id, params) => {
     try {
       const { data } = await api.get(`api${base_url}/get-post-comments/${id}`, { params })
-      console.log('postdata', data)
       comments.data = [...data.comments]
       comments.count = data.count
     } catch (error) {
@@ -134,6 +142,7 @@ export const postStore = defineStore('postStore', () => {
     likes,
     getCommentsPosts,
     comments,
+    getNewSocket
   }
 })
 

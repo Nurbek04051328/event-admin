@@ -30,6 +30,9 @@ const enLang = {
     social: 'Social media',
     page: 'Page',
     tax: 'Tax',
+    refound: 'Refund policy',
+    regions: 'Regions',
+    answerQuestion: 'Answer questions'
   },
   home: {
     title: 'General report',

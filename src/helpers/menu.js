@@ -256,13 +256,56 @@ export const links = [
     path: 'posts',
     name: 'posts',
     component: () => import('@/views/dashboard/post/indexPost.vue'),
+    redirect: { name: 'active-posts' },
     meta: {
       title: 'Посты',
       icon: PhotoIcon,
       group: 'main',
       toggleTitle: 'Добавить пост',
       linkName: 'postAdd',
-    }
+    },
+    children: [
+      {
+        path: 'active',
+        name: 'active-posts',
+        component: () => import('@/components/data/dashboard/post/table/postActiveTable.vue'),
+        meta: {
+          title: 'Посты',
+          linkName: 'postAdd',
+          active: 'posts'
+        }
+      },
+      {
+        path: 'pending',
+        name: 'pending-posts',
+        component: () => import('@/components/data/dashboard/post/table/postPendingTable.vue'),
+        meta: {
+          title: 'Посты',
+          linkName: 'postAdd',
+          active: 'posts'
+        }
+      },
+      {
+        path: 'denied',
+        name: 'denied-posts',
+        component: () => import('@/components/data/dashboard/post/table/postDeniedTable.vue'),
+        meta: {
+          title: 'Посты',
+          linkName: 'postAdd',
+          active: 'posts'
+        }
+      },
+      {
+        path: 'deleted',
+        name: 'deleted-posts',
+        component: () => import('@/components/data/dashboard/post/table/postDeletedTable.vue'),
+        meta: {
+          title: 'Посты',
+          linkName: 'postAdd',
+          active: 'posts'
+        }
+      }
+    ]
   },
   {
     path: 'activation-keys',

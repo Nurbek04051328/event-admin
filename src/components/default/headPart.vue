@@ -2,6 +2,7 @@
   <div class="pb-3 px-4 pt-3">
     <div class="flex items-center justify-between">
       <div class="min-w-0 gap-3 flex items-center">
+        {{ backLink }}
         <button v-if="backLink" @click="router.push({ name: backLink })">
           <ChevronLeftIcon
             class="w-[30px] h-[30px] rounded-full bg-[#F5F0FF] flex justify-center items-center hover:bg-[#9E55EC] hover:text-white"
@@ -47,7 +48,7 @@
           </div>
         </div>
         <button
-          v-if="route?.meta?.toggle"
+          v-if="route.meta?.toggle"
           @click="openModal"
           type="button"
           class="bg-[#E9DCFF] text-[#360B64] hover:bg-[#9E55EC] hover:text-white p-1 rounded-lg"
@@ -55,8 +56,8 @@
           <PlusIcon class="size-5 text-white-400 md:size-3" />
         </button>
         <button
-          v-if="route?.meta?.linkName"
-          @click="$router.push({ name: route?.meta?.linkName })"
+          v-if="route.meta?.linkName"
+          @click="$router.push({ name: route.meta?.linkName })"
           type="button"
           class="bg-[#E9DCFF] text-[#360B64] hover:bg-[#9E55EC] hover:text-white p-1 rounded-lg"
         >

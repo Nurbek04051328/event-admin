@@ -145,6 +145,9 @@
               route.name == 'social' ? 'bg-[#F3EBFC] rounded-2xl' :
               route.name == 'page' ? 'bg-[#F3EBFC] rounded-2xl' :
               route.name == 'regions' ? 'bg-[#F3EBFC] rounded-2xl' :
+              route.name == 'answerQuestion' ? 'bg-[#F3EBFC] rounded-2xl' :
+              route.name == 'pageAdd' ? 'bg-[#F3EBFC] rounded-2xl' :
+              route.name == 'pageEdit' ? 'bg-[#F3EBFC] rounded-2xl' :
               ''
             "
             >

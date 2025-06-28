@@ -18,7 +18,7 @@
       placeholder="Выберите мероприятия"
       @change="findMe"
     />
-    <filterSelect
+    <!-- <filterSelect
       v-model="search.status"
       name="status"
       :options="postStatus || []"
@@ -26,7 +26,7 @@
       :class="['w-full z-[99]'] "
       placeholder="Выберите статус"
       @change="findMe"
-    />
+    /> -->
     <button class="bg-[#FFECD9] text-[#FF7E00] hover:bg-[#FF7E00] hover:text-white rounded-lg w-auto p-2" @click="clear">
       <XMarkIcon class="size-5" />
     </button>

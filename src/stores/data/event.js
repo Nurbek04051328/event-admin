@@ -70,6 +70,7 @@ export const eventStore = defineStore('eventStore', () => {
     events.value = [data, ...events.value]
     notification.setNotif(true, 'Добавлено новое Мероприятие', 'success')
   }
+  
   const getUpdateSocket = async (id) => {
     let { data } = await api.get(`${base_url}/${id}`)
     events.value = events.value.map((e) => {

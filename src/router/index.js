@@ -1,7 +1,8 @@
 import { links } from '@/helpers/menu'
 import { createRouter, createWebHistory } from 'vue-router'
 import { useBreadcrumbStore } from '@/stores/data/breadcrump';
-
+import { authStore } from '@/stores/user/auth'
+import { detailMenu } from '@/helpers/detailMenu'
 
 const routes = [
   {
@@ -38,8 +39,7 @@ const router = createRouter({
   routes
 })
 
-import { authStore } from '@/stores/user/auth'
-import { detailMenu } from '@/helpers/detailMenu'
+
 router.beforeEach(async (to, from, next) => {
   const auth_store = authStore()
   const breadcrumbStore = useBreadcrumbStore();

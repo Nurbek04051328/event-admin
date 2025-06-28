@@ -12,11 +12,13 @@
   import { organizerStore } from '@/stores/user/organizer';
   import { activationStore } from '@/stores/data/activation';
   import { messageStore } from '@/stores/data/message'
+  import { postStore } from '@/stores/data/post'
 
   const event_store = eventStore();
   const organization_store = organizerStore();
   const activation_store = activationStore();
   const message_store = messageStore();
+  const post_store = postStore();
 
 
   import { useRoute } from 'vue-router';
@@ -67,9 +69,14 @@
       socket.on("message-viewed", (id) => {
         message_store.viewMessage(id)
       });
-      // socket.on("message-viewed", (id) => {
-      //   message_store.viewMessage(id)
-      // });
+      socket.on("newPost", async(obj) => {
+        console.log("newPost", obj );
+        await post_store.getNewSocket(obj)
+      });
+      socket.on("post-status", (obj) => {
+        console.log("post-status", obj );
+        
+      });
     } 
   })
 

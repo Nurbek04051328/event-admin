@@ -352,7 +352,7 @@ export const postStatus = [
   },
   {
     _id: 'denied',
-    title: 'Удалено',
+    title: 'Отказано',
     class: 'bg-red-500'
   }
 ]

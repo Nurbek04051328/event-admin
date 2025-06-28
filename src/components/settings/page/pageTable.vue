@@ -44,7 +44,7 @@
           <td class="td md-max:text-[13px]">
             <div class="flex items-start gap-2">
               <button
-                @click="edit(item?._id, lang.slug)"
+                @click="$router.push({ name: 'pageEdit', params: { id: item?._id, lang: lang.slug } })"
                 :class="`${
                   item?.translates?.some((tr) => tr.language == lang.slug)
                     ? 'bg-[#DCF7DD] text-[#119A21] hover:bg-[#119A21] hover:text-white rounded-lg flex items-center justify-center size-9 lg:size-8'

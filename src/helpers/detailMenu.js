@@ -286,6 +286,7 @@ export const detailMenu = [
       }
     ]
   },
+  
   // NotifBoughtUser
   {
     path: 'notification/bought/:id',

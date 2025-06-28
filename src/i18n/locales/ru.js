@@ -32,7 +32,8 @@ const ruLang = {
     page: 'Страница',
     tax: 'Налог',
     refound: 'Политика возврата',
-    regions: 'Регионы'
+    regions: 'Регионы',
+    answerQuestion: 'Ответы на вопросы',
   },
   home: {
     title: 'Общий отчет',

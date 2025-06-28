@@ -35,4 +35,26 @@ export const settingChildren = [
       back: true
     }
   },
+
+   // Page
+  {
+    path: 'page/add',
+    name: 'pageAdd',
+    component: () => import('@/components/settings/page/pageAdd.vue'),
+    meta: {
+      title: 'Добавить страницу',
+      active: 'page',
+      group: 'setting',
+    }
+  },
+  {
+    path: 'page/edit/:id/:lang',
+    name: 'pageEdit',
+    component: () => import('@/components/settings/page/pageEdit.vue'),
+    meta: {
+      title: 'Редактировать страницу',
+      group: 'setting',
+      active: 'page',
+    }
+  },
 ]

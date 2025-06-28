@@ -42,6 +42,9 @@
         id: `vuechart-eventChart-${Math.random().toString(36).substring(2, 8)}`,
         type: 'area',
         height: chartHeight.value,
+        toolbar: {
+          show: window.innerWidth > 768, // faqat desktopda ko‘rsatadi
+        },
       },
       xaxis: {
         categories: props?.eventChart?.denied?.map((v, k) => k + 1)
@@ -50,7 +53,34 @@
       legend: {
         position: 'top',
         horizontalAlign: 'left'
-      }
+      },
+      dataLabels: {
+        enabled: false
+      },
+      responsive: [
+        {
+          breakpoint: 768,
+          options: {
+            xaxis: {
+              labels: {
+                style: {
+                  fontSize: '8px',
+                }
+              }
+            },
+            yaxis: {
+              labels: {
+                style: {
+                  fontSize: '8px',
+                }
+              }
+            },
+            legend: {
+              fontSize: '10px'
+            }
+          }
+        }
+      ]
     }
   })
   

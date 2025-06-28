@@ -15,6 +15,7 @@
             'ring-red-300  focus:ring-2 focus:ring-inset focus:ring-red-500': error
           }
         ]"
+        @keyup.enter="$emit('enter')"
       />
     </div>
     <span v-if="error">
@@ -26,6 +27,7 @@
 import { vMaska } from 'maska/vue'
 const model = defineModel()
 defineProps(['label', 'placeholder', 'name', 'maska', 'enter', 'error', 'disabled', 'suffix', 'customClass'])
+defineEmits(['enter'])
 const phoneMask = '+998 (##) ###-##-##'
 </script>
 <style lang=""></style>

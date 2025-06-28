@@ -46,12 +46,34 @@ export const settingMenu = [
     component: () => import('@/views/dashboard/settings/indexPage.vue'),
     meta: {
       title: 'Настройки/Страница',
-      toggle: true,
+      linkName: 'pageAdd',
       group: 'setting',
       toggleTitle: 'Yangi Sahifa'
     }
   },
-  // {
+  {
+    path: 'regions',
+    name: 'regions',
+    component: () => import('@/views/dashboard/settings/regions.vue'),
+    meta: {
+      title: 'Настройки/Регионы',
+      toggle: true,
+      group: 'setting',
+      toggleTitle: 'Новый'
+    }
+  },
+  {
+    path: 'answer-question',
+    name: 'answerQuestion',
+    component: () => import('@/views/dashboard/settings/indexAnswerQuestion.vue'),
+    meta: {
+      title: 'Настройки/Ответы на вопросы',
+      toggle: true,
+      group: 'setting',
+      toggleTitle: 'Yangi savol',
+    }
+  },
+   // {
   //   path: 'tax',
   //   name: 'tax',
   //   component: () => import('@/views/dashboard/settings/indexNalog.vue'),
@@ -73,15 +95,4 @@ export const settingMenu = [
   //     toggleTitle: 'Новый'
   //   }
   // },
-  {
-    path: 'regions',
-    name: 'regions',
-    component: () => import('@/views/dashboard/settings/regions.vue'),
-    meta: {
-      title: 'Настройки/Регионы',
-      toggle: true,
-      group: 'setting',
-      toggleTitle: 'Новый'
-    }
-  }
 ]

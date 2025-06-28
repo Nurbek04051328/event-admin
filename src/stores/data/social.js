@@ -51,6 +51,19 @@ export const socialStore = defineStore('socialStore', () => {
     return await api.get(`${base_url}/${id}`)
   }
 
+  const changeStatus = async (id, status) => {
+      let {data} = await api.get(`${base_url}/status/${id}/${status}`)
+      if (data) {
+        socials.value = socials.value.map(reg => {
+          if (reg._id == id) return {
+              ...reg,
+              status: status
+          }
+          return reg
+        })
+      }
+    }
+
   return {
     socials,
     socialsCount,
@@ -59,5 +72,6 @@ export const socialStore = defineStore('socialStore', () => {
     removeSocial,
     saveSocial,
     getSocial,
+    changeStatus
   }
 })
