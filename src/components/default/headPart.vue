@@ -2,7 +2,6 @@
   <div class="pb-3 px-4 pt-3">
     <div class="flex items-center justify-between">
       <div class="min-w-0 gap-3 flex items-center">
-        {{ backLink }}
         <button v-if="backLink" @click="router.push({ name: backLink })">
           <ChevronLeftIcon
             class="w-[30px] h-[30px] rounded-full bg-[#F5F0FF] flex justify-center items-center hover:bg-[#9E55EC] hover:text-white"

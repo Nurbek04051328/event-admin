@@ -25,6 +25,9 @@ const options = computed(() => {
     chart: {
       id: 'vuechart-deposit',
       type: 'bar',
+      toolbar: {
+        show: window.innerWidth > 768, // faqat desktopda ko‘rsatadi
+      },
     },
     stroke: {
       show: true,
@@ -54,7 +57,34 @@ const options = computed(() => {
       position: 'top',
       horizontalAlign: 'left',
       borderRadius: 3,
-    }
+    },
+    dataLabels: {
+      enabled: false
+    },
+    responsive: [
+      {
+        breakpoint: 768,
+        options: {
+          xaxis: {
+            labels: {
+              style: {
+                fontSize: '8px',
+              }
+            }
+          },
+          yaxis: {
+            labels: {
+              style: {
+                fontSize: '8px',
+              }
+            }
+          },
+          legend: {
+            fontSize: '10px'
+          }
+        }
+      }
+    ]
   }
 })
 const series = ref([])

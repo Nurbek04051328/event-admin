@@ -1,5 +1,5 @@
 <template>
-  <div class="flex-1 h-full w-full overflow-auto rounded-[16px]">
+  <div class="flex-1 h-full w-full overflow-auto rounded-[16px] md:rounded-[0px]">
     <div class="inline-block min-w-full align-middle md:hidden">
       <table class="min-w-full divide-y divide-gray-300 bg-white">
         <thead>
@@ -67,7 +67,7 @@
         <li
           v-for="item in workers"
           :key="item._id"
-          class="flex flex-col col-span-4 sm:col-span-6 xm:col-span-12 divide-y border border-gray-300 divide-gray-200 rounded-lg bg-white text-center shadow mb-3"
+          class="flex flex-col col-span-4 sm:col-span-6 xm:col-span-12 divide-y border border-gray-300 divide-gray-200 rounded-md bg-white text-center shadow mb-3"
         >
           <div class="flex flex-1 flex-col relative">
             <div class="absolute top-0 right-0 m-1">
@@ -89,7 +89,7 @@
                     <MenuItem>
                       <button
                         class="block px-3 py-1 text-sm leading-6 text-gray-900"
-                        @click="$router.push({ name: 'worker-logger', params: { id: item?._id } })"
+                        @click="$router.push({ name: 'worker-statistic', params: { id: item?._id } })"
                       >
                         Просмотр
                       </button>

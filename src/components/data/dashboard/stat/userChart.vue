@@ -41,7 +41,34 @@ const options = computed(() => {
     legend: {
       position: 'top',
       horizontalAlign: 'left'
-    }
+    },
+    dataLabels: {
+      enabled: false, 
+    },
+    responsive: [
+      {
+        breakpoint: 768,
+        options: {
+          xaxis: {
+            labels: {
+              style: {
+                fontSize: '8px',
+              }
+            }
+          },
+          yaxis: {
+            labels: {
+              style: {
+                fontSize: '8px',
+              }
+            }
+          },
+          legend: {
+            fontSize: '10px'
+          }
+        }
+      }
+    ]
   }
 })
 const series = ref([])

@@ -28,11 +28,11 @@
   <div class="px-4 pb-4 flex-1 overflow-auto h-full">
     <div class="grid grid-cols-12 gap-4 h-full 2xl:h-auto md:h-full xm-max:grid-cols-6">
       <!-- Sidebar -->
-      <div class="col-span-3 bg-white/100 rounded-[26px] shadow-sm order-first h-full overflow-auto 2xl:col-span-4 md-max:col-span-6 xm-max:col-span-6">
+      <div class="col-span-3 bg-white/100 rounded-[26px] shadow-sm order-first h-full overflow-auto  md:col-span-12">
         <OrganizerInfo :user="org.user" :follow="org.follow" />
       </div>
       <!-- Main content -->
-      <div class="col-span-6 flex flex-col space-y-2 h-full overflow-auto 2xl:col-span-8 2xl:h-[670px] md-max:col-span-6 xm-max:col-span-6">
+      <div class="col-span-6 flex flex-col space-y-2 h-full overflow-auto md:col-span-12">
         <OrganizerStatistic :org="org" :allEvents="allEvents" />
         <OrganizerEvents :list="allEvents" class="bg-white/100 rounded-[26px] shadow-sm" />
       </div>

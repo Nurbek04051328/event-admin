@@ -4,7 +4,7 @@
     :id="name"
     :name="name"
     v-model="model"
-    class="select text-gray-600 py-1.5 px-2.5 rounded-2xl cursor-pointer"
+    class="select appearance-none text-gray-600 py-1.5 px-2.5 rounded-2xl cursor-pointer"
     :class="[
       customClass,
       {

@@ -1,5 +1,5 @@
 <template>
-  <div class="flex-1 h-full w-full overflow-auto rounded-[16px]">
+  <div class="flex-1 h-full w-full overflow-auto rounded-[16px] sm:rounded-[0px]">
     <div class="inline-block min-w-full align-middle sm:hidden">
       <table class="min-w-full divide-y divide-gray-300">
         <thead>
@@ -71,9 +71,9 @@
         <li
           v-for="item in store.organizer.data"
           :key="item._id"
-          class="flex flex-col col-span-4 xm:col-span-6 xs-max:col-span-12 divide-y border border-gray-300 divide-gray-200 rounded-lg bg-white shadow mb-3"
+          class="flex flex-col col-span-4  xm:col-span-6 xs:col-span-12 divide-y border border-gray-300 divide-gray-200 rounded-lg bg-white shadow mb-3"
         >
-          <div class="flex flex-1 flex-col relative">
+          <div class="flex flex-1 flex-col relative px-2">
             <div class="absolute top-0 right-0 m-1">
               <Menu as="div" class="relative m-r-0">
                 <MenuButton class="-m-1.5 flex items-center p-1.5 mx:m-0">
@@ -126,11 +126,18 @@
               <dd class="text-sm text-gray-500">{{ item.login }}</dd>
               <dd class="text-sm text-gray-300">{{ item.email }}</dd>
               <dt class="sr-only">Статус</dt>
-              <dd class="mt-3 space-x-2 mb-1">
-                <span :class="`${item?.activated ? 'success-tag' : 'warning-tag'}`">
-                  {{ item?.status ? 'Активный' : 'Не активный' }}
+              <dd class="mt-3 space-x-2 mb-1 flex items-center justify-between xm:text-[8px]">
+                <span 
+                  class="xm:text-[10px]"
+                  :class="`${item?.status == 'active' ? 'success-tag' :
+                  item?.status == 'limited' ? 'primary-tag' :
+                  item?.status == 'not active' ? 'warning-tag' : 'danger-tag'}`">
+                  {{ item?.status == 'active' ? 'Активный' : 
+                    item?.status == 'limited' ? 'Ограниченный' :
+                    item?.status == 'not active' ? 'Не активирован' : 'Удален' }}
                 </span>
                 <span
+                  class="xm:text-[10px]"
                   :class="`${item?.organizer == 'pending' ? 'warning-tag' : item?.organizer == 'denied' ? 'danger-tag' : 'success-tag'}`"
                 >
                   {{

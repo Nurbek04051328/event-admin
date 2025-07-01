@@ -14,7 +14,7 @@
             leave-from="opacity-100 translate-y-0 sm:scale-100"
             leave-to="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95">
             <DialogPanel
-              class="relative transform overflow-hidden rounded-lg bg-white pt-12 text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-[420px]">
+              class="relative transform overflow-hidden rounded-lg bg-white pt-12 text-left shadow-xl transition-all sm:w-[80%]">
               <div class="absolute right-0 top-0 hidden pr-4 pt-4 sm:block">
                 <button type="button" class="rounded-md bg-white text-gray-400 hover:text-gray-500 focus:outline-none"
                   @click="close">

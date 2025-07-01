@@ -41,7 +41,7 @@
     <transition name="fade">
       <div
         v-if="showFilter"
-        class="fixed top-0 right-0 w-[50%] h-full bg-white z-50 flex flex-col p-4 xm:w-[80%]"
+        class="fixed top-0 right-0 w-[50%] h-full bg-white z-50 flex flex-col p-4 xm:w-[80%] shadow-lg"
       >
         <div class="flex justify-between items-center mb-4">
           <h2 class="text-xl font-semibold text-[#483D5B]">Фильтр</h2>

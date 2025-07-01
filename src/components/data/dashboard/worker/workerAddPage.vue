@@ -12,7 +12,7 @@
           {{ $t('worker.dialog.title') }}
         </div>
       </div>
-      <div class="flex gap-2 sm:mt-3 sm:justify-end">
+      <div class="flex gap-2 sm:hidden ">
         <div class="flex gap-2 items-center justify-end sm:gap-0">
           <button 
             type="button" 
@@ -125,9 +125,7 @@
           </div>
         </div>
   
-        <div class="flex w-full xm:block">
-          
-        </div>
+
   
         <div class="mt-7 mb-2 text-[19px]  text-[#483D5B] font-semibold sm:text-[15px]">Доступы:</div>
         <div class="flex w-full xm:block" >
@@ -154,7 +152,7 @@
               </label>
             </div>
           </div>
-          <div class="space-y-4 mt-2 w-full ml-3">
+          <div class="space-y-4 mt-2 w-full ml-3 sm:ml-0">
             <div class="text-[#645A77] text-[17px] font-semibold sm:text-[14px]">
               Пользователи:
             </div>
@@ -217,7 +215,7 @@
               </label>
             </div>
           </div>
-          <div class="space-y-4 mt-2 w-full ml-3">
+          <div class="space-y-4 mt-2 w-full ml-3 sm:ml-0">
             <div class="text-[#645A77] text-[17px] font-semibold sm:text-[14px]">
               Посты:
             </div>
@@ -239,6 +237,25 @@
                 <span class="hover:text-[#9E55EC] text-[16px] font-normal text-[#645A77] sm:text-[13px]">Добавить </span>
               </label>
             </div>
+          </div>
+        </div>
+
+        <div class="hidden sm:flex gap-2 sm:mt-6 sm:justify-between w-full">
+          <div class="flex gap-2 items-center justify-end sm:gap-0">
+            <button 
+              type="button" 
+              class="close-btn mt-0 h-[40px] min-w-[100px] rounded-[16px] sm:min-w-[200px] xm:min-w-[150px]" 
+              @click="close"
+            >
+              {{ $t('worker.dialog.close') }}
+            </button>
+            <button 
+              type="button" 
+              class="send-btn rounded-[16px] h-[40px] min-w-[100px] sm:min-w-[200px] xm:min-w-[150px]" 
+              @click="send"
+            >
+              {{ $t('worker.dialog.save') }}
+            </button>
           </div>
         </div>
       </div>

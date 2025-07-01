@@ -27,7 +27,7 @@
           />
         </div>
         <Combobox
-          class="absolute top-full w-[97%] bg-white shadow rounded-br-2xl rounded-bl-2xl"
+          class="absolute top-full w-[97%] bg-white shadow rounded-br-2xl rounded-bl-2xl sm:w-[95%]"
           v-if="filteredList.length > 0"
         >
           <ComboboxOptions
@@ -46,10 +46,10 @@
                   as="template"
                   v-slot="{ active }"
                 >
-                  <li :class="['px-4 py-2', active && 'bg-[#9E55EC] text-white']">
+                  <li :class="['px-4 py-2 sm:py-0', active && 'bg-[#9E55EC] text-white']">
                     <div
                       v-if="item.lname && item.name"
-                      class="flex justify-between cursor-pointer"
+                      class="flex justify-between cursor-pointer sm:text-[10px]"
                       @click="routeTo(category.route, item._id)"
                     >
                       <div>
@@ -191,36 +191,51 @@
             leave-to-class="transform opacity-0 scale-95"
           >
             <MenuItems
-              class="absolute right-0 top-[50px] z-10 w-[200px]  rounded-md bg-white py-2 shadow-lg  ring-gray-900/5 focus:outline-none"
+              class="absolute right-0 top-[50px] z-10 w-[210px]  rounded-md bg-white py-2 shadow-lg  ring-gray-900/5 focus:outline-none"
             >
-              <MenuItem class="hidden lg:block">
-                <button @click="$router.push({ name: 'type-notification' })" class="block px-3 py-1 text-sm leading-6 text-[#483D5B]">
-                  Уведомление
+              <MenuItem class="hidden lg:block py-2">
+                <button @click="$router.push({ name: 'activationkeys' })" class="px-3 py-1 text-sm leading-6 text-[#483D5B]">
+                  <div class="flex items-center justify-between gap-2">
+                    <component :is="KeyIcon" class="h-5 w-5 block" aria-hidden="true" />
+                    <!-- <KeyIcon class="h-7 w-7 shrink-0 text-[#9E55EC]" aria-hidden="true" /> -->
+                    Активационные ключи
+                  </div>
                 </button>
               </MenuItem>
-              <MenuItem class="hidden lg:block">
-                <button @click="$router.push({ name: 'activationkeys' })" class="block px-3 py-1 text-sm leading-6 text-[#483D5B]">
-                  Активационные ключи
-                </button>
-              </MenuItem>
-              <MenuItem class="hidden lg:block">
+              <MenuItem class="hidden lg:block py-2">
                 <button @click="$router.push({ name: 'logs' })" class="block px-3 py-1 text-sm leading-6 text-[#483D5B]">
-                  Журналы
+                  <div class="flex items-center justify-between gap-2">
+                    <BookmarkSquareIcon class="h-5 w-5 block" aria-hidden="true" />
+                    <!-- <BookmarkSquareIcon class="h-7 w-7 shrink-0 text-[#9E55EC]" aria-hidden="true" /> -->  
+                    Журналы
+                  </div>
                 </button>
               </MenuItem>
-              <MenuItem class="hidden lg:block">
+              <MenuItem class="hidden lg:block py-2">
                 <button  @click="$router.push({ name: 'messages' })" class="block px-3 py-1 text-sm leading-6 text-[#483D5B]">
-                  Сообщение
+                  <div class="flex items-center justify-between gap-2">
+                    <ChatBubbleLeftIcon class="h-5 w-5 block" aria-hidden="true" />
+                    <!-- <ChatBubbleLeftIcon class="h-7 w-7 shrink-0 text-[#9E55EC]" aria-hidden="true" /> -->
+                    Сообщение
+                  </div>
                 </button>
               </MenuItem>
-              <MenuItem class="hidden lg:block">
+              <MenuItem class="hidden lg:block py-2">
                 <button  @click="$router.push({ name: 'language' })" class="block px-3 py-1 text-sm leading-6 text-[#483D5B]">
-                  Настройки
+                  <div class="flex items-center justify-between gap-2">
+                    <Cog6ToothIcon class="h-5 w-5 block" aria-hidden="true" />
+                    <!-- <Cog6ToothIcon class="h-7 w-7 shrink-0 text-[#9E55EC]" aria-hidden="true" /> -->
+                    Языки
+                  </div>
                 </button>
               </MenuItem>
               <MenuItem>
-                <button @click="logout" class="block px-3 py-1 text-sm leading-6 text-[#483D5B]">
-                  {{ $t('header.logout') }}
+                <button @click="logout" class="block px-3 py-2 text-sm leading-6 text-[#483D5B]">
+                  <div class="flex items-center justify-between gap-2">
+                    <ArrowLeftStartOnRectangleIcon class="h-5 w-5 block" aria-hidden="true" />
+                    <!-- <ArrowLeftStartOnRectangleIcon class="h-7 w-7 shrink-0 text-[#9E55EC]" aria-hidden="true" /> -->
+                    {{ $t('header.logout') }}
+                  </div>
                 </button>
               </MenuItem>
             </MenuItems>
@@ -235,7 +250,7 @@ import { ref, watch, computed } from 'vue'
 import { useI18n } from 'vue-i18n'
 const { locale, t } = useI18n()
 import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/vue'
-import { Bars3Icon, BellIcon, Cog6ToothIcon, ChatBubbleLeftIcon, BookmarkSquareIcon, KeyIcon } from '@heroicons/vue/24/outline'
+import { Bars3Icon, BellIcon, Cog6ToothIcon, ChatBubbleLeftIcon, BookmarkSquareIcon, KeyIcon, ArrowLeftStartOnRectangleIcon } from '@heroicons/vue/24/outline'
 import { ChevronDownIcon, MagnifyingGlassIcon } from '@heroicons/vue/20/solid'
 // const userNavigation = [{ name: 'Your profile', href: '#' }]
 

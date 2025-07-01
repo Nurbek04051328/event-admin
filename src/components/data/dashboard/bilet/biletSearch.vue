@@ -15,6 +15,15 @@
       placeholder="Выберите организер"
     /> -->
     <filterSelect
+      v-model="search.user"
+      name="user"
+      :options="user__store.user.data || []"
+      :option_title="[`name`, `lname`]"
+      :class="['w-full z-[99]'] "
+      placeholder="Выберите пользовател"
+      @change="findMe"
+    />
+    <filterSelect
       v-model="search.status"
       name="status"
       :options="statuses || []"
@@ -40,11 +49,12 @@ import { ref } from 'vue'
 const store = biletStore()
 
 // Filter uchun ma'lumotlar
-import { organizerStore } from '@/stores/user/organizer'
-const organizer__store = organizerStore()
+import { usersStore } from '@/stores/data/users'
+const user__store = usersStore()
 
 const search = ref({
-  status: ''
+  status: '',
+  user: ''
 })
 // const router = useRouter()
 
@@ -79,14 +89,15 @@ const findMe = async () => {
 const clear = async() => {
   await store.getBilets({})
   search.value = {
-    status:''
+    status: '',
+    user: ''
   }
 }
 
 
 
 onMounted(async () => {
-  await organizer__store.getorganizers()
+  await user__store.getUsers({ limit: 0, type:"all"})
 })
 </script>
 <style lang=""></style>

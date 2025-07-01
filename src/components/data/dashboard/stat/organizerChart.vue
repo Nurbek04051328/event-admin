@@ -19,7 +19,6 @@ const stat = ref([])
 
 const options = computed(() => {
   return {
-    
     chart: {
       id: `vuechart-organizer-${Math.random().toString(36).substring(2, 8)}`,
       type: 'bar',
@@ -40,7 +39,34 @@ const options = computed(() => {
     legend: {
       position: 'top',
       horizontalAlign: 'left'
-    }
+    },
+    dataLabels: {
+      enabled: false, 
+    },
+    responsive: [
+      {
+        breakpoint: 768,
+        options: {
+          xaxis: {
+            labels: {
+              style: {
+                fontSize: '8px',
+              }
+            }
+          },
+          yaxis: {
+            labels: {
+              style: {
+                fontSize: '8px',
+              }
+            }
+          },
+          legend: {
+            fontSize: '10px'
+          }
+        }
+      }
+    ]
   }
 })
 const series = ref([])
