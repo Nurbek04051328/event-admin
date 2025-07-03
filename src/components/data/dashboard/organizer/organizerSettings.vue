@@ -1,6 +1,6 @@
 <template>
   <div
-    class="group/text relative ring-1 ring-gray-200 size-7 flex items-center justify-center rounded-full"
+    class="group/text relative ring-1 ring-gray-200 size-7 flex items-center justify-center rounded-full xm:size-5"
     :class="{
       'bg-[#9E55EC] ring-[#9E55EC]': item?.privateSettings.allowPhotoSharing
     }"
@@ -11,7 +11,7 @@
       Разрешение на обмен фотографиями
     </div>
     <CameraIcon
-      class="size-4 xm-max:size-3"
+      class="size-4 xm:size-3"
       :class="{
         'text-white': item?.privateSettings.allowPhotoSharing,
         'text-[#9E55EC] ring-[#9E55EC]': !item?.privateSettings.allowPhotoSharing
@@ -19,7 +19,7 @@
     />
   </div>
   <div
-    class="group/text relative ring-1 ring-gray-200 size-7 flex items-center justify-center rounded-full"
+    class="group/text relative ring-1 ring-gray-200 size-7 flex items-center justify-center rounded-full xm:size-5"
     :class="{
       'bg-[#9E55EC] ring-[#9E55EC]': item?.privateSettings.showParticipants
     }"
@@ -30,7 +30,7 @@
       Видимость списка участников
     </div>
     <UsersIcon
-      class="size-4 xm-max:size-3"
+      class="size-4 xm:size-3"
       :class="{
         'text-white': item?.privateSettings.showParticipants,
         'text-[#9E55EC] ring-[#9E55EC]': !item?.privateSettings.showParticipants
@@ -38,7 +38,7 @@
     />
   </div>
   <div
-    class="group/text relative ring-1 ring-gray-200 size-7 flex items-center justify-center rounded-full"
+    class="group/text relative ring-1 ring-gray-200 size-7 flex items-center justify-center rounded-full xm:size-5"
     :class="{
       'bg-[#9E55EC] ring-[#9E55EC]': item?.privateSettings.locationVisibility
     }"
@@ -49,7 +49,7 @@
       Видимость местоположения мероприятия
     </div>
     <MapPinIcon
-      class="size-4 xm-max:size-3"
+      class="size-4 xm:size-3"
       :class="{
         'text-white': item?.privateSettings.locationVisibility,
         'text-[#9E55EC] ring-[#9E55EC]': !item?.privateSettings.locationVisibility
@@ -57,7 +57,7 @@
     />
   </div>
   <div
-    class="group/text relative ring-1 ring-gray-200 size-7 flex items-center justify-center rounded-full"
+    class="group/text relative ring-1 ring-gray-200 size-7 flex items-center justify-center rounded-full xm:size-5"
     :class="{
       'bg-[#9E55EC] ring-[#9E55EC]': item?.interactionOptions.adult
     }"
@@ -68,7 +68,7 @@
       Возрастное ограничение
     </div>
     <ExclamationTriangleIcon
-      class="size-4 xm-max:size-3"
+      class="size-4 xm:size-3"
       :class="{
         'text-white': item?.interactionOptions.adult,
         'text-[#9E55EC] ring-[#9E55EC]': !item?.interactionOptions.adult
@@ -76,7 +76,7 @@
     />
   </div>
   <div
-    class="group/text relative ring-1 ring-gray-200 size-7 flex items-center justify-center rounded-full"
+    class="group/text relative ring-1 ring-gray-200 size-7 flex items-center justify-center rounded-full xm:size-5"
     :class="{
       'bg-[#9E55EC] ring-[#9E55EC]': item?.interactionOptions.allowShare
     }"
@@ -87,7 +87,7 @@
       Разрешение делиться мероприятием
     </div>
     <ShareIcon
-      class="size-4 xm-max:size-3"
+      class="size-4 xm:size-3"
       :class="{
         'text-white': item?.interactionOptions.allowShare,
         'text-[#9E55EC] ring-[#9E55EC]': !item?.interactionOptions.allowShare
@@ -95,7 +95,7 @@
     />
   </div>
   <div
-    class="group/text relative ring-1 ring-gray-200 size-7 flex items-center justify-center rounded-full"
+    class="group/text relative ring-1 ring-gray-200 size-7 flex items-center justify-center rounded-full xm:size-5"
     :class="{
       'bg-[#9E55EC] ring-[#9E55EC]': item?.interactionOptions.allowSave
     }"
@@ -106,7 +106,7 @@
       Разрешение сохранять мероприятие
     </div>
     <BookmarkIcon
-      class="size-4 xm-max:size-3"
+      class="size-4 xm:size-3"
       :class="{
         'text-white': item?.interactionOptions.allowSave,
         'text-[#9E55EC] ring-[#9E55EC]': !item?.interactionOptions.allowSave

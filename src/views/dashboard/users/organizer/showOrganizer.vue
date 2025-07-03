@@ -19,16 +19,16 @@
           org.user.status == 'limited' ? 'Ограничен' :
           org.user.status == 'not active' ? 'Не активирован' : 'Удален/Заблокирован' }}
       </button>
-      <span @click="openAccess('organizer')" :class="organizerInfo[org.user?.organizer]?.class" class="xm-max:text-[10px] cursor-pointer">
+      <span @click="openAccess('organizer')" :class="organizerInfo[org.user?.organizer]?.class" class="cursor-pointer">
         {{ organizerInfo[org.user?.organizer]?.title }}
       </span>
     </div>
   </headPart>
 
   <div class="px-4 pb-4 flex-1 overflow-auto h-full">
-    <div class="grid grid-cols-12 gap-4 h-full 2xl:h-auto md:h-full xm-max:grid-cols-6">
+    <div class="grid grid-cols-12 gap-4 h-full 2xl:h-auto md:h-full">
       <!-- Sidebar -->
-      <div class="col-span-3 bg-white/100 rounded-[26px] shadow-sm order-first h-full overflow-auto  md:col-span-12">
+      <div class="col-span-3 bg-white/100 rounded-[26px] shadow-sm order-first h-full overflow-auto   md:col-span-12">
         <OrganizerInfo :user="org.user" :follow="org.follow" />
       </div>
       <!-- Main content -->
@@ -37,7 +37,7 @@
         <OrganizerEvents :list="allEvents" class="bg-white/100 rounded-[26px] shadow-sm" />
       </div>
       <!-- Tabs and router -->
-      <div class="col-span-3 bg-white/100 rounded-[26px] shadow-sm px-2 flex flex-col h-full overflow-hidden 2xl:col-span-12 2xl:h-[670px] md:col-span-12 xm-max:col-span-6">
+      <div class="col-span-3 bg-white/100 rounded-[26px] shadow-sm px-2 flex flex-col h-full overflow-hidden  md:col-span-12">
         <TabList :list="links" />
         <router-view />
       </div>

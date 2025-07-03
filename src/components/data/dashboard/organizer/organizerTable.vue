@@ -1,5 +1,5 @@
 <template>
-  <div class="flex-1 h-full w-full overflow-auto rounded-[16px] sm:rounded-[0px]">
+  <div class="flex-1 h-full w-full overflow-auto rounded-[16px] sm:rounded-[0px]" v-if="store.organizer.data.length">
     <div class="inline-block min-w-full align-middle sm:hidden">
       <table class="min-w-full divide-y divide-gray-300">
         <thead>
@@ -94,7 +94,7 @@
                       <button
                         class="block px-3 py-1 text-sm leading-6 text-gray-900"
                         @click="
-                          $router.push({ name: 'organizer-logger', params: { id: item._id } })
+                          $router.push({ name: 'organizer-wallet', params: { id: item._id } })
                         "
                       >
                         Просмотр
@@ -106,7 +106,7 @@
             </div>
             <div class="mt-2">
               <img
-                class="mx-auto h-[100px] w-[100px] flex-shrink-0 rounded-full"
+                class="mx-auto h-[100px] w-[100px] flex-shrink-0 rounded-full object-cover"
                 v-if="item.cover?.length > 0 || item.face?.at(0)?.length > 0"
                 :src="`${url}/${item.cover?.at(0) || item.face?.at(0)}`"
                 alt=""
@@ -167,6 +167,9 @@
         </li>
       </ul>
     </div>
+  </div>
+  <div v-else>
+    <div class="p-4 text-center text-gray-500 text-sm">Пока нет данных</div>
   </div>
 </template>
 <script setup>

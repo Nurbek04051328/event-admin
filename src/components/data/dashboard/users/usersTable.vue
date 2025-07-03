@@ -1,5 +1,5 @@
 <template>
-  <div class="flex-1 h-full w-full overflow-auto rounded-[16px]">
+  <div class="flex-1 h-full w-full overflow-auto rounded-[16px]" v-if="store.user.data.length">
     <div class="inline-block min-w-full align-middle sm:hidden">
       <table class="min-w-full divide-y divide-gray-300">
         <thead>
@@ -145,6 +145,9 @@
         </li>
       </ul>
     </div>
+  </div>
+  <div v-else>
+    <div class="p-4 text-center text-gray-500 text-sm">Пока нет данных</div>
   </div>
 </template>
 <script setup>
