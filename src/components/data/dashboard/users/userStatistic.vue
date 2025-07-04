@@ -1,12 +1,12 @@
 <template>
-  <div class="grid grid-cols-4  bg-white/100 rounded-[26px] shadow-sm p-4 lg:grid-cols-2">
+  <div class="grid grid-cols-3 gap-4   lg:grid-cols-2">
     <!-- <pre>{{ org.statistic }}</pre> -->
     <div
       v-for="(stat, statIdx) in stats"
       :key="stat.name"
       :class="[
         statIdx % 2 === 1 ? 'sm:border-l' : statIdx === 2 ? 'lg:border-l' : '',
-        'border-t border-white/5 '
+        'border-t border-white/5 bg-white/100 rounded-[26px] shadow-sm p-4'
       ]"
     >
       <p class="text-[13px] font-medium leading-6 text-gray-600 md-max:text-[15px]">{{ stat.name }}</p>
@@ -22,7 +22,7 @@ const props = defineProps(['org'])
 import { computed } from 'vue'
 const stats = computed(() => {
   const tickets = props.org?.statistic?.purchaseTickets ?? 0;
-  const profits = props.org?.statistic?.profit ?? 0;
+  const profits = props.org?.statistic?.expenses ?? 0;
   let allTickerPurchasesCount =
   tickets > 1000000
       ? (tickets / 1000000).toFixed(2) + ' млн'
@@ -31,7 +31,7 @@ const stats = computed(() => {
         : tickets + ' шт'
 
   let allPurchasesSum =
-    props.org.organizerEvents?.reduce((a, b) => a + b.counts?.ticketPurchase * b.entryFree, 0) || 0
+    props.org.statistic?.expense || 0
   allPurchasesSum =
   profits > 1000000
       ? (profits / 1000000).toFixed(2) + ' млн. сум'
@@ -48,11 +48,11 @@ const stats = computed(() => {
       unit: allTickerPurchasesCount.split(' ').at(1) || 0
     },
     {
-      name: 'Расходь',
+      name: 'Расход',
       value: allPurchasesSum.split(' ')?.at(0) || 0,
       unit: allPurchasesSum.split(' ')?.at(1) || 0
     },
-    { name: 'Успешность', value: `${props.org.statistic?.success.toFixed(1) || 0} %` }
+    // { name: 'Успешность', value: `${props.org.statistic?.success.toFixed(1) || 0} %` }
   ]
 })
 </script>

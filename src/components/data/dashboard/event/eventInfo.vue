@@ -132,8 +132,8 @@
             <div class="text-xs text-gray-500 2xl:text-[12px] mb-2">Даты</div>
             <swiper
               v-if="event?.eventDates?.length > 0"
-              :slides-per-view="event?.eventDates?.length >= 4 ? 4 : event?.eventDates?.length"
-              :loop="event?.eventDates?.length >= 4"
+              :slides-per-view="event?.eventDates?.length >= 3 ? 3 : event?.eventDates?.length"
+              :loop="event?.eventDates?.length >= 3"
               :space-between="20"
             >
               <swiper-slide v-for="d of event.eventDates" :key="d._id">
@@ -155,10 +155,35 @@
                     {{ moment(d.date).add(event?.duration, 'h').format('HH:mm') }}
                   </div>
                   <div class="text-sm mt-2">Билеты:</div>
-                  <div class="text-gray-800 text-lg font-semibold">
-                    <span class="primary-tag">{{ d.pending || 0 }}</span> /
-                    <span class="success-tag">{{ d.bought || 0 }}</span> /
-                    <span class="warning-tag">{{ d.denied || 0 }}</span> / {{ d.quantity || 0 }}
+                  <div class="text-gray-800 text-lg font-semibold relative">
+                    <span class="success-tag group/text">{{ d.count || 0 }}
+                      <div
+                        class="invisible group-hover/text:visible absolute bottom-full whitespace-nowrap text-right bg-gray-100 p-1 rounded-sm text-xs"
+                      >
+                        Кол. проданных билетов
+                      </div>
+                    </span> / 
+                    <span class="primary-tag group/text">{{ d.bought || 0 }}
+                      <div
+                        class="invisible group-hover/text:visible absolute bottom-full whitespace-nowrap text-right bg-gray-100 p-1 rounded-sm text-xs"
+                      >
+                        Не исползованные билеты
+                      </div>
+                    </span> /
+                    <span class="warning-tag group/text">{{ d.used || 0 }}
+                      <div
+                        class="invisible group-hover/text:visible absolute bottom-full whitespace-nowrap text-right bg-gray-100 p-1 rounded-sm text-xs"
+                      >
+                        Исползованные билеты
+                      </div>
+                    </span> / 
+                    <span class="danger-tag group/text">{{ d.denied || 0 }}
+                      <div
+                        class="invisible group-hover/text:visible absolute bottom-full whitespace-nowrap text-right bg-gray-100 p-1 rounded-sm text-xs"
+                      >
+                        Отказанные билеты
+                      </div>
+                    </span> / {{ d.quantity || 0 }}
                   </div>
                 </div>
               </swiper-slide>

@@ -90,7 +90,7 @@
             </div>
           </div>
           <!-- bottom -->
-          <div class="w-full grid grid-cols-6 mt-[10px] text-[#483D5B] text-[14px] gap-3 md:text-[11px] xm:text-[10px]">
+          <div class="w-full grid grid-cols-6 mt-[10px] text-[#483D5B] text-[13px] gap-3 md:text-[11px] xm:text-[10px]">
             <div class="w-full col-span-4 xm:col-span-6">
               Статистика билета
               <ul

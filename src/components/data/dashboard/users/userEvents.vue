@@ -79,17 +79,18 @@
               </div>
             </div>
           </div>
+          <!-- <pre>{{ item }}</pre> -->
           <!-- bottom -->
-          <div class="w-full grid grid-cols-6 mt-[10px] text-[#483D5B] text-[14px] gap-3 md:text-[11px] xm:text-[10px]">
-            <div class="w-full col-span-4 xm:col-span-6">
+          <div class="w-full grid grid-cols-6 mt-[10px] text-[#483D5B] text-[13px] gap-3 md:text-[11px] xm:text-[10px]">
+            <div class="w-full col-span-3 xm:col-span-6">
               Статистика билета
               <ul class="flex items-center gap-4 bg-[#F9F8FC] rounded-[30px] px-[7px] py-[4px]  mr-8 mt-[5px]">
-                <li
+                <!-- <li
                   class="text-[#EEC900]"
                 >
                   <span class="inline-block rounded-full w-[7px] h-[7px] mr-1 bg-[#EEC900]"></span>
                   {{ item.counts?.ticketPending }} В обработке
-                </li>
+                </li> -->
                 <li
                   class="text-[#9E55EC]"
                 >
@@ -110,6 +111,7 @@
                 </li>
               </ul>
             </div>
+            <div class="w-full col-span-1"></div>
             <div class="w-full col-span-2 xm:col-span-6">
               Статистика возвратов
               <ul class="flex items-center gap-4 rounded-[30px] bg-[#F9F8FC] px-[7px] py-[4px] mt-[5px]">
@@ -117,13 +119,13 @@
                   class="text-[#EEC900]"
                 >
                   <span class="inline-block rounded-full w-[7px] h-[7px] mr-1 bg-[#EEC900]" ></span>
-                  В обработке
+                  {{ item.counts?.refoundFalse }} В обработке
                 </li>
                 <li
                   class="text-[#05CD99]"
                 >
                   <span class="inline-block rounded-full w-[7px] h-[7px] mr-1 bg-[#05CD99]" ></span>
-                  Возвращены
+                  {{ item.counts?.refoundTrue }} Возвращены
                 </li>
               </ul>
             </div>

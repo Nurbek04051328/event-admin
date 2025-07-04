@@ -1,5 +1,5 @@
 <template>
-  <div class="grid grid-cols-2 gap-3 md-max:grid-cols-2 md-max:p-2">
+  <div class="grid grid-cols-2 gap-3 md-max:grid-cols-2">
     <div
       v-for="(stat, statIdx) in stats"
       :key="stat.name"
@@ -9,9 +9,9 @@
       ]"
       class="bg-white/100 rounded-[13px] shadow-sm px-4 py-2"
     >
-      <p class="text-[13px] font-medium leading-6 text-gray-600">{{ stat.name }}</p>
+      <p class="text-[12px] font-semibold leading-6 text-gray-600">{{ stat.name }}</p>
       <p class="flex items-baseline gap-x-2">
-        <span class="text-3xl font-semibold tracking-tight">{{ stat.value || 0 }} </span>
+        <span class="text-[20px] font-semibold tracking-tight">{{ stat.value || 0 }} </span>
         <span v-if="stat.unit" class="text-sm text-gray-600">{{ stat.unit }}</span>
       </p>
     </div>
@@ -22,15 +22,15 @@ const props = defineProps(['org'])
 import { computed } from 'vue'
 const stats = computed(() => {
   return [
-    { name: 'Кол. проданных билетов', value: props.org?.bougth || 0, unit: 'шт' },
+    { name: 'Кол. проданных билетов', value: props.org?.count || 0, unit: 'шт' },
     {
       name: 'Отказанные билеты',
       value: props.org?.denied || 0,
       unit: 'шт'
     },
     {
-      name: 'Ожиданные билеты',
-      value: props.org?.pending || 0,
+      name: 'Не исползованные билеты',
+      value: props.org?.bought || 0,
       unit: 'шт'
     },
     { name: 'Исползованные билеты', value: props.org?.used || 0, unit: 'шт' }

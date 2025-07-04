@@ -2,13 +2,14 @@
   <headPart backLink="event">
     <div class="flex overflow-auto gap-2 items-center">
       <router-link
-        class="primary-btn"
+        class="send-btn px-4 py-[6px] rounded-md"
         :to="{ name: 'event-edit', params: { id: route.params.id } }"
       >
         Редактировать
       </router-link>
+      <!-- <pre>{{ eventInfo?.event?.status }}</pre> -->
       <button
-        v-if="eventInfo?.event?.status == 0"
+        v-if="eventInfo?.event?.status == 'pending'"
         type="button"
         class="flex w-full items-center justify-center rounded-md border bg-green-50 text-[#05CD99] border-[#05CD99] px-4 py-[6px] font-medium focus:outline-none focus:ring-2 focus:ring-green-600 focus:ring-offset-2 focus:ring-offset-gray-50 text-sm xm-max:text-xs"
         @click="confirmAccess()"
@@ -16,7 +17,7 @@
         {{ $t('event.detailPage.access') }}
       </button>
       <button
-        v-if="eventInfo?.event?.status == 0"
+        v-if="eventInfo?.event?.status == 'pending'"
         type="button"
         class="flex w-full items-center justify-center rounded-md border border-transparent bg-red-50 px-4 py-[6px] text-base font-medium text-[#FF5558] focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 focus:ring-offset-gray-50 xm-max:text-xs"
         @click="confirmRefusel()"
@@ -24,12 +25,13 @@
         Отказать
       </button>
       <button
-        v-if="eventInfo?.event?.status !== 0"
+        v-if="eventInfo?.event?.status !== 'pending'"
         type="button"
-        class="flex w-full items-center justify-center rounded-md border border-transparent bg-[#F3EBFC] px-4 py-[6px] text-base font-medium text-[#9E55EC] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 xm-max:text-xs"
+        class="flex w-full items-center justify-center rounded-md border  px-4 py-[6px] text-base font-medium focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 xm-max:text-xs"
+        :class="`${eventInfo?.event?.status=='active'? 'bg-green-50 text-[#05CD99] border-[#05CD99]' : 'bg-[#F3EBFC] text-[#9E55EC] border-transparent'}`"
         @click="confirmBack()"
       >
-        {{ $t('event.detailPage.danger') }}
+        {{ eventInfo?.event?.status=='active'? 'Активный': $t('event.detailPage.danger') }}
       </button>
     </div>
   </headPart>
@@ -106,7 +108,7 @@ const access = async () => {
     await store.changeStatus(
       {
         _id: route.params.id,
-        status: 1
+        status: 'active'
       },
       t
     )
@@ -131,7 +133,7 @@ const confirmBack = async () => {
     await store.changeStatus(
       {
         _id: route.params.id,
-        status: 0
+        status: 'pending'
       },
       t
     )

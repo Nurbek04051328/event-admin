@@ -1,6 +1,6 @@
 <template>
   <headPart>
-    <button class="primary-btn" @click="store.saveEvent(data)">Сохранить</button>
+    <button class="send-btn px-4 py-[6px] rounded-md" @click="store.saveEvent(data)">Сохранить</button>
   </headPart>
   <section class="overflow-auto flex p-4 gap-4 flex-1">
     <EventMenu v-model="menuIndex" />

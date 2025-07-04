@@ -74,7 +74,7 @@ const data = ref({
   _id: route.params.id,
   title: '',
   desc: '',
-  status: 2
+  status: 'denied'
 })
 
 

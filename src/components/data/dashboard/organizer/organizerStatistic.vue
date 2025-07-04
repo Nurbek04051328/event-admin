@@ -40,7 +40,7 @@ const stats = computed(() => {
 
   return [
     { name: 'Кол. мероприятия', value: props.allEvents?.count },
-    { name: 'Генерированные билеты', value: props.org?.statistic?.generatedTickets },
+    { name: 'Отказанные билеты', value: props.org?.statistic?.deniedTickets },
     { name: 'Затраты', value: props.org?.statistic?.expenses },
     {
       name: 'Проданные билеты',
