@@ -128,6 +128,18 @@ export const actionsall = [
     _id: 'pending',
     label: 'В ожидание',
     class: 'warning-tag'
+  },
+  {
+    title: 'Взрослый',
+    _id: 'adult',
+    label: 'Взрослый',
+    class: 'success-tag'
+  },
+  {
+    title: 'Несовершеннолетний',
+    _id: 'minor',
+    label: 'Несовершеннолетний',
+    class: 'warning-tag'
   }
 ]
 

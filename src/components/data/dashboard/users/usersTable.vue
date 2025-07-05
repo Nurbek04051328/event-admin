@@ -1,5 +1,5 @@
 <template>
-  <div class="flex-1 h-full w-full overflow-auto rounded-[16px]" v-if="store.user.data.length">
+  <div class="flex-1 h-full w-full overflow-auto rounded-[16px] md:rounded-[0px]" v-if="store.user.data.length">
     <div class="inline-block min-w-full align-middle sm:hidden">
       <table class="min-w-full divide-y divide-gray-300">
         <thead>
@@ -84,7 +84,7 @@
                     <MenuItem>
                       <button
                         class="block px-3 py-1 text-sm leading-6 text-gray-900"
-                        @click="$router.push({ name: 'user-logger', params: { id: item?._id } })"
+                        @click="$router.push({ name: 'user-wallet', params: { id: item?._id } })"
                       >
                         Просмотр
                       </button>

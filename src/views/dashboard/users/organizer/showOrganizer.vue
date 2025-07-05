@@ -3,10 +3,10 @@
     <div class="flex space-x-2 overflow-auto">
       <button 
         @click="ChangeId()"
-        class="flex items-center justify-center cursor-pointer mr-2 px-2 primary-tag"
+        class="flex items-center justify-center cursor-pointer mr-2 px-2 primary-tag xm:mr-0"
       >
         <ChatBubbleLeftEllipsisIcon 
-        class="w-5 text-[#9E55EC]" />
+        class="w-5 text-[#9E55EC] xm:w-4" />
       </button>
       <button 
         v-if="org?.user?.status"

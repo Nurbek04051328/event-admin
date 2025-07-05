@@ -1,5 +1,5 @@
 <template>
-  <div class="flex-1 h-full w-full overflow-auto rounded-[16px]">
+  <div class=" w-full rounded-[16px]">
     <div class="inline-block min-w-full align-middle">
       <table class="min-w-full divide-y divide-gray-300">
         <thead>

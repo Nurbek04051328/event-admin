@@ -70,7 +70,7 @@
             <VueDatePicker v-model="date" month-picker placeholder="Выберите месяц"></VueDatePicker>
           </div>
         </div>
-        <apexchart height="400" width="100%" :options="options" :series="series"></apexchart>
+        <apexchart class="w-[full] h-[300px]" :options="options" :series="series"></apexchart>
       </div>
     </div>
   </div>
@@ -91,8 +91,8 @@ const options = computed(() => {
     chart: {
       id: `vuechart-transaction-${Math.random().toString(36).substring(2, 8)}`,
       type: 'area',
-      height: 200,
-      width: 500
+      height: 100,
+      width: 200
     },
     stroke: {
       curve: 'smooth'
@@ -130,7 +130,34 @@ const options = computed(() => {
     legend: {
       position: 'top',
       horizontalAlign: 'left'
-    }
+    },
+    dataLabels: {
+      enabled: false
+    },
+    responsive: [
+      {
+        breakpoint: 768,
+        options: {
+          xaxis: {
+            labels: {
+              style: {
+                fontSize: '8px',
+              }
+            }
+          },
+          yaxis: {
+            labels: {
+              style: {
+                fontSize: '8px',
+              }
+            }
+          },
+          legend: {
+            fontSize: '10px'
+          }
+        }
+      }
+    ]
   }
 })
 

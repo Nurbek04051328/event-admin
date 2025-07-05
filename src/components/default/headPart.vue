@@ -21,7 +21,7 @@
         </nav> -->
         <div class="flex items-center relative mr-8">
           <h2
-            class="leading-7 text-[#645A77] md:text-[20px]"
+            class="leading-7 text-[#645A77] md:text-[20px] xm:text-[16px]"
             :class="
               route?.meta?.group == 'setting' ? 'text-[16px] font-medium' :
               route?.meta?.group == 'middle' ? 'text-[18px] font-medium' :

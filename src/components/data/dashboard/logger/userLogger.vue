@@ -2,6 +2,7 @@
     <div v-if="store.logger.data?.length > 0" class="flex flex-col overflow-hidden">
       <div class="w-full overflow-y-auto flex-1 text-[13px]">
         <div v-for="log of store.logger.data" :key="log._id" class="p-2 xm-max:text-[11px]">
+          {{ log.action }}
           <span class="font-medium">
             {{ log?.actionFrom?.lname }}
             {{ log?.actionFrom?.name }}

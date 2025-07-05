@@ -1,9 +1,8 @@
 <template>
     <div v-if="store.logger.data?.length > 0" class="flex flex-col overflow-hidden">
       <div class="w-full overflow-y-auto flex-1 text-[13px]" >
-        <div v-for="ticket of store.logger.data" :key="ticket._id" class="p-2 xm-max:text-[11px]">
-          <span class="font-bold text-[#645A77]"> {{ ticket?.user?.lname }} {{ ticket?.user?.name }} </span>
-          купил
+        <div v-for="ticket of store.logger.data" :key="ticket._id" class="p-2 w-full">
+          <span class="font-bold text-[#645A77] mr-1"> {{ ticket?.user?.lname }} {{ ticket?.user?.name }} </span><br>
           <span
             class="mr-2"
             :class="ticket.status == 0 ? 'bg-[#FFECD9] text-[#FF7E00] rounded-lg px-2':
@@ -15,8 +14,9 @@
             {{ ticket.status == 1 ? 'Успешно приобретен' : '' }}
             {{ ticket.status == 2 ? 'Возврат/Отменен' : '' }}
             {{ ticket.status == 3 ? 'Использован' : '' }}
-          </span> на
-          <span class="font-bold text-[#9E55EC]">
+          </span>
+          билет на
+          <span class="font-bold text-[#9E55EC] mr-1">
             {{ ticket.event?.title }}
           </span> 
           <span v-if="ticket.entryFee == 0" class="font-bold"> бесплатно </span>

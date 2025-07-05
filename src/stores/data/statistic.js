@@ -74,7 +74,6 @@ export const statisticStore = defineStore('statisticStore', () => {
   
       loadingStore.start()
       const {data} =  await api.get('/statistic/wallet-statistic', { params })
-      console.log("allDeposit", data);
       purchases.purchase = data.purchase || []
       purchases.refound = data.refound || []
 

@@ -5,13 +5,14 @@
     >
       <TransactionSearch/>
     </headPart>
-    <div class="px-4 pb-0 w-full grid grid-cols-12 gap-4 overflow-hidden">
+    <div class="p-4 w-full grid grid-cols-12 gap-4 overflow-hidden">
       <TransactionStatistic class="col-span-6"  :transactionChart="stat_store.deposits"/>
-      <div class="col-span-6 overflow-auto flex flex-col flex-1">
-        
-        <TransactionTable
-          :page="page" :limit="limit"
-        />
+      <div class="col-span-6 w-full flex flex-col h-full">
+        <div class="overflow-auto h-[670px]">
+          <TransactionTable
+            :page="page" :limit="limit"
+          />
+        </div>
         <div class="pl-4 pb-2">
           <paginate
             v-if="store.transactionsCount > limit"

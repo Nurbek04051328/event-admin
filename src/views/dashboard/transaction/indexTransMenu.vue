@@ -94,16 +94,15 @@ const clickCallback = async (value) => {
   await getData()
 }
 
-const getData = async () => {
-  console.log("page", page.value);
+// const getData = async () => {
+//   console.log("page", page.value);
   
-  await store.getTransactions({ limit: limit.value, page: page.value })
-  await users_store.getUsers({ limit: 0, type:"all"})
-  await stat_store.allDeposit()
-}
+//   await store.getTransactions({ limit: limit.value, page: page.value })
+//   await users_store.getUsers({ limit: 0, type:"all"})
+// }
 
-onMounted(async () => {
-  await getData()
-})
+// onMounted(async () => {
+//   await getData()
+// })
 </script>
 <style lang=""></style>

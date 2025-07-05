@@ -25,7 +25,6 @@
 
   onMounted(async () => {
     await Promise.all([
-      await store.allDeposit(),
       await store.profitStatistic()
     ])
   })

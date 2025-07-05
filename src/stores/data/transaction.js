@@ -1,6 +1,7 @@
 import { ref } from 'vue'
 import { defineStore } from 'pinia'
 import api from '@/helpers/api'
+
 const base_url = '/statistic/wallet-history'
 
 export const transactionStore = defineStore('transactionStore', () => {
@@ -14,7 +15,6 @@ export const transactionStore = defineStore('transactionStore', () => {
   
   const getTransactions = async (params) => {
     const { data } = await api.get(base_url, {params})
-    console.log("datatra", data);
     
     transactions.value = data?.wallet
     transactionsCount.value = data?.count
