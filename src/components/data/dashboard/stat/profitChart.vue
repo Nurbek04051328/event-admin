@@ -57,7 +57,62 @@
       legend: {
         position: 'top',
         horizontalAlign: 'left'
+      },
+      dataLabels: {
+      enabled: false, 
+    },
+    responsive: [
+      {
+        breakpoint: 1441,
+        options: {
+          chart: {
+            height:230,
+          },
+          xaxis: {
+            labels: {
+              style: {
+                fontSize: '8px',
+              }
+            }
+          },
+          yaxis: {
+            labels: {
+              style: {
+                fontSize: '8px',
+              },
+              formatter: (val) => {
+                return `${val.toLocaleString()} сум`
+              }
+            }
+          },
+          legend: {
+            fontSize: '10px'
+          }
+        }
+      },
+      {
+        breakpoint: 768,
+        options: {
+          xaxis: {
+            labels: {
+              style: {
+                fontSize: '8px',
+              }
+            }
+          },
+          yaxis: {
+            labels: {
+              style: {
+                fontSize: '8px',
+              }
+            }
+          },
+          legend: {
+            fontSize: '10px'
+          }
+        }
       }
+    ]
     }
   })
 

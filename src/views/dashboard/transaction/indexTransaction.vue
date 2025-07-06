@@ -5,10 +5,10 @@
     >
       <TransactionSearch/>
     </headPart>
-    <div class="p-4 w-full grid grid-cols-12 gap-4 overflow-hidden">
-      <TransactionStatistic class="col-span-6"  :transactionChart="stat_store.deposits"/>
-      <div class="col-span-6 w-full flex flex-col h-full">
-        <div class="overflow-auto h-[670px]">
+    <div class="p-4 w-full grid grid-cols-12 gap-4 overflow-hidden md:overflow-auto">
+      <TransactionStatistic class="col-span-6 md:col-span-12"  :transactionChart="stat_store.deposits"/>
+      <div class="col-span-6 w-full flex flex-col h-full  md:col-span-12 md:h-[75%]">
+        <div class="overflow-auto h-[670px] 2xl:h-[600px]">
           <TransactionTable
             :page="page" :limit="limit"
           />

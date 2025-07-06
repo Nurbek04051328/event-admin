@@ -7,8 +7,8 @@
             <CircleStackIcon class="size-8 text-[#9E55EC]" />
           </div>
           <div>
-            <div class="text-[18px] text-[#483D5B]">Пополнение</div>
-            <div class="text-[20px] font-bold text-[#483D5B]">
+            <div class="text-[18px] text-[#483D5B] lg:text-[15px]">Пополнение</div>
+            <div class="text-[20px] font-bold text-[#483D5B] lg:text-[15px]">
               {{ store.deposit?.toLocaleString() || 0 }} сум
             </div>
           </div>
@@ -20,8 +20,8 @@
             <ArchiveBoxArrowDownIcon class="size-8 text-[#FF5558]" />
           </div>
           <div>
-            <div class="text-[18px] text-[#483D5B]">Вывод</div>
-            <div class="text-[20px] font-bold text-[#483D5B]">
+            <div class="text-[18px] text-[#483D5B] lg:text-[15px]">Вывод</div>
+            <div class="text-[20px] font-bold text-[#483D5B] lg:text-[15px]">
               {{ store.withdrawal?.toLocaleString() || 0 }} сум
             </div>
           </div>
@@ -33,8 +33,8 @@
             <CreditCardIcon class="size-8 text-[#FFCE20]" />
           </div>
           <div>
-            <div class="text-[18px] text-[#483D5B]">Покупка</div>
-            <div class="text-[20px] font-bold text-[#483D5B]">
+            <div class="text-[18px] text-[#483D5B] lg:text-[15px]">Покупка</div>
+            <div class="text-[20px] font-bold text-[#483D5B] lg:text-[15px]">
               {{ store.purchase?.toLocaleString() || 0 }} сум
             </div>
           </div>
@@ -46,8 +46,8 @@
             <img src="@/assets/images/profit.svg" alt="profit_img" class="size-8 text-[#FFCE20]" />
           </div>
           <div>
-            <div class="text-[18px] text-[#483D5B]">Доход</div>
-            <div class="text-[20px] font-bold text-[#483D5B]">
+            <div class="text-[18px] text-[#483D5B] lg:text-[15px]">Доход</div>
+            <div class="text-[20px] font-bold text-[#483D5B] lg:text-[15px]">
               {{ store.profit?.toLocaleString() || 0 }} сум
             </div>
           </div>
@@ -57,7 +57,7 @@
     <div class="col-span-12 h-full">
       <div class="bg-white w-full rounded-[16px] items-center p-5">
         <div class="flex items-center justify-between mb-3">
-          <h3 class="text-[18px] font-bold leading-6 text-[#483D5B] w-full">
+          <h3 class="text-[18px] font-bold leading-6 text-[#483D5B] w-full lg:text-[14px]">
             Статистика по (текуший месяц)
           </h3>
           <!-- <default-select
@@ -70,7 +70,7 @@
             <VueDatePicker v-model="date" month-picker placeholder="Выберите месяц"></VueDatePicker>
           </div>
         </div>
-        <apexchart class="w-[full] h-[300px]" :options="options" :series="series"></apexchart>
+        <apexchart height="330" :options="options" :series="series"></apexchart>
       </div>
     </div>
   </div>
@@ -136,8 +136,11 @@ const options = computed(() => {
     },
     responsive: [
       {
-        breakpoint: 768,
+        breakpoint: 1025,
         options: {
+          chart: {
+            height:240,
+          },
           xaxis: {
             labels: {
               style: {

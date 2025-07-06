@@ -1,5 +1,5 @@
 <template>
-  <div class="grid grid-cols-12 overflow-hidden h-full gap-5 px-[20px] relative mt-4">
+  <div class="grid grid-cols-12 overflow-hidden h-full gap-5 px-[20px] relative mt-4 2xl:gap-3 lg:overflow-auto">
     <div class="overflow-hidden col-span-12 lg:col-span-12">
       <PurchaseStat :purchases="purchases"/>
     </div>
