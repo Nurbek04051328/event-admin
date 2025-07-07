@@ -5,14 +5,19 @@
       route.name == 'package-notification' ? notifPackage_store.notifpackageCount :
       route.name == 'bought-notification' ? store.boughtNotif.count :
       0">
-      <div class="space-x-4">
+      <div class="space-x-4 block md:flex">
         <router-link
           :to="{ name: 'type-notification' }"
           :class="{
             'text-purple-500 underline underline-offset-2': route.name == 'type-notification'
           }"
         >
-          Тип уведомление
+          <span class="md:hidden">
+            Тип уведомление
+          </span>
+          <span class="hidden md:flex">
+            Тип
+          </span>
         </router-link>
         <router-link
           :to="{ name: 'package-notification' }"
@@ -20,7 +25,12 @@
             'text-purple-500 underline underline-offset-2': route.name == 'package-notification'
           }"
         >
-          Пакеты уведомлении
+          <span class="md:hidden">
+            Пакеты уведомлении
+          </span>
+          <span class="hidden md:flex">
+            Пакеты
+          </span>
         </router-link>
         <router-link
           :to="{ name: 'bought-notification' }"

@@ -96,7 +96,7 @@
           xaxis: {
             labels: {
               style: {
-                fontSize: '8px',
+                fontSize: '6px',
               }
             }
           },
@@ -104,11 +104,14 @@
             labels: {
               style: {
                 fontSize: '8px',
+              },
+              formatter: (val) => {
+                return `${val.toLocaleString()} сум`
               }
             }
           },
           legend: {
-            fontSize: '10px'
+            fontSize: '8px'
           }
         }
       }

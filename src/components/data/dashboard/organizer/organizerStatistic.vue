@@ -21,7 +21,10 @@
 <script setup>
 const props = defineProps(['org', 'allEvents'])
 import { computed } from 'vue'
+
+
 const stats = computed(() => {
+  const profits = props.org?.statistic?.expenses ?? 0;
   let allTickerPurchasesCount =
     props.org.statistic?.purchaseTickets > 1000000
       ? (props.org.statistic?.purchaseTickets / 1000000).toFixed(2) + ' млн'
@@ -37,11 +40,23 @@ const stats = computed(() => {
       : props.org.statistic?.profit > 1000
         ? (props.org.statistic?.profit / 1000).toFixed(0) + ' тысяч. сум'
         : props.org.statistic?.profit + ' сум'
+  let allExpencesSum =
+    props.org.statistic?.expense || 0
+  allExpencesSum =
+    profits > 1000000
+      ? (profits / 1000000).toFixed(2) + ' млн. сум'
+      : profits > 1000
+        ? (profits / 1000).toFixed(2) + ' тысяч. сум'
+        : profits + ' сум'
 
   return [
     { name: 'Кол. мероприятия', value: props.allEvents?.count },
     { name: 'Отказанные билеты', value: props.org?.statistic?.deniedTickets },
-    { name: 'Затраты', value: props.org?.statistic?.expenses },
+    { 
+      name: 'Затраты', 
+      value: allExpencesSum.split(' ').at(0) || 0,
+      unit: allExpencesSum.split(' ').at(1)
+    },
     {
       name: 'Проданные билеты',
       value: allTickerPurchasesCount.split(' ').at(0) || 0,

@@ -66,7 +66,7 @@
             name="type"
             :options="walletActions"
             option_title="title"
-            :class="['w-full z-[99]'] "
+            :class="['w-full z-[19]'] "
             placeholder="Выберите транзакция"
           />
 

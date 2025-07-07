@@ -20,7 +20,12 @@
           user.user.status == 'not active' ? 'Не активирован' : 'Удален/Заблокирован' }}
       </button>
       <button @click="confirmAdult()" :class="`${user?.user?.adult == true ? 'success-tag' : 'warning-tag'}`">
-        {{ user?.user?.adult == true ? "Взрослый" : "Несовершеннолетний"}}
+        <template v-if="user?.user?.adult">
+          Взрослый
+        </template>
+        <template v-else>
+          {{ isMobile ? 'Несоверш.' : 'Несовершеннолетний' }}
+        </template>
       </button>
       <!-- @click="accessAdult(user?.user?.adult)" -->
       <!-- <div
@@ -210,9 +215,18 @@ const getData = async () => {
   
 }
 
+
+const isMobile = ref(false)
+
 onMounted(() => {
   id.value = route.params.id
   getData()
+  const updateWidth = () => {
+    isMobile.value = window.innerWidth < 640
+  }
+
+  updateWidth()
+  window.addEventListener('resize', updateWidth)
 })
 </script>
 <style lang=""></style>

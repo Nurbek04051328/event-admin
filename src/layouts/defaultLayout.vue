@@ -3,7 +3,7 @@
     <asideDefault />
     <div class="flex flex-col h-full w-full">
       <headerDefault />
-      <main class="overflow-hidden 2xl:overflow-auto flex-1 flex flex-col">
+      <main class="overflow-hidden flex-1 flex flex-col">
         <routerView />
       </main>
     </div>

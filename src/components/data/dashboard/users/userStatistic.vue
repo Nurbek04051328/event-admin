@@ -6,6 +6,7 @@
       :key="stat.name"
       :class="[
         statIdx % 2 === 1 ? 'sm:border-l' : statIdx === 2 ? 'lg:border-l' : '',
+        statIdx === 2 ? 'lg:col-span-2' : '',
         'border-t border-white/5 bg-white/100 rounded-[26px] shadow-sm p-4'
       ]"
     >

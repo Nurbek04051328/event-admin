@@ -50,6 +50,7 @@
   }
 
   // tag
+  .active-tag,
   .success-tag {
     @apply inline-flex items-center rounded-md bg-[#DCF7DD] px-2 py-1 text-xs font-normal text-[#119A21];
   }

@@ -1,7 +1,7 @@
 <template>
   <div class="grid grid-cols-12 gap-4 h-min">
     <div class="col-span-12 grid grid-cols-12 gap-4">
-      <div class="col-span-6 h-full">
+      <div class="col-span-6 h-full sm:col-span-12">
         <div class="bg-white w-full rounded-[16px] flex items-center p-5">
           <div class="bg-[#F3EBFC] p-3 rounded-full mr-6">
             <CircleStackIcon class="size-8 text-[#9E55EC]" />
@@ -14,7 +14,7 @@
           </div>
         </div>
       </div>
-      <div class="col-span-6 h-full">
+      <div class="col-span-6 h-full sm:col-span-12">
         <div class="bg-white w-full rounded-[16px] flex items-center p-5">
           <div class="bg-[#FF555826] p-3 rounded-full mr-6">
             <ArchiveBoxArrowDownIcon class="size-8 text-[#FF5558]" />
@@ -27,7 +27,7 @@
           </div>
         </div>
       </div>
-      <div class="col-span-6 h-full">
+      <div class="col-span-6 h-full sm:col-span-12">
         <div class="bg-white w-full rounded-[16px] flex items-center p-5">
           <div class="bg-[#FFF8DE] p-3 rounded-full mr-6">
             <CreditCardIcon class="size-8 text-[#FFCE20]" />
@@ -40,7 +40,7 @@
           </div>
         </div>
       </div>
-      <div class="col-span-6 h-full">
+      <div class="col-span-6 h-full sm:col-span-12">
         <div class="bg-white w-full rounded-[16px] flex items-center p-5">
           <div class="bg-[#E1F9F2] p-3 rounded-full mr-6">
             <img src="@/assets/images/profit.svg" alt="profit_img" class="size-8 text-[#FFCE20]" />
@@ -54,10 +54,10 @@
         </div>
       </div>
     </div>
-    <div class="col-span-12 h-full">
+    <div class="col-span-12 h-full sm:col-span-12">
       <div class="bg-white w-full rounded-[16px] items-center p-5">
         <div class="flex items-center justify-between mb-3">
-          <h3 class="text-[18px] font-bold leading-6 text-[#483D5B] w-full lg:text-[14px]">
+          <h3 class="text-[18px] font-bold leading-6 text-[#483D5B] w-full lg:text-[14px] sm:text-[18px]">
             Статистика по (текуший месяц)
           </h3>
           <!-- <default-select

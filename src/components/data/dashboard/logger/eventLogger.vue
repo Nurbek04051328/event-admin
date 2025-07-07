@@ -2,11 +2,15 @@
   <div v-if="store.eventLoggers.data?.length > 0" class="flex flex-col overflow-hidden">
     <div class="w-full overflow-y-auto flex-1 text-[13px]" >
       <div v-for="log of store.eventLoggers.data" :key="log._id" class="p-2">
+        <div>
+
+        </div>
         <span class="font-medium">
           {{ log?.actionFrom?.lname }}
           {{ log?.actionFrom?.name }}
         </span>
-        поменял права мероприятия на
+        поменял права мероприятия
+        <!-- <pre>{{ log }}</pre> -->
         <span :class="eventActions.find((a) => a._id == log.status)?.class">
           {{ eventActions.find((a) => a._id == log.status)?.label }}
         </span>
@@ -52,7 +56,8 @@ const getLoggers = async () => {
   await store.eventLogger({
     limit: limit.value,
     page: page.value,
-    event: id.value
+    event: id.value,
+    type: 'event'
   })
 }
 

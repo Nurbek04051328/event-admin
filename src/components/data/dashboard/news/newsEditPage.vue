@@ -8,21 +8,22 @@
           >
             <ChevronLeftIcon class="size-7" />
         </button>
-        <div as="h3" class="text-[22px] font-bold leading-6 text-[#483D5B]">
-          Редактировать новость
+        <div as="h3" class="text-[22px] font-bold leading-6 text-[#483D5B] sm:text-[16px]">
+          <span class="sm:hidden">Редактировать новость</span>
+          <span class="hidden sm:flex">Редактировать</span>
         </div>
       </div>
       <div class="flex gap-2">
-        <div class="flex gap-2 items-center">
-          <button type="button" class="close-btn mt-0 h-[40px] min-w-[100px] rounded-[16px]" @click="close">
+        <div class="flex gap-2 items-center md:gap-1">
+          <button type="button" class="close-btn mt-0 h-[40px] min-w-[100px] rounded-[16px] md:text-[12px] md:h-[30px] md:py-1" @click="close">
             Отмена
           </button>
-          <button type="button" class="send-btn rounded-[16px] h-[40px] min-w-[100px]" @click="send">Добавить</button>
+          <button type="button" class="send-btn rounded-[16px] h-[40px] min-w-[100px] md:text-[12px] md:h-[30px] md:py-1" @click="send">Добавить</button>
         </div>
       </div>
     </div>
     <div class="grid grid-cols-12 gap-4 h-[100%] overflow-hidden">
-      <div class="col-span-8 p-8 bg-white rounded-[16px] flex flex-col overflow-hidden">
+      <div class="col-span-8 p-8 bg-white rounded-[16px] flex flex-col overflow-hidden md:col-span-12">
         <div class="h-full flex-1 overflow-auto">
           <div class="flex w-full xm:block">
             <div class="space-y-2 w-full">
@@ -49,7 +50,7 @@
           </div>
         </div>
       </div>
-      <div class="col-span-4 p-8 bg-white rounded-[16px] flex flex-col overflow-hidden">
+      <div class="col-span-4 p-8 bg-white rounded-[16px] flex flex-col overflow-hidden md:col-span-12">
         <div class="h-full flex-1 overflow-auto">
           <div class="flex w-full xm:block">
             <div class="space-y-2 w-full">

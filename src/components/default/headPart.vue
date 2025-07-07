@@ -1,5 +1,5 @@
 <template>
-  <div class="pb-3 px-4 pt-3">
+  <div class="pb-3 px-4 pt-3 sm:pb-1 sm:pt-2">
     <div class="flex items-center justify-between">
       <div class="min-w-0 gap-3 flex items-center">
         <button v-if="backLink" @click="router.push({ name: backLink })">
@@ -24,7 +24,7 @@
             class="leading-7 text-[#645A77] md:text-[20px] xm:text-[16px]"
             :class="
               route?.meta?.group == 'setting' ? 'text-[16px] font-medium' :
-              route?.meta?.group == 'middle' ? 'text-[18px] font-medium' :
+              route?.meta?.group == 'middle' ? 'text-[18px] font-medium xm:text-[12px]' :
               'text-[22px] font-bold'
             "
           >

@@ -103,7 +103,7 @@ const options = computed(() => {
           xaxis: {
             labels: {
               style: {
-                fontSize: '8px',
+                fontSize: '6px',
               }
             }
           },
@@ -111,6 +111,9 @@ const options = computed(() => {
             labels: {
               style: {
                 fontSize: '8px',
+              },
+              formatter: (val) => {
+                return `${val.toLocaleString()} сум`
               }
             }
           },

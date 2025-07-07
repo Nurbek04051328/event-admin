@@ -6,6 +6,7 @@
           <tr>
             <th scope="col" class="th-first">№</th>
             <th scope="col" class="th">Ф.И.О</th>
+            <!-- <th scope="col" class="th">Роль</th> -->
             <th scope="col" class="th text-center">Мероприятие</th>
             <th scope="col" class="th text-center">Билеты</th>
             <th scope="col" class="th text-center">Кол-во Собщение</th>
@@ -30,6 +31,9 @@
                 <div class="mt-1 text-[13px] text-gray-500">{{ person.phone }}</div>
               </div>
             </td>
+            <!-- <td class="whitespace-nowrap px-3 py-5 text-sm text-gray-500 text-center">
+              <pre>{{ person }}</pre>
+            </td> -->
             <td class="whitespace-nowrap px-3 py-5 text-sm text-gray-500 text-center">
               {{ person?.events }}
             </td>

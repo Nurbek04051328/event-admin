@@ -15,7 +15,7 @@
       <DialogTitle as="h3" class="text-lg font-semibold leading-6 text-gray-900">
         {{ edit ? $t('ticketPackage.dialog.edit') : $t('ticketPackage.dialog.title') }}
       </DialogTitle>
-      <div class="flex w-full xs-max:flex-col">
+      <div class="flex w-full md:flex-col">
         <div class="space-y-2 mt-4 w-full mr-1">
           <default-input
             v-model="data.title"

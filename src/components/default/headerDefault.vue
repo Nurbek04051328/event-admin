@@ -1,6 +1,6 @@
 <template>
   <div
-    class="sticky top-0 z-40 flex h-[100px] shrink-0 items-center px-4 sm:gap-x-6 xm:h-[70px]"
+    class="sticky top-0 z-40 flex h-[100px] shrink-0 items-center px-4 sm:gap-x-6 sm:h-[70px] "
   >
     <button
       type="button"

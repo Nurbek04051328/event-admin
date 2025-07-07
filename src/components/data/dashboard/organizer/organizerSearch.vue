@@ -24,7 +24,7 @@
           v-model="search.status"
           :options="statusList"
           option_title="title"
-          :class="['w-full z-[100]'] "
+          :class="['w-full z-50'] "
           placeholder="Выберите статус"
           @change="findMe"
         />
