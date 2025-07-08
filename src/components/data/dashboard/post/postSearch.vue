@@ -68,7 +68,14 @@
             :class="['w-full z-[19]'] "
             placeholder="Выберите мероприятия"
           />
-
+          <filterSelect
+            v-model="search.status"
+            name="status"
+            :options="postStatus || []"
+            option_title="title"
+            :class="['w-full z-[18]'] "
+            placeholder="Выберите статус"
+          /> 
           <button
             class="bg-[#DCF7DD] text-[#119A21] hover:bg-[#119A21] hover:text-white rounded-lg py-2"
             @click="() => { findMe(); showFilter = false }"
@@ -102,7 +109,8 @@ const event__store = eventStore()
 
 const search = ref({
   user: '',
-  event: ''
+  event: '',
+  status: ''
 })
 
 const showFilter = ref(false)
@@ -121,7 +129,8 @@ const clear = async() => {
   await store.getPosts({})
   search.value = {
     user: '',
-    event: ''
+    event: '',
+    status: ''
   }
 }
 
@@ -129,7 +138,8 @@ const clearModal = () => {
   showFilter.value = false
   search.value = {
     user: '',
-    event: ''
+    event: '',
+    status: ''
   }
 }
 

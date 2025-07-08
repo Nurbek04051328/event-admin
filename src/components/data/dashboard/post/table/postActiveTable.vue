@@ -1,7 +1,7 @@
 <template>
   <div class="p-4 pb-0 w-full overflow-auto flex-1">
     <div class="flex-1 h-full w-full overflow-auto rounded-[16px]">
-      <div v-if="posts.data.length" class="grid grid-cols-6 gap-4 lg:grid-cols-4 sm:grid-cols-2">
+      <div v-if="posts.data.length" class="grid grid-cols-6 gap-4 lg:grid-cols-4 xm:grid-cols-1">
         <div v-for="post of posts.data" :key="post._id" class="bg-white rounded-[16px] p-2 space-y-2">
           <div class="relative">
             <div

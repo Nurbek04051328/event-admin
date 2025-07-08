@@ -6,43 +6,43 @@
           <router-link
             :to="{ name: 'active-posts' }"
             :class="
-              route.name == 'active-posts' ? 'text-purple-500 lg:border lg:border-purple-500 lg:rounded-lg lg:p-1 underline underline-offset-2': 'lg:text-gray-500 lg:border lg:border-gray-500 lg:p-1 lg:rounded-lg'
+              route.name == 'active-posts' ? 'text-purple-500  underline underline-offset-2': ''
             "
 
           >
             <span class="lg:hidden">Активные</span>
-            <CheckIcon class="hidden size-6 lg:block"/>
+            <!-- <CheckIcon class="hidden size-6 lg:block"/> -->
           </router-link>
           <router-link
             :to="{ name: 'pending-posts' }"
             :class="
-              route.name == 'pending-posts' ? 'text-purple-500 lg:border lg:border-purple-500 lg:rounded-lg lg:p-1 underline underline-offset-2': 
-              'lg:text-gray-500 lg:border lg:border-gray-500 lg:p-1 lg:rounded-lg'
+              route.name == 'pending-posts' ? 'text-purple-500  underline underline-offset-2': 
+              ''
             "
           >
             <span class="lg:hidden">На рассмотрении</span>
-            <ClockIcon class="hidden size-6 lg:block"/>
+            <!-- <ClockIcon class="hidden size-6 lg:block"/> -->
           </router-link>
           <router-link
             :to="{ name: 'denied-posts' }"
             :class="
-              route.name == 'denied-posts' ? 'text-purple-500 lg:border lg:border-purple-500 lg:rounded-lg lg:p-1 underline underline-offset-2': 
-              'lg:text-gray-500 lg:border lg:border-gray-500 lg:p-1 lg:rounded-lg'
+              route.name == 'denied-posts' ? 'text-purple-500  underline underline-offset-2': 
+              ''
             "
           >
             
             <span class="lg:hidden">Отказанные</span>
-            <XMarkIcon class="hidden size-6 lg:block"/>
+            <!-- <XMarkIcon class="hidden size-6 lg:block"/> -->
           </router-link>
           <router-link
             :to="{ name: 'deleted-posts' }"
             :class="
-              route.name == 'deleted-posts' ? 'text-purple-500 lg:border lg:border-purple-500 lg:rounded-lg lg:p-1 underline underline-offset-2': 
-              'lg:text-gray-500 lg:border lg:border-gray-500 lg:p-1 lg:rounded-lg'
+              route.name == 'deleted-posts' ? 'text-purple-500  underline underline-offset-2': 
+              ''
             "
           >
             <span class="lg:hidden">Удаленные</span>
-            <TrashIcon class="hidden size-6 lg:block"/>
+            <!-- <TrashIcon class="hidden size-6 lg:block"/> -->
           </router-link>
         </div>
         <PostSearch />
