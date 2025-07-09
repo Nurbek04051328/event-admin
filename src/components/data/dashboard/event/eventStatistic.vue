@@ -1,5 +1,5 @@
 <template>
-  <div class="grid grid-cols-2 gap-3 md-max:grid-cols-2">
+  <div class="grid grid-cols-2 gap-3 2xl:grid-cols-4 2xl:w-full xm:grid-cols-1">
     <div
       v-for="(stat, statIdx) in stats"
       :key="stat.name"

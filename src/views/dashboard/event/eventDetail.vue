@@ -2,7 +2,7 @@
   <headPart backLink="event">
     <div class="flex overflow-auto gap-2 items-center">
       <router-link
-        class="send-btn px-4 py-[6px] rounded-md"
+        class="send-btn px-4 py-[6px] rounded-md sm:text-[12px]"
         :to="{ name: 'event-edit', params: { id: route.params.id } }"
       >
         Редактировать
@@ -11,7 +11,7 @@
       <button
         v-if="eventInfo?.event?.status == 'pending'"
         type="button"
-        class="flex w-full items-center justify-center rounded-md border bg-green-50 text-[#05CD99] border-[#05CD99] px-4 py-[6px] font-medium focus:outline-none focus:ring-2 focus:ring-green-600 focus:ring-offset-2 focus:ring-offset-gray-50 text-sm xm-max:text-xs"
+        class="flex w-full items-center justify-center rounded-md border bg-green-50 text-[#05CD99] border-[#05CD99] px-4 py-[6px] font-medium focus:outline-none focus:ring-2 focus:ring-green-600 focus:ring-offset-2 focus:ring-offset-gray-50 text-sm sm:text-[12px]"
         @click="confirmAccess()"
       >
         {{ $t('event.detailPage.access') }}
@@ -19,7 +19,7 @@
       <button
         v-if="eventInfo?.event?.status == 'pending'"
         type="button"
-        class="flex w-full items-center justify-center rounded-md border border-transparent bg-red-50 px-4 py-[6px] text-base font-medium text-[#FF5558] focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 focus:ring-offset-gray-50 xm-max:text-xs"
+        class="flex w-full items-center justify-center rounded-md border border-transparent bg-red-50 px-4 py-[6px] text-base font-medium text-[#FF5558] focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 focus:ring-offset-gray-50 sm:text-[12px]"
         @click="confirmRefusel()"
       >
         Отказать
@@ -27,7 +27,7 @@
       <button
         v-if="eventInfo?.event?.status !== 'pending'"
         type="button"
-        class="flex w-full items-center justify-center rounded-md border  px-4 py-[6px] text-base font-medium focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 xm-max:text-xs"
+        class="flex w-full items-center justify-center rounded-md border  px-4 py-[6px] text-base font-medium focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 sm:text-[12px]"
         :class="`${eventInfo?.event?.status=='active'? 'bg-green-50 text-[#05CD99] border-[#05CD99]' : 'bg-[#F3EBFC] text-[#9E55EC] border-transparent'}`"
         @click="confirmBack()"
       >
@@ -37,21 +37,27 @@
   </headPart>
   <div class="px-4 pb-4 flex-1 overflow-hidden h-full">
     <Loading v-if="loading" class="h-full" />
-    <div v-else class="grid grid-cols-12 gap-4 h-full 2xl:h-auto md:h-full xm-max:grid-cols-6">
-      <div
-        class="col-span-9 bg-white/100 rounded-[13px] shadow-sm order-first h-full overflow-auto 2xl:col-span-4 md-max:col-span-6 xm-max:col-span-6"
-      >
-        <EventInfo :event="eventInfo.event" />
-      </div>
-      <div
-        class="col-span-3 flex flex-col space-y-3 h-full overflow-auto 2xl:col-span-8 2xl:h-[670px] md-max:col-span-6 xm-max:col-span-6"
-      >
-        <EventStatistic :org="eventInfo.ticket" />
+    <div v-else class="h-full overflow-auto">
+
+      <div  class="grid grid-cols-12 gap-4 h-full 2xl:h-auto md:h-full overflow-auto">
         <div
-          class="bg-white/100 rounded-[13px] shadow-sm px-2 flex flex-col h-full overflow-hidden"
+          class="col-span-9 bg-white/100 rounded-[13px] shadow-sm order-first h-full overflow-auto 2xl:col-span-12 2xl:order-2"
         >
-          <TabList :list="links" />
-          <router-view />
+          <EventInfo :event="eventInfo.event" />
+        </div>
+        <div class="hidden 2xl:col-span-12 2xl:flex 2xl:order-1">
+          <EventStatistic :org="eventInfo.ticket" />
+        </div>
+        <div
+          class="col-span-3 flex flex-col space-y-3 h-full overflow-auto 2xl:col-span-12 2xl:order-3"
+        >
+          <EventStatistic :org="eventInfo.ticket" class="2xl:hidden"/>
+          <div
+            class="bg-white/100 rounded-[13px] shadow-sm px-2 flex flex-col h-full overflow-hidden"
+          >
+            <TabList :list="links" />
+            <router-view />
+          </div>
         </div>
       </div>
     </div>

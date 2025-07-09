@@ -1,7 +1,7 @@
 <template>
   <div class="p-4">
     <div class="grid grid-cols-12 gap-4">
-      <div class="col-span-4 space-y-2">
+      <div class="col-span-4 space-y-2 xm:col-span-12">
         <div>
           <swiper
             v-if="event?.cover?.length"
@@ -73,7 +73,7 @@
           </div>
         </div>
       </div>
-      <div class="col-span-8">
+      <div class="col-span-8 xm:col-span-12">
         <div class="space-y-2">
           <div class="border-b-[1px] pb-2">
             <div class="text-xs text-gray-500 2xl:text-[12px]">{{ $t('event.table.title') }}</div>
@@ -132,9 +132,9 @@
             <div class="text-xs text-gray-500 2xl:text-[12px] mb-2">Даты</div>
             <swiper
               v-if="event?.eventDates?.length > 0"
-              :slides-per-view="event?.eventDates?.length >= 3 ? 3 : event?.eventDates?.length"
               :loop="event?.eventDates?.length >= 3"
               :space-between="20"
+              :breakpoints="swiperBreakpoints"
             >
               <swiper-slide v-for="d of event.eventDates" :key="d._id">
                 <div class="p-3 rounded-lg border text-gray-600 border-[#9E55EC] bg-gray-50">
@@ -342,7 +342,7 @@
                 v-for="atr of event?.provide"
                 :key="atr?._id"
               >
-                <div class="flex-1">{{ t(`6.${atr.eventTransport}`) }}</div>
+                <div v-if="atr.whoWillDrive.length" class="flex-1">{{ t(`6.${atr.eventTransport}`) }}</div>
                 <div class="flex flex-1 flex-wrap gap-2 justify-end">
                   <div
                     v-for="(val, index) of atr.whoWillDrive"
@@ -369,7 +369,7 @@
 import { computed } from 'vue'
 import { convertDateShort } from '@/helpers/func'
 const url = import.meta.env.VITE_URL
-defineProps(['event'])
+const props = defineProps(['event'])
 
 import { Swiper, SwiperSlide } from 'swiper/vue'
 import 'swiper/css'
@@ -379,6 +379,20 @@ import moment from 'moment'
 import { languages } from '@/helpers/vars'
 
 const { t } = useI18n()
+
+const swiperBreakpoints = computed(() => {
+  const len = props.event?.eventDates?.length || 0
+
+  return {
+    0: {
+      slidesPerView: 1,
+    },
+    500: {
+      slidesPerView: len >= 3 ? 3 : len,
+    },
+  }
+})
+
 
 //Можно использовать для различных преобразований
 
